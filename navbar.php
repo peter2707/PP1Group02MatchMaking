@@ -1,7 +1,8 @@
 <?php
 session_start();
 $validLogin = require('php/login.php');
-if ($validLogin) {
+$validSession = require('php/check_session.php');
+if ($validLogin || $validSession) {
     $username = $_SESSION['valid_user'];
     echo <<<END
                     <nav class="navbar navbar-default navbar-sticky bootsnav">
@@ -30,6 +31,7 @@ if ($validLogin) {
                                                 <li><a href="resume.php">Resume Detail</a></li>
                                             </ul>
                                         </li>
+                                        <li><a href="logout.php">Logout</a></li> 
                                     </ul>
                             </div><!-- /.navbar-collapse -->
                         </div>   
