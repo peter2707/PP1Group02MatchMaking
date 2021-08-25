@@ -20,9 +20,9 @@
                     <ul>
                         <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a> &nbsp;JobMatch</li>
                         <br>
-                        <li><a href="#" class="fa fa-twitter"></a> &nbsp;job_match</li>
+                        <li><a href="#" class="fa fa-twitter"></a> &nbsp;@jobmatch</li>
                         <br>
-                        <li><a href="#" class="fa fa-instagram"></a> &nbsp;@jobmatch</li>
+                        <li><a href="#" class="fa fa-instagram"></a> &nbsp;job_match</li>
                     </ul>
                 </div>
                 
@@ -43,7 +43,7 @@
                         <input type="text" class="form-control input-lg" placeholder="Your Name">
                         <input type="text" class="form-control input-lg" placeholder="Email...">
                         <textarea class="form-control" placeholder="Message"></textarea>
-                        <button type="submit" class="btn btn-primary">Login</button>
+                        <button type="submit" class="btn btn-primary">Send</button>
                     </form>
                 </div>
                 

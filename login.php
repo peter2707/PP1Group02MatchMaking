@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Jober Desk | Responsive Job Portal Template</title>
+        <title>JobMatch | Home</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 		
@@ -34,7 +34,7 @@
 						<input type="password" class="form-control input-lg" placeholder="Password" name="password">
 						<label><a href="">Forget Password?</a></label>
 						<button type="submit" class="btn btn-primary">Login</button>
-						<p>Have't Any Account <a href="">Create An Account</a></p>
+						<p>Not a user? <a href="register.php">Create An Account</a></p>
 					</form>
 				</div>
 			</div>
