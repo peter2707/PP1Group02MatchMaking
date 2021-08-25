@@ -20,9 +20,9 @@
                     <ul>
                         <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a> &nbsp;JobMatch</li>
                         <br>
-                        <li><a href="#" class="fa fa-twitter"></a> &nbsp;@jobmatch</li>
+                        <li><a href="#" class="fa fa-twitter"></a> &nbsp;job_match</li>
                         <br>
-                        <li><a href="#" class="fa fa-instagram"></a> &nbsp;job_match</li>
+                        <li><a href="#" class="fa fa-instagram"></a> &nbsp;@jobmatch</li>
                     </ul>
                 </div>
                 
