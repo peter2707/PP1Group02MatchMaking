@@ -28,7 +28,7 @@
 		<section class="login-wrapper">
 			<div class="container">
 				<div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
-					<form method="post" action="php/testing.php">
+					<form method="post" action="index.php">
 						<img class="img-responsive" alt="logo" src="img/logo.png">
 						<input type="text" class="form-control input-lg" placeholder="User Name" name="username">
 						<input type="password" class="form-control input-lg" placeholder="Password" name="password">
