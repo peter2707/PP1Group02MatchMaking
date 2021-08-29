@@ -60,7 +60,7 @@
 								</select>
 							</div>
 							<div class="col-md-2 col-sm-2 no-pad">
-								<input type="submit" class="btn seub-btn" value="submit" />
+								<input type="submit" class="btn seub-btn" value="search" />
 							</div>
 						</fieldset>
 					</form>
@@ -70,9 +70,10 @@
 		
 		<section class="features">
 			<div class="container">
+
 				<div class="col-md-4 col-sm-4">
 					<div class="features-content">
-						<span class="box1"><span aria-hidden="true" class="icon-dial"></span></span>
+						<span class="box1"><span aria-hidden="true" class="icon-profile-male"></span></span>
 						<h3>Create An Account</h3>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid ut labore et dolore magna aliqua.</p>
 					</div>
@@ -80,40 +81,16 @@
 				
 				<div class="col-md-4 col-sm-4">
 					<div class="features-content">
-						<span class="box1"><span aria-hidden="true" class="icon-search"></span></span>
-						<h3>Search Desired Job</h3>
+						<span class="box1"><span aria-hidden="true" class="icon-document"></span></span>
+						<h3>Enter Your Skills</h3>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid ut labore et dolore magna aliqua.</p>
 					</div>
 				</div>
 				
 				<div class="col-md-4 col-sm-4">
 					<div class="features-content">
-						<span class="box1"><span aria-hidden="true" class="icon-printer"></span></span>
-						<h3>Send Your Resume</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid ut labore et dolore magna aliqua.</p>
-					</div>
-				</div>
-				
-				<div class="col-md-4 col-sm-4">
-					<div class="features-content">
-						<span class="box1"><span aria-hidden="true" class="icon-dial"></span></span>
-						<h3>Create An Account</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid ut labore et dolore magna aliqua.</p>
-					</div>
-				</div>
-				
-				<div class="col-md-4 col-sm-4">
-					<div class="features-content">
-						<span class="box1"><span aria-hidden="true" class="icon-search"></span></span>
-						<h3>Search Desired Job</h3>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid ut labore et dolore magna aliqua.</p>
-					</div>
-				</div>
-				
-				<div class="col-md-4 col-sm-4">
-					<div class="features-content">
-						<span class="box1"><span aria-hidden="true" class="icon-printer"></span></span>
-						<h3>Send Your Resume</h3>
+						<span class="box1"><span aria-hidden="true" class="icon-lightbulb"></span></span>
+						<h3>Get Matches</h3>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incidid ut labore et dolore magna aliqua.</p>
 					</div>
 				</div>
@@ -149,7 +126,7 @@
 				
 				<div class="col-md-3 col-sm-3">
 					<div class="counter-text">
-					<span class="box1"><span aria-hidden="true" class="icon-sad"></span></span>
+					<span class="box1"><span aria-hidden="true" class="icon-happy"></span></span>
 						<h3>802+</h3>
 						<p>Happy Members</p>
 					</div>

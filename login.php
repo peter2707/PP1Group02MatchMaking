@@ -27,9 +27,9 @@
 		<!-- login section start -->
 		<section class="login-wrapper">
 			<div class="container">
-				<div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
+				<div class="col-md-4 col-md-offset-4">
 					<form method="post" action="index.php">
-						<img class="img-responsive" alt="logo" src="img/logo.png">
+						<img class="img-responsive" alt="logo" src="img/login.png">
 						<input type="text" class="form-control input-lg" placeholder="User Name" name="username">
 						<input type="password" class="form-control input-lg" placeholder="Password" name="password">
 						<label><a href="">Forget Password?</a></label>

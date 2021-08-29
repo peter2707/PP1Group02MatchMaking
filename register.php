@@ -12,8 +12,7 @@
 		
 		<!-- Style & Common Css --> 
 		<link rel="stylesheet" href="css/common.css">
-        <link rel="stylesheet" href="css/main.css">
-
+        <link rel="stylesheet" href="css/main.css">		
     </head>
 	
     <body>
@@ -24,26 +23,28 @@
 		?>
 		<!-- Navigation End  -->
 		
-		<!-- login section start -->
+		<!-- Sign Up section start -->
 		<section class="login-wrapper">
 			<div class="container">
-				<div class="col-md-6 col-sm-8 col-md-offset-3 col-sm-offset-2">
+				<div class="col-md-4 col-md-offset-4">
                     <form action="php/register.php" method="POST">
-                        <input type="text" id="firstName" class="form-control input-lg" placeholder="Firstname" name="firstName"><br><br>
-                        <input type="text" id="lastName" class="form-control input-lg" placeholder="Lastname" name="lastName"><br><br>
-                        <input type="text" id="username" class="form-control input-lg" placeholder="Username" name="username"><br><br>
-                        <input type="password" id="password" class="form-control input-lg" placeholder="Password" name="password"><br><br>
-                        <input type="text" id="dateOfBirth" class="form-control input-lg" placeholder="Date Of Birth" name="dateOfBirth"><br><br>
-                        <input type="text" id="phone" class="form-control input-lg" placeholder="Phone" name="phone"><br><br>
-                        <input type="email" id="email" class="form-control input-lg" placeholder="Email" name="email"><br><br>
-                        <input type="text" id="position" class="form-control input-lg" placeholder="Position" name="position"><br><br>
+						<img class="img-responsive" alt="logo" src="img/register.png">
+                        <input type="text" id="firstName" class="form-control input-lg" placeholder="Firstname" name="firstName">
+                        <input type="text" id="lastName" class="form-control input-lg" placeholder="Lastname" name="lastName">
+                        <input type="text" id="username" class="form-control input-lg" placeholder="Username" name="username">
+                        <input type="password" id="password" class="form-control input-lg" placeholder="Password" name="password">
+                        <input type="text" id="dateOfBirth" class="form-control input-lg" placeholder="Date Of Birth" name="dateOfBirth">
+                        <input type="tel" id="phone" class="form-control input-lg" placeholder="Phone" name="phone">
+                        <input type="email" id="email" class="form-control input-lg" placeholder="Email" name="email">
+                        <input type="text" id="position" class="form-control input-lg" placeholder="Position" name="position">
 
                         <button type="submit" class="btn btn-primary">Register</button>
+						<p>Already got an account? <a href="login.php">Login Here</a></p>
                    </form>
 				</div>
 			</div>
 		</section>
-		<!-- login section End -->	
+		<!-- Sign Up section End -->
 		
 		<!-- footer start -->
 		<?php
@@ -55,5 +56,6 @@
 		<script type="text/javascript" src="js/owl.carousel.min.js"></script>
 		<script src="js/bootsnav.js"></script>
 		<script src="js/main.js"></script>
+
     </body>
 </html>

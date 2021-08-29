@@ -18,11 +18,9 @@
                 <div class="col-md-3 col-sm-6">
                     <h4>Social Media</h4>
                     <ul>
-                        <li><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a> &nbsp;JobMatch</li>
-                        <br>
+                        <li style="margin-bottom: 10px;"><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a> &nbsp;JobMatch</li>
+                        <li style="margin-bottom: 10px;"><a href="#" class="fa fa-instagram"></a> &nbsp;job_match</li>
                         <li><a href="#" class="fa fa-twitter"></a> &nbsp;@jobmatch</li>
-                        <br>
-                        <li><a href="#" class="fa fa-instagram"></a> &nbsp;job_match</li>
                     </ul>
                 </div>
                 

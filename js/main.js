@@ -8,4 +8,5 @@ $(document).ready(function(){
 				pagination: true,
 				autoPlay:false
 			});
-		});	
+		});
+		
