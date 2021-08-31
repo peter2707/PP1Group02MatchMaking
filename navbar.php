@@ -18,7 +18,7 @@ if ($validSession) {
                             <!-- Collect the nav links, forms, and other content for toggling -->
                             <div class="collapse navbar-collapse" id="navbar-menu">
                                 <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                                        <li><a href="">Welcome, $username</a></li>
+                                        <li><a href="userprofile.php">Welcome, $username</a></li>
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Browse</a>
                                             <ul class="dropdown-menu animated fadeOutUp" style="display: none; opacity: 1;">
