@@ -27,7 +27,7 @@
 		<section class="login-wrapper">
 			<div class="container">
 				<div class="col-md-4 col-md-offset-4">
-                    <form action="php/register.php" method="POST">
+                    <form action="includes/register.inc.php" method="POST">
 						<img class="img-responsive" alt="logo" src="img/register.png">
                         <input type="text" id="firstName" class="form-control input-lg" placeholder="Firstname" name="firstName">
                         <input type="text" id="lastName" class="form-control input-lg" placeholder="Lastname" name="lastName">
@@ -37,8 +37,15 @@
                         <input type="tel" id="phone" class="form-control input-lg" placeholder="Phone" name="phone">
                         <input type="email" id="email" class="form-control input-lg" placeholder="Email" name="email">
                         <input type="text" id="position" class="form-control input-lg" placeholder="Position" name="position">
-
-                        <button type="submit" class="btn btn-primary">Register</button>
+						<p style="color: red;">
+							<?php 
+								if(isset($_SESSION['Error'])){
+									echo $_SESSION['Error'];
+									unset($_SESSION['Error']);
+								}
+							?>
+						</p>
+                        <button type="submit" class="btn btn-primary" name="registerAdmin">Register</button>
 						<p>Already got an account? <a href="login.php">Login Here</a></p>
                    </form>
 				</div>

@@ -25,7 +25,7 @@
 		<!-- Navigation End  -->
 	
     <!-- Main jumbotron for a primary marketing message or call to action -->
-	<section class="inner-banner" style="backend:#242c36 url(https://via.placeholder.com/1920x600)no-repeat;">
+	<section class="inner-banner">
 		<div class="container">
 			<div class="caption">
 				<h2>Get your jobs</h2>

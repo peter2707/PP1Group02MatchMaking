@@ -1,7 +1,7 @@
 <?php
 session_start();
-$validLogin = require('php/login.php');
-$validSession = require('php/check_session.php');
+$validLogin = require('includes/login.inc.php');
+$validSession = require('includes/check_session.inc.php');
 if ($validLogin || $validSession) {
     $username = $_SESSION['valid_user'];
     echo <<<END
@@ -20,7 +20,6 @@ if ($validLogin || $validSession) {
                             <div class="collapse navbar-collapse" id="navbar-menu">
                                 <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                                         <li><a href="">Welcome, $username</a></li>
-                                        <li><a href="login.php">Login</a></li>
                                         <li><a href="companies.php">Companies</a></li> 
                                         <li class="dropdown">
                                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Browse</a>

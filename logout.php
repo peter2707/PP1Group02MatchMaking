@@ -25,7 +25,7 @@
 		<!-- Navigation End  -->
 		
         <?php	
-			$validSession = require('php/check_session.php');
+			$validSession = require('includes/check_session.inc.php');
 			
 			if ($validSession) {
 				$oldUser = $_SESSION['valid_user'];

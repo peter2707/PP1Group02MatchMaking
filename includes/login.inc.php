@@ -10,7 +10,7 @@
 			return false;
 		}
 
-		require('db_connection.php');
+		require('db_connection.inc.php');
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 
