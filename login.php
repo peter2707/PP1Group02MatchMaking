@@ -28,13 +28,39 @@
 		<section class="login-wrapper">
 			<div class="container">
 				<div class="col-md-4 col-md-offset-4">
-					<form method="post" action="index.php">
+					<form method="POST" action="includes/login.inc.php">
 						<img class="img-responsive" alt="logo" src="img/login.png">
-						<input type="text" class="form-control input-lg" placeholder="User Name" name="username">
+						<p style="color: red;">
+							<?php
+								// Error messages
+								if (isset($_GET["error"])) {
+									if ($_GET["error"] == "emptyusername") {
+										echo "Username cannot be empty!";
+									}else if ($_GET["error"] == "emptypassword") {
+										echo "Password cannot be empty!";
+									}else if ($_GET["error"] == "failed") {
+										echo "Something went wrong!";
+									}else if ($_GET["error"] == "incorrect") {
+										echo "Incorrect Password or Email!";
+									}
+								}
+							?>
+						</p>
+						<p style="color: #4BB543;">
+							<?php
+								// Account created message
+								if (isset($_GET["success"])) {
+									if ($_GET["success"] == "created") {
+										echo "Your account has been created.<br>Please log in to continue!";
+									}
+								}
+							?>
+						</p>
+						<input type="text" class="form-control input-lg" placeholder="Username" name="username">
 						<input type="password" class="form-control input-lg" placeholder="Password" name="password">
 						<label><a href="">Forget Password?</a></label>
 						<button type="submit" class="btn btn-primary">Login</button>
-						<p>Not a user? <a href="register.php">Create An Account</a></p>
+						<p>Not a user? <a href="signup.php">Create An Account</a></p>
 					</form>
 				</div>
 			</div>

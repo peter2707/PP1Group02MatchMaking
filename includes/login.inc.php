@@ -1,16 +1,17 @@
 <?php
-
+	session_start(); 
+	
 	if (isset($_POST['username']) || isset($_POST['password'])) {
 		if (!isset($_POST['username']) || empty($_POST['username'])) {
-			echo "Name not supplied";
-			return false;
+			header("location: ../login.php?error=emptyusername");
+        	exit();
 		}
 		if (!isset($_POST['password']) || empty($_POST['password'])) {
-			echo "Password not supplied";
-			return false;
+			header("location: ../login.php?error=emptypassword");
+        	exit();
 		}
 
-		require('db_connection.inc.php');
+		require_once 'db_connection.inc.php';
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 
@@ -27,23 +28,28 @@
 		$stmt->close();
 
 		if (!$result) {
-			echo "Couldn't check credentials";
+			header("location: ../login.php?error=failed");
+        	exit();
 			$db->close();
-			exit;
+			exit();
 		}
 		
 		$row = $result->fetch_row();
 		
 		if ($row[0] > 0) {
 			$_SESSION['valid_user'] = $username;
+			$_SESSION['valid_pass'] = $password;
 			$db->close();
-			return true;
+			if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
+				header("Location: ../index.php");
+			}
+			
 		}
 		else {
-			echo "Username and Password Incorrect<br>";
+			header("location: ../login.php?error=incorrect");
+        	exit();
 			$db->close();
-			return false;
-		}		
+		}
 	}	
 	return false;
 ?>
