@@ -3,15 +3,12 @@
         <footer>
             <div class="container">
                 <div class="col-md-3 col-sm-6">
-                    <h4>Featured Job</h4>
+                    <h4>Features</h4>
                     <ul>
                         <li><a href="#">Browse Jobs</a></li>
-                        <li><a href="#">Premium MBA Jobs</a></li>
-                        <li><a href="#">Access Database</a></li>
-                        <li><a href="#">Manage Responses</a></li>
-                        <li><a href="#">Report a Problem</a></li>
-                        <li><a href="#">Mobile Site</a></li>
+                        <li><a href="#">Recommended Jobs</a></li>
                         <li><a href="#">Jobs by Skill</a></li>
+                        <li><a href="#">Career Advice</a></li>
                     </ul>
                 </div>
                 
@@ -31,6 +28,7 @@
                     <li>124 La Trobe St<br>Melbourne VIC 3000</li>
                     <li>Email: <a href="mailto:customerservice@jobmatch.com">customerservice@jobmatch.com</li>
                     <li>Call: +61 (03) 9925 2000</li>
+                    <li><a href="mailto:customerservice@jobmatch.com">Report a Problem</a></li>
                     </ul>
                     </address>
                 </div>
