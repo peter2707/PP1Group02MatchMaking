@@ -2,7 +2,7 @@
 	$dbAddress = 'localhost';
 	$dbUser = 'root';
 	$dbPass = '';
-	$dbName = 'jobmatch';
+	$dbName = 'heroku_4846e6f92797d07';
 
 	$db = new mysqli($dbAddress, $dbUser, $dbPass, $dbName);
 	if ($db->connect_error) {
