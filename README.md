@@ -8,7 +8,7 @@
 
 <p>&nbsp;</p>
 
-### Run the App on local machine (Window OS)
+### Run the App locally on Window OS
 
 1. Copy the project and place it under this directory
     ```
@@ -16,9 +16,9 @@
     ```
 2. Open XAMPP and Turn on both Apache and MySQL
 
-3. Time to config the database
+3. Time to config the database. On your browser, go to
     ```
-    On your browser, go to https://localhost/phpmyadmin
+    https://localhost/phpmyadmin
     ```
 4. Go to directory `mysql/jobmatch.sql`
     ```
@@ -28,15 +28,15 @@
     ```
     Click on SQL, paste the script, and click 'Go'
     ```
-6. Now time to see the application
+6. Now time to see the application. On your browser, go to 
     ```
-    On your browser, go to https://localhost/<project name>
+    https://localhost/<project name>
     ```
 7. You should be able to see the app running
 
 <p>&nbsp;</p>
 
-### Run the App on local machine (Mac OS)
+### Run the App locally on Mac OS
 
 1. Open XAMPP and click Start, Go to Services and click Start All, Go to Network and enable a server, and Go to Volumes and mount the disk.
 
