@@ -62,6 +62,17 @@
     ```
 7. You should be able to see the app running
 
+<p>&nbsp;</p>
+
 ## To clean up
 
-1. Just quit the browser and turn off both `Apache` and `MySQL` on `XAMPP`
+1. Quit the browser
+2. Turn off all services on XAMPP
+3. Then you should be good to go
+
+<p>&nbsp;</p>
+
+## Heroku Deployment Link
+```
+https://jobmatchdemo.herokuapp.com
+```
