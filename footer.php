@@ -1,54 +1,100 @@
 <?php
     echo <<<END
-        <footer>
-            <div class="container">
-                <div class="col-md-3 col-sm-6">
-                    <h4>Features</h4>
-                    <ul>
-                        <li><a href="#">Browse Jobs</a></li>
-                        <li><a href="#">Recommended Jobs</a></li>
-                        <li><a href="#">Jobs by Skill</a></li>
-                        <li><a href="#">Career Advice</a></li>
-                    </ul>
+
+    <!-- Footer -->
+    <div class="footer bg-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h4 style="color: white;">Check out our latest news about career by following us on social media</h4>
+                    <div class="social-container">
+                        <span class="fa-stack">
+                            <a href="https://www.facebook.com">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-facebook-f fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="https://www.twitter.com">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-twitter fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="https://www.pinterest.com">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-pinterest-p fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="https://www.instagram.com">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-instagram fa-stack-1x"></i>
+                            </a>
+                        </span>
+                        <span class="fa-stack">
+                            <a href="https://www.youtube.com">
+                                <i class="fas fa-circle fa-stack-2x"></i>
+                                <i class="fab fa-youtube fa-stack-1x"></i>
+                            </a>
+                        </span>
+                    </div>
+                    <!-- end of social-container -->
                 </div>
-                
-                <div class="col-md-3 col-sm-6">
-                    <h4>Social Media</h4>
-                    <ul>
-                        <li style="margin-bottom: 10px;"><a href="#" class="fa fa-facebook-square" attr="facebook icon"></a> &nbsp;JobMatch</li>
-                        <li style="margin-bottom: 10px;"><a href="#" class="fa fa-instagram"></a> &nbsp;job_match</li>
-                        <li><a href="#" class="fa fa-twitter"></a> &nbsp;@jobmatch</li>
-                    </ul>
-                </div>
-                
-                <div class="col-md-3 col-sm-6">
-                    <h4>Reach Us</h4>
-                    <address>
-                    <ul>
-                    <li>124 La Trobe St<br>Melbourne VIC 3000</li>
-                    <li>Email: <a href="mailto:customerservice@jobmatch.com">customerservice@jobmatch.com</li>
-                    <li>Call: +61 (03) 9925 2000</li>
-                    <li><a href="mailto:customerservice@jobmatch.com">Report a Problem</a></li>
-                    </ul>
-                    </address>
-                </div>
-                
-                <div class="col-md-3 col-sm-6">
-                    <h4>Drop A Mail</h4>
-                    <form>
-                        <input type="text" class="form-control input-lg" placeholder="Your Name">
-                        <input type="text" class="form-control input-lg" placeholder="Email...">
-                        <textarea class="form-control" placeholder="Message"></textarea>
-                        <button type="submit" class="btn btn-primary">Send</button>
-                    </form>
-                </div>
-                
-                
+                <!-- end of col -->
             </div>
-            <div class="copy-right">
-            <p>&copy;Copyright 2021 JobMatch | Design By PMR </p>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+
+        
+    <!-- Copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <ul class="list-unstyled li-space-lg p-small">
+                        <li><a href="article.php" style="color: white;">Article Details</a></li>
+                        <li><a href="terms.php" style="color: white;">Terms & Conditions</a></li>
+                        <li><a href="privacy.php" style="color: white;">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <!-- end of col -->
+                <div class="col-lg-3 col-md-12 col-sm-12">
+                    <p class="p-small statement" style="color: white;">&copy; Copyright 2021 JobMatch</a></p>
+                </div>
+                <!-- end of col -->
+
+                <div class="col-lg-3 col-md-12 col-sm-12">
+                    <p class="p-small statement" style="color: white;">Distributed by <a href="https://themewagon.com/" target="_blank" style="color: white;">Themewagon</a></p>
+                </div>
+                <!-- end of col -->
             </div>
-        </footer>
+            <!-- enf of row -->
+        </div>
+        <!-- end of container -->
+    </div>
+    <!-- end of copyright -->
+    <!-- end of copyright -->
+
+    </div>
+    <!-- end of footer -->
+    <!-- end of footer -->
+
+
+    
+    <!-- Back To Top Button -->
+    <button onclick="topFunction()" id="myBtn">
+        <img src="images/up-arrow.png" alt="alternative">
+    </button>
+    <!-- end of back to top button -->
+
+
+    <!-- Scripts -->
+    <script src="js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
+    <script src="js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
+    <script src="js/scripts.js"></script> <!-- Custom scripts -->
+    
     END;
 
 ?>

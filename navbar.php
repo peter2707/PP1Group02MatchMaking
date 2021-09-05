@@ -4,68 +4,100 @@ $validSession = require('includes/check_session.inc.php');
 if ($validSession) {
     $username = $_SESSION['valid_user'];
     echo <<<END
-                    <nav class="navbar navbar-default navbar-sticky bootsnav">
-                        <div class="container">      
-                            <!-- Start Header Navigation -->
-                            <div class="navbar-header">
-                                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-                                    <i class="fa fa-bars"></i>
-                                </button>
-                                <a class="navbar-brand" href="index.php"><img src="img/logo.png" class="logo" alt="" style="width:250px;height:40px;" ></a>
-                            </div>
-                            <!-- End Header Navigation -->
 
-                            <!-- Collect the nav links, forms, and other content for toggling -->
-                            <div class="collapse navbar-collapse" id="navbar-menu">
-                                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                                        <li><a href="userprofile.php">Welcome, $username</a></li>
-                                        <li class="dropdown">
-                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Browse</a>
-                                            <ul class="dropdown-menu animated fadeOutUp" style="display: none; opacity: 1;">
-                                                <li class="active"><a href="browse-job.php">Browse Jobs</a></li>
-                                                <li><a href="companies.php">Companies</a></li> 
-                                                <li><a href="company-detail.php">Job Detail</a></li>
-                                                <li><a href="resume.php">Resume Detail</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="includes/logout.inc.php">Logout</a></li>
-                                    </ul>
-                            </div><!-- /.navbar-collapse -->
-                        </div>   
-                    </nav>
+        <!-- Navigation -->
+        <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
+            <div class="container">
+
+                <!-- Image Logo -->
+                <a class="navbar-brand logo-image" href="index.php"><img src="images/logo.svg" alt="Logo"></a>
+
+                <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                    <ul class="navbar-nav ms-auto navbar-nav-scroll">
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="index.php#header">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php#getstarted">Get Started</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php#details">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="index.php#contact">Career Advices</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">$username</a>
+                            <ul class="dropdown-menu" aria-labelledby="dropdown01">
+                                <li><a class="dropdown-item" href="userprofile.php">Profile</a></li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li><a class="dropdown-item" href="terms.html">Matches</a></li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li><a class="dropdown-item" href="terms.html">Settings</a></li>
+                                <li>
+                                    <div class="dropdown-divider"></div>
+                                </li>
+                                <li><a class="dropdown-item" href="includes/logout.inc.php">Logout</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- end of navbar-collapse -->
+            </div>
+            <!-- end of container -->
+        </nav>
+        <!-- end of navbar -->
+        <!-- end of navigation -->
     END;
 } else {
     if (isset($_SESSION['valid_user'])) {
     }
     echo <<<END
-    <nav class="navbar navbar-default navbar-sticky bootsnav">
-        <div class="container">      
-            <!-- Start Header Navigation -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
-                    <i class="fa fa-bars"></i>
-                </button>
-                <a class="navbar-brand" href="index.php"><img src="img/logo.png" class="logo" alt="" style="width:250px;height:40px;" ></a>
-            </div>
-            <!-- End Header Navigation -->
 
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="navbar-menu">
-                <ul class="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                        <li><a href="login.php">Login</a></li>        
-                        <li><a href="signup.php">Sign Up</a></li> 
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Browse</a>
-                            <ul class="dropdown-menu animated fadeOutUp" style="display: none; opacity: 1;">
-                                <li class="active"><a href="browse-job.php">Browse Jobs</a></li>
-                                <li><a href="companies.php">Companies</a></li>
-                                <li><a href="company-detail.php">Job Detail</a></li>
-                                <li><a href="resume.php">Resume Detail</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-            </div><!-- /.navbar-collapse -->
-        </div>   
+    <!-- Navigation -->
+    <nav id="navbarExample" class="navbar navbar-expand-lg fixed-top navbar-light" aria-label="Main navigation">
+        <div class="container">
+
+            <!-- Image Logo -->
+            <a class="navbar-brand logo-image" href="index.php"><img src="images/logo.svg" alt="Logo"></a>
+
+            <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav ms-auto navbar-nav-scroll">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="index.php#header">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php#getstarted">Get Started</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php#details">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php#contact">Career Advices</a>
+                    </li>
+                </ul>
+                <span class="nav-item">
+                    <a class="btn-solid-sm" href="login.php">Login</a>
+                </span>
+            </div>
+            <!-- end of navbar-collapse -->
+        </div>
+        <!-- end of container -->
     </nav>
+    <!-- end of navbar -->
+    <!-- end of navigation -->
+    
     END;
 }
