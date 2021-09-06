@@ -1,9 +1,9 @@
 <?php
 
 // Check for empty input signup
-function emptyInputSignup($firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position) {
+function emptyInputSignup($firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $type) {
 	$result = false;
-	if (empty($firstName) || empty($lastName) || empty($username) || empty($password) || empty($dateOfBirth) || empty($phone) || empty($email) || empty($position)) {
+	if (empty($firstName) || empty($lastName) || empty($username) || empty($password) || empty($dateOfBirth) || empty($phone) || empty($email) || empty($type)) {
 		$result = true;
 	}
 	return $result;
@@ -37,11 +37,11 @@ function passwordMatch($password, $confirmPassword) {
 }
 
 // Check if username is in database, if so then return data
-function usernameExists($db, $username, $email) {
+function usernameExists($db, $username, $email, $table) {
 		$username = $_POST['username'];
 		$email = $_POST['email'];
 
-		$query = "SELECT count(*) FROM admin WHERE username=? OR email =?";
+		$query = "SELECT count(*) FROM $table WHERE username=? OR email =?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("ss", $username, $email);
 		$stmt->execute();

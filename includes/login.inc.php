@@ -15,7 +15,37 @@
 		$username = $_POST['username'];
 		$password = $_POST['password'];
 
+		if(checkAdmin($db, $username, $password)){
+			$_SESSION['valid_user'] = $username;
+			$_SESSION['valid_pass'] = $password;
+			$db->close();
+			if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
+				header("Location: ../index.php?admin");
+			}
+		}elseif(checkEmployer($db, $username, $password)){
+			$_SESSION['valid_user'] = $username;
+			$_SESSION['valid_pass'] = $password;
+			$db->close();
+			if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
+				header("Location: ../index.php?employer");
+			}
+		}elseif(checkJobSeeker($db, $username, $password)){
+			$_SESSION['valid_user'] = $username;
+			$_SESSION['valid_pass'] = $password;
+			$db->close();
+			if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
+				header("Location: ../index.php?jobseeker");
+			}
+		}else {
+			header("location: ../login.php?error=incorrect");
+        	exit();
+			$db->close();
+		}
 		
+	}
+
+	function checkAdmin($db, $username, $password){
+		$admin = false;
 		$query = "SELECT count(*) 
 				FROM admin
 				WHERE username=? AND password =?";
@@ -29,7 +59,6 @@
 
 		if (!$result) {
 			header("location: ../login.php?error=failed");
-        	exit();
 			$db->close();
 			exit();
 		}
@@ -37,20 +66,64 @@
 		$row = $result->fetch_row();
 		
 		if ($row[0] > 0) {
-			$_SESSION['valid_user'] = $username;
-			$_SESSION['valid_pass'] = $password;
-			$db->close();
-			if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
-				header("Location: ../index.php");
-			}
-			
+			$admin = true;
 		}
-		else {
-			header("location: ../login.php?error=incorrect");
-        	exit();
+		return $admin;
+	}
+
+	function checkEmployer($db, $username, $password){
+		$employer = false;
+		$query = "SELECT count(*) 
+				FROM employer
+				WHERE username=? AND password =?";
+				  
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("ss", $username, $password);
+		$stmt->execute();
+		
+		$result = $stmt->get_result();
+		$stmt->close();
+
+		if (!$result) {
+			header("location: ../login.php?error=failed");
 			$db->close();
+			exit();
 		}
-	}	
-	return false;
+		
+		$row = $result->fetch_row();
+		
+		if ($row[0] > 0) {
+			$employer = true;
+		}
+		return $employer;
+	}
+
+	function checkJobSeeker($db, $username, $password){
+		$jobseeker = false;
+		$query = "SELECT count(*) 
+				FROM jobseeker
+				WHERE username=? AND password =?";
+				  
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("ss", $username, $password);
+		$stmt->execute();
+		
+		$result = $stmt->get_result();
+		$stmt->close();
+
+		if (!$result) {
+			header("location: ../login.php?error=failed");
+			$db->close();
+			exit();
+		}
+		
+		$row = $result->fetch_row();
+		
+		if ($row[0] > 0) {
+			$jobseeker = true;
+		}
+		return $jobseeker;
+	}
+
 ?>
 

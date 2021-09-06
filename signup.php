@@ -84,9 +84,13 @@
                             <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email">
                             <label for="floatingInput">Email</label>
                         </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Position" name="position">
-                            <label for="floatingInput">Position</label>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="signup_type" id="inlineRadio1" value="jobseeker" checked>
+                            <label class="form-check-label" for="inlineRadio1">Job Seeker</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="signup_type" id="inlineRadio2" value="employer">
+                            <label class="form-check-label" for="inlineRadio2">Employer</label>
                         </div>
                         
                         <p style="color: red;">
@@ -112,7 +116,7 @@
                             ?>
                         </p>
 
-                        <button class="w-50 btn btn-lg btn-primary mb-5 mt-2" type="submit" name="registerAdmin">Register</button>
+                        <button class="w-50 btn btn-lg btn-primary mb-5 mt-2" type="submit" name="register">Register</button>
                         <p class="mb-3">Already have an account? <a href="login.php">Login Here</a></p>
                     </form>
                 </main>
