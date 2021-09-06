@@ -40,6 +40,12 @@
     ?>
     <!-- Navigation End  -->
 
+    <?php
+    session_start();
+    $validSession = require('includes/check_session.inc.php');
+    if ($validSession) {
+        $username = $_SESSION['valid_user'];
+        echo <<<END
 
     <!-- login section start -->
     <header class="ex-header">
@@ -224,6 +230,18 @@
     </header>
     <!-- login section End -->
 
+    END;
+    } else {
+        if (isset($_SESSION['valid_user'])) {
+        }
+        echo <<<END
+
+
+
+        END;
+    }
+
+    ?>
 
     <!-- footer start -->
     <?php

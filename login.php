@@ -19,7 +19,7 @@
     <meta name="twitter:card" content="summary_large_image"> <!-- to have large image post format in Twitter -->
 
     <!-- Webpage Title -->
-    <title>JobMatch | Login</title>
+    <title>JobMatch | Log In</title>
 
     <!-- Styles -->
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -91,7 +91,7 @@
                                     <input type="checkbox" value="remember-me"> Remember me
                                 </label>
                             </div>
-                            <button class="w-50 btn btn-lg btn-primary mb-5 mt-2" type="submit">Login</button>
+                            <button class="w-50 btn btn-lg btn-primary mb-5 mt-2" type="submit">Log In</button>
                             <p class="mb-3">Not a user? <a href="signup.php">Create Account</a></p>
                         </form>
                     </main>

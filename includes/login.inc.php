@@ -18,23 +18,26 @@
 		if(checkAdmin($db, $username, $password)){
 			$_SESSION['valid_user'] = $username;
 			$_SESSION['valid_pass'] = $password;
+			$_SESSION['user_type'] = "admin";
 			$db->close();
 			if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
-				header("Location: ../index.php?admin");
+				header("Location: ../index.php");
 			}
 		}elseif(checkEmployer($db, $username, $password)){
 			$_SESSION['valid_user'] = $username;
 			$_SESSION['valid_pass'] = $password;
+			$_SESSION['user_type'] = "employer";
 			$db->close();
 			if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
-				header("Location: ../index.php?employer");
+				header("Location: ../index.php");
 			}
 		}elseif(checkJobSeeker($db, $username, $password)){
 			$_SESSION['valid_user'] = $username;
 			$_SESSION['valid_pass'] = $password;
+			$_SESSION['user_type'] = "jobseeker";
 			$db->close();
 			if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
-				header("Location: ../index.php?jobseeker");
+				header("Location: ../index.php");
 			}
 		}else {
 			header("location: ../login.php?error=incorrect");
