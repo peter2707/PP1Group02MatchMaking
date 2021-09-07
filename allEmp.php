@@ -100,8 +100,8 @@
                             echo "<td scope=\"row\">$phone</td>";
                             echo "<td scope=\"row\">$email</td>";
                             echo "<td scope=\"row\">$rate</td>";
-                            createButtonColumn("id", $id, "Edit", "edit.php");
-                            createButtonColumn("id", $id, "Delete", "delete.php");
+                            createButtonColumn("id", $id, "Edit", "editEmp.php");
+                            createButtonColumn("id", $id, "Delete", "deleteEmp.php");
                             echo "</tr>";
                         }
 
@@ -111,9 +111,9 @@
                         function createButtonColumn($hiddenName, $hiddenValue, $buttonText, $actionPage)
                         {
                             echo "<td>";
-                            echo "<form action=\"\"method=\"GET\">";
+                            echo "<form action=$actionPage method=\"GET\">";
                             echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-                            echo "<button type=\"submit\">$buttonText</button>";
+                            echo "<button type=\"submit\" class=\"btn btn-primary\">$buttonText</button>";
                             echo "</form>";
                             echo "</td>";
                         }

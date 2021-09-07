@@ -51,7 +51,7 @@
     <header id="header" class="header">
         <div class="container">
             <div class="row">
-                <a href="allJobSeekers.php" class="btn btn-success">Display all Job Seeker</a>
+                <a href="allJobSeeker.php" class="btn btn-success">Display all Job Seeker</a>
                 <p></p>
                 <a href="allEmp.php" class="btn btn-success">Display all Employer</a>
             </div>
