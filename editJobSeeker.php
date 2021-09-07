@@ -59,11 +59,7 @@
 
                 if (isset($_POST['submit'])) {
                     $submit = $_POST['submit'];
-                    if ($submit == "Cancel") {
-                        $db->close();
-                        header('location: adminIndex.php');
-                        exit;
-                    }
+
 
 
                     $firstName = $_POST['firstName'];
@@ -163,7 +159,7 @@
 					<br>
 					<input type="hidden" name="id" value=$id>
 					<input type="submit" name="submit" value="Update">
-					<input type="submit" name="submit" value="Cancel">
+					<input type="button" value="Cancel" class="homebutton" id="btnHome" onClick="document.location.href='adminIndex.php'" />
 				</form>
 END;
                     $result->free();
