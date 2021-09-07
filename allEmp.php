@@ -48,7 +48,7 @@
     <!-- Navigation End  -->
 
     <!-- Header -->
-    <header id="header" class="header">
+    <header id="ex-header" class="ex-header">
         <div class="container">
             <div class="row">
 
@@ -120,6 +120,9 @@
 
 
                         ?>
+
+                    </tbody>
+                </table>
             </div>
             <!-- end of row -->
         </div>

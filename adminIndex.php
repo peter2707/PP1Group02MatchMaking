@@ -48,7 +48,7 @@
     <!-- Navigation End  -->
 
     <!-- Header -->
-    <header id="header" class="header">
+    <header id="ex-header" class="ex-header">
         <div class="container">
             <div class="row">
                 <a href="allJobSeeker.php" class="btn btn-success">Display all Job Seeker</a>
