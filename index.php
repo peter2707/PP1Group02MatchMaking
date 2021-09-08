@@ -55,7 +55,7 @@
                 <div class="col-lg-6 col-xl-5">
                     <div class="text-container">
                         <h1 class="h1-large">Get your job faster and easier</h1>
-                        <p class="p-large">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dignissim, neque ut ultrices sollicitudin</p>
+                        <p class="p-large">Let us help you land an opportunity of a lifetime.</p>
                         <a class="btn-solid-lg" href="signup.php">Join today</a>
                     </div>
                     <!-- end of text-container -->
@@ -154,7 +154,7 @@
                     <div class="text-container">
                         <div class="section-title">WHAT WE DO</div>
                         <h2>Finding jobs have never been easier</h2>
-                        <p>Etiam tempus condimentum congue. In sit amet nisi eget massa condimentum lobortis eget ac eros. In hac habitasse platea dictumst. Aenean molestie mauris eget sapien sagittis, a bibendum magna tincidunt</p>
+                        <p>We strive to match the right person to the right job and with the help of our system the dream job is only just one click away.</p>
                         <a class="btn-solid-reg" href="#contact">Get quote</a>
                     </div>
                     <!-- end of text-container -->
@@ -176,9 +176,9 @@
                 <div class="col-lg-6 col-xl-5">
                     <div class="text-container">
                         <div class="section-title">ABOUT US</div>
-                        <h2>We ensure that you do not need to worry about getting turned down</h2>
-                        <p>Etiam tempus condimentum congue. In sit amet nisi eget massa condimentum lobortis eget ac eros. In hac habitasse platea dictumst. Aenean molestie mauris eget sapien sagittis, a bibendum magna tincidunt</p>
-                        <a class="btn-outline-reg" href="article.html">Details</a>
+                        <h2>Leave the hard work to us</h2>
+                        <p>JobMatch is here to help Job Seekers and Employers alike can come together and connect with each other to form new opportunities while ensuring that everyone goes aways satisfied with our services.</p>
+                        <a class="btn-outline-reg" href="aboutus.php">Details</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -389,6 +389,7 @@
                                 <div class="flex-grow-1">Sem pulvinar suscipit sit amet quis lorem. Sed risus</div>
                             </li>
                         </ul>
+                        <a class="btn-outline-reg" href="careeradvice.php">Details</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
