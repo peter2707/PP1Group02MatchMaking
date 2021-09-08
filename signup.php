@@ -98,19 +98,19 @@
                             // Error messages
                             if (isset($_GET["error"])) {
                                 if ($_GET["error"] == "emptyinput") {
-                                    echo "Fill in all fields!";
+                                    echo "Fill in all required fields!";
                                 } else if ($_GET["error"] == "invaliduid") {
-                                    echo "Choose a proper username!";
+                                    echo "Enter a valid username!";
                                 } else if ($_GET["error"] == "invalidemail") {
-                                    echo "Choose a proper email!";
+                                    echo "Enter a valid email!";
                                 } else if ($_GET["error"] == "passwordsdontmatch") {
-                                    echo "Passwords doesn't match!";
+                                    echo "Passwords do not match. Please try again!";
                                 } else if ($_GET["error"] == "stmtfailed") {
-                                    echo "Something went wrong!";
+                                    echo "Something went wrong. Please try again!";
                                 } else if ($_GET["error"] == "usernametaken") {
-                                    echo "Username already taken!";
+                                    echo "Username is already taken!";
                                 } else if ($_GET["error"] == "none") {
-                                    echo "You have signed up!";
+                                    echo "You have successfully registered!";
                                 }
                             }
                             ?>

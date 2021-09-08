@@ -6,7 +6,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h4 style="color: white;">Check out our latest news about career by following us on social media</h4>
+                    <h4 style="color: white;">Check out our latest news & updates by following us on social media!</h4>
                     <div class="social-container">
                         <span class="fa-stack">
                             <a href="https://www.facebook.com">
@@ -60,8 +60,8 @@
                     </ul>
                 </div>
                 <!-- end of col -->
-                <div class="col-lg-3 col-md-12 col-sm-12">
-                    <p class="p-small statement" style="color: white;">&copy; Copyright 2021 JobMatch</a></p>
+                <div class="col-lg-3 col-md-12 col-md-12">
+                    <p class="p-small statement" style="color: white;">&copy; Copyright 2021 PP1Group02JobMatch</a></p>
                 </div>
                 <!-- end of col -->
 

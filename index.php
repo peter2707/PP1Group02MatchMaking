@@ -54,9 +54,9 @@
             <div class="row">
                 <div class="col-lg-6 col-xl-5">
                     <div class="text-container">
-                        <h1 class="h1-large">Get your job faster and easier</h1>
-                        <p class="p-large">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dignissim, neque ut ultrices sollicitudin</p>
-                        <a class="btn-solid-lg" href="signup.php">Join today</a>
+                        <h1 class="h1-large">Get Matched</br>In No Time!</h1>
+                        <p>Looking for a job? Enter your skills & experience.</br>Seeking the right employees? Post your business ad.</br>Receive an email notification.</br>That's it, you've successfully matched!</br></br>In just 2 fast & easy steps,</br>Job Match will pair you perfectly with</br>either an Employer or Job Seeker!</p></br>
+                        <a class="btn-solid-lg" href="signup.php"><i>Get Matched Now!</i></a>
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -78,62 +78,87 @@
 
     <!-- Services -->
     <div id="getstarted" class="cards-1 bg-gray">
-        <div class="container">
+    <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>How to get started</h2>
+                    <h2>How To Start?</h2>
                 </div>
                 <!-- end of col -->
+            </div>
             </div>
             <!-- end of row -->
             <div class="row">
                 <div class="col-lg-12">
 
                     <!-- Card -->
+                    <div class="container-fluid">
+                    <div class="row">
+                    <div class="col-sm-3">
                     <div class="card">
                         <div class="card-icon">
                             <span class="fas fa-file-alt"></span>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Create your account</h5>
-                            <p>Et blandit nisl libero at arcu. Donec ac lectus sed tellus mollis viverra. Nullam pharetra ante at nunc elementum</p>
+                            <h5 class="card-title">Sign Up</h5>
+                            <p>Select whether you're registering as an Employer or Job Seeker!</p>
                             <a class="read-more no-line" href="article.html">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
                         </div>
+                    </div>
                     </div>
                     <!-- end of card -->
 
                     <!-- Card -->
+                    <div class="col-sm-3">
+                    <div class="card">
+                        <div class="card-icon">
+                            <span class="fas fa-file-alt"></span>
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Create Post/Profile</h5>
+                            <p>Employer? List a job post with your business values!</br>Job Seeker? Personalize your profile with a skillset!</p>
+    
+                            <a class="read-more no-line" href="article.html">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- end of card -->
+
+                    <!-- Card -->
+                    <div class="col-sm-3">
                     <div class="card">
                         <div class="card-icon red">
                             <span class="far fa-lightbulb"></span>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Get matches</h5>
-                            <p>Vulputate nibh feugiat. Morbi pellent diam nec libero lacinia, sed ultrices velit scelerisque. Nunc placerat justo sem</p>
+                            <h5 class="card-title">Get Matches</h5>
+                            <p>We will pair you up with your corresponding Employer/Job Seeker.</br>Keep an eye out on your email!</p>
                             <a class="read-more no-line" href="article.html">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
                         </div>
+                    </div>
                     </div>
                     <!-- end of card -->
 
                     <!-- Card -->
+                    <div class="col-sm-3">
                     <div class="card">
                         <div class="card-icon green">
                             <span class="far fa-comments"></span>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Make contact</h5>
-                            <p>Ety suscipit metus sollicitudin euqu isq imperdiet nibh nec magna tincidunt, nec pala vehicula neque sodales verum</p>
+                            <h5 class="card-title">Make Contact</h5>
+                            <p>Choose to continue with the next employment steps by contacting one another!</p>
                             <a class="read-more no-line" href="article.html">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
                         </div>
                     </div>
+                    </div>
+                     <!-- end of row -->
+                    </div>
                     <!-- end of card -->
-
                 </div>
                 <!-- end of col -->
             </div>
             <!-- end of row -->
-        </div>
-        <!-- end of container -->
+
     </div>
     <!-- end of cards-1 -->
     <!-- end of services -->
@@ -152,10 +177,10 @@
                 <!-- end of col -->
                 <div class="col-lg-6 col-xl-5">
                     <div class="text-container">
-                        <div class="section-title">WHAT WE DO</div>
-                        <h2>Finding jobs have never been easier</h2>
-                        <p>Etiam tempus condimentum congue. In sit amet nisi eget massa condimentum lobortis eget ac eros. In hac habitasse platea dictumst. Aenean molestie mauris eget sapien sagittis, a bibendum magna tincidunt</p>
-                        <a class="btn-solid-reg" href="#contact">Get quote</a>
+                        <div class="section-title">EMPLOYERS</div>
+                        <h2>Advertise a job at no cost!</h2>
+                        <p>Looking for candidates?</br>It's quick & simple to post jobs on JobMatch. Start today. Reach 200M+ Job Seekers. Evaluate Candidates. Post a job in minutes. No.1 Job-Matching Site. Find Quality Candidates. Schedule Interviews.</p>
+                        <a class="btn-solid-reg" href="#contact">Find Candidates</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -163,6 +188,7 @@
             </div>
             <!-- end of row -->
         </div>
+        </div>  
         <!-- end of container -->
     </div>
     <!-- end of basic-1 -->
@@ -175,10 +201,10 @@
             <div class="row">
                 <div class="col-lg-6 col-xl-5">
                     <div class="text-container">
-                        <div class="section-title">ABOUT US</div>
-                        <h2>We ensure that you do not need to worry about getting turned down</h2>
-                        <p>Etiam tempus condimentum congue. In sit amet nisi eget massa condimentum lobortis eget ac eros. In hac habitasse platea dictumst. Aenean molestie mauris eget sapien sagittis, a bibendum magna tincidunt</p>
-                        <a class="btn-outline-reg" href="article.html">Details</a>
+                        <div class="section-title">JOB SEEKERS</div>
+                        <h2>Finding jobs have never been easier!</h2>
+                        <p>Looking for a job?</br>Customise your profile; add your skills, experience, qualifications, availability, career objective.</br>With thousands of jobs currently available and more being added everyday, JobMatch can help you find the right job.</p>
+                        <a class="btn-outline-reg" href="article.html">Find Jobs</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -198,13 +224,43 @@
     <!-- end of basic-2 -->
     <!-- end of details 2 -->
 
+     <!-- Details 3 -->
+     <div id="details" class="basic-2">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-xl-7">
+                    <div class="image-container">
+                        <img class="img-fluid" src="images/details-3.png" alt="alternative">
+                    </div>
+                    <!-- end of image-container -->
+                </div>
+                <!-- end of col -->
+                <div class="col-lg-6 col-xl-5">
+                    <div class="text-container">
+                        <div class="section-title">ABOUT US</div>
+                        <h2>Whatever you're looking for, you can find it on JobMatch!</h2>
+                        <p>JobMatch is the latest product developed by students from RMIT University studying the course COSC2408 Programming Project 1. </br>Known as Group 2, we're helping people to get back to work & employers find the right staff. </br>Find jobs & career related information or recruit the ideal candidate!</p>
+                        <a class="btn-solid-reg" href="#contact">Details</a>
+                    </div>
+                    <!-- end of text-container -->
+                </div>
+                <!-- end of col -->
+            </div>
+            <!-- end of row -->
+        </div>
+        </div>  
+        <!-- end of container -->
+    </div>
+    <!-- end of basic-1 -->
+    <!-- end of details 3 -->
+
 
     <!-- Testimonials -->
     <div class="cards-2 bg-gray">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2 class="h2-heading">Customer satisfactions</h2>
+                    <h2 class="h2-heading">Customer Satisfactions</h2>
                 </div>
                 <!-- end of col -->
             </div>
@@ -216,7 +272,7 @@
                     <div class="card">
                         <img class="quotes" src="images/quotes.svg" alt="alternative">
                         <div class="card-body">
-                            <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
+                            <p class="testimonial-text">It fits our needs perfectly. I couldn't have asked for more than this. You guys rock!</p>
                             <div class="testimonial-author">Roe Smith</div>
                             <div class="occupation">General Manager, Presentop</div>
                         </div>
@@ -228,7 +284,7 @@
                     <div class="card">
                         <img class="quotes" src="images/quotes.svg" alt="alternative">
                         <div class="card-body">
-                            <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
+                            <p class="testimonial-text">It really saves me time and effort. JobMatch is exactly what our business has been lacking.</p>
                             <div class="testimonial-author">Sam Bloom</div>
                             <div class="occupation">General Manager, Presentop</div>
                         </div>
@@ -240,7 +296,7 @@
                     <div class="card">
                         <img class="quotes" src="images/quotes.svg" alt="alternative">
                         <div class="card-body">
-                            <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
+                            <p class="testimonial-text">Best. Product. Ever! It's really wonderful.</p>
                             <div class="testimonial-author">Bill McKenzie</div>
                             <div class="occupation">General Manager, Presentop</div>
                         </div>
@@ -252,7 +308,7 @@
                     <div class="card">
                         <img class="quotes" src="images/quotes.svg" alt="alternative">
                         <div class="card-body">
-                            <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
+                            <p class="testimonial-text">Your company is truly upstanding and is behind its product 100%. JobMatch should be nominated for service of the year. I'm good to go.</p>
                             <div class="testimonial-author">Vanya Dropper</div>
                             <div class="occupation">General Manager, Presentop</div>
                         </div>
@@ -264,7 +320,7 @@
                     <div class="card">
                         <img class="quotes" src="images/quotes.svg" alt="alternative">
                         <div class="card-body">
-                            <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
+                            <p class="testimonial-text">Wow what great service, I love it!</p>
                             <div class="testimonial-author">Lefty Brown</div>
                             <div class="occupation">General Manager, Presentop</div>
                         </div>
@@ -276,7 +332,7 @@
                     <div class="card">
                         <img class="quotes" src="images/quotes.svg" alt="alternative">
                         <div class="card-body">
-                            <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
+                            <p class="testimonial-text">Job Match has got everything I need. Thank you so much for your help.</p>
                             <div class="testimonial-author">Susane Blake</div>
                             <div class="occupation">General Manager, Presentop</div>
                         </div>
@@ -300,7 +356,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h4>Trusted by over <span class="blue">5000</span> customers worldwide</h4>
+                    <h4>Trusted by over <span class="blue">5000</span> customers worldwide!</h4>
                     <hr class="section-divider">
 
                     <!-- Image Slider -->
@@ -350,9 +406,9 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="text-container">
-                        <h2>Find the right job for you</h2>
-                        <p class="p-large">Eu convallis arcu ultrices in. Mauris ornare libero et pharetra hendrerit. Curabitur elementum lectus quis vioc tellus</p>
-                        <a class="btn-solid-lg" href="#contact">Get free quote</a>
+                        <h2>Find The Right Job For You</h2>
+                        <p class="p-large">We understand that the workplace may seem challenging.</br>So, let us help!</p>
+                        <a class="btn-solid-lg" href="#contact">Get Free Quote</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -372,21 +428,21 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="text-container">
-                        <div class="section-title">CAREER ADVICE</div>
-                        <h2>Get in touch for career advice</h2>
-                        <p>Aliquam et enim vel sem pulvinar suscipit sit amet quis lorem. Sed risus ipsum, egestas sed odio in, pulvinar euismod ipsum. Sed ut enim non nunc fermentum dictum et sit amet erat. Maecenas</p>
+                        <div class="section-title">Contact Support</div>
+                        <h2>Got a question? Just ask us!</h2>
+                        <p>Whether you require support or have an issue with your experience, let us know!</p>
                         <ul class="list-unstyled li-space-lg">
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
-                                <div class="flex-grow-1">Vel maximus nunc aliquam ut. Donec semper, magna a pulvinar</div>
+                                <div class="flex-grow-1">Step 1:</br>Fill in your contact details including your full name & email.</div>
                             </li>
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
-                                <div class="flex-grow-1">Suscipit sit amet quis lorem. Sed risus ipsum, egestas mare</div>
+                                <div class="flex-grow-1">Step 2:</br>Enter a title for your message & type away!</div>
                             </li>
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
-                                <div class="flex-grow-1">Sem pulvinar suscipit sit amet quis lorem. Sed risus</div>
+                                <div class="flex-grow-1">Step 3:</br>Press 'Send Enquiry' & we'll make sure to get back to you within 1-3 business days.</div>
                             </li>
                         </ul>
                     </div>
@@ -398,19 +454,19 @@
                     <!-- Contact Form -->
                     <form>
                         <div class="form-group">
-                            <input type="text" class="form-control-input" placeholder="Name" required>
+                            <input type="text" class="form-control-input" placeholder="Full Name" required>
                         </div>
                         <div class="form-group">
                             <input type="email" class="form-control-input" placeholder="Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control-input" placeholder="Industry" required>
+                            <input type="text" class="form-control-input" placeholder="Topic" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control-input" placeholder="Your product" required>
+                            <input type="text" class="form-control-input" placeholder="Your Message" required>
                         </div>
                         <div class="form-group">
-                            <button type="submit" class="form-control-submit-button">Submit</button>
+                            <button type="submit" class="form-control-submit-button">Send Enquiry</button>
                         </div>
                     </form>
                     <!-- end of contact form -->
