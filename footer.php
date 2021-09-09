@@ -59,16 +59,13 @@
                         <li><a href="privacy.php" style="color: white;">Privacy Policy</a></li>
                     </ul>
                 </div>
+                
                 <!-- end of col -->
-                <div class="col-lg-3 col-md-12 col-md-12">
+                <div class="col-lg-6 col-md-12 col-md-12">
                     <p class="p-small statement" style="color: white;">&copy; Copyright 2021 PP1Group02JobMatch</a></p>
                 </div>
                 <!-- end of col -->
-
-                <div class="col-lg-3 col-md-12 col-sm-12">
-                    <p class="p-small statement" style="color: white;">Distributed by <a href="https://themewagon.com/" target="_blank" style="color: white;">Themewagon</a></p>
-                </div>
-                <!-- end of col -->
+                
             </div>
             <!-- enf of row -->
         </div>

@@ -25,6 +25,7 @@ All images are included in the download package and can be reused in your projec
 
 
 CREDITS
+- Distributed by ThemeWagon: https://themewagon.com/
 - Design by Ruhul Amin: https://dribbble.com/Ruhul-Amin 
 - Images by Pexels: https://www.pexels.com/
 

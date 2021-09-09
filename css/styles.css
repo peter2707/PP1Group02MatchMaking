@@ -541,7 +541,7 @@ a:hover {
 .cards-1 .card {
     margin-bottom: 5rem;
     border: none;
-    margin-left: 10px;
+    background-color: transparent;
 }
 
 .cards-1 .card-icon {
@@ -580,7 +580,6 @@ a:hover {
 
 .cards-1 .card-body {
     padding: 0;
-    padding-right: 30px;
 }
 
 .cards-1 .card-title {

@@ -28,7 +28,7 @@ if ($validSession) {
                             <a class="nav-link" href="index.php#details">About Us</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php#contact">Contact Support</a>
+                            <a class="nav-link" href="index.php#contact">Career Advices</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">$username</a>
@@ -85,7 +85,7 @@ if ($validSession) {
                         <a class="nav-link" href="index.php#details">About Us</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php#contact">Contact Support</a>
+                        <a class="nav-link" href="index.php#contact">Career Advices</a>
                     </li>
                 </ul>
                 <span class="nav-item">
