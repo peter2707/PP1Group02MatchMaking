@@ -54,6 +54,8 @@
                 <a href="allJobSeeker.php" class="btn btn-success">Display all Job Seeker</a>
                 <p></p>
                 <a href="allEmp.php" class="btn btn-success">Display all Employer</a>
+                <p></p>
+                <a href="addUser.php" class="btn btn-success">Add new user</a>
             </div>
             <!-- end of row -->
         </div>
