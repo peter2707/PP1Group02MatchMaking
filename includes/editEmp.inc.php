@@ -101,3 +101,4 @@
 					<input type="button" value="Cancel" class="homebutton" id="btnHome" onClick="document.location.href='adminIndex.php'" />
 				</form>
 END;
+                }

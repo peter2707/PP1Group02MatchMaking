@@ -2,7 +2,7 @@
     echo <<<END
 
     <!-- Footer -->
-    <div class="footer bg-gray">
+    <div class="footer bg-light">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
