@@ -1,7 +1,7 @@
 <?php
 session_start();
 $validSession = require('includes/check_session.inc.php');
-$userType = $_SESSION['user_type'];
+$userType = $_SESSION['user_type'] ?? "";
 if ($validSession && $userType == "jobseeker") {                       //jobseeker nav-bar
     $username = $_SESSION['valid_user'];
     echo <<<END
