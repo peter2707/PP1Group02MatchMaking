@@ -25,9 +25,9 @@
             <div class="row">
                 <div class="col-lg-6 col-xl-5">
                     <div class="text-container">
-                        <h1 class="h1-large">Get your job faster and easier</h1>
-                        <p class="p-large">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut dignissim, neque ut ultrices sollicitudin</p>
-                        <a class="btn-solid-lg" href="signup.php">Join today</a>
+                        <h1 class="h1-large">Get Matched</br>In No Time!</h1>
+                        <p>Looking for a job? Enter your skills & experience.</br>Seeking the right employees? Post your business ad.</br>Receive an email notification.</br>That's it, you've successfully matched!</br></br>In just 2 fast & easy steps,</br>Job Match will pair you perfectly with</br>either an Employer or Job Seeker!</p></br>
+                        <a class="btn-solid-lg" href="signup.php"><i>Get Matched Now!</i></a>
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -52,7 +52,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h2>How to get started</h2>
+                    <h2>How To Start?</h2>
                 </div>
                 <!-- end of col -->
             </div>
@@ -67,7 +67,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Create your account</h5>
-                            <p>Et blandit nisl libero at arcu. Donec ac lectus sed tellus mollis viverra. Nullam pharetra ante at nunc elementum</p>
+                            <p>Enter your details, choose your side between an Employer or Job Seeker!</br>Employer? List a job post with your business values!</br>Job Seeker? Personalize your profile with a skillset!</p>
                             <a class="read-more no-line" href="article.html">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
                         </div>
                     </div>
@@ -80,7 +80,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Get matches</h5>
-                            <p>Vulputate nibh feugiat. Morbi pellent diam nec libero lacinia, sed ultrices velit scelerisque. Nunc placerat justo sem</p>
+                            <p>We will pair you up with your corresponding Employer/Job Seeker.</br>Keep an eye out on your email!</p>
                             <a class="read-more no-line" href="article.html">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
                         </div>
                     </div>
@@ -93,7 +93,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Make contact</h5>
-                            <p>Ety suscipit metus sollicitudin euqu isq imperdiet nibh nec magna tincidunt, nec pala vehicula neque sodales verum</p>
+                            <p>Choose to continue with the next employment steps by contacting one another!</p>
                             <a class="read-more no-line" href="article.html">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
                         </div>
                     </div>
@@ -123,10 +123,10 @@
                 <!-- end of col -->
                 <div class="col-lg-6 col-xl-5">
                     <div class="text-container">
-                        <div class="section-title">WHAT WE DO</div>
+                        <div class="section-title">JOB SEEKER</div>
                         <h2>Finding jobs have never been easier</h2>
-                        <p>Etiam tempus condimentum congue. In sit amet nisi eget massa condimentum lobortis eget ac eros. In hac habitasse platea dictumst. Aenean molestie mauris eget sapien sagittis, a bibendum magna tincidunt</p>
-                        <a class="btn-solid-reg" href="#contact">Get quote</a>
+                        <p>Looking for a job?</br>Customise your profile; add your skills, experience, qualifications, availability, career objective.</br>With thousands of jobs currently available and more being added everyday, JobMatch can help you find the right job.</p>
+                        <a class="btn-solid-reg" href="#contact">Get Advices</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -146,10 +146,10 @@
             <div class="row">
                 <div class="col-lg-6 col-xl-5">
                     <div class="text-container">
-                        <div class="section-title">ABOUT US</div>
-                        <h2>We ensure that you do not need to worry about getting turned down</h2>
-                        <p>Etiam tempus condimentum congue. In sit amet nisi eget massa condimentum lobortis eget ac eros. In hac habitasse platea dictumst. Aenean molestie mauris eget sapien sagittis, a bibendum magna tincidunt</p>
-                        <a class="btn-outline-reg" href="article.html">Details</a>
+                        <div class="section-title">EMPLOYER</div>
+                        <h2>Advertise a job at no cost!</h2>
+                        <p>Looking for candidates?</br>It's quick & simple to post jobs on JobMatch. Start today. Reach 200M+ Job Seekers. Evaluate Candidates. Post a job in minutes. No.1 Job-Matching Site. Find Quality Candidates. Schedule Interviews.</p>
+                        <a class="btn-solid-reg" href="#contact">Get Advices</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -159,6 +159,35 @@
                         <img class="img-fluid" src="../images/details-2.png" alt="alternative">
                     </div>
                     <!-- end of image-container -->
+                </div>
+                <!-- end of col -->
+            </div>
+            <!-- end of row -->
+        </div>
+        <!-- end of container -->
+    </div>
+    <!-- end of basic-2 -->
+    <!-- end of details 2 -->
+
+    <!-- Details 3 -->
+    <div class="basic-1">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-xl-7">
+                    <div class="image-container">
+                        <img class="img-fluid" src="images/details-3.png" alt="alternative">
+                    </div>
+                    <!-- end of image-container -->
+                </div>
+                <!-- end of col -->
+                <div class="col-lg-6 col-xl-5">
+                    <div class="text-container">
+                        <div class="section-title">ABOUT US</div>
+                        <h2>Whatever you're looking for, you can find it on JobMatch!</h2>
+                        <p>JobMatch is the latest product developed by students from RMIT University studying the course COSC2408 Programming Project 1. </br>Known as Group 2, we're helping people to get back to work & employers find the right staff. </br>Find jobs & career related information or recruit the ideal candidate!</p>
+                        <a class="btn-solid-reg" href="#contact">Contact</a>
+                    </div>
+                    <!-- end of text-container -->
                 </div>
                 <!-- end of col -->
             </div>
@@ -187,7 +216,7 @@
                     <div class="card">
                         <img class="quotes" src="../images/quotes.svg" alt="alternative">
                         <div class="card-body">
-                            <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
+                            <p class="testimonial-text">It fits our needs perfectly. I couldn't have asked for more than this. You guys rock!</p>
                             <div class="testimonial-author">Roe Smith</div>
                             <div class="occupation">General Manager, Presentop</div>
                         </div>
@@ -199,9 +228,9 @@
                     <div class="card">
                         <img class="quotes" src="../images/quotes.svg" alt="alternative">
                         <div class="card-body">
-                            <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
+                            <p class="testimonial-text">It really saves me time and effort. JobMatch is exactly what our business has been lacking.</p>
                             <div class="testimonial-author">Sam Bloom</div>
-                            <div class="occupation">General Manager, Presentop</div>
+                            <div class="occupation">CEO, G-Tech</div>
                         </div>
                         <div class="gradient-floor blue-to-purple"></div>
                     </div>
@@ -211,9 +240,9 @@
                     <div class="card">
                         <img class="quotes" src="../images/quotes.svg" alt="alternative">
                         <div class="card-body">
-                            <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
+                            <p class="testimonial-text">Your company is truly upstanding and is behind its product 100%. JobMatch should be nominated for service of the year.</p>
                             <div class="testimonial-author">Bill McKenzie</div>
-                            <div class="occupation">General Manager, Presentop</div>
+                            <div class="occupation">Assistant Manager, Bloomingdale</div>
                         </div>
                         <div class="gradient-floor purple-to-green"></div>
                     </div>
@@ -223,9 +252,9 @@
                     <div class="card">
                         <img class="quotes" src="../images/quotes.svg" alt="alternative">
                         <div class="card-body">
-                            <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
+                            <p class="testimonial-text">Job Match has got everything I need. Thank you so much for your help.</p>
                             <div class="testimonial-author">Vanya Dropper</div>
-                            <div class="occupation">General Manager, Presentop</div>
+                            <div class="occupation">Junior Associate, Nexus Law Firm</div>
                         </div>
                         <div class="gradient-floor red-to-blue"></div>
                     </div>
@@ -235,9 +264,9 @@
                     <div class="card">
                         <img class="quotes" src="../images/quotes.svg" alt="alternative">
                         <div class="card-body">
-                            <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
+                            <p class="testimonial-text">Been struggling looking for a job but finally got my first job with these guys, they're absolutely amazing.</p>
                             <div class="testimonial-author">Lefty Brown</div>
-                            <div class="occupation">General Manager, Presentop</div>
+                            <div class="occupation">General Nurse, Eastern Hospital</div>
                         </div>
                         <div class="gradient-floor blue-to-purple"></div>
                     </div>
@@ -247,9 +276,9 @@
                     <div class="card">
                         <img class="quotes" src="../images/quotes.svg" alt="alternative">
                         <div class="card-body">
-                            <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
+                            <p class="testimonial-text">Seek is always very handy and helpful . Lot of genuine applicants for job. The website is easy to use and well designed.</p>
                             <div class="testimonial-author">Susane Blake</div>
-                            <div class="occupation">General Manager, Presentop</div>
+                            <div class="occupation">Chief Financial Officer, Blue Mountain Trading</div>
                         </div>
                         <div class="gradient-floor purple-to-green"></div>
                     </div>
@@ -322,7 +351,7 @@
                 <div class="col-lg-12">
                     <div class="text-container">
                         <h2>Find the right job for you</h2>
-                        <p class="p-large">Eu convallis arcu ultrices in. Mauris ornare libero et pharetra hendrerit. Curabitur elementum lectus quis vioc tellus</p>
+                        <p class="p-large">We understand that the workplace may seem challenging.</br>So, let us help!</p>
                         <a class="btn-solid-lg" href="#contact">Get free quote</a>
                     </div>
                     <!-- end of text-container -->
@@ -344,20 +373,20 @@
                 <div class="col-lg-6">
                     <div class="text-container">
                         <div class="section-title">CAREER ADVICE</div>
-                        <h2>Get in touch for career advice</h2>
-                        <p>Aliquam et enim vel sem pulvinar suscipit sit amet quis lorem. Sed risus ipsum, egestas sed odio in, pulvinar euismod ipsum. Sed ut enim non nunc fermentum dictum et sit amet erat. Maecenas</p>
+                        <h2>Got a question? Just ask us!</h2>
+                        <p>Whether you require support or have an issue with your experience, let us know!</p>
                         <ul class="list-unstyled li-space-lg">
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
-                                <div class="flex-grow-1">Vel maximus nunc aliquam ut. Donec semper, magna a pulvinar</div>
+                                <div class="flex-grow-1">Fill in your contact details including your full name & email.</div>
                             </li>
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
-                                <div class="flex-grow-1">Suscipit sit amet quis lorem. Sed risus ipsum, egestas mare</div>
+                                <div class="flex-grow-1">Enter a title for your message & type away!</div>
                             </li>
                             <li class="d-flex">
                                 <i class="fas fa-square"></i>
-                                <div class="flex-grow-1">Sem pulvinar suscipit sit amet quis lorem. Sed risus</div>
+                                <div class="flex-grow-1">Submit your enquiry & we'll make sure to get back to you within 1-3 business days.</div>
                             </li>
                         </ul>
                     </div>
@@ -375,10 +404,10 @@
                             <input type="email" class="form-control-input" placeholder="Email" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control-input" placeholder="Industry" required>
+                            <input type="text" class="form-control-input" placeholder="Title" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control-input" placeholder="Your product" required>
+                            <input type="text" class="form-control-input" placeholder="Message" required>
                         </div>
                         <div class="form-group">
                             <button type="submit" class="form-control-submit-button">Submit</button>

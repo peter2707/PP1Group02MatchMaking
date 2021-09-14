@@ -29,13 +29,13 @@
                         // Error messages
                         if (isset($_GET["error"])) {
                             if ($_GET["error"] == "emptyusername") {
-                                echo "Username cannot be empty!";
+                                echo "You must enter a valid username!";
                             } else if ($_GET["error"] == "emptypassword") {
-                                echo "Password cannot be empty!";
+                                echo "You must enter a valid password!";
                             } else if ($_GET["error"] == "failed") {
-                                echo "Something went wrong!";
+                                echo "Something went wrong. Please try again!";
                             } else if ($_GET["error"] == "incorrect") {
-                                echo "Incorrect Password or Email!";
+                                echo "Incorrect password or email. Please try again!";
                             }
                         }
                         ?>
@@ -45,7 +45,7 @@
                         // Account created message
                         if (isset($_GET["success"])) {
                             if ($_GET["success"] == "created") {
-                                echo "Your account has been created.<br>Please log in to continue!";
+                                echo "Your account has been successfully created.<br>Please log in to continue!";
                             }
                         }
                         ?>
@@ -55,11 +55,11 @@
                     <main class="form-signin">
                         <form method="POST" action="../includes/login.inc.php">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com" name="username">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="SamSmith123@gmail.com" name="username">
                                 <label for="floatingInput">Username</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="SammyS101!" name="password">
                                 <label for="floatingPassword">Password</label>
                             </div>
 
@@ -69,7 +69,7 @@
                                 </label>
                             </div>
                             <button class="w-50 btn btn-lg btn-primary mb-5 mt-2" type="submit">Log In</button>
-                            <p class="mb-3">Not a user? <a href="signup.php">Create Account</a></p>
+                            <p class="mb-3">New user?</br><a href="signup.php">Create an account!</a></p>
                         </form>
                     </main>
                 </div>
