@@ -1,63 +1,63 @@
 <?php
-                require_once 'includes/db_connection.inc.php';
-                $id = $_GET['id'];
+require_once 'includes/db_connection.inc.php';
+$id = $_GET['id'];
 
-                if (isset($_POST['submit'])) {
-                    $submit = $_POST['submit'];
+if (isset($_POST['submit'])) {
+    $submit = $_POST['submit'];
 
 
 
-                    $firstName = $_POST['firstName'];
-                    $lastName = $_POST['lastName'];
-                    $username = $_POST['username'];
-                    $password = $_POST['password'];
-                    $dob = $_POST['dob'];
-                    $phone = $_POST['phone'];
-                    $email = $_POST['email'];
-                    $rate = $_POST['rate'];
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $dob = $_POST['dob'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $rate = $_POST['rate'];
 
-                    $query = "UPDATE employer SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, rating=? WHERE id = ?";
+    $query = "UPDATE employer SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, rating=? WHERE id = ?";
 
-                    $stmt = $db->prepare($query);
-                    $stmt->bind_param("ssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $rate, $id);
-                    $stmt->execute();
+    $stmt = $db->prepare($query);
+    $stmt->bind_param("ssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $rate, $id);
+    $stmt->execute();
 
-                    $affectedRows = $stmt->affected_rows;
-                    $stmt->close();
-                    $db->close();
+    $affectedRows = $stmt->affected_rows;
+    $stmt->close();
+    $db->close();
 
-                    if ($affectedRows == 1) {
-                        echo "Successfully Updated Job<br><br>";
-                        echo "<a href=\"adminIndex.php\" class=\"btn btn-success\">Back to Job List</a>";
-                        echo "<br><hr>";
-                        exit;
-                    } else {
-                        echo "Failed to Updated Job<br><br>";
-                        echo "<a href=\"adminIndex.php\" class=\"btn btn-success\">Back to Job List</a>";
-                        echo "<br><hr>";
-                        exit;
-                    }
-                } else {
-                    $queryEmp = "SELECT * FROM employer WHERE id = ?";
-                    $stmtEmp = $db->prepare($queryEmp);
-                    $stmtEmp->bind_param("i", $id);
+    if ($affectedRows == 1) {
+        echo "Successfully Updated Job<br><br>";
+        echo "<a href=\"adminIndex.php\" class=\"btn btn-success\">Back to Job List</a>";
+        echo "<br><hr>";
+        exit;
+    } else {
+        echo "Failed to Updated Job<br><br>";
+        echo "<a href=\"adminIndex.php\" class=\"btn btn-success\">Back to Job List</a>";
+        echo "<br><hr>";
+        exit;
+    }
+} else {
+    $queryEmp = "SELECT * FROM employer WHERE id = ?";
+    $stmtEmp = $db->prepare($queryEmp);
+    $stmtEmp->bind_param("i", $id);
 
-                    $stmtEmp->execute();
-                    $result = $stmtEmp->get_result();
-                    $stmtEmp->close();
+    $stmtEmp->execute();
+    $result = $stmtEmp->get_result();
+    $stmtEmp->close();
 
-                    $row = $result->fetch_assoc();
+    $row = $result->fetch_assoc();
 
-                    $firstName = $row['firstName'];
-                    $lastName = $row['lastName'];
-                    $username = $row['username'];
-                    $password = $row['password'];
-                    $dob = $row['dateOfBirth'];
-                    $phone = $row['phone'];
-                    $email = $row['email'];
-                    $rate = $row['rating'];
+    $firstName = $row['firstName'];
+    $lastName = $row['lastName'];
+    $username = $row['username'];
+    $password = $row['password'];
+    $dob = $row['dateOfBirth'];
+    $phone = $row['phone'];
+    $email = $row['email'];
+    $rate = $row['rating'];
 
-                    echo <<<END
+    echo <<<END
 				
 				<form action="" method="POST">
 					<table class=”table”>
@@ -101,4 +101,4 @@
 					<input type="button" value="Cancel" class="homebutton" id="btnHome" onClick="document.location.href='adminIndex.php'" />
 				</form>
 END;
-                }
+}

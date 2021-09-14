@@ -1,6 +1,7 @@
 <?php
 session_start();
-$validSession = require('includes/check_session.inc.php');
+$validSession = require_once __DIR__.'/../../includes/check_session.inc.php';
+
 $userType = $_SESSION['user_type'] ?? "";
 if ($validSession && $userType == "jobseeker") {                       //jobseeker nav-bar
     $username = $_SESSION['valid_user'];
@@ -11,7 +12,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
             <div class="container">
 
                 <!-- Image Logo -->
-                <a class="navbar-brand logo-image" href="index.php"><img src="images/logo.svg" alt="Logo"></a>
+                <a class="navbar-brand logo-image" href="index.php"><img src="../images/logo.svg" alt="Logo"></a>
 
                 <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -43,7 +44,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
-                                <li><a class="dropdown-item text-danger" href="includes/logout.inc.php">Log Out</a></li>
+                                <li><a class="dropdown-item text-danger" href="../includes/logout.inc.php">Log Out</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -65,7 +66,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
         <div class="container">
 
             <!-- Image Logo -->
-            <a class="navbar-brand logo-image" href="index.php"><img src="images/logo.svg" alt="Logo"></a>
+            <a class="navbar-brand logo-image" href="index.php"><img src="../images/logo.svg" alt="Logo"></a>
 
             <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -97,7 +98,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>
-                            <li><a class="dropdown-item text-danger" href="includes/logout.inc.php">Log Out</a></li>
+                            <li><a class="dropdown-item text-danger" href="../includes/logout.inc.php">Log Out</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -119,7 +120,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
         <div class="container">
 
             <!-- Image Logo -->
-            <a class="navbar-brand logo-image" href="index.php"><img src="images/logo.svg" alt="Logo"></a>
+            <a class="navbar-brand logo-image" href="index.php"><img src="../images/logo.svg" alt="Logo"></a>
 
             <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -146,15 +147,15 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>
-                            <li><a class="dropdown-item" href="terms.html">Matches</a></li>
+                            <li><a class="dropdown-item" href="#">Matches</a></li>
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>
-                            <li><a class="dropdown-item" href="terms.html">Settings</a></li>
+                            <li><a class="dropdown-item" href="#">Settings</a></li>
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>
-                            <li><a class="dropdown-item" href="includes/logout.inc.php">Log Out</a></li>
+                            <li><a class="dropdown-item text-danger" href="../includes/logout.inc.php">Log Out</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -175,7 +176,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
         <div class="container">
 
             <!-- Image Logo -->
-            <a class="navbar-brand logo-image" href="index.php"><img src="images/logo.svg" alt="Logo"></a>
+            <a class="navbar-brand logo-image" href="index.php"><img src="../images/logo.svg" alt="Logo"></a>
 
             <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>

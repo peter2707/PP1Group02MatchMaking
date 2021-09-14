@@ -2,48 +2,19 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Your description">
-    <meta name="author" content="Your name">
-
-    <!-- OG Meta Tags to improve the way the post looks when you share the page on Facebook, Twitter, LinkedIn -->
-    <meta property="og:site_name" content="" />
-    <!-- website name -->
-    <meta property="og:site" content="" />
-    <!-- website link -->
-    <meta property="og:title" content="" />
-    <!-- title shown in the actual shared post -->
-    <meta property="og:description" content="" />
-    <!-- description shown in the actual shared post -->
-    <meta property="og:image" content="" />
-    <!-- image link, make sure it's jpg -->
-    <meta property="og:url" content="" />
-    <!-- where do you want your post to link to -->
-    <meta name="twitter:card" content="summary_large_image">
-    <!-- to have large image post format in Twitter -->
-
     <!-- Webpage Title -->
     <title>JobMatch | Home</title>
+    <?php
+        include("component/header.php");
+    ?>
 
-    <!-- Styles -->
-    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/fontawesome-all.min.css" rel="stylesheet">
-    <link href="css/swiper.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
-
-    <!-- Favicon  -->
-    <link rel="icon" href="images/favicon.png">
 </head>
 
 <body data-bs-spy="scroll" data-bs-target="#navbarExample">
 
     <!-- Navigation Start  -->
 		<?php
-			include("navbar.php");
+			include("component/navbar.php");
 		?>
 	<!-- Navigation End  -->
 
@@ -63,7 +34,7 @@
                 <!-- end of col -->
                 <div class="col-lg-6 col-xl-7">
                     <div class="image-container" style="margin-top: -100px;">
-                        <img class="img-fluid" src="images/header-image.png" alt="alternative">
+                        <img class="img-fluid" src="../images/header-image.png" alt="alternative">
                     </div>
                     <!-- end of image-container -->
                 </div>
@@ -145,7 +116,7 @@
             <div class="row">
                 <div class="col-lg-6 col-xl-7">
                     <div class="image-container">
-                        <img class="img-fluid" src="images/details-1.png" alt="alternative">
+                        <img class="img-fluid" src="../images/details-1.png" alt="alternative">
                     </div>
                     <!-- end of image-container -->
                 </div>
@@ -185,7 +156,7 @@
                 <!-- end of col -->
                 <div class="col-lg-6 col-xl-7">
                     <div class="image-container">
-                        <img class="img-fluid" src="images/details-2.png" alt="alternative">
+                        <img class="img-fluid" src="../images/details-2.png" alt="alternative">
                     </div>
                     <!-- end of image-container -->
                 </div>
@@ -214,7 +185,7 @@
 
                     <!-- Card -->
                     <div class="card">
-                        <img class="quotes" src="images/quotes.svg" alt="alternative">
+                        <img class="quotes" src="../images/quotes.svg" alt="alternative">
                         <div class="card-body">
                             <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
                             <div class="testimonial-author">Roe Smith</div>
@@ -226,7 +197,7 @@
 
                     <!-- Card -->
                     <div class="card">
-                        <img class="quotes" src="images/quotes.svg" alt="alternative">
+                        <img class="quotes" src="../images/quotes.svg" alt="alternative">
                         <div class="card-body">
                             <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
                             <div class="testimonial-author">Sam Bloom</div>
@@ -238,7 +209,7 @@
 
                     <!-- Card -->
                     <div class="card">
-                        <img class="quotes" src="images/quotes.svg" alt="alternative">
+                        <img class="quotes" src="../images/quotes.svg" alt="alternative">
                         <div class="card-body">
                             <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
                             <div class="testimonial-author">Bill McKenzie</div>
@@ -250,7 +221,7 @@
 
                     <!-- Card -->
                     <div class="card">
-                        <img class="quotes" src="images/quotes.svg" alt="alternative">
+                        <img class="quotes" src="../images/quotes.svg" alt="alternative">
                         <div class="card-body">
                             <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
                             <div class="testimonial-author">Vanya Dropper</div>
@@ -262,7 +233,7 @@
 
                     <!-- Card -->
                     <div class="card">
-                        <img class="quotes" src="images/quotes.svg" alt="alternative">
+                        <img class="quotes" src="../images/quotes.svg" alt="alternative">
                         <div class="card-body">
                             <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
                             <div class="testimonial-author">Lefty Brown</div>
@@ -274,7 +245,7 @@
 
                     <!-- Card -->
                     <div class="card">
-                        <img class="quotes" src="images/quotes.svg" alt="alternative">
+                        <img class="quotes" src="../images/quotes.svg" alt="alternative">
                         <div class="card-body">
                             <p class="testimonial-text">Suspendisse vitae enim arcu. Aliqu convallis risus a felis blandit, at mollis nisi bibendum aliquam noto ricos</p>
                             <div class="testimonial-author">Susane Blake</div>
@@ -308,22 +279,22 @@
                         <div class="swiper-container image-slider">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide">
-                                    <img class="img-fluid" src="images/customer-logo-1.png" alt="alternative">
+                                    <img class="img-fluid" src="../images/customer-logo-1.png" alt="alternative">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="img-fluid" src="images/customer-logo-2.png" alt="alternative">
+                                    <img class="img-fluid" src="../images/customer-logo-2.png" alt="alternative">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="img-fluid" src="images/customer-logo-3.png" alt="alternative">
+                                    <img class="img-fluid" src="../images/customer-logo-3.png" alt="alternative">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="img-fluid" src="images/customer-logo-4.png" alt="alternative">
+                                    <img class="img-fluid" src="../images/customer-logo-4.png" alt="alternative">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="img-fluid" src="images/customer-logo-5.png" alt="alternative">
+                                    <img class="img-fluid" src="../images/customer-logo-5.png" alt="alternative">
                                 </div>
                                 <div class="swiper-slide">
-                                    <img class="img-fluid" src="images/customer-logo-6.png" alt="alternative">
+                                    <img class="img-fluid" src="../images/customer-logo-6.png" alt="alternative">
                                 </div>
                             </div>
                             <!-- end of swiper-wrapper -->
@@ -428,7 +399,7 @@
 
     <!-- footer start -->
     <?php
-        include("footer.php");
+        include("component/footer.php");
     ?>
     <!-- end of footer -->
 
