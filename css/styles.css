@@ -372,8 +372,8 @@ a:hover {
 }
 
 .navbar .logo-image img {
-    width: 126px;
-    height: 32px;
+    width: 150px;
+    height: 40px;
 }
 
 .navbar .logo-text {
@@ -943,11 +943,14 @@ a:hover {
 
 .footer {
     position: relative;
-    padding-top: 7.5rem;
+    padding-top: 7rem;
     padding-bottom: 6rem;
     text-align: center;
-    background: url('../images/footer-background.jpg') no-repeat;
-    background-size: 100%;
+    background: url('../images/footer-background.jpg') center no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 .footer .decoration-circles {

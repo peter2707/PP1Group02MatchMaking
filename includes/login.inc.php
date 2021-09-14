@@ -3,11 +3,11 @@
 	
 	if (isset($_POST['username']) || isset($_POST['password'])) {
 		if (!isset($_POST['username']) || empty($_POST['username'])) {
-			header("location: ../login.php?error=emptyusername");
+			header("location: ../view/login.php?error=emptyusername");
         	exit();
 		}
 		if (!isset($_POST['password']) || empty($_POST['password'])) {
-			header("location: ../login.php?error=emptypassword");
+			header("location: ../view/login.php?error=emptypassword");
         	exit();
 		}
 
@@ -18,26 +18,29 @@
 		if(checkAdmin($db, $username, $password)){
 			$_SESSION['valid_user'] = $username;
 			$_SESSION['valid_pass'] = $password;
+			$_SESSION['user_type'] = "admin";
 			$db->close();
 			if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
-				header("Location: ../index.php?admin");
+				header("Location: ../view/adminIndex.php");
 			}
 		}elseif(checkEmployer($db, $username, $password)){
 			$_SESSION['valid_user'] = $username;
 			$_SESSION['valid_pass'] = $password;
+			$_SESSION['user_type'] = "employer";
 			$db->close();
 			if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
-				header("Location: ../index.php?employer");
+				header("Location: ../view/index.php");
 			}
 		}elseif(checkJobSeeker($db, $username, $password)){
 			$_SESSION['valid_user'] = $username;
 			$_SESSION['valid_pass'] = $password;
+			$_SESSION['user_type'] = "jobseeker";
 			$db->close();
 			if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
-				header("Location: ../index.php?jobseeker");
+				header("Location: ../view/index.php");
 			}
 		}else {
-			header("location: ../login.php?error=incorrect");
+			header("location: ../view/login.php?error=incorrect");
         	exit();
 			$db->close();
 		}
@@ -58,7 +61,7 @@
 		$stmt->close();
 
 		if (!$result) {
-			header("location: ../login.php?error=failed");
+			header("location: ../view/login.php?error=failed");
 			$db->close();
 			exit();
 		}
@@ -85,7 +88,7 @@
 		$stmt->close();
 
 		if (!$result) {
-			header("location: ../login.php?error=failed");
+			header("location: ../view/login.php?error=failed");
 			$db->close();
 			exit();
 		}
@@ -112,7 +115,7 @@
 		$stmt->close();
 
 		if (!$result) {
-			header("location: ../login.php?error=failed");
+			header("location: ../view/login.php?error=failed");
 			$db->close();
 			exit();
 		}
