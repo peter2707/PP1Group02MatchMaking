@@ -175,7 +175,7 @@
             <div class="row">
                 <div class="col-lg-6 col-xl-7">
                     <div class="image-container">
-                        <img class="img-fluid" src="images/details-3.png" alt="alternative">
+                        <img class="img-fluid" src="../images/details-3.png" alt="alternative">
                     </div>
                     <!-- end of image-container -->
                 </div>
