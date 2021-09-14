@@ -33,7 +33,7 @@
                 </div>
                 <!-- end of col -->
                 <div class="col-lg-6 col-xl-7">
-                    <div class="image-container" style="margin-top: -100px;">
+                    <div class="image-container" style="margin-top: -50px;">
                         <img class="img-fluid" src="../images/header-image.png" alt="alternative">
                     </div>
                     <!-- end of image-container -->
