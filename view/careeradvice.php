@@ -75,7 +75,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <textarea rows="3" class="form-control-input" placeholder="Enter inquiry..." required></textarea>
+                            <textarea rows="3" class="form-control-input" placeholder="Enter enquiry..." required></textarea>
                             
                         </div>
                         <div class="form-group">
