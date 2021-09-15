@@ -2,11 +2,11 @@
     echo <<<END
 
     <!-- Footer -->
-    <div class="footer bg-gray">
+    <div class="footer bg-light">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <h4 style="color: white;">Check out our latest news about career by following us on social media</h4>
+                    <h4 style="color: white;">Check out our latest news & updates by following us on social media!</h4>
                     <div class="social-container">
                         <span class="fa-stack">
                             <a href="https://www.facebook.com">
@@ -59,16 +59,13 @@
                         <li><a href="privacy.php" style="color: white;">Privacy Policy</a></li>
                     </ul>
                 </div>
+                
                 <!-- end of col -->
-                <div class="col-lg-3 col-md-12 col-sm-12">
-                    <p class="p-small statement" style="color: white;">&copy; Copyright 2021 JobMatch</a></p>
+                <div class="col-lg-6 col-md-12 col-md-12">
+                    <p class="p-small statement" style="color: white;">&copy; Copyright 2021 PP1Group02JobMatch</a></p>
                 </div>
                 <!-- end of col -->
-
-                <div class="col-lg-3 col-md-12 col-sm-12">
-                    <p class="p-small statement" style="color: white;">Distributed by <a href="https://themewagon.com/" target="_blank" style="color: white;">Themewagon</a></p>
-                </div>
-                <!-- end of col -->
+                
             </div>
             <!-- enf of row -->
         </div>
@@ -85,15 +82,15 @@
     
     <!-- Back To Top Button -->
     <button onclick="topFunction()" id="myBtn">
-        <img src="images/up-arrow.png" alt="alternative">
+        <img src="../images/up-arrow.png" alt="alternative">
     </button>
     <!-- end of back to top button -->
 
 
     <!-- Scripts -->
-    <script src="js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
-    <script src="js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
-    <script src="js/scripts.js"></script> <!-- Custom scripts -->
+    <script src="../js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
+    <script src="../js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
+    <script src="../js/scripts.js"></script> <!-- Custom scripts -->
     
     END;
 
