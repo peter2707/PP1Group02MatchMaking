@@ -397,7 +397,7 @@
                 <div class="col-lg-6">
 
                     <div class="image-container">
-                            <img class="img-fluid" src="../images/careeradvice-1.png" alt="alternative">
+                            <img class="img-fluid" src="../images/careeradvice-2.png" alt="alternative">
                         </div>
                     <!-- end of image-container -->
 
