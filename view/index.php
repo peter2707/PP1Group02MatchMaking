@@ -170,7 +170,7 @@
     <!-- end of details 2 -->
 
     <!-- Details 3 -->
-    <div class="basic-1">
+    <div id=aboutUs class="basic-1">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-xl-7">
