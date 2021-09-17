@@ -25,9 +25,9 @@
             <div class="row">
                 <div class="col-lg-6 col-xl-5">
                     <div class="text-container">
-                        <h1 class="h1-large">Get Matched</br>In No Time!</h1>
-                        <p>Looking for a job? Enter your skills & experience.</br>Seeking the right employees? Post your business ad.</br>Receive an email notification.</br>That's it, you've successfully matched!</br></br>In just 2 fast & easy steps,</br>Job Match will pair you perfectly with</br>either an Employer or Job Seeker!</p></br>
-                        <a class="btn-solid-lg" href="signup.php"><i>Get Matched Now!</i></a>
+                        <h1 class="h1-large">Get your job faster and easier</h1>
+                        <p class="p-large">Let us help you land an opportunity of a lifetime.</p>
+                        <a class="btn-solid-lg" href="signup.php">Join today</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -67,8 +67,8 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Create your account</h5>
-                            <p>Enter your details, choose your side between an Employer or Job Seeker!</br>Employer? List a job post with your business values!</br>Job Seeker? Personalize your profile with a skillset!</p>
-                            <a class="read-more no-line" href="article.html">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
+                             <p>Enter your details, choose your side between an Employer or Job Seeker!</p> <!-- Employer? List a job post with your business values! Job Seeker? Personalize your profile with a skillset!</p> -->
+                            <a class="read-more no-line" href="signup.php">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
                         </div>
                     </div>
                     <!-- end of card -->
@@ -80,7 +80,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Get matches</h5>
-                            <p>We will pair you up with your corresponding Employer/Job Seeker.</br>Keep an eye out on your email!</p>
+                            <p>We will pair you up with your corresponding Employer/Job Seeker. Keep an eye out on your email!</p>
                             <a class="read-more no-line" href="article.html">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
                         </div>
                     </div>
@@ -125,8 +125,8 @@
                     <div class="text-container">
                         <div class="section-title">JOB SEEKER</div>
                         <h2>Finding jobs have never been easier</h2>
-                        <p>Looking for a job?</br>Customise your profile; add your skills, experience, qualifications, availability, career objective.</br>With thousands of jobs currently available and more being added everyday, JobMatch can help you find the right job.</p>
-                        <a class="btn-solid-reg" href="#contact">Get Advices</a>
+                        <p>Looking for a job?. Customise your profile; add your skills, experience, qualifications, availability, career objective. With thousands of jobs currently available and more being added everyday, JobMatch can help you find the right job.</p>
+                        <!-- <a class="btn-solid-reg" href="#contact">Get Advices</a> -->
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -148,8 +148,8 @@
                     <div class="text-container">
                         <div class="section-title">EMPLOYER</div>
                         <h2>Advertise a job at no cost!</h2>
-                        <p>Looking for candidates?</br>It's quick & simple to post jobs on JobMatch. Start today. Reach 200M+ Job Seekers. Evaluate Candidates. Post a job in minutes. No.1 Job-Matching Site. Find Quality Candidates. Schedule Interviews.</p>
-                        <a class="btn-solid-reg" href="#contact">Get Advices</a>
+                        <p>Looking for candidates? It's quick & simple to post jobs on JobMatch. Start today. Reach 200M+ Job Seekers. Evaluate Candidates. Post a job in minutes. No.1 Job-Matching Site. Find Quality Candidates. Schedule Interviews.</p>
+                        <!-- <a class="btn-solid-reg" href="#contact">Get Advices</a> -->
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -170,7 +170,7 @@
     <!-- end of details 2 -->
 
     <!-- Details 3 -->
-    <div class="basic-1">
+    <div id=aboutUs class="basic-1">
         <div class="container">
             <div class="row">
                 <div class="col-lg-6 col-xl-7">
@@ -184,8 +184,8 @@
                     <div class="text-container">
                         <div class="section-title">ABOUT US</div>
                         <h2>Whatever you're looking for, you can find it on JobMatch!</h2>
-                        <p>JobMatch is the latest product developed by students from RMIT University studying the course COSC2408 Programming Project 1. </br>Known as Group 2, we're helping people to get back to work & employers find the right staff. </br>Find jobs & career related information or recruit the ideal candidate!</p>
-                        <a class="btn-solid-reg" href="#contact">Contact</a>
+                        <p>JobMatch is the latest product developed by students from RMIT University studying the course COSC2408 Programming Project 1. We're helping people to get back to work & employers find the right staff. Find jobs & career related information or recruit the ideal candidate!</p>
+                        <a class="btn-solid-reg" href="aboutUs.php">About Us</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -351,7 +351,7 @@
                 <div class="col-lg-12">
                     <div class="text-container">
                         <h2>Find the right job for you</h2>
-                        <p class="p-large">We understand that the workplace may seem challenging.</br>So, let us help!</p>
+                        <p class="p-large">We understand that the workplace may seem challenging. So, let us help!</p>
                         <a class="btn-solid-lg" href="#contact">Get free quote</a>
                     </div>
                     <!-- end of text-container -->
@@ -389,14 +389,20 @@
                                 <div class="flex-grow-1">Submit your enquiry & we'll make sure to get back to you within 1-3 business days.</div>
                             </li>
                         </ul>
+                        <a class="btn-solid-reg" href="careeradvice.php">Contact Us</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
                 <!-- end of col -->
                 <div class="col-lg-6">
 
+                    <div class="image-container">
+                            <img class="img-fluid" src="../images/careerAdvice-2.png" alt="alternative">
+                        </div>
+                    <!-- end of image-container -->
+
                     <!-- Contact Form -->
-                    <form>
+                    <!-- <form>
                         <div class="form-group">
                             <input type="text" class="form-control-input" placeholder="Name" required>
                         </div>
@@ -412,7 +418,7 @@
                         <div class="form-group">
                             <button type="submit" class="form-control-submit-button">Submit</button>
                         </div>
-                    </form>
+                    </form> -->
                     <!-- end of contact form -->
 
                 </div>
