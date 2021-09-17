@@ -3,7 +3,7 @@
 
 <head>
     <!-- Webpage Title -->
-    <title>JobMatch | Home</title>
+    <title>JobMatch | About Us</title>
     <?php
         include("component/header.php");
     ?>
@@ -41,7 +41,6 @@
                     <h2 class="mb-3">Who are we?</h2>
                     <p>JobMatch was founded by six young passionate students who due to odd circumstances have been brought together. We are currently based in Melbourne and have created such a unique and fun workplace where we have enjoyed our time so much that we would want to help spread this feeling everywhere hence we want to match the right person to the right job.</p>
                   
-                                       
                     <h2 class="mb-3">What is JobMatch?</h2>
                     <p>JobMatch is the future platform where Job Seekers and Employers alike can come together and connect with each other to form new opportunities. We strive to match the right person to the right job while ensuring that everyone goes aways satisfied with our services.  </p>
                     <p class="mb-4">To help Job Seekers better display their abilities, we have personalise user profiles where you can share your media portfolios such as GitHub, personal websites, social media links and much more. Our goal is to help Job Seekers express themselves fully in order to match with the right opportunities.</p>
