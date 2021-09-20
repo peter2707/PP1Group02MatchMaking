@@ -22,6 +22,23 @@
     $validSession = require('../includes/check_session.inc.php');
     if ($validSession) {
         $username = $_SESSION['valid_user'];
+		$user_type = $_SESSION['user_type'];
+		if ($user_type == "employer") {
+		$employer_get = mysqli_query($link,"SELECT firstName, lastName, phone, email FROM employer WHERE username = '$username'");
+		$_SESSION['user_profile_get'] = $employer_get;
+		}
+		else {
+		$jobseeker_get = mysqli_query($link,"SELECT firstName, lastName, phone, email FROM jobseeker WHERE username = '$username'");
+		$_SESSION['user_profile_get'] = $jobseeker_get;
+		}
+		$user_profile_get = $_SESSION['user_profile_get'];
+		//$db is from includes/db_connection.inc.php
+		$results = mysqli_query($db, $user_profile_get) or die(mysqli_error($db));
+		while($row=mysqli_fetch_array($results))
+        {
+			$firstName_echo = echo $row['firstName'];
+			$lastName_echo = echo $row['lastName'];
+		
         echo <<<END
 
     <!-- login section start -->
@@ -86,6 +103,7 @@
                         </div>
                     </div>
 
+
                     <div class="col-md-8">
                         <div class="card mb-3">
                             <div class="card-body">
@@ -94,7 +112,7 @@
                                         <h6 class="mb-0">Full Name</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        Test User
+                                        $firstName_echo.' '.$lastName_echo
                                     </div>
                                 </div>
                                 <hr>
@@ -103,7 +121,7 @@
                                         <h6 class="mb-0">Email</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        user@gmail.com
+                                        echo $row['email']
                                     </div>
                                 </div>
                                 <hr>
@@ -112,7 +130,7 @@
                                         <h6 class="mb-0">Phone</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        (239) 816-9029
+                                        echo $row['phone']
                                     </div>
                                 </div>
                                 <hr>
@@ -133,6 +151,7 @@
                                         Bay Area, San Francisco, CA
                                     </div>
                                 </div>
+								}
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-12">
