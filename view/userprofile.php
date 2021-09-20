@@ -22,6 +22,7 @@
     $validSession = require('../includes/check_session.inc.php');
     if ($validSession) {
         $username = $_SESSION['valid_user'];
+        // Below is a WIP function to show some of the user's logged in profile details
 		// $user_type = $_SESSION['user_type'];
 		// if ($user_type == "employer") {
 		// $employer_get = mysqli_query($link,"SELECT firstName, lastName, phone, email FROM employer WHERE username = '$username'");
@@ -38,6 +39,9 @@
         // {
 		// 	$firstName_echo = echo $row['firstName'];
 		// 	$lastName_echo = echo $row['lastName'];
+        // echo $row['phone'];
+        // echo $row['email'];
+        //    }
 		
         echo <<<END
 
@@ -113,7 +117,6 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                     Test User
-                                    <!-- $firstName_echo.' '.$lastName_echo -->
                                     </div>
                                 </div>
                                 <hr>
@@ -123,7 +126,6 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                     user@gmail.com
-                                    <!-- echo $row['email'] -->
                                     </div>
                                 </div>
                                 <hr>
@@ -133,7 +135,6 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                     (239) 816-9029
-                                    <!-- echo $row['phone'] -->
                                     </div>
                                 </div>
                                 <hr>
@@ -154,7 +155,6 @@
                                         Bay Area, San Francisco, CA
                                     </div>
                                 </div>
-								<!-- } -->
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-12">
