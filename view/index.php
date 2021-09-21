@@ -185,7 +185,7 @@
                         <div class="section-title">ABOUT US</div>
                         <h2>Whatever you're looking for, you can find it on JobMatch!</h2>
                         <p>JobMatch is the latest product developed by students from RMIT University studying the course COSC2408 Programming Project 1. We're helping people to get back to work & employers find the right staff. Find jobs & career related information or recruit the ideal candidate!</p>
-                        <a class="btn-solid-reg" href="aboutUs.php">About Us</a>
+                        <a class="btn-solid-reg" href="aboutus.php">About Us</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -397,7 +397,7 @@
                 <div class="col-lg-6">
 
                     <div class="image-container">
-                            <img class="img-fluid" src="../images/careerAdvice-2.png" alt="alternative">
+                            <img class="img-fluid" src="../images/careeradvice-2.png" alt="alternative">
                         </div>
                     <!-- end of image-container -->
 
