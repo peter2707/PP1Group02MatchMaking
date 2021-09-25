@@ -1,6 +1,6 @@
 <?php
 session_start();
-$validSession = require_once __DIR__.'/../../includes/check_session.inc.php';
+$validSession = require_once __DIR__.'/../../model/session_model.php';
 
 $userType = $_SESSION['user_type'] ?? "";
 if ($validSession && $userType == "jobseeker") {                       //jobseeker nav-bar

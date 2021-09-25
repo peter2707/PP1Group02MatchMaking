@@ -1,3 +1,25 @@
+<?php
+if(isset($_POST['register'])){
+    include "../model/admin_model.php";
+    $adminModel = new AdminModel();
+
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+    $dateOfBirth = $_POST['dateOfBirth'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $type = $_POST['signup_type'];
+    $position = $_POST['position'];
+    $rating = $_POST['rating'];
+    $exp = $_POST['exp'];
+    $skill = $_POST['skill'];
+    
+    $adminModel->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $position, $rating, $exp, $skill);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,7 +51,7 @@
                 </div>
                 <div class="col-md-4 offset-md-4">
                     <main class="form-register">
-                        <form action="../includes/adduser.inc.php" method="POST">
+                        <form action="" method="POST">
                             <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="floatingInput" placeholder="Firstname" name="firstName">
                                 <label for="floatingInput">Firstname</label>
@@ -137,6 +159,8 @@
                             </p>
                             <button class="w-50 btn btn-lg btn-primary mb-5 mt-2" type="submit" name="register">Add User</button>
                         </form>
+
+                        
                     </main>
                 </div>
                 <!-- end of col -->
