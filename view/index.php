@@ -27,7 +27,7 @@
                     <div class="text-container">
                         <h1 class="h1-large">Get your job faster and easier</h1>
                         <p class="p-large">Let us help you land an opportunity of a lifetime.</p>
-                        <a class="btn-solid-lg" href="signup.php">Join today</a>
+                        <a class="btn-solid-lg" href="register.php">Join today</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
