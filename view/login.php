@@ -1,3 +1,13 @@
+<?php
+if (isset($_POST['login'])) {
+    include '../controller/login_controller.php';
+    $loginController = new LoginController();
+
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $loginController->login($username, $password);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -40,7 +50,7 @@
                         }
                         ?>
                     </p>
-                    <p style="color: #4BB543;">
+                    <p class="mt-5 mb-2" style="color: #4BB543;">
                         <?php
                         // Account created message
                         if (isset($_GET["success"])) {
@@ -53,13 +63,13 @@
                 </div>
                 <div class="col-md-4 offset-md-4">
                     <main class="form-signin">
-                        <form method="POST" action="../includes/login.inc.php">
+                        <form method="POST">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="SamSmith123@gmail.com" name="username">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
                                 <label for="floatingInput">Username</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="SammyS101!" name="password">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
                                 <label for="floatingPassword">Password</label>
                             </div>
 
@@ -68,8 +78,8 @@
                                     <input type="checkbox" value="remember-me"> Remember me
                                 </label>
                             </div>
-                            <button class="w-50 btn btn-lg btn-primary mb-5 mt-2" type="submit">Log In</button>
-                            <p class="mb-3">New user?</br><a href="signup.php">Create an account!</a></p>
+                            <button class="w-50 btn btn-lg btn-primary mb-5 mt-2" type="submit" name="login">Log In</button>
+                            <p class="mb-3">New user?</br><a href="register.php">Create an account!</a></p>
                         </form>
                     </main>
                 </div>

@@ -4,7 +4,7 @@ class AdminModel{
   public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $position, $rating, $exp, $skill){
     require_once 'utility.php';
     require_once 'db_connection.php';
-    if (emptyInputSignup($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type) !== false) {
+    if (emptyInputRegister($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type) !== false) {
         header("location: ../view/addUser.php?error=emptyinput");
         exit();
     } elseif (invalidUsername($username) !== false) {                         // Proper username chosen
@@ -22,21 +22,21 @@ class AdminModel{
           header("location: ../view/addUser.php?error=usernametaken");
           exit();
         }else{
-          registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $rating);
+          $this->registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $rating);
         }
       }elseif($type == "admin"){
         if (usernameExists($db, $username, $email, "admin") !== false) {              // Is the username taken already
           header("location: ../view/addUser.php?error=usernametaken");
           exit();
         }else{
-          registerAdmin($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position);
+          $this->registerAdmin($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position);
         }
       }else{
         if (usernameExists($db, $username, $email, "jobseeker") !== false) {              // Is the username taken already
           header("location: ../view/addUser.php?error=usernametaken");
           exit();
         }else{
-          registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $exp, $skill);
+          $this->registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $exp, $skill);
         }
       }
     }

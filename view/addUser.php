@@ -11,7 +11,7 @@ if(isset($_POST['register'])){
     $dateOfBirth = $_POST['dateOfBirth'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
-    $type = $_POST['signup_type'];
+    $type = $_POST['type'];
     $position = $_POST['position'];
     $rating = $_POST['rating'];
     $exp = $_POST['exp'];
@@ -41,7 +41,7 @@ if(isset($_POST['register'])){
     <!-- Navigation End  -->
 
 
-    <!-- signup section start -->
+    <!-- register section start -->
     <header class="ex-header">
         <div class="container">
             <div class="row">
@@ -86,15 +86,15 @@ if(isset($_POST['register'])){
                             </div>
 
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="signup_type" id="job-seeker" value="jobseeker" onclick="toggleOptions();">
+                                <input class="form-check-input" type="radio" name="type" id="job-seeker" value="jobseeker" onclick="toggleOptions();">
                                 <label class="form-check-label" for="job-seeker">Job Seeker</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="signup_type" id="employer" value="employer" onclick="toggleOptions();">
+                                <input class="form-check-input" type="radio" name="type" id="employer" value="employer" onclick="toggleOptions();">
                                 <label class="form-check-label" for="employer">Employer</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="signup_type" id="admin" value="admin" onclick="toggleOptions();">
+                                <input class="form-check-input" type="radio" name="type" id="admin" value="admin" onclick="toggleOptions();">
                                 <label class="form-check-label" for="admin">Admin</label>
                             </div>
 
@@ -135,7 +135,7 @@ if(isset($_POST['register'])){
                                 }
                             </script>
 
-                            <p style="color: red;">
+                            <p class="mt-5 mb-2" style="color: red;">
                                 <?php
                                 // Error messages
                                 if (isset($_GET["error"])) {
@@ -169,7 +169,7 @@ if(isset($_POST['register'])){
         </div>
         <!-- end of container -->
     </header>
-    <!-- signup section End -->
+    <!-- register section End -->
 
 
     <!-- footer start -->

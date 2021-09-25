@@ -40,7 +40,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
-                    <img class="img-fluid mt-5 mb-3" src="images/article-details-large.jpg" alt="alternative">
+                    <img class="img-fluid mt-5 mb-3" src="../images/article-details-large.jpg" alt="alternative">
                 </div>
                 <!-- end of col -->
             </div>
@@ -158,7 +158,7 @@
                         or motionless on reasonable projecting expression. Last sentence of words thus better.</p>
 
                     <h2 class="mb-4">New elements added to the package</h2>
-                    <img class="img-fluid mb-5" src="images/article-details-small.jpg" alt="alternative">
+                    <img class="img-fluid mb-5" src="../images/article-details-small.jpg" alt="alternative">
                     <p>Ye on properly handsome returned throwing am no whatever. In without wishing he of picture no exposed talking minutes. Curiosity continual belonging offending so explained it exquisite. Do remember to followed yourself material mr
                         recurred carriage. Way mrs end gave fat skin brown yesterday tall walk fact bed.</p>
                     <p class="mb-5">High drew west we no or at john. About or given on witty event. Or sociable up material bachelor bringing landlord confined. Busy so many in hung easy find well up. So of exquisite my an explained remainder. Dashwood denoting securing

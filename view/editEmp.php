@@ -24,7 +24,7 @@
                 <a href="adminIndex.php" class="btn btn-success">Back to home</a>
 
                 <?php
-                require_once '../includes/db_connection.inc.php';
+                require_once '../model/db_connection.php';
                 $id = $_GET['id'];
 
                 if (isset($_POST['submit'])) {

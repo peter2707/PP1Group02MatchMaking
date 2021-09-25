@@ -1,9 +1,30 @@
+<?php
+if(isset($_POST['register'])){
+    include '../controller/register_controller.php';
+    $registerController = new RegisterController();
+
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+    $dateOfBirth = $_POST['dateOfBirth'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $type = $_POST['type'];
+    $rating = $_POST['rating'];
+    $exp = $_POST['exp'];
+    $skill = $_POST['skill'];
+    
+    $registerController->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $rating, $exp, $skill);
+  }
+?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <!-- Webpage Title -->
-    <title>JobMatch | Sign Up</title>
+    <title>JobMatch | Register</title>
     <?php
         include("component/header.php");
     ?>
@@ -18,7 +39,7 @@
     <!-- Navigation End  -->
 
 
-    <!-- signup section start -->
+    <!-- register section start -->
     <header class="ex-header">
         <div class="container">
             <div class="row">
@@ -28,7 +49,7 @@
                 </div>
                 <div class="col-md-4 offset-md-4">
                 <main class="form-register">
-                    <form action="../includes/signup.inc.php" method="POST">
+                    <form action="" method="POST">
                         <div class="form-floating mb-3">
                             <input type="text" class="form-control" id="floatingInput" placeholder="Firstname" name="firstName">
                             <label for="floatingInput">Firstname</label>
@@ -62,15 +83,41 @@
                             <label for="floatingInput">Email</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="signup_type" id="inlineRadio1" value="jobseeker" checked>
+                            <input class="form-check-input" type="radio" name="type" id="inlineRadio1" value="jobseeker" checked>
                             <label class="form-check-label" for="inlineRadio1">Job Seeker</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="signup_type" id="inlineRadio2" value="employer">
+                            <input class="form-check-input" type="radio" name="type" id="inlineRadio2" value="employer">
                             <label class="form-check-label" for="inlineRadio2">Employer</label>
                         </div>
-                        
-                        <p style="color: red;">
+                        <div class="form-floating mb-3" id="employer-form" style="display:none;">
+                            <input type="text" class="form-control" id="employer-form-rating" name="rating">
+                            <label for="employer-form-label">Rating</label>
+                        </div>
+                        <div id="job-seeker-form" style="display:none;">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="job-seeker-form-exp" name="exp">
+                                <label for="job-seeker-form-exp">Experience (How many years?)</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="job-seeker-form-skill" name="skill">
+                                <label for="job-seeker-form-skill">Skill</label>
+                            </div>
+                        </div>
+
+                        <script type="text/javascript">
+                            function toggleOptions() {
+                                if (document.getElementById('employer').checked) {
+                                    document.getElementById('employer-form').style.display = '';
+                                    document.getElementById('job-seeker-form').style.display = 'none';
+                                } else if (document.getElementById('job-seeker').checked) {
+                                    document.getElementById('employer-form').style.display = 'none';
+                                    document.getElementById('job-seeker-form').style.display = '';
+                                }
+                            }
+                        </script>
+
+                        <p class="mt-5 mb-2" style="color: red;">
                             <?php
                             // Error messages
                             if (isset($_GET["error"])) {
@@ -94,7 +141,7 @@
                         </p>
 
                         <button class="w-50 btn btn-lg btn-primary mb-5 mt-2" type="submit" name="register">Register</button>
-                        <p class="mb-3">Already have an account? <a href="login.php">Log In Here</a></p>
+                        <p class="mb-3">Already have an account? <a href="login.php">Log In</a></p>
                     </form>
                 </main>
             </div>
@@ -104,7 +151,7 @@
         </div>
         <!-- end of container -->
     </header>
-    <!-- signup section End -->
+    <!-- register section End -->
 
 
     <!-- footer start -->
