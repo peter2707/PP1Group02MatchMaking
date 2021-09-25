@@ -22,36 +22,13 @@
     $validSession = require('../includes/check_session.inc.php');
     if ($validSession) {
         $username = $_SESSION['valid_user'];
-        // Below is a WIP function to show some of the user's logged in profile details
-		// $user_type = $_SESSION['user_type'];
-		// if ($user_type == "employer") {
-		// $employer_get = mysqli_query($link,"SELECT firstName, lastName, phone, email FROM employer WHERE username = '$username'");
-		// $_SESSION['user_profile_get'] = $employer_get;
-		// }
-		// else {
-		// $jobseeker_get = mysqli_query($link,"SELECT firstName, lastName, phone, email FROM jobseeker WHERE username = '$username'");
-		// $_SESSION['user_profile_get'] = $jobseeker_get;
-		// }
-		// $user_profile_get = $_SESSION['user_profile_get'];
-		// //$db is from includes/db_connection.inc.php
-		// $results = mysqli_query($db, $user_profile_get) or die(mysqli_error($db));
-		// while($row=mysqli_fetch_array($results))
-        // {
-		// 	$firstName_echo = echo $row['firstName'];
-		// 	$lastName_echo = echo $row['lastName'];
-        // echo $row['phone'];
-        // echo $row['email'];
-        //    }
-		
         echo <<<END
-
     <!-- login section start -->
     <header class="ex-header">
         <div class="container">
             <div class="main-body">
                 <div class="row gutters-sm">
                     <div class="col-md-4 mb-3">
-
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
@@ -66,7 +43,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="card mt-3">
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
@@ -106,8 +82,6 @@
                             </ul>
                         </div>
                     </div>
-
-
                     <div class="col-md-8">
                         <div class="card mb-3">
                             <div class="card-body">
@@ -116,7 +90,7 @@
                                         <h6 class="mb-0">Full Name</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                    Test User
+                                        Test User
                                     </div>
                                 </div>
                                 <hr>
@@ -125,7 +99,7 @@
                                         <h6 class="mb-0">Email</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                    user@gmail.com
+                                        user@gmail.com
                                     </div>
                                 </div>
                                 <hr>
@@ -134,7 +108,7 @@
                                         <h6 class="mb-0">Phone</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                    (239) 816-9029
+                                        (239) 816-9029
                                     </div>
                                 </div>
                                 <hr>
@@ -163,7 +137,6 @@
                                 </div>
                             </div>
                         </div>
-
                         <div class="row gutters-sm">
                             <div class="col-sm-6 mb-3">
                                 <div class="card h-100">
@@ -220,7 +193,6 @@
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -228,15 +200,11 @@
         <!-- end of container -->
     </header>
     <!-- login section End -->
-
     END;
     } else {
         if (isset($_SESSION['valid_user'])) {
         }
         echo <<<END
-
-
-
         END;
     }
 
