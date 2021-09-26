@@ -99,16 +99,15 @@
                                 echo "<td scope=\"row\">$email</td>";
                                 echo "<td scope=\"row\">$exp</td>";
                                 echo "<td scope=\"row\">$skill</td>";
-                                createButtonColumn("id", $id, "Edit", "editJobSeeker.php");
-                                createButtonColumn("id", $id, "Delete", "deleteJobSeeker.php");
+                                createEditButton("id", $id, "Edit", "editJobSeeker.php");
+                                createDeleteButton("id", $id, "Delete", "deleteJobSeeker.php");
                                 echo "</tr>";
                             }
 
                             $result->free();
                             $db->close();
 
-                            function createButtonColumn($hiddenName, $hiddenValue, $buttonText, $actionPage)
-                            {
+                            function createEditButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
                                 echo "<td>";
                                 echo "<form action=$actionPage method=\"GET\">";
                                 echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
@@ -116,8 +115,14 @@
                                 echo "</form>";
                                 echo "</td>";
                             }
-
-
+                            function createDeleteButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
+                                echo "<td>";
+                                echo "<form action=$actionPage method=\"GET\">";
+                                echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
+                                echo "<button type=\"submit\" class=\"btn btn-danger\">$buttonText</button>";
+                                echo "</form>";
+                                echo "</td>";
+                            }
                             ?>
                         </tbody>
                     </table>

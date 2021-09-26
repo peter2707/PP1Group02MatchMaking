@@ -95,16 +95,15 @@
                                 echo "<td scope=\"row\">$phone</td>";
                                 echo "<td scope=\"row\">$email</td>";
                                 echo "<td scope=\"row\">$rate</td>";
-                                createButtonColumn("id", $id, "Edit", "editEmp.php");
-                                createButtonColumn("id", $id, "Delete", "deleteEmp.php");
+                                createEditButton("id", $id, "Edit", "editEmp.php");
+                                createDeleteButton("id", $id, "Delete", "deleteEmp.php");
                                 echo "</tr>";
                             }
 
                             $result->free();
                             $db->close();
 
-                            function createButtonColumn($hiddenName, $hiddenValue, $buttonText, $actionPage)
-                            {
+                            function createEditButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
                                 echo "<td>";
                                 echo "<form action=$actionPage method=\"GET\">";
                                 echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
@@ -112,8 +111,14 @@
                                 echo "</form>";
                                 echo "</td>";
                             }
-
-
+                            function createDeleteButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
+                                echo "<td>";
+                                echo "<form action=$actionPage method=\"GET\">";
+                                echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
+                                echo "<button type=\"submit\" class=\"btn btn-danger\">$buttonText</button>";
+                                echo "</form>";
+                                echo "</td>";
+                            }
                             ?>
 
                         </tbody>

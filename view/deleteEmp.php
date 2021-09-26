@@ -21,18 +21,14 @@
     <header id="ex-header" class="ex-header">
         <div class="container">
             <div class="row">
-                <a href="adminIndex.php" class="btn btn-success">Back to home</a>
-
                 <?php
-                require_once '../includes/db_connection.inc.php';
+                require_once '../model/db_connection.php';
                 $id = $_GET['id'];
 
                 if (isset($_POST['submit'])) {
                     $submit = $_POST['submit'];
 
-
                     $query = "DELETE FROM employer WHERE id = ?";
-
                     $stmt = $db->prepare($query);
                     $stmt->bind_param("i",$id);
                     $stmt->execute();
