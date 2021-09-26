@@ -3,7 +3,7 @@
 
 <head>
     <!-- Webpage Title -->
-    <title>JobMatch | Sign Up</title>
+    <title>JobMatch | User</title>
     <?php
         include("component/header.php");
     ?>
@@ -19,9 +19,13 @@
 
     <?php
     session_start();
-    $validSession = require('../includes/check_session.inc.php');
+    require_once __DIR__.'/../controller/session_controller.php';
+    $sessionController = new SessionController();
+    $validSession = $sessionController->checkSession();
+    $userType = $sessionController->getUserType();
+
     if ($validSession) {
-        $username = $_SESSION['valid_user'];
+        $username = $sessionController->getUserName();
         echo <<<END
     <!-- login section start -->
     <header class="ex-header">
@@ -204,8 +208,7 @@
     } else {
         if (isset($_SESSION['valid_user'])) {
         }
-        echo <<<END
-        END;
+        
     }
 
     ?>

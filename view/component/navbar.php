@@ -7,7 +7,7 @@ if(isset($_POST['logout'])){
 session_start();
 include __DIR__.'/../../controller/session_controller.php';
 $sessionController = new SessionController();
-$validSession = $sessionController->connectDb();
+$validSession = $sessionController->checkSession();
 $userType = $sessionController->getUserType();
 
 if ($validSession && $userType == "jobseeker") {                       //jobseeker nav-bar

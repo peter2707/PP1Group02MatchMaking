@@ -1,8 +1,8 @@
 <?php
-include __DIR__.'/../model/session_model.php';
+require_once __DIR__.'/../model/session_model.php';
 class SessionController {
     
-    public function connectDb() {
+    public function checkSession() {
         $sessionModel = new SessionModel();
         return $sessionModel->sessionExists();
     }
