@@ -13,11 +13,10 @@ if(isset($_POST['register'])){
     $email = $_POST['email'];
     $type = $_POST['type'];
     $position = $_POST['position'];
-    $rating = $_POST['rating'];
     $exp = $_POST['exp'];
     $skill = $_POST['skill'];
     
-    $adminModel->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $position, $rating, $exp, $skill);
+    $adminModel->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $position, $exp, $skill);
 }
 ?>
 <!DOCTYPE html>
@@ -45,7 +44,7 @@ if(isset($_POST['register'])){
     <header class="ex-header">
         <div class="container">
             <div class="row">
-                <div class="col-xl-10 offset-xl-1 mb-3">
+                <div class="col-xl-10 offset-md-1 mb-3">
                     <h1>Add New User</h1>
                     <p class="mt-5 mb-2 text-muted">Enter your details below:</p>
                 </div>
@@ -85,55 +84,38 @@ if(isset($_POST['register'])){
                                 <label for="floatingInput">Email</label>
                             </div>
 
+
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="type" id="job-seeker" value="jobseeker" onclick="toggleOptions();">
+                                <input class="form-check-input" type="radio" name="type" id="job-seeker" value="jobseeker" onclick="toggleAddUser();" checked>
                                 <label class="form-check-label" for="job-seeker">Job Seeker</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="type" id="employer" value="employer" onclick="toggleOptions();">
+                                <input class="form-check-input" type="radio" name="type" id="employer" value="employer" onclick="toggleAddUser();">
                                 <label class="form-check-label" for="employer">Employer</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="type" id="admin" value="admin" onclick="toggleOptions();">
+                                <input class="form-check-input" type="radio" name="type" id="admin" value="admin" onclick="toggleAddUser();">
                                 <label class="form-check-label" for="admin">Admin</label>
                             </div>
-
-                            <div class="form-floating mb-3" id="admin-form" style="display:none;">
-                                <input type="text" class="form-control" id="admin-form-position" name="position">
-                                <label for="admin-form-position">Position</label>
-                            </div>
-                            <div class="form-floating mb-3" id="employer-form" style="display:none;">
-                                <input type="text" class="form-control" id="employer-form-rating" name="rating">
-                                <label for="employer-form-label">Rating</label>
-                            </div>
-                            <div id="job-seeker-form" style="display:none;">
+                            
+                            <div id="job-seeker-form">
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="job-seeker-form-exp" name="exp">
+                                    <input type="text" class="form-control" id="job-seeker-form-exp" name="exp" placeholder="Experience (How many years?)">
                                     <label for="job-seeker-form-exp">Experience (How many years?)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="job-seeker-form-skill" name="skill">
+                                    <input type="text" class="form-control" id="job-seeker-form-skill" name="skill" placeholder="Skill">
                                     <label for="job-seeker-form-skill">Skill</label>
                                 </div>
                             </div>
-
-                            <script type="text/javascript">
-                                function toggleOptions() {
-                                    if (document.getElementById('admin').checked) {
-                                        document.getElementById('admin-form').style.display = '';
-                                        document.getElementById('employer-form').style.display = 'none';
-                                        document.getElementById('job-seeker-form').style.display = 'none';
-                                    } else if (document.getElementById('employer').checked) {
-                                        document.getElementById('admin-form').style.display = 'none';
-                                        document.getElementById('employer-form').style.display = '';
-                                        document.getElementById('job-seeker-form').style.display = 'none';
-                                    } else if (document.getElementById('job-seeker').checked) {
-                                        document.getElementById('admin-form').style.display = 'none';
-                                        document.getElementById('employer-form').style.display = 'none';
-                                        document.getElementById('job-seeker-form').style.display = '';
-                                    }
-                                }
-                            </script>
+                            <div class="form-floating mb-3" id="employer-form" style="display:none;">
+                                <input type="text" class="form-control" id="employer-form-position" name="position" placeholder="Position">
+                                <label for="employer-form-label">Position</label>
+                            </div>
+                            <div class="form-floating mb-3" id="admin-form" style="display:none;">
+                                <input type="text" class="form-control" id="admin-form-position" name="position" placeholder="Position">
+                                <label for="admin-form-position">Position</label>
+                            </div>
 
                             <p class="mt-5 mb-2" style="color: red;">
                                 <?php
@@ -151,13 +133,18 @@ if(isset($_POST['register'])){
                                         echo "Something went wrong!";
                                     } else if ($_GET["error"] == "usernametaken") {
                                         echo "Username already taken!";
-                                    } else if ($_GET["error"] == "none") {
-                                        echo "You have signed up!";
                                     }
                                 }
                                 ?>
                             </p>
-                            <button class="w-50 btn btn-lg btn-primary mb-5 mt-2" type="submit" name="register">Add User</button>
+                            <div class="row mb-5 mt-2">
+                                <div class="col">
+                                    <a style="text-decoration : none" class="w-100 btn btn-lg btn-secondary" href="adminIndex.php">Cancel</a>
+                                </div>
+                                <div class="col">
+                                    <button class="w-100 btn btn-lg btn-primary" type="submit" name="register">Add</button>
+                                </div>
+                            </div>
                         </form>
 
                         

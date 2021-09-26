@@ -82,40 +82,30 @@ if(isset($_POST['register'])){
                             <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email">
                             <label for="floatingInput">Email</label>
                         </div>
+
+
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type" id="inlineRadio1" value="jobseeker" checked>
-                            <label class="form-check-label" for="inlineRadio1">Job Seeker</label>
+                            <input class="form-check-input" type="radio" name="type" id="job-seeker" value="jobseeker" onclick="toggleRegister();" checked>
+                            <label class="form-check-label" for="job-seeker">Job Seeker</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type" id="inlineRadio2" value="employer">
-                            <label class="form-check-label" for="inlineRadio2">Employer</label>
+                            <input class="form-check-input" type="radio" name="type" id="employer" value="employer" onclick="toggleRegister();">
+                            <label class="form-check-label" for="employer">Employer</label>
                         </div>
-                        <div class="form-floating mb-3" id="employer-form" style="display:none;">
-                            <input type="text" class="form-control" id="employer-form-rating" name="rating">
-                            <label for="employer-form-label">Rating</label>
-                        </div>
-                        <div id="job-seeker-form" style="display:none;">
+                        <div id="job-seeker-form">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="job-seeker-form-exp" name="exp">
+                                <input type="text" class="form-control" id="job-seeker-form-exp" name="exp" placeholder="Experience (How many years?)">
                                 <label for="job-seeker-form-exp">Experience (How many years?)</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="job-seeker-form-skill" name="skill">
+                                <input type="text" class="form-control" id="job-seeker-form-skill" name="skill" placeholder="Skill">
                                 <label for="job-seeker-form-skill">Skill</label>
                             </div>
                         </div>
-
-                        <script type="text/javascript">
-                            function toggleOptions() {
-                                if (document.getElementById('employer').checked) {
-                                    document.getElementById('employer-form').style.display = '';
-                                    document.getElementById('job-seeker-form').style.display = 'none';
-                                } else if (document.getElementById('job-seeker').checked) {
-                                    document.getElementById('employer-form').style.display = 'none';
-                                    document.getElementById('job-seeker-form').style.display = '';
-                                }
-                            }
-                        </script>
+                        <div class="form-floating mb-3" id="employer-form" style="display:none;">
+                            <input type="text" class="form-control" id="employer-form-rating" name="position" placeholder="Position">
+                            <label for="employer-form-label">Position</label>
+                        </div>
 
                         <p class="mt-5 mb-2" style="color: red;">
                             <?php

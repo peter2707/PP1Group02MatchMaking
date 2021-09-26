@@ -21,8 +21,6 @@
     <header id="ex-header" class="ex-header">
         <div class="container">
             <div class="row">
-                <a href="adminIndex.php" class="btn btn-success">Back to home</a>
-
                 <?php
                 require_once '../model/db_connection.php';
                 $id = $_GET['id'];

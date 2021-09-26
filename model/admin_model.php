@@ -1,7 +1,7 @@
 <?php
 class AdminModel{
 
-  public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $position, $rating, $exp, $skill){
+  public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $position, $exp, $skill){
     require_once 'utility.php';
     require_once 'db_connection.php';
     if (emptyInputRegister($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type) !== false) {
@@ -22,7 +22,7 @@ class AdminModel{
           header("location: ../view/addUser.php?error=usernametaken");
           exit();
         }else{
-          $this->registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $rating);
+          $this->registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position);
         }
       }elseif($type == "admin"){
         if (usernameExists($db, $username, $email, "admin") !== false) {              // Is the username taken already
@@ -43,9 +43,9 @@ class AdminModel{
   }
   
 
-  function registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $rating){
-    $query = "INSERT INTO employer (firstName, lastName, username, password, dateOfBirth, phone, email, rating) 
-            VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$rating')";
+  function registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position){
+    $query = "INSERT INTO employer (firstName, lastName, username, password, dateOfBirth, phone, email, position) 
+            VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$position')";
     mysqli_query($db, $query);
     $db->close();
     header("location: ../view/adminIndex.php?success=created");
@@ -60,7 +60,7 @@ class AdminModel{
   }
 
   function registerAdmin($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position){
-    $query = "INSERT INTO employer (firstName, lastName, username, password, dateOfBirth, phone, email, position) 
+    $query = "INSERT INTO admin (firstName, lastName, username, password, dateOfBirth, phone, email, position) 
             VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$position')";
     mysqli_query($db, $query);
     $db->close();

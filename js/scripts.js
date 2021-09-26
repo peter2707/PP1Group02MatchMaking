@@ -2,6 +2,7 @@
 
 /* Navigation*/
 // Collapse the navbar by adding the top-nav-collapse class
+
 window.onscroll = function() {
     scrollFunction();
     scrollFunctionBTT(); // back to top button
@@ -10,6 +11,32 @@ window.onscroll = function() {
 window.onload = function() {
     scrollFunction();
 };
+
+function toggleAddUser() {
+    if (document.getElementById('admin').checked) {
+        document.getElementById('admin-form').style.display = '';
+        document.getElementById('employer-form').style.display = 'none';
+        document.getElementById('job-seeker-form').style.display = 'none';
+    } else if (document.getElementById('employer').checked) {
+        document.getElementById('admin-form').style.display = 'none';
+        document.getElementById('employer-form').style.display = '';
+        document.getElementById('job-seeker-form').style.display = 'none';
+    } else if (document.getElementById('job-seeker').checked) {
+        document.getElementById('admin-form').style.display = 'none';
+        document.getElementById('employer-form').style.display = 'none';
+        document.getElementById('job-seeker-form').style.display = '';
+    }
+}
+
+function toggleRegister() {
+    if (document.getElementById('employer').checked) {
+        document.getElementById('employer-form').style.display = '';
+        document.getElementById('job-seeker-form').style.display = 'none';
+    } else if (document.getElementById('job-seeker').checked) {
+        document.getElementById('employer-form').style.display = 'none';
+        document.getElementById('job-seeker-form').style.display = '';
+    }
+}
 
 function scrollFunction() {
     if (document.documentElement.scrollTop > 30) {

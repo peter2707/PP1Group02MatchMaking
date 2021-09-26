@@ -140,25 +140,12 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav ms-auto navbar-nav-scroll">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.php#header">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#getstarted">Get Started</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#details">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#contact">Career Advices</a>
+                        <a class="nav-link" aria-current="page" href="adminIndex.php">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">$username</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdown01">
                             <li><a class="dropdown-item" href="userprofile.php">Profile</a></li>
-                            <li>
-                                <div class="dropdown-divider"></div>
-                            </li>
-                            <li><a class="dropdown-item" href="#">Matches</a></li>
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>
