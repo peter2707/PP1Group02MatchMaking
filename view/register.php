@@ -94,17 +94,25 @@ if(isset($_POST['register'])){
                         </div>
                         <div id="job-seeker-form">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="job-seeker-form-exp" name="exp" placeholder="Experience (How many years?)">
-                                <label for="job-seeker-form-exp">Experience (How many years?)</label>
-                            </div>
-                            <div class="form-floating mb-3">
                                 <input type="text" class="form-control" id="job-seeker-form-skill" name="skill" placeholder="Skill">
-                                <label for="job-seeker-form-skill">Skill</label>
+                                <label for="job-seeker-form-skill">Field of Expertise</label>
                             </div>
                         </div>
                         <div class="form-floating mb-3" id="employer-form" style="display:none;">
                             <input type="text" class="form-control" id="employer-form-rating" name="position" placeholder="Position">
                             <label for="employer-form-label">Position</label>
+                        </div>
+
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <label class="input-group-text" for="inputGroupSelect01">Career Field</label>
+                            </div>
+                            <select class="custom-select" id="inputGroupSelect01">
+                                <option selected>Choose...</option>
+                                <option value="1">One</option>
+                                <option value="2">Two</option>
+                                <option value="3">Three</option>
+                            </select>
                         </div>
 
                         <p class="mt-5 mb-2" style="color: red;">

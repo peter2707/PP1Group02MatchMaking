@@ -31,6 +31,11 @@
     <link href="../css/swiper.css" rel="stylesheet">
     <link href="../css/styles.css" rel="stylesheet">
 
+    <!-- Scripts -->
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
     <!-- Favicon  -->
     <link rel="icon" href="../images/favicon.png">
     
