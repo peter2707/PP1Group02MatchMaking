@@ -5,7 +5,7 @@
     <!-- Webpage Title -->
     <title>JobMatch | Article</title>
     <?php
-        include("component/header.php");
+        require_once("component/header.php");
     ?>
 </head>
 
@@ -13,7 +13,7 @@
 
     <!-- Navigation Start  -->
 		<?php
-			include("component/navbar.php");
+			require_once("component/navbar.php");
 		?>
 	<!-- Navigation End  -->
 
@@ -94,7 +94,7 @@
                                 </span>
                                 <div class="flex-grow-1">
                                     <h5>High Quality Service</h5>
-                                    <p>Features include an eye catching morphtext in the header, details lightbox for more details information</p>
+                                    <p>Features require_once an eye catching morphtext in the header, details lightbox for more details information</p>
                                 </div>
                             </li>
                         </ul>
@@ -208,7 +208,7 @@
 
     <!-- footer start -->
     <?php
-        include("component/footer.php");
+        require_once("component/footer.php");
     ?>
     <!-- end of footer -->
 

@@ -1,49 +1,6 @@
 <?php
 class AdminModel{
-
-  public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $position, $exp, $field){
-    require_once 'utility.php';
-    require_once 'db_connection.php';
-    if (emptyInputRegister($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type) !== false) {
-        header("location: ../view/addUser.php?error=emptyinput");
-        exit();
-    } elseif (invalidUsername($username) !== false) {                         // Proper username chosen
-        header("location: ../view/addUser.php?error=invaliduid");
-        exit();
-    } elseif (invalidEmail($email) !== false) {                     // Proper email chosen
-        header("location: ../view/addUser.php?error=invalidemail");
-        exit();
-    } elseif (passwordMatch($password, $confirmPassword) !== false) {               // Do the two passwords match?
-        header("location: ../view/addUser.php?error=passwordsdontmatch");
-        exit();
-    } else {
-      if($type == "employer"){
-        if (usernameExists($db, $username, $email, "employer") !== false) {              // Is the username taken already
-          header("location: ../view/addUser.php?error=usernametaken");
-          exit();
-        }else{
-          $this->registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position);
-        }
-      }elseif($type == "admin"){
-        if (usernameExists($db, $username, $email, "admin") !== false) {              // Is the username taken already
-          header("location: ../view/addUser.php?error=usernametaken");
-          exit();
-        }else{
-          $this->registerAdmin($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position);
-        }
-      }else{
-        if (usernameExists($db, $username, $email, "jobseeker") !== false) {              // Is the username taken already
-          header("location: ../view/addUser.php?error=usernametaken");
-          exit();
-        }else{
-          $this->registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $exp, $field);
-        }
-      }
-    }
-  }
-  
-
-  function registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position){
+  public function registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position){
     $query = "INSERT INTO employer (firstName, lastName, username, password, dateOfBirth, phone, email, position) 
             VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$position')";
     mysqli_query($db, $query);
@@ -51,15 +8,15 @@ class AdminModel{
     header("location: ../view/adminIndex.php?success=created");
   }
 
-  function registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $exp, $field){
-    $query = "INSERT INTO jobseeker (firstName, lastName, username, password, dateOfBirth, phone, email, experience, field) 
-            VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$exp', '$field')";
+  public function registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $field){
+    $query = "INSERT INTO jobseeker (firstName, lastName, username, password, dateOfBirth, phone, email, field) 
+            VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$field')";
     mysqli_query($db, $query);
     $db->close();
     header("location: ../view/adminIndex.php?success=created");
   }
 
-  function registerAdmin($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position){
+  public function registerAdmin($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position){
     $query = "INSERT INTO admin (firstName, lastName, username, password, dateOfBirth, phone, email, position) 
             VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$position')";
     mysqli_query($db, $query);

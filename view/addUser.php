@@ -1,7 +1,7 @@
 <?php
 if(isset($_POST['register'])){
-    include "../model/admin_model.php";
-    $adminModel = new AdminModel();
+    require_once "../controller/admin_controller.php";
+    $adminController= new AdminController();
 
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
@@ -12,11 +12,11 @@ if(isset($_POST['register'])){
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $type = $_POST['type'];
-    $position = $_POST['position'];
-    $exp = $_POST['exp'];
+    $positionEmployer = $_POST['positionEmp'];
+    $positionAdmin = $_POST['positionAdmin'];
     $field = $_POST['field'];
     
-    $adminModel->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $position, $exp, $field);
+    $adminController->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $positionEmployer, $positionAdmin, $field);
 }
 ?>
 <!DOCTYPE html>
@@ -26,7 +26,7 @@ if(isset($_POST['register'])){
     <!-- Webpage Title -->
     <title>JobMatch | Sign Up</title>
     <?php
-        include("component/header.php");
+        require_once("component/header.php");
     ?>
 </head>
 
@@ -35,7 +35,7 @@ if(isset($_POST['register'])){
 
     <!-- Navigation Start  -->
     <?php
-        include("component/navbar.php");
+        require_once("component/navbar.php");
     ?>
     <!-- Navigation End  -->
 
@@ -98,22 +98,18 @@ if(isset($_POST['register'])){
                                 <label class="form-check-label" for="admin">Admin</label>
                             </div>
                             
-                            <div id="job-seeker-form">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="job-seeker-form-exp" name="exp" placeholder="Experience (How many years?)">
-                                    <label for="job-seeker-form-exp">Experience (How many years?)</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="job-seeker-form-field" name="field" placeholder="field">
-                                    <label for="job-seeker-form-field">field</label>
-                                </div>
+                            <div class="form-floating mb-3" id="job-seeker-form">
+                                <select class="form-select mb-3" aria-label=".form-select-lg example" id="job-seeker-form-field" name="field">
+                                    <option disabled selected>--- Choose one ---</option>
+                                </select>
+                                <label for="job-seeker-form-field">Field of Expertise</label>
                             </div>
                             <div class="form-floating mb-3" id="employer-form" style="display:none;">
-                                <input type="text" class="form-control" id="employer-form-position" name="position" placeholder="Position">
+                                <input type="text" class="form-control" id="employer-form-position" name="positionEmp" placeholder="Position">
                                 <label for="employer-form-label">Position</label>
                             </div>
                             <div class="form-floating mb-3" id="admin-form" style="display:none;">
-                                <input type="text" class="form-control" id="admin-form-position" name="position" placeholder="Position">
+                                <input type="text" class="form-control" id="admin-form-position" name="positionAdmin" placeholder="Position">
                                 <label for="admin-form-position">Position</label>
                             </div>
 
@@ -123,7 +119,7 @@ if(isset($_POST['register'])){
                                 if (isset($_GET["error"])) {
                                     if ($_GET["error"] == "emptyinput") {
                                         echo "Fill in all fields!";
-                                    } else if ($_GET["error"] == "invaliduid") {
+                                    } else if ($_GET["error"] == "invalidusername") {
                                         echo "Choose a proper username!";
                                     } else if ($_GET["error"] == "invalidemail") {
                                         echo "Choose a proper email!";
@@ -133,6 +129,10 @@ if(isset($_POST['register'])){
                                         echo "Something went wrong!";
                                     } else if ($_GET["error"] == "usernametaken") {
                                         echo "Username already taken!";
+                                    } else if ($_GET["error"] == "fieldnull") {
+                                        echo "You have to choose a field of expertise";
+                                    } else if ($_GET["error"] == "positionnull") {
+                                        echo "You have to enter a position";
                                     }
                                 }
                                 ?>
@@ -161,7 +161,7 @@ if(isset($_POST['register'])){
 
     <!-- footer start -->
     <?php
-        include("component/footer.php");
+        require_once("component/footer.php");
     ?>
     <!-- end of footer -->
 

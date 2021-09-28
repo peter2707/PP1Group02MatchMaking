@@ -5,7 +5,7 @@
     <!-- Webpage Title -->
     <title>JobMatch | Admin</title>
     <?php
-        include("component/header.php");
+        require_once("component/header.php");
     ?>
 </head>
 
@@ -13,7 +13,7 @@
 
     <!-- Navigation Start  -->
     <?php
-        include("component/navbar.php");
+        require_once("component/navbar.php");
     ?>
     <!-- Navigation End  -->
 
@@ -67,7 +67,7 @@
 
     <!-- footer start -->
     <?php
-        include("component/footer.php");
+        require_once("component/footer.php");
     ?>
     <!-- end of footer -->
 

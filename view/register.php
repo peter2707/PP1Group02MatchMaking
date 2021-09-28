@@ -1,6 +1,6 @@
 <?php
 if(isset($_POST['register'])){
-    include '../controller/register_controller.php';
+    require_once '../controller/register_controller.php';
     $registerController = new RegisterController();
 
     $firstName = $_POST['firstName'];
@@ -25,7 +25,7 @@ if(isset($_POST['register'])){
     <!-- Webpage Title -->
     <title>JobMatch | Register</title>
     <?php
-        include("component/header.php");
+        require_once("component/header.php");
     ?>
 </head>
 
@@ -33,7 +33,7 @@ if(isset($_POST['register'])){
 
     <!-- Navigation Start  -->
     <?php
-        include("component/navbar.php");
+        require_once("component/navbar.php");
     ?>
     <!-- Navigation End  -->
 
@@ -122,7 +122,7 @@ if(isset($_POST['register'])){
                                     echo "Username is already taken!";
                                 } else if ($_GET["error"] == "fieldnull") {
                                     echo "You have to choose a field of expertise";
-                                }else if ($_GET["error"] == "positionnull") {
+                                } else if ($_GET["error"] == "positionnull") {
                                     echo "You have to enter your position";
                                 }
                             }
@@ -145,7 +145,7 @@ if(isset($_POST['register'])){
 
     <!-- footer start -->
     <?php
-        include("component/footer.php");
+        require_once("component/footer.php");
     ?>
     <!-- end of footer -->
 

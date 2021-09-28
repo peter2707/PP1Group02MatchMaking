@@ -1,11 +1,11 @@
 <?php
 if(isset($_POST['logout'])){
-    include '../controller/login_controller.php';
+    require_once '../controller/login_controller.php';
     $loginController = new LoginController();
     $loginController->logOut();
 }
 session_start();
-include __DIR__.'/../../controller/session_controller.php';
+require_once __DIR__.'/../../controller/session_controller.php';
 $sessionController = new SessionController();
 $validSession = $sessionController->checkSession();
 $userType = $sessionController->getUserType();

@@ -2,7 +2,7 @@
 class LoginController{
 
 	public function login($username, $password){
-		include '../model/login_model.php';
+		require_once '../model/login_model.php';
 		$loginModel = new LoginModel();
 		if (!isset($username) || empty($username)) {
 			header("location: ../view/login.php?error=emptyusername");
@@ -16,7 +16,7 @@ class LoginController{
 	}
 
 	public function logOut(){
-		include '../model/login_model.php';
+		require_once '../model/login_model.php';
 		$loginModel = new LoginModel();
 
 		$loginModel->logOut();

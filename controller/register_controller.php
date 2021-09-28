@@ -2,10 +2,10 @@
 class RegisterController {
 
     public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $field, $position){
-        include '../model/register_model.php';
-        include '../model/utility.php';
+        require_once '../model/register_model.php';
+        require_once '../model/utility.php';
         require_once '../model/db_connection.php';
-		    $registerModel = new RegisterModel();
+        $registerModel = new RegisterModel();
 
         if (emptyInputRegister($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type) !== false) {
             header("location: ../view/register.php?error=emptyinput");
@@ -42,4 +42,3 @@ class RegisterController {
         }
     }
 }
-?>

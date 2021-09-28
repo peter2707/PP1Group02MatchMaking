@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__.'/../model/session_model.php';
+require_once '../model/session_model.php';
 class SessionController {
     
     public function checkSession() {
