@@ -16,7 +16,7 @@
 
 
 <?php
-	//  try {
+	// try {
 	// 	$dbAddress = 'localhost';
 	// 	$dbUser = 'root';
 	// 	$dbPass = '';
