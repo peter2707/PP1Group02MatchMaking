@@ -5,7 +5,7 @@
     <!-- Webpage Title -->
     <title>JobMatch | Home</title>
     <?php
-        include("component/header.php");
+        require_once("component/header.php");
     ?>
 
 </head>
@@ -14,7 +14,7 @@
 
     <!-- Navigation Start  -->
 		<?php
-			include("component/navbar.php");
+			require_once("component/navbar.php");
 		?>
 	<!-- Navigation End  -->
 
@@ -27,7 +27,7 @@
                     <div class="text-container">
                         <h1 class="h1-large">Get your job faster and easier</h1>
                         <p class="p-large">Let us help you land an opportunity of a lifetime.</p>
-                        <a class="btn-solid-lg" href="signup.php">Join today</a>
+                        <a class="btn-solid-lg" href="register.php">Join today</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -67,7 +67,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Create your account</h5>
-                             <p>Enter your details, choose your side between an Employer or Job Seeker!</p> <!-- Employer? List a job post with your business values! Job Seeker? Personalize your profile with a skillset!</p> -->
+                             <p>Enter your details, choose your side between an Employer or Job Seeker!</p> <!-- Employer? List a job post with your business values! Job Seeker? Personalize your profile with a fieldset!</p> -->
                             <a class="read-more no-line" href="signup.php">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                     <div class="text-container">
                         <div class="section-title">JOB SEEKER</div>
                         <h2>Finding jobs have never been easier</h2>
-                        <p>Looking for a job?. Customise your profile; add your skills, experience, qualifications, availability, career objective. With thousands of jobs currently available and more being added everyday, JobMatch can help you find the right job.</p>
+                        <p>Looking for a job?. Customise your profile; add your fields, experience, qualifications, availability, career objective. With thousands of jobs currently available and more being added everyday, JobMatch can help you find the right job.</p>
                         <!-- <a class="btn-solid-reg" href="#contact">Get Advices</a> -->
                     </div>
                     <!-- end of text-container -->
@@ -389,7 +389,7 @@
                                 <div class="flex-grow-1">Submit your enquiry & we'll make sure to get back to you within 1-3 business days.</div>
                             </li>
                         </ul>
-                        <a class="btn-solid-reg" href="careeradvice.php">Contact Us</a>
+                        <a class="btn-solid-reg" href="career_advice.php">Contact Us</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -434,7 +434,7 @@
 
     <!-- footer start -->
     <?php
-        include("component/footer.php");
+        require_once("component/footer.php");
     ?>
     <!-- end of footer -->
 

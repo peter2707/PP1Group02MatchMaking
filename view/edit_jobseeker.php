@@ -5,7 +5,7 @@
     <!-- Webpage Title -->
     <title>JobMatch | Sign Up</title>
     <?php
-        include("component/header.php");
+        require_once("component/header.php");
     ?>
 </head>
 
@@ -13,7 +13,7 @@
 
     <!-- Navigation Start  -->
     <?php
-        include("component/navbar.php");
+        require_once("component/navbar.php");
     ?>
     <!-- Navigation End  -->
 
@@ -21,22 +21,25 @@
     <header id="ex-header" class="ex-header">
         <div class="container">
             <div class="row">
-                <a href="adminIndex.php" class="btn btn-success">Back to home</a>
-
                 <?php
-                require_once '../includes/db_connection.inc.php';
+                require_once '../model/db_connection.php';
                 $id = $_GET['id'];
 
                 if (isset($_POST['submit'])) {
-                    $submit = $_POST['submit'];
+                    $firstName = $_POST['firstName'];
+                    $lastName = $_POST['lastName'];
+                    $username = $_POST['username'];
+                    $password = $_POST['password'];
+                    $dob = $_POST['dob'];
+                    $phone = $_POST['phone'];
+                    $email = $_POST['email'];
+                    $exp = $_POST['exp'];
+                    $field = $_POST['field'];
 
-
-
-
-                    $query = "DELETE FROM jobseeker WHERE id = ?";
+                    $query = "UPDATE jobseeker SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, experience=?, field=? WHERE id = ?";
 
                     $stmt = $db->prepare($query);
-                    $stmt->bind_param("i",$id);
+                    $stmt->bind_param("sssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $exp, $field, $id);
                     $stmt->execute();
 
                     $affectedRows = $stmt->affected_rows;
@@ -44,20 +47,19 @@
                     $db->close();
 
                     if ($affectedRows == 1) {
-                        echo "Successfully Deleted Job Seeker<br><br>";
-                        echo "<a href=\"adminIndex.php\" class=\"btn btn-success\">Back to Job List</a>";
+                        echo "Successfully Updated Job<br><br>";
+                        echo "<a href=\"admin_index.php\" class=\"btn btn-success\">Back to Job List</a>";
                         echo "<br><hr>";
                         exit;
                     } else {
                         echo "Failed to Updated Job<br><br>";
-                        echo "<a href=\"adminIndex.php\" class=\"btn btn-success\">Back to Job List</a>";
+                        echo "<a href=\"admin_index.php\" class=\"btn btn-success\">Back to Job List</a>";
                         echo "<br><hr>";
                         exit;
                     }
                 } else {
-
-                    $query = "SELECT * FROM jobseeker WHERE id = ?";
-                    $stmtSeeker = $db->prepare($query);
+                    $querySeeker = "SELECT * FROM jobseeker WHERE id = ?";
+                    $stmtSeeker = $db->prepare($querySeeker);
                     $stmtSeeker->bind_param("i", $id);
 
                     $stmtSeeker->execute();
@@ -74,50 +76,54 @@
                     $phone = $row['phone'];
                     $email = $row['email'];
                     $exp = $row['experience'];
-                    $skill = $row['skill'];
+                    $field = $row['field'];
 
-                    echo <<<END
+echo <<<END
 				
 				<form action="" method="POST">
 					<table class=”table”>
-                        <tr>
-                            <td scope="row">First Name:</td>
-                            <td scope="row">$firstName</td>
-                        </tr>
+						<tr>
+							<td scope="row">First Name:</td>
+							<td scope="row"><input type="text" name="firstName" value="$firstName" required></td>
+						</tr>
                         <tr>
                             <td scope="row">Last Name:</td>
-                            <td scope="row">$lastName</td>
+                            <td scope="row"><input type="text" name="lastName" value="$lastName" required ></td>
                         </tr>
 
                         <tr>
                             <td scope="row">Username:</td>
-                            <td scope="row">$username</td>
+                            <td scope="row"><input type="text" name="username" value="$username" required></td>
                         </tr>
                         <tr>
                             <td scope="row">Password:</td>
-                            <td scope="row">$password</td>
+                            <td scope="row"><input type="password" name="password" value="$password" required></td>
                         </tr>
                         <tr>
                             <td scope="row">Date of Birth:</td>
-                            <td scope="row">$dob</td>
+                            <td scope="row"><input type="text" name="dob" value="$dob" required></td>
                         </tr>
                         <tr>
                             <td scope="row">Phone:</td>
-                            <td scope="row">$phone</td>
+                            <td scope="row"><input type="text" name="phone" value="$phone" required></td>
+                        </tr>
+						<tr>
+							<td scope="row">Email:</td>
+							<td scope="row"><input type="text" name="email" value="$email" required></td>
+						</tr>
+						<tr>
+                            <td scope="row">Experience:</td>
+                            <td scope="row"><input type="text" name="exp" value="$exp" required></td>
                         </tr>
                         <tr>
-                            <td scope="row">Email:</td>
-                            <td scope="row">$email</td>
-                        </tr>
-                        <tr>
-                            <td scope="row">Skill:</td>
-                            <td scope="row">$skill</td>
+                            <td scope="row">field:</td>
+                            <td scope="row"><input type="text" name="field" value="$field" required></td>
                         </tr>
 					</table>
 					<br>
 					<input type="hidden" name="id" value=$id>
-					<input type="submit" name="submit" value="Delete">
-					<input type="button" value="Cancel" class="homebutton" id="btnHome" onClick="document.location.href='adminIndex.php'" />
+					<input type="submit" name="submit" value="Update">
+					<input type="button" value="Cancel" class="homebutton" id="btnHome" onClick="document.location.href='admin_index.php'" />
 				</form>
 END;
                     $result->free();
@@ -138,7 +144,7 @@ END;
 
     <!-- footer start -->
     <?php
-        include("component/footer.php");
+        require_once("component/footer.php");
     ?>
     <!-- end of footer -->
 

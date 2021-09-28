@@ -1,10 +1,17 @@
 <?php
+if(isset($_POST['logout'])){
+    require_once '../controller/login_controller.php';
+    $loginController = new LoginController();
+    $loginController->logOut();
+}
 session_start();
-$validSession = require_once __DIR__.'/../../includes/check_session.inc.php';
+require_once __DIR__.'/../../controller/session_controller.php';
+$sessionController = new SessionController();
+$validSession = $sessionController->checkSession();
+$userType = $sessionController->getUserType();
 
-$userType = $_SESSION['user_type'] ?? "";
 if ($validSession && $userType == "jobseeker") {                       //jobseeker nav-bar
-    $username = $_SESSION['valid_user'];
+    $username = $sessionController->getUserName();
     echo <<<END
 
         <!-- Navigation -->
@@ -32,7 +39,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">$username</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                                <li><a class="dropdown-item" href="userprofile.php">Profile</a></li>
+                                <li><a class="dropdown-item" href="user_profile.php">Profile</a></li>
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
@@ -44,7 +51,9 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
-                                <li><a class="dropdown-item text-danger" href="../includes/logout.inc.php">Log Out</a></li>
+                                <form method="POST">
+                                <li><button class="dropdown-item text-danger" type="submit" name="logout">Log Out</button></li>
+                                </form>
                             </ul>
                         </li>
                     </ul>
@@ -58,7 +67,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
 
     END;
 } elseif ($validSession && $userType == "employer") {                    //employer nav-bar
-    $username = $_SESSION['valid_user'];
+    $username = $sessionController->getUserName();
     echo <<<END
 
     <!-- Navigation -->
@@ -86,7 +95,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">$username</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                            <li><a class="dropdown-item" href="userprofile.php">Profile</a></li>
+                            <li><a class="dropdown-item" href="user_profile.php">Profile</a></li>
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>
@@ -98,7 +107,9 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>
-                            <li><a class="dropdown-item text-danger" href="../includes/logout.inc.php">Log Out</a></li>
+                            <form method="POST">
+                                <li><button class="dropdown-item text-danger" type="submit" name="logout">Log Out</button></li>
+                            </form>
                         </ul>
                     </li>
                 </ul>
@@ -112,7 +123,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
 
     END;
 } elseif ($validSession && $userType == "admin") {                     //admin nav-bar
-    $username = $_SESSION['valid_user'];
+    $username = $sessionController->getUserName();
     echo <<<END
 
     <!-- Navigation -->
@@ -129,25 +140,12 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav ms-auto navbar-nav-scroll">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.php#header">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#getstarted">Get Started</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#details">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#contact">Career Advices</a>
+                        <a class="nav-link" aria-current="page" href="admin_index.php">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">$username</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                            <li><a class="dropdown-item" href="userprofile.php">Profile</a></li>
-                            <li>
-                                <div class="dropdown-divider"></div>
-                            </li>
-                            <li><a class="dropdown-item" href="#">Matches</a></li>
+                            <li><a class="dropdown-item" href="user_profile.php">Profile</a></li>
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>
@@ -155,7 +153,9 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>
-                            <li><a class="dropdown-item text-danger" href="../includes/logout.inc.php">Log Out</a></li>
+                            <form method="POST">
+                                <li><button class="dropdown-item text-danger" type="submit" name="logout">Log Out</button></li>
+                            </form>
                         </ul>
                     </li>
                 </ul>

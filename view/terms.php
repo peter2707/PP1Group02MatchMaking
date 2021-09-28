@@ -4,14 +4,14 @@
     <!-- Webpage Title -->
     <title>JobMatch | Terms</title>
     <?php
-        include("component/header.php");
+        require_once("component/header.php");
     ?>
 </head>
 <body>
     
     <!-- Navigation Start  -->
 		<?php
-			include("component/navbar.php");
+			require_once("component/navbar.php");
 		?>
 	<!-- Navigation End  -->
 
@@ -82,7 +82,7 @@
                         </li>
                         <li class="d-flex">
                             <i class="fas fa-square"></i>
-                            <div class="flex-grow-1"><strong>Besides buying</strong> the template you need some basic web skills in order to customize it nothing</div>
+                            <div class="flex-grow-1"><strong>Besides buying</strong> the template you need some basic web fields in order to customize it nothing</div>
                         </li>
                         <li class="d-flex">
                             <i class="fas fa-square"></i>
@@ -131,7 +131,7 @@
 
     <!-- footer start -->
     <?php
-        include("component/footer.php");
+        require_once("component/footer.php");
     ?>
     <!-- end of footer -->
 

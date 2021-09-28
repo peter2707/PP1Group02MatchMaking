@@ -3,9 +3,9 @@
 
 <head>
     <!-- Webpage Title -->
-    <title>JobMatch | Sign Up</title>
+    <title>JobMatch | User</title>
     <?php
-        include("component/header.php");
+        require_once("component/header.php");
     ?>
 </head>
 
@@ -13,15 +13,19 @@
 
     <!-- Navigation Start  -->
     <?php
-        include("component/navbar.php");
+        require_once("component/navbar.php");
     ?>
     <!-- Navigation End  -->
 
     <?php
     session_start();
-    $validSession = require('../includes/check_session.inc.php');
+    require_once __DIR__.'/../controller/session_controller.php';
+    $sessionController = new SessionController();
+    $validSession = $sessionController->checkSession();
+    $userType = $sessionController->getUserType();
+
     if ($validSession) {
-        $username = $_SESSION['valid_user'];
+        $username = $sessionController->getUserName();
         echo <<<END
     <!-- login section start -->
     <header class="ex-header">
@@ -204,15 +208,14 @@
     } else {
         if (isset($_SESSION['valid_user'])) {
         }
-        echo <<<END
-        END;
+        
     }
 
     ?>
 
     <!-- footer start -->
     <?php
-        include("component/footer.php");
+        require_once("component/footer.php");
     ?>
     <!-- end of footer -->
 

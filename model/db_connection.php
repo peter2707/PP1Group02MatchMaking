@@ -1,4 +1,3 @@
-
 <?php
 	$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 	$cleardb_server = $cleardb_url["host"];
@@ -17,14 +16,19 @@
 
 
 <?php
-	//  $dbAddress = 'localhost';
-	//  $dbUser = 'root';
-	//  $dbPass = '';
-	//  $dbName = 'jobmatch';
+	//  try {
+	// 	$dbAddress = 'localhost';
+	// 	$dbUser = 'root';
+	// 	$dbPass = '';
+	// 	$dbName = 'jobmatch';
 
-	//  $db = new mysqli($dbAddress, $dbUser, $dbPass, $dbName);
-	//  if ($db->connect_error) {
-	//  	echo "Could not connect to the database.  Please try again later.";
-	//  	exit;
-	//  }
+	// 	if ($db = mysqli_connect($dbAddress, $dbUser, $dbPass, $dbName)) {
+	// 		//do something
+	// 	}else {
+	// 		throw new Exception('Unable to connect');
+	// 		exit;
+	// 	}
+	// }catch(Exception $e) {
+	// 	echo $e->getMessage();
+	// }
 ?>

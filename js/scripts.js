@@ -2,6 +2,7 @@
 
 /* Navigation*/
 // Collapse the navbar by adding the top-nav-collapse class
+
 window.onscroll = function() {
     scrollFunction();
     scrollFunctionBTT(); // back to top button
@@ -10,6 +11,32 @@ window.onscroll = function() {
 window.onload = function() {
     scrollFunction();
 };
+
+function toggleAddUser() {
+    if (document.getElementById('admin').checked) {
+        document.getElementById('admin-form').style.display = '';
+        document.getElementById('employer-form').style.display = 'none';
+        document.getElementById('job-seeker-form').style.display = 'none';
+    } else if (document.getElementById('employer').checked) {
+        document.getElementById('admin-form').style.display = 'none';
+        document.getElementById('employer-form').style.display = '';
+        document.getElementById('job-seeker-form').style.display = 'none';
+    } else if (document.getElementById('job-seeker').checked) {
+        document.getElementById('admin-form').style.display = 'none';
+        document.getElementById('employer-form').style.display = 'none';
+        document.getElementById('job-seeker-form').style.display = '';
+    }
+}
+
+function toggleRegister() {
+    if (document.getElementById('employer').checked) {
+        document.getElementById('employer-form').style.display = '';
+        document.getElementById('job-seeker-form').style.display = 'none';
+    } else if (document.getElementById('job-seeker').checked) {
+        document.getElementById('employer-form').style.display = 'none';
+        document.getElementById('job-seeker-form').style.display = '';
+    }
+}
 
 function scrollFunction() {
     if (document.documentElement.scrollTop > 30) {
@@ -138,3 +165,63 @@ function topFunction() {
     document.body.scrollTop = 0; // for Safari
     document.documentElement.scrollTop = 0; // for Chrome, Firefox, IE and Opera
 }
+
+
+
+
+// add field row
+$("#addRow").click(function() {
+    var html = '';
+    html += '<div id="inputFormRow">';
+    html += '<div class="input-group mb-3">';
+    html += '<input type="text" name="title[]" class="form-control m-input" placeholder="Enter title" autocomplete="off">';
+    html += '<div class="input-group-append">';
+    html += '<button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
+    html += '</div>';
+    html += '</div>';
+
+    $('#newRow').append(html);
+});
+
+// remove row
+$(document).on('click', '#removeRow', function() {
+    $(this).closest('#inputFormRow').remove();
+});
+
+
+//register dropdown (carreer field)
+var fieldOptions = {
+    val1: 'Accounting',
+    val2: 'Administration',
+    val3: 'Advertising',
+    val4: 'Agriculture',
+    val5: 'Arts & Media',
+    val6: 'Banking & Financial Services',
+    val7: 'Customer Service',
+    val8: 'Community',
+    val9: 'Construction',
+    val10: 'Consulting',
+    val11: 'Design & Architecture',
+    val12: 'Education & Training',
+    val13: 'Engineering',
+    val14: 'Government & Defence',
+    val15: 'Healthcare & Medical',
+    val16: 'Hospitality & Tourism',
+    val17: 'Human Resource',
+    val18: 'Information Technology',
+    val19: 'Insurance',
+    val20: 'Marketing',
+    val21: 'Mineral Resource',
+    val22: 'Real Estate & Property',
+    val23: 'Retail & Consumer Products',
+    val24: 'Science & Technology',
+    val25: 'Sport & Recreation',
+    val26: 'Trades & Services'
+};
+
+var fieldSelect = $('#job-seeker-form-field');
+$.each(fieldOptions, function(val, text) {
+    fieldSelect.append(
+        $('<option></option>').val(text).html(text)
+    );
+});
