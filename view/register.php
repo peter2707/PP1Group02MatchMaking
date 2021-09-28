@@ -12,11 +12,10 @@ if(isset($_POST['register'])){
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $type = $_POST['type'];
-    $rating = $_POST['rating'];
-    $exp = $_POST['exp'];
-    $skill = $_POST['skill'];
+    $field = $_POST['field'];
+    $position = $_POST['position'];
     
-    $registerController->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $rating, $exp, $skill);
+    $registerController->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $field, $position);
   }
 ?>
 <!DOCTYPE html>
@@ -92,28 +91,18 @@ if(isset($_POST['register'])){
                             <input class="form-check-input" type="radio" name="type" id="employer" value="employer" onclick="toggleRegister();">
                             <label class="form-check-label" for="employer">Employer</label>
                         </div>
-                        <div id="job-seeker-form">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="job-seeker-form-skill" name="skill" placeholder="Skill">
-                                <label for="job-seeker-form-skill">Field of Expertise</label>
-                            </div>
+                        <div class="form-floating mb-3" id="job-seeker-form">
+                            <select class="form-select mb-3" aria-label=".form-select-lg example" id="job-seeker-form-field" name="field">
+                                <option disabled selected>--- Choose one ---</option>
+                            </select>
+                            <label for="job-seeker-form-field">Field of Expertise</label>
                         </div>
                         <div class="form-floating mb-3" id="employer-form" style="display:none;">
                             <input type="text" class="form-control" id="employer-form-rating" name="position" placeholder="Position">
                             <label for="employer-form-label">Position</label>
                         </div>
 
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <label class="input-group-text" for="inputGroupSelect01">Career Field</label>
-                            </div>
-                            <select class="custom-select" id="inputGroupSelect01">
-                                <option selected>Choose...</option>
-                                <option value="1">One</option>
-                                <option value="2">Two</option>
-                                <option value="3">Three</option>
-                            </select>
-                        </div>
+                        
 
                         <p class="mt-5 mb-2" style="color: red;">
                             <?php
@@ -121,7 +110,7 @@ if(isset($_POST['register'])){
                             if (isset($_GET["error"])) {
                                 if ($_GET["error"] == "emptyinput") {
                                     echo "Fill in all required fields!";
-                                } else if ($_GET["error"] == "invaliduid") {
+                                } else if ($_GET["error"] == "invalidusername") {
                                     echo "Enter a valid username!";
                                 } else if ($_GET["error"] == "invalidemail") {
                                     echo "Enter a valid email!";
@@ -131,8 +120,10 @@ if(isset($_POST['register'])){
                                     echo "Something went wrong. Please try again!";
                                 } else if ($_GET["error"] == "usernametaken") {
                                     echo "Username is already taken!";
-                                } else if ($_GET["error"] == "none") {
-                                    echo "You have successfully registered!";
+                                } else if ($_GET["error"] == "fieldnull") {
+                                    echo "You have to choose a field of expertise";
+                                }else if ($_GET["error"] == "positionnull") {
+                                    echo "You have to enter your position";
                                 }
                             }
                             ?>

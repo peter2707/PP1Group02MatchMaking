@@ -67,7 +67,7 @@
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Create your account</h5>
-                             <p>Enter your details, choose your side between an Employer or Job Seeker!</p> <!-- Employer? List a job post with your business values! Job Seeker? Personalize your profile with a skillset!</p> -->
+                             <p>Enter your details, choose your side between an Employer or Job Seeker!</p> <!-- Employer? List a job post with your business values! Job Seeker? Personalize your profile with a fieldset!</p> -->
                             <a class="read-more no-line" href="signup.php">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
                         </div>
                     </div>
@@ -125,7 +125,7 @@
                     <div class="text-container">
                         <div class="section-title">JOB SEEKER</div>
                         <h2>Finding jobs have never been easier</h2>
-                        <p>Looking for a job?. Customise your profile; add your skills, experience, qualifications, availability, career objective. With thousands of jobs currently available and more being added everyday, JobMatch can help you find the right job.</p>
+                        <p>Looking for a job?. Customise your profile; add your fields, experience, qualifications, availability, career objective. With thousands of jobs currently available and more being added everyday, JobMatch can help you find the right job.</p>
                         <!-- <a class="btn-solid-reg" href="#contact">Get Advices</a> -->
                     </div>
                     <!-- end of text-container -->

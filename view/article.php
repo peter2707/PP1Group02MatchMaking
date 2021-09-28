@@ -129,7 +129,7 @@
                                 <span class="fa-stack-1x">2</span>
                                 </span>
                                 <div class="flex-grow-1">
-                                    <h5>Skilled Team Involved</h5>
+                                    <h5>fielded Team Involved</h5>
                                     <p>Some useful extra pages are bundled with the template lik article details, terms conditions and privacy policy</p>
                                 </div>
                             </li>

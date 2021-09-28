@@ -38,12 +38,12 @@
                     $phone = $_POST['phone'];
                     $email = $_POST['email'];
                     $exp = $_POST['exp'];
-                    $skill = $_POST['skill'];
+                    $field = $_POST['field'];
 
-                    $query = "UPDATE jobseeker SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, experience=?, skill=? WHERE id = ?";
+                    $query = "UPDATE jobseeker SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, experience=?, field=? WHERE id = ?";
 
                     $stmt = $db->prepare($query);
-                    $stmt->bind_param("sssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $exp, $skill, $id);
+                    $stmt->bind_param("sssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $exp, $field, $id);
                     $stmt->execute();
 
                     $affectedRows = $stmt->affected_rows;
@@ -80,7 +80,7 @@
                     $phone = $row['phone'];
                     $email = $row['email'];
                     $exp = $row['experience'];
-                    $skill = $row['skill'];
+                    $field = $row['field'];
 
                     echo <<<END
 				
@@ -120,8 +120,8 @@
                             <td scope="row"><input type="text" name="exp" value="$exp" required></td>
                         </tr>
                         <tr>
-                            <td scope="row">Skill:</td>
-                            <td scope="row"><input type="text" name="skill" value="$skill" required></td>
+                            <td scope="row">field:</td>
+                            <td scope="row"><input type="text" name="field" value="$field" required></td>
                         </tr>
 					</table>
 					<br>

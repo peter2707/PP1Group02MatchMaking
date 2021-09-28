@@ -14,9 +14,9 @@ if(isset($_POST['register'])){
     $type = $_POST['type'];
     $position = $_POST['position'];
     $exp = $_POST['exp'];
-    $skill = $_POST['skill'];
+    $field = $_POST['field'];
     
-    $adminModel->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $position, $exp, $skill);
+    $adminModel->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $position, $exp, $field);
 }
 ?>
 <!DOCTYPE html>
@@ -104,8 +104,8 @@ if(isset($_POST['register'])){
                                     <label for="job-seeker-form-exp">Experience (How many years?)</label>
                                 </div>
                                 <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="job-seeker-form-skill" name="skill" placeholder="Skill">
-                                    <label for="job-seeker-form-skill">Skill</label>
+                                    <input type="text" class="form-control" id="job-seeker-form-field" name="field" placeholder="field">
+                                    <label for="job-seeker-form-field">field</label>
                                 </div>
                             </div>
                             <div class="form-floating mb-3" id="employer-form" style="display:none;">

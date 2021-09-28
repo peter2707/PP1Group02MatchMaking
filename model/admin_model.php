@@ -1,7 +1,7 @@
 <?php
 class AdminModel{
 
-  public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $position, $exp, $skill){
+  public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $position, $exp, $field){
     require_once 'utility.php';
     require_once 'db_connection.php';
     if (emptyInputRegister($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type) !== false) {
@@ -36,7 +36,7 @@ class AdminModel{
           header("location: ../view/addUser.php?error=usernametaken");
           exit();
         }else{
-          $this->registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $exp, $skill);
+          $this->registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $exp, $field);
         }
       }
     }
@@ -51,9 +51,9 @@ class AdminModel{
     header("location: ../view/adminIndex.php?success=created");
   }
 
-  function registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $exp, $skill){
-    $query = "INSERT INTO jobseeker (firstName, lastName, username, password, dateOfBirth, phone, email, experience, skill) 
-            VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$exp', '$skill')";
+  function registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $exp, $field){
+    $query = "INSERT INTO jobseeker (firstName, lastName, username, password, dateOfBirth, phone, email, experience, field) 
+            VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$exp', '$field')";
     mysqli_query($db, $query);
     $db->close();
     header("location: ../view/adminIndex.php?success=created");

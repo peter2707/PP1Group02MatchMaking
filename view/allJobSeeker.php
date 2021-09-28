@@ -70,7 +70,7 @@
                                 <th scope="col">Phone</th>
                                 <th scope="col">Email</th>
                                 <th scope="col">Experience</th>
-                                <th scope="col">Skill</th>
+                                <th scope="col">field</th>
                                 <th scope="col">Action</th>
                                 <th scope="col"></th>
                             </tr>
@@ -87,7 +87,7 @@
                                 $phone = $row['phone'];
                                 $email = $row['email'];
                                 $exp = $row['experience'];
-                                $skill = $row['skill'];
+                                $field = $row['field'];
 
                                 echo "<tr>";
                                 echo "<td scope=\"row\" >$id</td>";
@@ -97,8 +97,7 @@
                                 echo "<td scope=\"row\">$dob</td>";
                                 echo "<td scope=\"row\">$phone</td>";
                                 echo "<td scope=\"row\">$email</td>";
-                                echo "<td scope=\"row\">$exp</td>";
-                                echo "<td scope=\"row\">$skill</td>";
+                                echo "<td scope=\"row\">$field</td>";
                                 createEditButton("id", $id, "Edit", "editJobSeeker.php");
                                 createDeleteButton("id", $id, "Delete", "deleteJobSeeker.php");
                                 echo "</tr>";

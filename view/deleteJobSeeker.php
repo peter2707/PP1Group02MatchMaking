@@ -68,7 +68,7 @@
                     $phone = $row['phone'];
                     $email = $row['email'];
                     $exp = $row['experience'];
-                    $skill = $row['skill'];
+                    $field = $row['field'];
 
                     echo <<<END
 				
@@ -104,8 +104,8 @@
                             <td scope="row">$email</td>
                         </tr>
                         <tr>
-                            <td scope="row">Skill:</td>
-                            <td scope="row">$skill</td>
+                            <td scope="row">field:</td>
+                            <td scope="row">$field</td>
                         </tr>
 					</table>
 					<br>

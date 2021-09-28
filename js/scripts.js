@@ -166,7 +166,10 @@ function topFunction() {
     document.documentElement.scrollTop = 0; // for Chrome, Firefox, IE and Opera
 }
 
-// add row
+
+
+
+// add field row
 $("#addRow").click(function() {
     var html = '';
     html += '<div id="inputFormRow">';
@@ -183,4 +186,42 @@ $("#addRow").click(function() {
 // remove row
 $(document).on('click', '#removeRow', function() {
     $(this).closest('#inputFormRow').remove();
+});
+
+
+//register dropdown (carreer field)
+var fieldOptions = {
+    val1: 'Accounting',
+    val2: 'Administration',
+    val3: 'Advertising',
+    val4: 'Agriculture',
+    val5: 'Arts & Media',
+    val6: 'Banking & Financial Services',
+    val7: 'Customer Service',
+    val8: 'Community',
+    val9: 'Construction',
+    val10: 'Consulting',
+    val11: 'Design & Architecture',
+    val12: 'Education & Training',
+    val13: 'Engineering',
+    val14: 'Government & Defence',
+    val15: 'Healthcare & Medical',
+    val16: 'Hospitality & Tourism',
+    val17: 'Human Resource',
+    val18: 'Information Technology',
+    val19: 'Insurance',
+    val20: 'Marketing',
+    val21: 'Mineral Resource',
+    val22: 'Real Estate & Property',
+    val23: 'Retail & Consumer Products',
+    val24: 'Science & Technology',
+    val25: 'Sport & Recreation',
+    val26: 'Trades & Services'
+};
+
+var fieldSelect = $('#job-seeker-form-field');
+$.each(fieldOptions, function(val, text) {
+    fieldSelect.append(
+        $('<option></option>').val(text).html(text)
+    );
 });
