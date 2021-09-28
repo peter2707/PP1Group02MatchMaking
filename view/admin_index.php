@@ -35,16 +35,22 @@
                                 echo "Something went wrong. Please try again!";
                             } else if ($_GET["error"] == "incorrect") {
                                 echo "Incorrect password or email. Please try again!";
+                            } else if ($_GET["error"] == "errordelete") {
+                                echo "There was a problem while trying to delete :(";
                             }
                         }
                         ?>
                     </p>
                     <p class="mt-5 mb-2" style="color: #4BB543;">
                         <?php
-                        // Account created message
+                        // Success message
                         if (isset($_GET["success"])) {
                             if ($_GET["success"] == "created") {
                                 echo "Account has been successfully created.";
+                            }elseif ($_GET["success"] == "deletedEmployer") {
+                                echo "Employer has been successfully deleted.";
+                            }elseif ($_GET["success"] == "deletedSeeker") {
+                                echo "Job Seeker has been successfully deleted.";
                             }
                         }
                         ?>
@@ -52,9 +58,9 @@
                 </div>
 
                 <div class="col-md-4 offset-md-4">
-                    <a style="text-decoration : none" href="allJobSeeker.php" class="mb-4 w-100 btn btn-primary">Display all Job Seeker</a>
-                    <a style="text-decoration : none" href="allEmp.php" class="mb-4 w-100 btn btn-primary">Display all Employer</a>
-                    <a style="text-decoration : none" href="addUser.php" class="mb-4 w-100 btn btn-primary">Add new user</a>
+                    <a style="text-decoration : none" href="jobseeker_list.php" class="mb-4 w-100 btn btn-primary">Display all Job Seeker</a>
+                    <a style="text-decoration : none" href="employer_list.php" class="mb-4 w-100 btn btn-primary">Display all Employer</a>
+                    <a style="text-decoration : none" href="add_user.php" class="mb-4 w-100 btn btn-primary">Add new user</a>
                 </div>
             </div>
             <!-- end of row -->

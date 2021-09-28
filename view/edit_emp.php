@@ -31,10 +31,6 @@
                     $id = $_GET['id'];
 
                     if (isset($_POST['submit'])) {
-                        $submit = $_POST['submit'];
-
-
-
                         $firstName = $_POST['firstName'];
                         $lastName = $_POST['lastName'];
                         $username = $_POST['username'];
@@ -56,12 +52,12 @@
 
                         if ($affectedRows == 1) {
                             echo "Successfully Updated Job<br><br>";
-                            echo "<a href=\"adminIndex.php\" class=\"btn btn-success\">Back to Job List</a>";
+                            echo "<a href=\"admin_index.php\" class=\"btn btn-success\">Back to Job List</a>";
                             echo "<br><hr>";
                             exit;
                         } else {
                             echo "Failed to Updated Job<br><br>";
-                            echo "<a href=\"adminIndex.php\" class=\"btn btn-success\">Back to Job List</a>";
+                            echo "<a href=\"admin_index.php\" class=\"btn btn-success\">Back to Job List</a>";
                             echo "<br><hr>";
                             exit;
                         }
@@ -85,7 +81,7 @@
                         $email = $row['email'];
                         $rate = $row['rating'];
 
-                        echo <<<END
+echo <<<END
                     
                     <form action="" method="POST">
                         <table class="table">
@@ -126,9 +122,9 @@
                         <br>
                         <input type="hidden" name="id" value=$id>
                         <input type="submit" name="submit" value="Update">
-                        <input type="button" value="Cancel" class="homebutton" id="btnHome" onClick="document.location.href='adminIndex.php'" />
+                        <input type="button" value="Cancel" class="homebutton" id="btnHome" onClick="document.location.href='admin_index.php'" />
                     </form>
-    END;
+END;
                         $result->free();
                     }
                     $db->close();

@@ -26,12 +26,12 @@ if (isset($_POST['submit'])) {
 
     if ($affectedRows == 1) {
         echo "Successfully Updated Job<br><br>";
-        echo "<a href=\"adminIndex.php\" class=\"btn btn-success\">Back to Job List</a>";
+        echo "<a href=\"admin_index.php\" class=\"btn btn-success\">Back to Job List</a>";
         echo "<br><hr>";
         exit;
     } else {
         echo "Failed to Updated Job<br><br>";
-        echo "<a href=\"adminIndex.php\" class=\"btn btn-success\">Back to Job List</a>";
+        echo "<a href=\"admin_index.php\" class=\"btn btn-success\">Back to Job List</a>";
         echo "<br><hr>";
         exit;
     }
@@ -96,7 +96,7 @@ if (isset($_POST['submit'])) {
         <br>
         <input type="hidden" name="id" value=$id>
         <input type="submit" name="submit" value="Update">
-        <input type="button" value="Cancel" class="homebutton" id="btnHome" onClick="document.location.href='adminIndex.php'" />
+        <input type="button" value="Cancel" class="homebutton" id="btnHome" onClick="document.location.href='admin_index.php'" />
     </form>
 END;
 }

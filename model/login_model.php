@@ -11,7 +11,7 @@
 				$_SESSION['user_type'] = "admin";
 				$db->close();
 				if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
-					header("Location: ../view/adminIndex.php");
+					header("Location: ../view/admin_index.php");
 				}
 			}elseif($this->checkEmployer($db, $username, $password)){
 				$_SESSION['valid_user'] = $username;
