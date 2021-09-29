@@ -4,8 +4,15 @@ if (isset($_POST['update'])) {
     $userController = new UserController();
 
     $username = $_POST['username'];
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $email = $_POST['email'];
+    $dob = $_POST['dob'];
+    $phone = $_POST['phone'];
     $password = $_POST['password'];
-    $loginController->login($username, $password);
+    $exp = "test";
+    $skill = "test";
+    $userController->updateUserData($firstname, $lastname, $password, $dob, $phone, $email, $exp, $skill, $username);
 }
 ?>
 
@@ -107,15 +114,15 @@ if (isset($_POST['update'])) {
                     </div>
 
                     <div class="col-md-8">
-                    
                         <div class="card mb-3">
                             <div class="card-body">
+                            <form method="POST">
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">First Name</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" disabled=true" class="test" id="first-name" value="$user->firstName" style="border: none; background-color:white; text-align:center;" />
+                                        <input type="text" disabled=true" class="form-control" id="first-name" name="firstName" value="$user->firstName" style="border: none; background-color:white; text-align:center;" />
                                     </div>
                                 </div>
                                 <hr>
@@ -124,7 +131,7 @@ if (isset($_POST['update'])) {
                                         <h6 class="mb-0">Last Name</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <input type="text" disabled=true" class="test" id="last-name" value="$user->lastName" style="border: none; background-color:white; text-align:center;" />
+                                        <input type="text" disabled=true" class="form-control" id="last-name" name="lastName" value="$user->lastName" style="border: none; background-color:white; text-align:center;" />
                                     </div>
                                 </div>
                                 <hr>
@@ -133,7 +140,7 @@ if (isset($_POST['update'])) {
                                         <h6 class="mb-0">Email</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                    <input type="text" disabled=true" class="test" id="email" value="$user->email" style="border: none; background-color:white; text-align:center;" />
+                                    <input type="text" disabled=true" class="form-control" id="email" name="email" value="$user->email" style="border: none; background-color:white; text-align:center;" />
 
                                     </div>
                                 </div>
@@ -143,7 +150,7 @@ if (isset($_POST['update'])) {
                                         <h6 class="mb-0">Phone</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                    <input type="text" disabled=true" class="test" id="phone" value="$user->phone" style="border: none; background-color:white; text-align:center;" />
+                                    <input type="text" disabled=true" class="form-control" id="phone" name="phone" value="$user->phone" style="border: none; background-color:white; text-align:center;" />
 
                                     </div>
                                 </div>
@@ -153,40 +160,44 @@ if (isset($_POST['update'])) {
                                         <h6 class="mb-0">Date of Birth</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                    <input type="text" disabled=true" class="test" id="dob" value="$user->dob" style="border: none; background-color:white; text-align:center;" />
+                                    <input type="text" disabled=true" class="form-control" id="dob" name="dob" value="$user->dob" style="border: none; background-color:white; text-align:center;" />
 
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Username</h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary ">
-                                <input type="text" disabled=true" class="test" id="username" value="$user->username" style="border: none; background-color:white; text-align:center;" />
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Username</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary ">
+                                        <input type="text" disabled=true" class="form-control" id="username" name="username" value="$user->username" style="border: none; background-color:white; text-align:center;" />
 
+                                    </div>
                                 </div>
-                            </div>
-                            <hr>
+                                <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
                                         <h6 class="mb-0">Password</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary ">
-                                        ********
+                                        <input type="password" disabled=true" class="form-control" id="password" name="password" value="$user->password" style="border: none; background-color:white; text-align:center;" />
                                     </div>
                                 </div>
                                 <hr>
+                                </form>
                                 <div class="row">
                                     <div class="col-sm-12">
 
-                                        <button class="btn btn-secondary" id="edit" target="__blank" onclick="edit()">Edit</button>
-                                        <button class="btn btn-secondary" id="delete" target="__blank" onclick="edit()">Delete</button>
-                                        <button class="btn btn-secondary" id="cancel" target="__blank" onclick="cancel()" style='display:none;' >Cancel</button>
-                                        <button class="btn btn-secondary" id="update" target="__blank" name="update" style='display:none;'>Update</button>
+                                        <button class="btn btn-secondary" id="edit" onclick="edit()">Edit</button>
+                                        <button class="btn btn-secondary" id="delete" onclick="delete()">Delete</button>
+                                        <button class="btn btn-secondary" id="cancel" onclick="cancel()" style='display:none;' >Cancel</button>
+                                        <button class="btn btn-secondary" id="update" type="submit" name="update" style='display:none;'>Update</button>
                                         
                                     </div>
                                 </div>
+                            
+
+                                
                             </div>
                         </div>
 
@@ -263,8 +274,8 @@ if (isset($_POST['update'])) {
 
     <script>
         function edit() {
-            var inputField = document.querySelectorAll("#first-name, #last-name, #email, #phone, #dob, #username");
-            for(var i=0; i<inputField.length; i++){
+            var inputField = document.querySelectorAll("#first-name, #last-name, #email, #phone, #dob, #password");
+            for (var i = 0; i < inputField.length; i++) {
                 inputField[i].disabled = false;
                 inputField[i].style.border = "1px solid black";
                 inputField[i].style.borderRadius = "10px";
@@ -274,9 +285,10 @@ if (isset($_POST['update'])) {
             document.getElementById("cancel").style.display = '';
             document.getElementById("update").style.display = '';
         }
+
         function cancel() {
-            var inputField = document.querySelectorAll("#first-name, #last-name, #email, #phone, #dob, #username");
-            for(var i=0; i<inputField.length; i++){
+            var inputField = document.querySelectorAll("#first-name, #last-name, #email, #phone, #dob, #password");
+            for (var i = 0; i < inputField.length; i++) {
                 inputField[i].disabled = true;
                 inputField[i].style.border = "none";
             }
