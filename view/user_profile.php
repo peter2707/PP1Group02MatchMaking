@@ -1,3 +1,21 @@
+<?php
+if (isset($_POST['update'])) {
+    include '../controller/user_controller.php';
+    $userController = new UserController();
+
+    $username = $_POST['username'];
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
+    $email = $_POST['email'];
+    $dob = $_POST['dob'];
+    $phone = $_POST['phone'];
+    $password = $_POST['password'];
+    $exp = "test";
+    $skill = "test";
+    $userController->updateUserData($firstname, $lastname, $password, $dob, $phone, $email, $exp, $skill, $username);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,14 +36,22 @@
     <!-- Navigation End  -->
 
     <?php
-    session_start();
-    require_once __DIR__.'/../controller/session_controller.php';
-    $sessionController = new SessionController();
-    $validSession = $sessionController->checkSession();
-    $userType = $sessionController->getUserType();
+    // check if the session has not started yet
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+    // require files
+    require_once __DIR__ . '/../controller/session_controller.php';
+    require_once __DIR__ . '/../controller/user_controller.php';
 
+    // call controllers
+    $sessionController = new SessionController();
+    $userController = new UserController();
+
+    // check session
+    $validSession = $sessionController->checkSession();
     if ($validSession) {
-        $username = $sessionController->getUserName();
+        $user = $userController->getUserData();
         echo <<<END
     <!-- login section start -->
     <header class="ex-header">
@@ -38,9 +64,9 @@
                                 <div class="d-flex flex-column align-items-center text-center">
                                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                                     <div class="mt-3">
-                                        <h4>John Doe</h4>
-                                        <p class="text-secondary mb-1">Full Stack Developer</p>
-                                        <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                                        <h4>$user->firstName</h4>
+                                        <p class="text-secondary mb-1">$user->skill </p>
+                                        <p class="text-muted font-size-sm">Experience: $user->exp years</p>
                                         <button class="btn btn-primary">Follow</button>
                                         <button class="btn btn-outline-primary">Message</button>
                                     </div>
@@ -86,15 +112,26 @@
                             </ul>
                         </div>
                     </div>
+
                     <div class="col-md-8">
                         <div class="card mb-3">
                             <div class="card-body">
+                            <form method="POST">
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Full Name</h6>
+                                        <h6 class="mb-0">First Name</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        Test User
+                                        <input type="text" disabled=true" class="form-control" id="first-name" name="firstName" value="$user->firstName" style="border: none; background-color:white; text-align:center;" />
+                                    </div>
+                                </div>
+                                <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Last Name</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary">
+                                        <input type="text" disabled=true" class="form-control" id="last-name" name="lastName" value="$user->lastName" style="border: none; background-color:white; text-align:center;" />
                                     </div>
                                 </div>
                                 <hr>
@@ -103,7 +140,8 @@
                                         <h6 class="mb-0">Email</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        user@gmail.com
+                                    <input type="text" disabled=true" class="form-control" id="email" name="email" value="$user->email" style="border: none; background-color:white; text-align:center;" />
+
                                     </div>
                                 </div>
                                 <hr>
@@ -112,35 +150,57 @@
                                         <h6 class="mb-0">Phone</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        (239) 816-9029
+                                    <input type="text" disabled=true" class="form-control" id="phone" name="phone" value="$user->phone" style="border: none; background-color:white; text-align:center;" />
+
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Mobile</h6>
+                                        <h6 class="mb-0">Date of Birth</h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        (320) 380-4539
+                                    <input type="text" disabled=true" class="form-control" id="dob" name="dob" value="$user->dob" style="border: none; background-color:white; text-align:center;" />
+
                                     </div>
                                 </div>
                                 <hr>
                                 <div class="row">
                                     <div class="col-sm-3">
-                                        <h6 class="mb-0">Address</h6>
+                                        <h6 class="mb-0">Username</h6>
                                     </div>
-                                    <div class="col-sm-9 text-secondary">
-                                        Bay Area, San Francisco, CA
+                                    <div class="col-sm-9 text-secondary ">
+                                        <input type="text" disabled=true" class="form-control" id="username" name="username" value="$user->username" style="border: none; background-color:white; text-align:center;" />
+
                                     </div>
                                 </div>
                                 <hr>
+                                <div class="row">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0">Password</h6>
+                                    </div>
+                                    <div class="col-sm-9 text-secondary ">
+                                        <input type="password" disabled=true" class="form-control" id="password" name="password" value="$user->password" style="border: none; background-color:white; text-align:center;" />
+                                    </div>
+                                </div>
+                                <hr>
+                                </form>
                                 <div class="row">
                                     <div class="col-sm-12">
-                                        <a class="btn btn-secondary" target="__blank" href="#">Edit</a>
+
+                                        <button class="btn btn-secondary" id="edit" onclick="edit()">Edit</button>
+                                        <button class="btn btn-secondary" id="delete" onclick="delete()">Delete</button>
+                                        <button class="btn btn-secondary" id="cancel" onclick="cancel()" style='display:none;' >Cancel</button>
+                                        <button class="btn btn-secondary" id="update" type="submit" name="update" style='display:none;'>Update</button>
+                                        
                                     </div>
                                 </div>
+                            
+
+                                
                             </div>
                         </div>
+
                         <div class="row gutters-sm">
                             <div class="col-sm-6 mb-3">
                                 <div class="card h-100">
@@ -208,10 +268,36 @@
     } else {
         if (isset($_SESSION['valid_user'])) {
         }
-        
     }
 
     ?>
+
+    <script>
+        function edit() {
+            var inputField = document.querySelectorAll("#first-name, #last-name, #email, #phone, #dob, #password");
+            for (var i = 0; i < inputField.length; i++) {
+                inputField[i].disabled = false;
+                inputField[i].style.border = "1px solid black";
+                inputField[i].style.borderRadius = "10px";
+            }
+            document.getElementById("edit").style.display = 'none';
+            document.getElementById("delete").style.display = 'none';
+            document.getElementById("cancel").style.display = '';
+            document.getElementById("update").style.display = '';
+        }
+
+        function cancel() {
+            var inputField = document.querySelectorAll("#first-name, #last-name, #email, #phone, #dob, #password");
+            for (var i = 0; i < inputField.length; i++) {
+                inputField[i].disabled = true;
+                inputField[i].style.border = "none";
+            }
+            document.getElementById("edit").style.display = '';
+            document.getElementById("delete").style.display = '';
+            document.getElementById("cancel").style.display = 'none';
+            document.getElementById("update").style.display = 'none';
+        }
+    </script>
 
     <!-- footer start -->
     <?php

@@ -4,8 +4,12 @@ if(isset($_POST['logout'])){
     $loginController = new LoginController();
     $loginController->logOut();
 }
-session_start();
+// check if the session has not started yet
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 require_once __DIR__.'/../../controller/session_controller.php';
+
 $sessionController = new SessionController();
 $validSession = $sessionController->checkSession();
 $userType = $sessionController->getUserType();
