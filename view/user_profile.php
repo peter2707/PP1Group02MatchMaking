@@ -204,8 +204,8 @@
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <button class="btn btn-secondary" id="update" type="submit" name="update">Update</button>
-                                                    <button class="btn btn-danger" id="delete" type="submit" name="delete">Delete Account</button>
+                                                    <button class="btn btn-secondary" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update">Update</button>
+                                                    <button class="btn btn-danger" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete">Delete Account</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -365,8 +365,8 @@
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <button class="btn btn-secondary" id="update" type="submit" name="update">Update</button>
-                                                    <button class="btn btn-danger" id="delete" type="submit" name="delete">Delete Account</button>
+                                                    <button class="btn btn-secondary" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update">Update</button>
+                                                    <button class="btn btn-danger" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete">Delete Account</button>
                                                 </div>
                                             </div>
                                         </form>
