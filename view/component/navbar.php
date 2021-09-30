@@ -1,6 +1,6 @@
 <?php
 if(isset($_POST['logout'])){
-    include '../controller/login_controller.php';
+    require_once '../controller/login_controller.php';
     $loginController = new LoginController();
     $loginController->logOut();
 }
@@ -8,7 +8,8 @@ if(isset($_POST['logout'])){
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-include __DIR__.'/../../controller/session_controller.php';
+require_once __DIR__.'/../../controller/session_controller.php';
+
 $sessionController = new SessionController();
 $validSession = $sessionController->checkSession();
 $userType = $sessionController->getUserType();
@@ -42,7 +43,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">$username</a>
                             <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                                <li><a class="dropdown-item" href="userprofile.php">Profile</a></li>
+                                <li><a class="dropdown-item" href="user_profile.php">Profile</a></li>
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
@@ -98,7 +99,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">$username</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                            <li><a class="dropdown-item" href="userprofile.php">Profile</a></li>
+                            <li><a class="dropdown-item" href="user_profile.php">Profile</a></li>
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>
@@ -143,25 +144,12 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
             <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
                 <ul class="navbar-nav ms-auto navbar-nav-scroll">
                     <li class="nav-item">
-                        <a class="nav-link" aria-current="page" href="index.php#header">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#getstarted">Get Started</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#details">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php#contact">Career Advices</a>
+                        <a class="nav-link" aria-current="page" href="admin_index.php">Home</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">$username</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                            <li><a class="dropdown-item" href="userprofile.php">Profile</a></li>
-                            <li>
-                                <div class="dropdown-divider"></div>
-                            </li>
-                            <li><a class="dropdown-item" href="#">Matches</a></li>
+                            <li><a class="dropdown-item" href="user_profile.php">Profile</a></li>
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>

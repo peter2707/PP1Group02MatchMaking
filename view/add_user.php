@@ -1,7 +1,7 @@
 <?php
 if(isset($_POST['register'])){
-    include "../model/admin_model.php";
-    $adminModel = new AdminModel();
+    require_once "../controller/admin_controller.php";
+    $adminController= new AdminController();
 
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
@@ -12,12 +12,11 @@ if(isset($_POST['register'])){
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $type = $_POST['type'];
-    $position = $_POST['position'];
-    $rating = $_POST['rating'];
-    $exp = $_POST['exp'];
-    $skill = $_POST['skill'];
+    $positionEmployer = $_POST['positionEmp'];
+    $positionAdmin = $_POST['positionAdmin'];
+    $field = $_POST['field'];
     
-    $adminModel->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $position, $rating, $exp, $skill);
+    $adminController->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $positionEmployer, $positionAdmin, $field);
 }
 ?>
 <!DOCTYPE html>
@@ -27,7 +26,7 @@ if(isset($_POST['register'])){
     <!-- Webpage Title -->
     <title>JobMatch | Sign Up</title>
     <?php
-        include("component/header.php");
+        require_once("component/header.php");
     ?>
 </head>
 
@@ -36,7 +35,7 @@ if(isset($_POST['register'])){
 
     <!-- Navigation Start  -->
     <?php
-        include("component/navbar.php");
+        require_once("component/navbar.php");
     ?>
     <!-- Navigation End  -->
 
@@ -45,7 +44,7 @@ if(isset($_POST['register'])){
     <header class="ex-header">
         <div class="container">
             <div class="row">
-                <div class="col-xl-10 offset-xl-1 mb-3">
+                <div class="col-xl-10 offset-md-1 mb-3">
                     <h1>Add New User</h1>
                     <p class="mt-5 mb-2 text-muted">Enter your details below:</p>
                 </div>
@@ -85,55 +84,34 @@ if(isset($_POST['register'])){
                                 <label for="floatingInput">Email</label>
                             </div>
 
+
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="type" id="job-seeker" value="jobseeker" onclick="toggleOptions();">
+                                <input class="form-check-input" type="radio" name="type" id="job-seeker" value="jobseeker" onclick="toggleAddUser();" checked>
                                 <label class="form-check-label" for="job-seeker">Job Seeker</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="type" id="employer" value="employer" onclick="toggleOptions();">
+                                <input class="form-check-input" type="radio" name="type" id="employer" value="employer" onclick="toggleAddUser();">
                                 <label class="form-check-label" for="employer">Employer</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="type" id="admin" value="admin" onclick="toggleOptions();">
+                                <input class="form-check-input" type="radio" name="type" id="admin" value="admin" onclick="toggleAddUser();">
                                 <label class="form-check-label" for="admin">Admin</label>
                             </div>
-
-                            <div class="form-floating mb-3" id="admin-form" style="display:none;">
-                                <input type="text" class="form-control" id="admin-form-position" name="position">
-                                <label for="admin-form-position">Position</label>
+                            
+                            <div class="form-floating mb-3" id="job-seeker-form">
+                                <select class="form-select mb-3" aria-label=".form-select-lg example" id="job-seeker-form-field" name="field">
+                                    <option disabled selected>--- Choose one ---</option>
+                                </select>
+                                <label for="job-seeker-form-field">Field of Expertise</label>
                             </div>
                             <div class="form-floating mb-3" id="employer-form" style="display:none;">
-                                <input type="text" class="form-control" id="employer-form-rating" name="rating">
-                                <label for="employer-form-label">Rating</label>
+                                <input type="text" class="form-control" id="employer-form-position" name="positionEmp" placeholder="Position">
+                                <label for="employer-form-label">Position</label>
                             </div>
-                            <div id="job-seeker-form" style="display:none;">
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="job-seeker-form-exp" name="exp">
-                                    <label for="job-seeker-form-exp">Experience (How many years?)</label>
-                                </div>
-                                <div class="form-floating mb-3">
-                                    <input type="text" class="form-control" id="job-seeker-form-skill" name="skill">
-                                    <label for="job-seeker-form-skill">Skill</label>
-                                </div>
+                            <div class="form-floating mb-3" id="admin-form" style="display:none;">
+                                <input type="text" class="form-control" id="admin-form-position" name="positionAdmin" placeholder="Position">
+                                <label for="admin-form-position">Position</label>
                             </div>
-
-                            <script type="text/javascript">
-                                function toggleOptions() {
-                                    if (document.getElementById('admin').checked) {
-                                        document.getElementById('admin-form').style.display = '';
-                                        document.getElementById('employer-form').style.display = 'none';
-                                        document.getElementById('job-seeker-form').style.display = 'none';
-                                    } else if (document.getElementById('employer').checked) {
-                                        document.getElementById('admin-form').style.display = 'none';
-                                        document.getElementById('employer-form').style.display = '';
-                                        document.getElementById('job-seeker-form').style.display = 'none';
-                                    } else if (document.getElementById('job-seeker').checked) {
-                                        document.getElementById('admin-form').style.display = 'none';
-                                        document.getElementById('employer-form').style.display = 'none';
-                                        document.getElementById('job-seeker-form').style.display = '';
-                                    }
-                                }
-                            </script>
 
                             <p class="mt-5 mb-2" style="color: red;">
                                 <?php
@@ -141,7 +119,7 @@ if(isset($_POST['register'])){
                                 if (isset($_GET["error"])) {
                                     if ($_GET["error"] == "emptyinput") {
                                         echo "Fill in all fields!";
-                                    } else if ($_GET["error"] == "invaliduid") {
+                                    } else if ($_GET["error"] == "invalidusername") {
                                         echo "Choose a proper username!";
                                     } else if ($_GET["error"] == "invalidemail") {
                                         echo "Choose a proper email!";
@@ -151,13 +129,22 @@ if(isset($_POST['register'])){
                                         echo "Something went wrong!";
                                     } else if ($_GET["error"] == "usernametaken") {
                                         echo "Username already taken!";
-                                    } else if ($_GET["error"] == "none") {
-                                        echo "You have signed up!";
+                                    } else if ($_GET["error"] == "fieldnull") {
+                                        echo "You have to choose a field of expertise";
+                                    } else if ($_GET["error"] == "positionnull") {
+                                        echo "You have to enter a position";
                                     }
                                 }
                                 ?>
                             </p>
-                            <button class="w-50 btn btn-lg btn-primary mb-5 mt-2" type="submit" name="register">Add User</button>
+                            <div class="row mb-5 mt-2">
+                                <div class="col">
+                                    <a style="text-decoration : none" class="w-100 btn btn-lg btn-secondary" href="admin_index.php">Cancel</a>
+                                </div>
+                                <div class="col">
+                                    <button class="w-100 btn btn-lg btn-primary" type="submit" name="register">Add</button>
+                                </div>
+                            </div>
                         </form>
 
                         
@@ -174,7 +161,7 @@ if(isset($_POST['register'])){
 
     <!-- footer start -->
     <?php
-        include("component/footer.php");
+        require_once("component/footer.php");
     ?>
     <!-- end of footer -->
 

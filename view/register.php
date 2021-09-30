@@ -1,6 +1,6 @@
 <?php
 if(isset($_POST['register'])){
-    include '../controller/register_controller.php';
+    require_once '../controller/register_controller.php';
     $registerController = new RegisterController();
 
     $firstName = $_POST['firstName'];
@@ -12,11 +12,10 @@ if(isset($_POST['register'])){
     $phone = $_POST['phone'];
     $email = $_POST['email'];
     $type = $_POST['type'];
-    $rating = $_POST['rating'];
-    $exp = $_POST['exp'];
-    $skill = $_POST['skill'];
+    $field = $_POST['field'];
+    $position = $_POST['position'];
     
-    $registerController->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $rating, $exp, $skill);
+    $registerController->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $field, $position);
   }
 ?>
 <!DOCTYPE html>
@@ -26,7 +25,7 @@ if(isset($_POST['register'])){
     <!-- Webpage Title -->
     <title>JobMatch | Register</title>
     <?php
-        include("component/header.php");
+        require_once("component/header.php");
     ?>
 </head>
 
@@ -34,7 +33,7 @@ if(isset($_POST['register'])){
 
     <!-- Navigation Start  -->
     <?php
-        include("component/navbar.php");
+        require_once("component/navbar.php");
     ?>
     <!-- Navigation End  -->
 
@@ -82,40 +81,28 @@ if(isset($_POST['register'])){
                             <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email">
                             <label for="floatingInput">Email</label>
                         </div>
+
+
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type" id="inlineRadio1" value="jobseeker" checked>
-                            <label class="form-check-label" for="inlineRadio1">Job Seeker</label>
+                            <input class="form-check-input" type="radio" name="type" id="job-seeker" value="jobseeker" onclick="toggleRegister();" checked>
+                            <label class="form-check-label" for="job-seeker">Job Seeker</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type" id="inlineRadio2" value="employer">
-                            <label class="form-check-label" for="inlineRadio2">Employer</label>
+                            <input class="form-check-input" type="radio" name="type" id="employer" value="employer" onclick="toggleRegister();">
+                            <label class="form-check-label" for="employer">Employer</label>
+                        </div>
+                        <div class="form-floating mb-3" id="job-seeker-form">
+                            <select class="form-select mb-3" aria-label=".form-select-lg example" id="job-seeker-form-field" name="field">
+                                <option disabled selected>--- Choose one ---</option>
+                            </select>
+                            <label for="job-seeker-form-field">Field of Expertise</label>
                         </div>
                         <div class="form-floating mb-3" id="employer-form" style="display:none;">
-                            <input type="text" class="form-control" id="employer-form-rating" name="rating">
-                            <label for="employer-form-label">Rating</label>
-                        </div>
-                        <div id="job-seeker-form" style="display:none;">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="job-seeker-form-exp" name="exp">
-                                <label for="job-seeker-form-exp">Experience (How many years?)</label>
-                            </div>
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="job-seeker-form-skill" name="skill">
-                                <label for="job-seeker-form-skill">Skill</label>
-                            </div>
+                            <input type="text" class="form-control" id="employer-form-rating" name="position" placeholder="Position">
+                            <label for="employer-form-label">Position</label>
                         </div>
 
-                        <script type="text/javascript">
-                            function toggleOptions() {
-                                if (document.getElementById('employer').checked) {
-                                    document.getElementById('employer-form').style.display = '';
-                                    document.getElementById('job-seeker-form').style.display = 'none';
-                                } else if (document.getElementById('job-seeker').checked) {
-                                    document.getElementById('employer-form').style.display = 'none';
-                                    document.getElementById('job-seeker-form').style.display = '';
-                                }
-                            }
-                        </script>
+                        
 
                         <p class="mt-5 mb-2" style="color: red;">
                             <?php
@@ -123,7 +110,7 @@ if(isset($_POST['register'])){
                             if (isset($_GET["error"])) {
                                 if ($_GET["error"] == "emptyinput") {
                                     echo "Fill in all required fields!";
-                                } else if ($_GET["error"] == "invaliduid") {
+                                } else if ($_GET["error"] == "invalidusername") {
                                     echo "Enter a valid username!";
                                 } else if ($_GET["error"] == "invalidemail") {
                                     echo "Enter a valid email!";
@@ -133,8 +120,10 @@ if(isset($_POST['register'])){
                                     echo "Something went wrong. Please try again!";
                                 } else if ($_GET["error"] == "usernametaken") {
                                     echo "Username is already taken!";
-                                } else if ($_GET["error"] == "none") {
-                                    echo "You have successfully registered!";
+                                } else if ($_GET["error"] == "fieldnull") {
+                                    echo "You have to choose a field of expertise";
+                                } else if ($_GET["error"] == "positionnull") {
+                                    echo "You have to enter your position";
                                 }
                             }
                             ?>
@@ -156,7 +145,7 @@ if(isset($_POST['register'])){
 
     <!-- footer start -->
     <?php
-        include("component/footer.php");
+        require_once("component/footer.php");
     ?>
     <!-- end of footer -->
 

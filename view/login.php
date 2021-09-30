@@ -1,6 +1,6 @@
 <?php
 if (isset($_POST['login'])) {
-    include '../controller/login_controller.php';
+    require_once '../controller/login_controller.php';
     $loginController = new LoginController();
 
     $username = $_POST['username'];
@@ -15,7 +15,7 @@ if (isset($_POST['login'])) {
     <!-- Webpage Title -->
     <title>JobMatch | Login</title>
     <?php
-        include("component/header.php");
+        require_once("component/header.php");
     ?>
 </head>
 
@@ -23,7 +23,7 @@ if (isset($_POST['login'])) {
 
     <!-- Navigation Start  -->
     <?php
-        include("component/navbar.php");
+        require_once("component/navbar.php");
     ?>
     <!-- Navigation End  -->
 
@@ -79,7 +79,7 @@ if (isset($_POST['login'])) {
                                 </label>
                             </div>
                             <button class="w-50 btn btn-lg btn-primary mb-5 mt-2" type="submit" name="login">Log In</button>
-                            <p class="mb-3">New user?</br><a href="register.php">Create an account!</a></p>
+                            <p class="mb-3">New user?</br><a href="register.php">Create an account</a></p>
                         </form>
                     </main>
                 </div>
@@ -94,7 +94,7 @@ if (isset($_POST['login'])) {
 
     <!-- footer start -->
     <?php
-        include("component/footer.php");
+        require_once("component/footer.php");
     ?>
     <!-- end of footer -->
 

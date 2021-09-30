@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 23, 2021 at 02:34 PM
+-- Generation Time: Sep 27, 2021 at 04:00 AM
 -- Server version: 10.4.20-MariaDB
 -- PHP Version: 8.0.9
 
@@ -20,8 +20,10 @@ SET time_zone = "+00:00";
 --
 -- Database: `jobmatch`
 --
-drop database if exists jobmatch;
-create database jobmatch;
+
+DROP DATABASE IF EXISTS jobmatch;
+CREATE DATABASE jobmatch;
+
 -- --------------------------------------------------------
 
 --
@@ -37,15 +39,9 @@ CREATE TABLE `admin` (
   `dateOfBirth` date NOT NULL,
   `phone` int(11) NOT NULL,
   `email` text NOT NULL,
-  `position` text NOT NULL
+  `position` text NOT NULL,
+  `image` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `admin`
---
-
-INSERT INTO `admin` (`id`, `firstName`, `lastName`, `username`, `password`, `dateOfBirth`, `phone`, `email`, `position`) VALUES
-(1, 'awd', 'awd', 'student', 'mmst12009', '0000-00-00', 0, 'awd', 'awd');
 
 -- --------------------------------------------------------
 
@@ -62,7 +58,9 @@ CREATE TABLE `employer` (
   `dateOfBirth` date NOT NULL,
   `phone` int(11) NOT NULL,
   `email` text NOT NULL,
-  `rating` int(11) NOT NULL
+  `position` text NOT NULL,
+  `rating` int(11) NOT NULL,
+  `image` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -90,7 +88,7 @@ CREATE TABLE `jobpost` (
   `title` text NOT NULL,
   `description` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `owner` text NOT NULL,
+  `employer` text NOT NULL,
   `contact` int(11) NOT NULL,
   `salary` int(11) NOT NULL,
   `requirements` text NOT NULL
@@ -111,8 +109,8 @@ CREATE TABLE `jobseeker` (
   `dateOfBirth` date NOT NULL,
   `phone` int(11) NOT NULL,
   `email` text NOT NULL,
-  `experience` int(11) NOT NULL,
-  `skill` text NOT NULL
+  `experience` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`experience`)),
+  `Image` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -157,7 +155,7 @@ ALTER TABLE `jobseeker`
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `employer`

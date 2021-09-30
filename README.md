@@ -15,24 +15,44 @@
     xampp/htdocs/
     ```
 2. Open XAMPP and Turn on both Apache and MySQL
+3. Go to `model/db_connection.php` and replace the content with this
+    ```
+    <?php
+        try {
+            $dbAddress = 'localhost';
+            $dbUser = 'root';
+            $dbPass = '';
+            $dbName = 'jobmatch';
 
-3. Time to config the database. On your browser, go to
+            if ($db = mysqli_connect($dbAddress, $dbUser, $dbPass, $dbName)) {
+                //do something
+            }else {
+                throw new Exception('Unable to connect');
+                exit;
+            }
+        }catch(Exception $e) {
+            echo $e->getMessage();
+        }
+    ?>
+    ```
+
+4. Time to config the database. On your browser, go to
     ```
     https://localhost/phpmyadmin
     ```
-4. Go to directory `mysql/jobmatch.sql`
+5. Go to directory `mysql/jobmatch.sql`
     ```
     Open and copy the script in the sql file
     ```
-5. On the `phpmyadmin` page
+6. On the `phpmyadmin` page
     ```
     Click on SQL, paste the script, and click 'Go'
     ```
-6. Now time to see the application. On your browser, go to 
+7. Now time to see the application. On your browser, go to 
     ```
     https://localhost/<project name>
     ```
-7. You should be able to see the app running
+8. You should be able to see the app running
 
 <p>&nbsp;</p>
 
@@ -44,23 +64,43 @@
     ```
     iampp/htdocs/
     ```
-3. Time to config the database. On your browser, go to
+3. Go to `model/db_connection.php` and replace the content with this
+    ```
+    <?php
+        try {
+            $dbAddress = 'localhost';
+            $dbUser = 'root';
+            $dbPass = '';
+            $dbName = 'jobmatch';
+
+            if ($db = mysqli_connect($dbAddress, $dbUser, $dbPass, $dbName)) {
+                //do something
+            }else {
+                throw new Exception('Unable to connect');
+                exit;
+            }
+        }catch(Exception $e) {
+            echo $e->getMessage();
+        }
+    ?>
+    ```
+4. On your browser, go to
     ```
     https://localhost:<port>/phpmyadmin
     ```
-4. Go to directory `mysql/jobmatch.sql`
+5. Go to directory `mysql/jobmatch.sql`
     ```
     Open and copy the script in the sql file
     ```
-5. On the `phpmyadmin` page
+6. On the `phpmyadmin` page
     ```
     Click on SQL, paste the script, and click 'Go'
     ```
-6. Now time to see the application. On your browser, go to
+7. Now time to see the application. On your browser, go to
     ```
     https://localhost:<port>/<project name>
     ```
-7. You should be able to see the app running
+8. You should be able to see the app running
 
 <p>&nbsp;</p>
 

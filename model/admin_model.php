@@ -1,71 +1,82 @@
 <?php
 class AdminModel{
+	public function registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position){
+		$query = "INSERT INTO employer (firstName, lastName, username, password, dateOfBirth, phone, email, position) 
+				VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$position')";
+		mysqli_query($db, $query);
+		$db->close();
+		header("location: ../view/admin_index.php?success=created");
+	}
 
-  public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $position, $rating, $exp, $skill){
-    require_once 'utility.php';
-    require_once 'db_connection.php';
-    if (emptyInputRegister($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type) !== false) {
-        header("location: ../view/addUser.php?error=emptyinput");
-        exit();
-    } elseif (invalidUsername($username) !== false) {                         // Proper username chosen
-        header("location: ../view/addUser.php?error=invaliduid");
-        exit();
-    } elseif (invalidEmail($email) !== false) {                     // Proper email chosen
-        header("location: ../view/addUser.php?error=invalidemail");
-        exit();
-    } elseif (passwordMatch($password, $confirmPassword) !== false) {               // Do the two passwords match?
-        header("location: ../view/addUser.php?error=passwordsdontmatch");
-        exit();
-    } else {
-      if($type == "employer"){
-        if (usernameExists($db, $username, $email, "employer") !== false) {              // Is the username taken already
-          header("location: ../view/addUser.php?error=usernametaken");
-          exit();
-        }else{
-          $this->registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $rating);
-        }
-      }elseif($type == "admin"){
-        if (usernameExists($db, $username, $email, "admin") !== false) {              // Is the username taken already
-          header("location: ../view/addUser.php?error=usernametaken");
-          exit();
-        }else{
-          $this->registerAdmin($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position);
-        }
-      }else{
-        if (usernameExists($db, $username, $email, "jobseeker") !== false) {              // Is the username taken already
-          header("location: ../view/addUser.php?error=usernametaken");
-          exit();
-        }else{
-          $this->registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $exp, $skill);
-        }
-      }
-    }
-  }
-  
+	public function registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $field){
+		$query = "INSERT INTO jobseeker (firstName, lastName, username, password, dateOfBirth, phone, email, field) 
+				VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$field')";
+		mysqli_query($db, $query);
+		$db->close();
+		header("location: ../view/admin_index.php?success=created");
+	}
 
-  function registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $rating){
-    $query = "INSERT INTO employer (firstName, lastName, username, password, dateOfBirth, phone, email, rating) 
-            VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$rating')";
-    mysqli_query($db, $query);
-    $db->close();
-    header("location: ../view/adminIndex.php?success=created");
-  }
+	public function registerAdmin($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position){
+		$query = "INSERT INTO admin (firstName, lastName, username, password, dateOfBirth, phone, email, position) 
+				VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$position')";
+		mysqli_query($db, $query);
+		$db->close();
+		header("location: ../view/admin_index.php?success=created");
+	}
 
-  function registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $exp, $skill){
-    $query = "INSERT INTO jobseeker (firstName, lastName, username, password, dateOfBirth, phone, email, experience, skill) 
-            VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$exp', '$skill')";
-    mysqli_query($db, $query);
-    $db->close();
-    header("location: ../view/adminIndex.php?success=created");
-  }
 
-  function registerAdmin($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position){
-    $query = "INSERT INTO employer (firstName, lastName, username, password, dateOfBirth, phone, email, position) 
-            VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$position')";
-    mysqli_query($db, $query);
-    $db->close();
-    header("location: ../view/adminIndex.php?success=created");
-  }
+	public function deleteJobSeeker($db, $username) {
+		$query = "DELETE FROM jobseeker WHERE username = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("s", $username);
+		$stmt->execute();
+
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			header("location: ../view/admin_index.php?success=deletedSeeker");
+		} else {
+			header("location: ../view/admin_index.php?error=errordelete");
+		}
+	}
+
+	public function deleteEmployer($db, $username){
+		$query = "DELETE FROM employer WHERE username = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("s", $username);
+		$stmt->execute();
+
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			header("location: ../view/admin_index.php?success=deletedEmployer");
+		} else {
+			header("location: ../view/admin_index.php?error=errordelete");
+		}
+	}
+
+	public function getAllJobSeeker(){
+
+		//return array of object
+	}
+
+	public function getAllEmployer(){
+
+		//return array of object
+	}
+
+	public function editJobSeeker($username){
+
+	}
+
+	public function editEmployer($username){
+
+	}
+
 }
   
 ?>

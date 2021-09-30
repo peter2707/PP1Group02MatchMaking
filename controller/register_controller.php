@@ -1,17 +1,17 @@
 <?php
 class RegisterController {
 
-    public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $rating, $exp, $skill){
-        include '../model/register_model.php';
-        include '../model/utility.php';
+    public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $field, $position){
+        require_once '../model/register_model.php';
+        require_once '../model/utility.php';
         require_once '../model/db_connection.php';
-		$registerModel = new RegisterModel();
+        $registerModel = new RegisterModel();
 
         if (emptyInputRegister($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type) !== false) {
             header("location: ../view/register.php?error=emptyinput");
             exit();
         } elseif (invalidUsername($username) !== false) {                         // Proper username chosen
-            header("location: ../view/register.php?error=invaliduid");
+            header("location: ../view/register.php?error=invalidusername");
             exit();
         } elseif (invalidEmail($email) !== false) {                     // Proper email chosen
             header("location: ../view/register.php?error=invalidemail");
@@ -21,21 +21,24 @@ class RegisterController {
             exit();
         } else {
             if($type == "employer"){
-              if (usernameExists($db, $username, $email, "employer") !== false) {              // Is the username taken already
+              if (!$position){
+                header("location: ../view/register.php?error=positionnull");
+              }elseif (usernameExists($db, $username, $email, "employer") !== false) {              // Is the username taken already
                 header("location: ../view/register.php?error=usernametaken");
                 exit();
               }else{
-                $registerModel->registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email);
+                $registerModel->registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position);
               }
             }else{
-              if (usernameExists($db, $username, $email, "jobseeker") !== false) {              // Is the username taken already
+              if (!$field){
+                header("location: ../view/register.php?error=fieldnull");
+              }elseif (usernameExists($db, $username, $email, "jobseeker") !== false) {              // Is the username taken already
                 header("location: ../view/register.php?error=usernametaken");
                 exit();
               }else{
-                $registerModel->registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email);
+                $registerModel->registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $field);
               }
             }
         }
     }
 }
-?>

@@ -5,7 +5,7 @@
     <!-- Webpage Title -->
     <title>JobMatch | Sign Up</title>
     <?php
-        include("component/header.php");
+        require_once("component/header.php");
     ?>
 </head>
 
@@ -13,7 +13,7 @@
 
     <!-- Navigation Start  -->
     <?php
-        include("component/navbar.php");
+        require_once("component/navbar.php");
     ?>
     <!-- Navigation End  -->
 
@@ -21,17 +21,11 @@
     <header id="ex-header" class="ex-header">
         <div class="container">
             <div class="row">
-                <a href="adminIndex.php" class="btn btn-success">Back to home</a>
-
                 <?php
                 require_once '../model/db_connection.php';
                 $id = $_GET['id'];
 
                 if (isset($_POST['submit'])) {
-                    $submit = $_POST['submit'];
-
-
-
                     $firstName = $_POST['firstName'];
                     $lastName = $_POST['lastName'];
                     $username = $_POST['username'];
@@ -40,12 +34,12 @@
                     $phone = $_POST['phone'];
                     $email = $_POST['email'];
                     $exp = $_POST['exp'];
-                    $skill = $_POST['skill'];
+                    $field = $_POST['field'];
 
-                    $query = "UPDATE jobseeker SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, experience=?, skill=? WHERE id = ?";
+                    $query = "UPDATE jobseeker SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, experience=?, field=? WHERE id = ?";
 
                     $stmt = $db->prepare($query);
-                    $stmt->bind_param("sssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $exp, $skill, $id);
+                    $stmt->bind_param("sssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $exp, $field, $id);
                     $stmt->execute();
 
                     $affectedRows = $stmt->affected_rows;
@@ -54,12 +48,12 @@
 
                     if ($affectedRows == 1) {
                         echo "Successfully Updated Job<br><br>";
-                        echo "<a href=\"adminIndex.php\" class=\"btn btn-success\">Back to Job List</a>";
+                        echo "<a href=\"admin_index.php\" class=\"btn btn-success\">Back to Job List</a>";
                         echo "<br><hr>";
                         exit;
                     } else {
                         echo "Failed to Updated Job<br><br>";
-                        echo "<a href=\"adminIndex.php\" class=\"btn btn-success\">Back to Job List</a>";
+                        echo "<a href=\"admin_index.php\" class=\"btn btn-success\">Back to Job List</a>";
                         echo "<br><hr>";
                         exit;
                     }
@@ -82,9 +76,9 @@
                     $phone = $row['phone'];
                     $email = $row['email'];
                     $exp = $row['experience'];
-                    $skill = $row['skill'];
+                    $field = $row['field'];
 
-                    echo <<<END
+echo <<<END
 				
 				<form action="" method="POST">
 					<table class=”table”>
@@ -122,14 +116,14 @@
                             <td scope="row"><input type="text" name="exp" value="$exp" required></td>
                         </tr>
                         <tr>
-                            <td scope="row">Skill:</td>
-                            <td scope="row"><input type="text" name="skill" value="$skill" required></td>
+                            <td scope="row">field:</td>
+                            <td scope="row"><input type="text" name="field" value="$field" required></td>
                         </tr>
 					</table>
 					<br>
 					<input type="hidden" name="id" value=$id>
 					<input type="submit" name="submit" value="Update">
-					<input type="button" value="Cancel" class="homebutton" id="btnHome" onClick="document.location.href='adminIndex.php'" />
+					<input type="button" value="Cancel" class="homebutton" id="btnHome" onClick="document.location.href='admin_index.php'" />
 				</form>
 END;
                     $result->free();
@@ -150,7 +144,7 @@ END;
 
     <!-- footer start -->
     <?php
-        include("component/footer.php");
+        require_once("component/footer.php");
     ?>
     <!-- end of footer -->
 
