@@ -8,7 +8,7 @@ if(isset($_POST['logout'])){
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
-require_once __DIR__.'/../../controller/session_controller.php';
+require_once '../controller/session_controller.php';
 
 $sessionController = new SessionController();
 $validSession = $sessionController->checkSession();

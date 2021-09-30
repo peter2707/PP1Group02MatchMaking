@@ -46,6 +46,8 @@ if (isset($_POST['login'])) {
                                 echo "Something went wrong. Please try again!";
                             } else if ($_GET["error"] == "incorrect") {
                                 echo "Incorrect password or email. Please try again!";
+                            } else if ($_GET["error"] == "errordelete") {
+                                echo "There was a problem while deleting your account. Please try again!";
                             }
                         }
                         ?>
@@ -56,6 +58,10 @@ if (isset($_POST['login'])) {
                         if (isset($_GET["success"])) {
                             if ($_GET["success"] == "created") {
                                 echo "Your account has been successfully created.<br>Please log in to continue!";
+                            } elseif ($_GET["success"] == "accountdeleted") {
+                                echo "Your account has been deleted. Thank you for using our service :)";
+                            } elseif ($_GET["success"] == "logout") {
+                                echo "Successfully logged out.";
                             }
                         }
                         ?>

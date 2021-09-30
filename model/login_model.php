@@ -1,11 +1,11 @@
 <?php
-	class LoginModel{
+	class LoginModel {
 
-		public function login($username, $password){
+		public function login($username, $password) {
 			session_start();
 			require_once 'db_connection.php';
 
-			if($this->checkAdmin($db, $username, $password)){
+			if($this->checkAdmin($db, $username, $password)) {
 				$_SESSION['valid_user'] = $username;
 				$_SESSION['valid_pass'] = $password;
 				$_SESSION['user_type'] = "admin";
@@ -13,7 +13,7 @@
 				if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
 					header("Location: ../view/admin_index.php");
 				}
-			}elseif($this->checkEmployer($db, $username, $password)){
+			}elseif($this->checkEmployer($db, $username, $password)) {
 				$_SESSION['valid_user'] = $username;
 				$_SESSION['valid_pass'] = $password;
 				$_SESSION['user_type'] = "employer";
@@ -21,7 +21,7 @@
 				if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
 					header("Location: ../view/index.php");
 				}
-			}elseif($this->checkJobSeeker($db, $username, $password)){
+			}elseif($this->checkJobSeeker($db, $username, $password)) {
 				$_SESSION['valid_user'] = $username;
 				$_SESSION['valid_pass'] = $password;
 				$_SESSION['user_type'] = "jobseeker";
@@ -36,15 +36,15 @@
 			}
 		}
 
-		public function logOut(){
+		public function logOut() {
 			session_start();
 			unset($_SESSION["username"]);
 			unset($_SESSION["password"]);
 			session_destroy();
-			header('Refresh: 1; URL = ../view/index.php?logout=success');
+			header('location: ../view/login.php?success=logout');
 		}
 	
-		function checkAdmin($db, $username, $password){
+		function checkAdmin($db, $username, $password) {
 			$admin = false;
 			$query = "SELECT count(*) 
 					FROM admin
@@ -71,7 +71,7 @@
 			return $admin;
 		}
 	
-		function checkEmployer($db, $username, $password){
+		function checkEmployer($db, $username, $password) {
 			$employer = false;
 			$query = "SELECT count(*) 
 					FROM employer
@@ -98,7 +98,7 @@
 			return $employer;
 		}
 	
-		function checkJobSeeker($db, $username, $password){
+		function checkJobSeeker($db, $username, $password) {
 			$jobseeker = false;
 			$query = "SELECT count(*) 
 					FROM jobseeker

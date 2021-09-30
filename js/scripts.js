@@ -225,3 +225,42 @@ $.each(fieldOptions, function(val, text) {
         $('<option></option>').val(text).html(text)
     );
 });
+
+
+//allow edit in user profile
+$('.editbtn').click(function() {
+    var currentTD = $(this).parents('tr').find('td');
+    if ($(this).html() == 'Edit') {
+        currentTD = $(this).parents('tr').find($("td").not(":nth-child(1)"));
+        $.each(currentTD, function() {
+            $(this).prop('contenteditable', true).css({
+                'background': '#fff',
+                'color': '#000'
+
+            })
+        });
+    } else {
+        $.each(currentTD, function() {
+            $(this).prop('contenteditable', false).removeAttr("style");
+        });
+    }
+
+    $(this).html($(this).html() == 'Edit' ? 'Save' : 'Edit')
+    if ($(this).html() == 'Save') {
+        $(this).prop('contenteditable', false)
+    }
+
+});
+
+
+function cancel() {
+    var inputField = document.querySelectorAll("#first-name, #last-name, #email, #phone, #dob, #password");
+    for (var i = 0; i < inputField.length; i++) {
+        inputField[i].disabled = true;
+        inputField[i].style.border = "none";
+    }
+    document.getElementById("edit").style.display = '';
+    document.getElementById("delete").style.display = '';
+    document.getElementById("cancel").style.display = 'none';
+    document.getElementById("update").style.display = 'none';
+}

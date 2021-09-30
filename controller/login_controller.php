@@ -18,7 +18,6 @@ class LoginController{
 	public function logOut(){
 		require_once '../model/login_model.php';
 		$loginModel = new LoginModel();
-
 		$loginModel->logOut();
 	}
 	
