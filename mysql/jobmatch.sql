@@ -107,7 +107,10 @@ CREATE TABLE `jobpost` (
   `employer` text NOT NULL,
   `contact` int(11) NOT NULL,
   `salary` int(11) NOT NULL,
-  `requirements` text NOT NULL
+  `requirements` text NOT NULL,
+  `type` text NOT NULL,
+  `location` text NOT NULL,
+  `job` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------

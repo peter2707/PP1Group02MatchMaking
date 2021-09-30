@@ -35,7 +35,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                             <a class="nav-link" aria-current="page" href="index.php#header">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">Your Matches</a>
+                            <a class="nav-link" href="jobseeker_match.php">Your Matches</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="index.php#contact">Career Advices</a>

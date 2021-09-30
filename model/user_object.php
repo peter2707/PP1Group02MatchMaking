@@ -41,4 +41,12 @@ class Admin {
         $this->image = $image;
     }
 }
+
+class JobPost{
+    public $employer;
+    public $salary;
+    public $type;
+    public $location;
+    public $job;
+}
 ?> 
