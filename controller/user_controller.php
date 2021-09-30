@@ -27,5 +27,12 @@ class UserController {
         $userModel = new UserModel();
         $userModel->deleteAccount($db, $username, $type);
     }
+
+    public function changeProfilePicture($file, $username, $userType){
+        require_once '../model/db_connection.php';
+        require_once '../model/user_model.php';
+        $userModel = new UserModel();
+        $userModel->changeProfilePicture($db, $file, $username, $userType);
+    }
 }
 ?> 
