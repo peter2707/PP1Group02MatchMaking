@@ -1,21 +1,20 @@
 <?php
 if (isset($_POST['match'])) {
-    require_once '../controller/register_controller.php';
-    $registerController = new RegisterController();
+    require_once '../controller/matchmaking_controller.php';
+    $mmc = new MatchmakingController();
+    // require files
+    require_once '../controller/session_controller.php';
 
-    $firstName = $_POST['salary'];
-    $lastName = $_POST['job'];
-    $username = $_POST['location'];
-    $password = $_POST['type'];
-    $confirmPassword = $_POST['confirmPassword'];
-    $dateOfBirth = $_POST['dateOfBirth'];
-    $phone = $_POST['phone'];
-    $email = $_POST['email'];
+    // call controllers
+    $sc = new SessionController();
+    $sc->checkSession();
+
+    $salary = $_POST['salary'];
+    $job = $_POST['job'];
+    $location = $_POST['location'];
     $type = $_POST['type'];
-    $field = $_POST['field'];
-    $position = $_POST['position'];
 
-    $registerController->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $field, $position);
+    $mmc->compareParam($salary, $location, $type, $job, $sc->getUserName());
 }
 ?>
 
@@ -82,7 +81,34 @@ if (isset($_POST['match'])) {
     </div> <!-- end of ex-basic-1 -->
     <!-- end of basic -->
 
+    <?php
+    if (isset($_POST['match'])) {
+        // require_once("../controller/matchmaking_controller.php");
+        // require_once '../model/db_connection.php';
+        // $mmc = new MatchmakingController();
+        // $jobposts = array();
+        // $jobposts = $mmc->getAllMatches();
 
+        // require files
+        require_once '../controller/session_controller.php';
+        require_once '../controller/user_controller.php';
+
+        // call controllers
+        $sessionController = new SessionController();
+
+        echo "<p>$sessionController->getUserName() hello world</p>";
+
+        // foreach ($jobposts as $post) {
+        //     echo <<<END
+        //     <div class="container">
+        //         <div class="row">
+        //             <p>$post->job $post->salary $post->type $post->location</p>
+        //         </div>
+        //     </div>
+        // END;
+        // }
+    }
+    ?>
     <!-- footer start -->
     <?php
     require_once("component/footer.php");
