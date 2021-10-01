@@ -7,15 +7,6 @@
     <?php
         require_once("component/header.php");
     ?>
-    <!-- JS dependencies -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    <!-- Bootstrap 4 dependency -->
-    <script src="popper.min.js"></script>
-    <script src="bootstrap.min.js"></script>
-
-    <!-- bootbox code -->
-    <script src="bootbox.min.js"></script>
-    <script src="bootbox.locales.min.js"></script>
 </head>
 
 <body class="text-center">
