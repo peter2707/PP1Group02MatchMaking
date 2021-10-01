@@ -113,6 +113,13 @@ CREATE TABLE `jobpost` (
   `job` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+
+--
+-- Dumping data for table `jobpost`
+--
+INSERT INTO `jobpost` (`title`, `description`, `date`, `employer`, `contact`, `salary`, `requirements`, `type`, `location`, `job`) VALUES
+('Software Developer', 'Melbourne Based job', '2021-09-09', 'employer1', '012345', '1000', '2 years exp', 'fulltime', 'Melbourne', 'Dev');
+
 -- --------------------------------------------------------
 
 --
@@ -169,6 +176,9 @@ ALTER TABLE `jobmatch`
 ALTER TABLE `jobpost`
   ADD PRIMARY KEY (`id`);
 
+-- add foriegn key
+ALTER TABLE `jobmatch`
+  ADD CONSTRAINT jobmatch_jobpost_fk FOREIGN KEY (jobPost) REFERENCES jobpost(id);
 --
 -- Indexes for table `jobseeker`
 --

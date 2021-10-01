@@ -2,12 +2,16 @@
 if (isset($_POST['match'])) {
     require_once '../controller/matchmaking_controller.php';
     $mmc = new MatchmakingController();
+
     // require files
     require_once '../controller/session_controller.php';
+    // check if the session has not started yet
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
 
     // call controllers
     $sc = new SessionController();
-    $sc->checkSession();
 
     $salary = $_POST['salary'];
     $job = $_POST['job'];
@@ -83,30 +87,31 @@ if (isset($_POST['match'])) {
 
     <?php
     if (isset($_POST['match'])) {
-        // require_once("../controller/matchmaking_controller.php");
-        // require_once '../model/db_connection.php';
-        // $mmc = new MatchmakingController();
-        // $jobposts = array();
-        // $jobposts = $mmc->getAllMatches();
-
+        require_once("../controller/matchmaking_controller.php");
         // require files
         require_once '../controller/session_controller.php';
-        require_once '../controller/user_controller.php';
+        // check if the session has not started yet
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
 
         // call controllers
-        $sessionController = new SessionController();
+        $sc = new SessionController();
+        $mmc = new MatchmakingController();
+        $jobposts = array();
+        $jobposts = $mmc->getAllMatches($sc->getUserName());
 
-        echo "<p>$sessionController->getUserName() hello world</p>";
 
-        // foreach ($jobposts as $post) {
-        //     echo <<<END
-        //     <div class="container">
-        //         <div class="row">
-        //             <p>$post->job $post->salary $post->type $post->location</p>
-        //         </div>
-        //     </div>
-        // END;
-        // }
+
+        foreach ($jobposts as $post) {
+            echo <<<END
+            <div class="container">
+                <div class="row">
+                    <p>$post->employer $post->requirement $post->contact $post->description</p>
+                </div>
+            </div>
+        END;
+        }
     }
     ?>
     <!-- footer start -->

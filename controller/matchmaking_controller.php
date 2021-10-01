@@ -1,6 +1,18 @@
 <?php
 class MatchmakingController {
 
+    public function getAllMatches($user){
+        require_once '../model/matchmaking_model.php';
+        require_once '../model/user_object.php';
+        include '../model/db_connection.php';
+
+        $mmm = new MatchmakingModel();
+        $jobMatch = array();
+        $jobMatch = $mmm->getJobMatch($db, $user);
+
+        return $jobMatch;
+    }
+
     public function compareParam($salary, $location, $type, $job, $jobseeker){
         require_once '../model/matchmaking_model.php';
         require_once '../model/user_object.php';
@@ -8,7 +20,6 @@ class MatchmakingController {
         require_once '../controller/session_controller.php';
 
         $mmm = new MatchmakingModel();
-        $sc = new SessionController();
         $jobposts = array();
         $jobposts = $mmm->getJobPost($db);
         $feedback = "test";
@@ -24,17 +35,5 @@ class MatchmakingController {
     }
 
 
-    public function getAllMatches(){
-        require_once '../model/matchmaking_model.php';
-        require_once '../model/user_object.php';
-        require_once '../model/db_connection.php';
-        require_once '../controller/session_controller.php';
 
-        $mmm = new MatchmakingModel();
-        $sc = new SessionController();
-        $jobposts = array();
-        $jobposts = $mmm->getJobMatch($db, $sc->getUserName());
-
-        return $jobposts;
-    }
 }

@@ -49,4 +49,10 @@ class JobPost{
     public $location;
     public $job;
 }
+class JobMatch{
+    public $employer;
+    public $requirement;
+    public $contact;
+    public $description;
+}
 ?> 
