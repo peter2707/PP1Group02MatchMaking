@@ -1,6 +1,6 @@
 <?php
 class JobSeeker {
-    public function __construct($firstName, $lastName, $username, $password, $dob, $phone, $email, $field) {
+    public function __construct($firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $image) {
         $this->firstName = $firstName;
         $this->lastName = $lastName;
         $this->username = $username;
@@ -9,6 +9,7 @@ class JobSeeker {
         $this->phone = $phone;
         $this->email = $email;
         $this->field = $field;
+        $this->image = $image;
     }
     
 }

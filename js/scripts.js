@@ -224,6 +224,7 @@ $.each(fieldOptions, function(val, text) {
     fieldSelect.append(
         $('<option></option>').val(text).html(text)
     );
+
 });
 
 //show match div

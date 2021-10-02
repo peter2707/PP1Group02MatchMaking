@@ -17,7 +17,7 @@ class UserModel {
 		$db->close();
 
 		if($userType == "jobseeker"){
-			$jobseeker = new JobSeeker($row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field']);
+			$jobseeker = new JobSeeker($row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['Image']);
 			return $jobseeker;
 		}elseif($userType == "employer"){
 			$employer = new Employer($row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['rating'], $row['image']);
@@ -30,7 +30,6 @@ class UserModel {
 
 	public function updateJobSeeker($db, $firstName, $lastName, $password, $dob, $phone, $email, $field, $username) {
 		$query = "UPDATE jobseeker SET firstName=?, lastName=?, password=?, dateOfBirth=?, phone=?, email=?, field=? WHERE username = ?";
-
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("ssssisss", $firstName, $lastName, $password, $dob, $phone, $email, $field, $username);
 		$stmt->execute();
@@ -50,7 +49,6 @@ class UserModel {
 
 	public function updateEmployer($db, $firstName, $lastName, $password, $dob, $phone, $email, $position, $username) {
 		$query = "UPDATE employer SET firstName=?, lastName=?, password=?, dateOfBirth=?, phone=?, email=?, position=? WHERE username = ?";
-
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("ssssisss", $firstName, $lastName, $password, $dob, $phone, $email, $position, $username);
 		$stmt->execute();
@@ -90,4 +88,24 @@ class UserModel {
 			echo $script;
 		}
 	}
+
+	public function changeProfilePicture($db, $file, $username, $userType){
+		$query = "UPDATE $userType SET image=? WHERE username = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("ss", $file, $username);
+		$stmt->execute();
+
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			$script = "<script>window.location = '../view/user_profile.php?success=successupdate';</script>";
+			echo $script;
+		} else {
+			$script = "<script>window.location = '../view/user_profile.php?error=errorupdate';</script>";
+			echo $script;
+		}
+	}
+
 }

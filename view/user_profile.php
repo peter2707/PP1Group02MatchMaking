@@ -59,26 +59,80 @@
         
     }elseif (isset($_POST['delete'])) {
         $userController->deleteAccount($sessionController->getUserName(), $userType);
+    }elseif (isset($_POST['changeImage'])){
+        $input = $_FILES["image"]["tmp_name"];
+        if (file_exists($input)){
+            $file = file_get_contents($input);
+            $base64 = base64_encode($file);
+            $userController->changeProfilePicture($base64, $sessionController->getUserName(), $sessionController->getUserType());
+        }else{
+            $script = "<script>window.location = '../view/user_profile.php?error=imagenotfound';</script>";
+			echo $script;
+        }
+        
     }elseif ($validSession) {
         $user = $userController->getUserData($userType);
-
+        $userImage = $user->image;
+        if($user->image == NULL){
+            $defaultImage = file_get_contents("../images/user.png");
+            $userImage = base64_encode($defaultImage);
+        }
         if($userType == "jobseeker"){
         echo <<<END
             <!-- User Profile section start -->
             <header class="ex-header">
                 <div class="container">
+                <p style="color: red;">
+END;
+                if (isset($_GET["error"])) {
+                    if ($_GET["error"] == "emptyusername") {
+                        echo "You must enter a valid username!";
+                    } else if ($_GET["error"] == "emptypassword") {
+                        echo "You must enter a valid password!";
+                    } else if ($_GET["error"] == "failed") {
+                        echo "Something went wrong. Please try again!";
+                    } else if ($_GET["error"] == "imagenotfound") {
+                        echo "Please select an image.";
+                    } else if ($_GET["error"] == "errordelete") {
+                        echo "There was a problem while deleting your account. Please try again!";
+                    }
+                }
+echo <<<END
+                </p>
                     <div class="main-body">
                         <div class="row gutters-sm">
                             <div class="col-md-4 mb-3">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-flex flex-column align-items-center text-center">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="User" class="rounded-circle" width="150">
+                                            <img src="data:image/png;base64, $userImage" alt="User" class="rounded-circle" width="150" height="150">
                                             <div class="mt-3">
                                                 <h4>$user->firstName $user->lastName</h4>
-                                                <p class="text-secondary mb-1">$user->field </p>
-                                                <button class="btn btn-primary">Follow</button>
-                                                <button class="btn btn-outline-primary">Message</button>
+                                                <p class="text-secondary">$user->field </p>
+                                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">Change Picture</button>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="profileModalLabel">Change profile picture</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <form method="POST" enctype="multipart/form-data">
+                                                                <div class="modal-body">
+                                                                    <small id="message">Choose an image</small>
+                                                                    <input type="file" class="form-control" id="image" name="image"/>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" name="changeImage" class="btn btn-primary">Save changes</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
                                             </div>
                                         </div>
                                     </div>
@@ -179,7 +233,7 @@
                                                 </div>
                                                 <div class="col-sm-7 text-secondary text-start">
                                                     <select class="form-select" aria-label=".form-select-lg example" id="job-seeker-form-field" name="field">
-                                                        <option disabled selected value="$user->field">$user->field</option>
+                                                        <option readonly selected value="$user->field">$user->field</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -189,7 +243,7 @@
                                                     <h6 class="mt-2 ms-5">Username</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="text" class="form-control" id="username" name="username" value="$user->username" disabled/>
+                                                    <input type="text" class="form-control" id="username" name="username" value="$user->username" readonly/>
                                                 </div>
                                             </div>
                                             <hr>
@@ -204,8 +258,8 @@
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <button class="btn btn-secondary" id="update" type="submit" name="update">Update</button>
-                                                    <button class="btn btn-danger" id="delete" type="submit" name="delete">Delete Account</button>
+                                                    <button class="btn btn-secondary" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update">Update</button>
+                                                    <button class="btn btn-danger" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete">Delete Account</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -230,18 +284,57 @@
             <!-- User Profile section start -->
             <header class="ex-header">
                 <div class="container">
+                <p style="color: red;">
+END;
+                if (isset($_GET["error"])) {
+                    if ($_GET["error"] == "emptyusername") {
+                        echo "You must enter a valid username!";
+                    } else if ($_GET["error"] == "emptypassword") {
+                        echo "You must enter a valid password!";
+                    } else if ($_GET["error"] == "failed") {
+                        echo "Something went wrong. Please try again!";
+                    } else if ($_GET["error"] == "imagenotfound") {
+                        echo "Please select an image.";
+                    } else if ($_GET["error"] == "errordelete") {
+                        echo "There was a problem while deleting your account. Please try again!";
+                    }
+                }
+echo <<<END
+                    </p>
                     <div class="main-body">
                         <div class="row gutters-sm">
                             <div class="col-md-4 mb-3">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="d-flex flex-column align-items-center text-center">
-                                            <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
+                                            <img src="data:image/png;base64, $userImage" alt="Admin" class="rounded-circle" width="150" height="150">
+
                                             <div class="mt-3">
                                                 <h4>$user->firstName $user->lastName</h4>
-                                                <p class="text-secondary mb-1">$user->position </p>
-                                                <button class="btn btn-primary">Follow</button>
-                                                <button class="btn btn-outline-primary">Message</button>
+                                                <p class="text-secondary">$user->position </p>
+                                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">Change Picture</button>
+
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="profileModalLabel">Change profile picture</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <form method="POST" enctype="multipart/form-data">
+                                                                <div class="modal-body">
+                                                                    <small id="message">Choose an image</small>
+                                                                    <input type="file" class="form-control" id="image" name="image"/>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" name="changeImage" class="btn btn-primary">Save changes</button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -341,7 +434,7 @@
                                                     <h6 class="mt-2 ms-5">Username</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary text-start ">
-                                                    <input type="text" class="form-control" id="username" name="username" value="$user->username" disabled/>
+                                                    <input type="text" class="form-control" id="username" name="username" value="$user->username" readonly/>
                                                 </div>
                                             </div>
                                             <hr>
@@ -365,8 +458,8 @@
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <button class="btn btn-secondary" id="update" type="submit" name="update">Update</button>
-                                                    <button class="btn btn-danger" id="delete" type="submit" name="delete">Delete Account</button>
+                                                    <button class="btn btn-secondary" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update">Update</button>
+                                                    <button class="btn btn-danger" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete">Delete Account</button>
                                                 </div>
                                             </div>
                                         </form>
