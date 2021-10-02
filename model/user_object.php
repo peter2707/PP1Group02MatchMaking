@@ -42,4 +42,5 @@ class Admin {
         $this->image = $image;
     }
 }
+
 ?> 
