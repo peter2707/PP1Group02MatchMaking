@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2021 at 12:14 PM
+-- Generation Time: Oct 02, 2021 at 03:33 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -20,10 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `jobmatch`
 --
-
 DROP DATABASE IF EXISTS jobmatch;
 CREATE DATABASE jobmatch;
-
 -- --------------------------------------------------------
 
 --
@@ -48,9 +46,7 @@ CREATE TABLE `admin` (
 --
 
 INSERT INTO `admin` (`id`, `firstName`, `lastName`, `username`, `password`, `dateOfBirth`, `phone`, `email`, `position`, `image`) VALUES
-(1, 'admin', 'admin', 'admin', 'admin', '2021-09-14', 123123, 'admin@gmail.com', 'admin', NULL),
-(2, 'ddd', 'ddd', 'ddd', 'ddd', '2021-09-10', 123123, 'ddd@gmail.com', 'ad', NULL),
-(3, 'ccc', 'ccc', 'ccc', 'ccc', '2021-09-23', 123123, 'ccc@gmail.com', 'ccc', NULL);
+(1, 'admin', 'admin', 'admin', 'admin', '2021-09-14', 123123, 'admin@gmail.com', 'admin', NULL);
 
 -- --------------------------------------------------------
 
@@ -100,13 +96,7 @@ CREATE TABLE `jobmatch` (
 --
 
 INSERT INTO `jobmatch` (`id`, `employer`, `jobSeeker`, `jobPostID`, `percentage`, `status`, `feedback`) VALUES
-(3, 'employer1', 'ggg', 0, 25, NULL, NULL),
-(4, 'www', 'ggg', 1, 25, NULL, NULL),
-(5, 'www', 'ggg', 1, 25, NULL, NULL),
-(6, 'employer1', 'ggg', 0, 25, NULL, NULL),
-(7, 'www', 'ggg', 1, 25, NULL, NULL),
-(8, 'employer1', 'ggg', 0, 25, NULL, NULL),
-(9, 'www', 'ggg', 1, 25, NULL, NULL);
+(6, 'www', 'ggg', 3, 25, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -117,7 +107,7 @@ INSERT INTO `jobmatch` (`id`, `employer`, `jobSeeker`, `jobPostID`, `percentage`
 CREATE TABLE `jobpost` (
   `id` int(11) NOT NULL,
   `position` text NOT NULL,
-  `salary` int(11) NOT NULL,
+  `salary` text NOT NULL,
   `type` text NOT NULL,
   `description` text NOT NULL,
   `requirements` text NOT NULL,
@@ -132,8 +122,9 @@ CREATE TABLE `jobpost` (
 --
 
 INSERT INTO `jobpost` (`id`, `position`, `salary`, `type`, `description`, `requirements`, `location`, `employer`, `contact`, `date`) VALUES
-(0, 'Dev', 1000, 'fulltime', 'Melbourne Based job', '2 years exp', 'Melbourne', 'employer1', 12345, '2021-09-09 00:00:00'),
-(1, 'test', 25, 'fulltime', 'ggg', 'dsfds', 'nsw', 'www', 123123, '2021-10-20 03:02:04');
+(1, 'Accountant', '25-30', 'casual', 'test', 'teset', 'nt', 'www', 123123, '2021-10-02 12:59:38'),
+(2, 'IT', '30-35', 'partime', 'ert', 'ert', 'nsw', 'www', 123123, '2021-10-02 13:00:03'),
+(3, 'test', '40-45', 'fulltime', 'awdawd', 'awdawd', 'vic', 'www', 123123, '2021-10-02 13:00:20');
 
 -- --------------------------------------------------------
 
@@ -160,7 +151,6 @@ CREATE TABLE `jobseeker` (
 --
 
 INSERT INTO `jobseeker` (`id`, `firstName`, `lastName`, `username`, `password`, `dateOfBirth`, `phone`, `email`, `field`, `experience`, `Image`) VALUES
-(12, 'see', 'see', 'see', 'see', '2021-09-17', 123123, 'see@gmail.com', 'Education & Training', NULL, NULL),
 (17, 'ggg', 'ggg', 'ggg', 'ggg', '2021-09-15', 123123, 'ggg@gmail.com', 'Consulting', NULL, NULL);
 
 --
@@ -217,13 +207,13 @@ ALTER TABLE `employer`
 -- AUTO_INCREMENT for table `jobmatch`
 --
 ALTER TABLE `jobmatch`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `jobpost`
 --
 ALTER TABLE `jobpost`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `jobseeker`

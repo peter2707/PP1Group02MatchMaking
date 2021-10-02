@@ -40,17 +40,45 @@ if (isset($_POST['match'])) {
     <header class="ex-header">
         <div class="container">
             <div class="row">
-                <form method="POST">
+                <p style="color: red;">
+                    <?php
+                    // Error messages
+                    if (isset($_GET["error"])) {
+                        if ($_GET["error"] == "emptyinput") {
+                            echo "Please complete all required columns!";
+                        }elseif($_GET["error"] == "nomatch"){
+                            echo "There are no match found at the moment :(<br>Hint: Try searching for a different position!";
+                        }
+                    }
+                    ?>
+                </p>
+                <p style="color: #4BB543;">
+                    <?php
+                    // Account created message
+                    if (isset($_GET["success"])) {
+                        if ($_GET["success"] == "posted") {
+                            echo "You have posted a new job! You can view it in the table below.";
+                        }
+                    }
+                    ?>
+                </p>
+                <div class="col-8 text-start">
+                    <h1>Your Matches</h1>
+                </div>
+                <div class="col-4 text-end">
+                    <button id="findMatchBtn" class="btn btn-primary btn-lg" type="submit" onclick="showFindMatchForm()">Find Match</button>
+                </div>
+                <form method="POST" id="jobmatch">
                     <div class="row">
                         <div class="col-sm-3">
-                            <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="positionInput" placeholder="Position" name="position">
+                            <div class="form-floating">
+                                <input disabled type="text" class="form-control" id="positionInput" placeholder="Position" name="position">
                                 <label for="positionInput">Position</label>
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <div class="form-floating mb-3">
-                                <select class="form-select mb-3" aria-label=".form-select-lg example" id="match-salary-field" name="salary">
+                            <div class="form-floating">
+                                <select disabled class="form-select" aria-label=".form-select-lg example" id="match-salary-field" name="salary">
                                     <option selected>Choose...</option>
                                     <option value="25-30">$25-$30/hr</option>
                                     <option value="30-35">$30-$35/hr</option>
@@ -65,8 +93,8 @@ if (isset($_POST['match'])) {
                             </div>
                         </div>
                         <div class="col-sm-3">
-                            <div class="form-floating mb-3">
-                                <select class="form-select mb-3" aria-label=".form-select-lg example" id="match-location-field" name="location">
+                            <div class="form-floating">
+                                <select disabled class="form-select" aria-label=".form-select-lg example" id="match-location-field" name="location">
                                     <option selected>Choose...</option>
                                     <option value="nsw">New South Wales</option>
                                     <option value="qld">Queensland</option>
@@ -81,8 +109,8 @@ if (isset($_POST['match'])) {
                             </div>
                         </div>
                         <div class="col-sm-2">
-                            <div class="form-floating mb-3">
-                                <select class="form-select mb-3" aria-label=".form-select-lg example" id="job-type-field" name="type">
+                            <div class="form-floating">
+                                <select disabled class="form-select" aria-label=".form-select-lg example" id="job-type-field" name="type">
                                     <option selected>Choose...</option>
                                     <option value="fulltime">Full time</option>
                                     <option value="partime">Part time</option>
@@ -92,7 +120,7 @@ if (isset($_POST['match'])) {
                                 <label for="job-type-field">Job Type</label>
                             </div>
                         </div>
-                        <div class="col-sm-2"><button class="btn btn-success btn-lg mt-1 w-100 fw-bolder" type="submit" id="matchBtn" name="match">Match</button></div>
+                        <div class="col-sm-2"><button disabled class="btn btn-success btn-lg mt-1 w-100 fw-bolder" type="submit" id="matchBtn" name="match">Find</button></div>
 
                     </div>
                 </form>
@@ -104,9 +132,6 @@ if (isset($_POST['match'])) {
 
 
     <div class="col-md-6 offset-md-3 mt-5 mb-5" style="min-height: 200px;">
-        <div class="col-8 text-start mb-5">
-            <h1>Your Matches</h1>
-        </div>
         <?php
         require_once '../controller/matchmaking_controller.php';
         require_once '../controller/session_controller.php';
@@ -141,7 +166,6 @@ if (isset($_POST['match'])) {
             echo "            </thead>";
             echo "            <tbody>";
         foreach ($jobposts as $post) {
-
             echo "                <tr>";
             echo "                    <td scope='row'>$post->position</td>";
             echo "                    <td scope='row'>$post->salary</td>";

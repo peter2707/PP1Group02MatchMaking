@@ -91,7 +91,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                         <a class="nav-link" aria-current="page" href="index.php#header">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Your Posts</a>
+                        <a class="nav-link" href="employer_post.php">Your Posts</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Hiring Advices</a>

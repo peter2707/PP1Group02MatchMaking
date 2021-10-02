@@ -225,3 +225,52 @@ $.each(fieldOptions, function(val, text) {
         $('<option></option>').val(text).html(text)
     );
 });
+
+//show match div
+function showFindMatchForm() {
+    var jobmatch = document.getElementById("jobmatch");
+    if (jobmatch.classList.contains('h-show')) {
+        jobmatch.classList.remove('h-show');
+        document.getElementById("findMatchBtn").innerText = "Find Match";
+        document.getElementById("positionInput").disabled = true;
+        document.getElementById("match-salary-field").disabled = true;
+        document.getElementById("match-location-field").disabled = true;
+        document.getElementById("job-type-field").disabled = true;
+        document.getElementById("matchBtn").disabled = true;
+    } else {
+        jobmatch.classList.add('h-show');
+        document.getElementById("findMatchBtn").innerHTML = "<i class='fa fa-chevron-up' aria-hidden='true'></i>";
+        document.getElementById("positionInput").disabled = false;
+        document.getElementById("match-salary-field").disabled = false;
+        document.getElementById("match-location-field").disabled = false;
+        document.getElementById("job-type-field").disabled = false;
+        document.getElementById("matchBtn").disabled = false;
+    }
+}
+
+function showNewPostForm() {
+    var newpost = document.getElementById("newpost");
+    if (newpost.classList.contains('h-show')) {
+        newpost.classList.remove('h-show');
+        document.getElementById("newPostBtn").innerText = "New Post";
+        document.getElementById("positionInput").disabled = true;
+        document.getElementById("descriptionTextArea").disabled = true;
+        document.getElementById("requirementsTextArea").disabled = true;
+        document.getElementById("contactInput").disabled = true;
+        document.getElementById("match-salary-field").disabled = true;
+        document.getElementById("match-location-field").disabled = true;
+        document.getElementById("job-type-field").disabled = true;
+        document.getElementById("postBtn").disabled = true;
+    } else {
+        newpost.classList.add('h-show');
+        document.getElementById("newPostBtn").innerHTML = "<i class='fa fa-chevron-up' aria-hidden='true'></i>";
+        document.getElementById("positionInput").disabled = false;
+        document.getElementById("match-salary-field").disabled = false;
+        document.getElementById("match-location-field").disabled = false;
+        document.getElementById("job-type-field").disabled = false;
+        document.getElementById("postBtn").disabled = false;
+        document.getElementById("descriptionTextArea").disabled = false;
+        document.getElementById("requirementsTextArea").disabled = false;
+        document.getElementById("contactInput").disabled = false;
+    }
+}

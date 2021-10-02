@@ -10,10 +10,25 @@ class JobPost{
     }
 }
 
+class EmpJobPost{
+    public function __construct($id, $position, $salary, $type, $description, $requirement, $location, $contact, $matches) {
+        $this->id = $id;
+        $this->position = $position;
+        $this->salary = $salary;
+        $this->type = $type;
+        $this->description = $description;
+        $this->requirements = $requirement;
+        $this->location = $location;
+        $this->contact = $contact;
+        $this->matches = $matches;
+    }
+}
+
 class JobMatch{
-    public function __construct($id, $employer, $position, $salary, $type, $description, $requirement, $location, $percentage) {
+    public function __construct($id, $employer, $contact, $position, $salary, $type, $description, $requirement, $location, $percentage) {
         $this->id = $id;
         $this->employer = $employer;
+        $this->contact = $contact;
         $this->position = $position;
         $this->salary = $salary;
         $this->type = $type;
