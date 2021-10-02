@@ -42,17 +42,4 @@ class Admin {
     }
 }
 
-class JobPost{
-    public $employer;
-    public $salary;
-    public $type;
-    public $location;
-    public $job;
-}
-class JobMatch{
-    public $employer;
-    public $requirement;
-    public $contact;
-    public $description;
-}
 ?> 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 30, 2021 at 10:24 AM
+-- Generation Time: Oct 02, 2021 at 12:14 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -89,9 +89,24 @@ CREATE TABLE `jobmatch` (
   `id` int(11) NOT NULL,
   `employer` text NOT NULL,
   `jobSeeker` text NOT NULL,
-  `jobPost` int(11) NOT NULL,
-  `feedback` text NOT NULL
+  `jobPostID` int(11) NOT NULL,
+  `percentage` int(11) NOT NULL,
+  `status` text DEFAULT NULL,
+  `feedback` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `jobmatch`
+--
+
+INSERT INTO `jobmatch` (`id`, `employer`, `jobSeeker`, `jobPostID`, `percentage`, `status`, `feedback`) VALUES
+(3, 'employer1', 'ggg', 0, 25, NULL, NULL),
+(4, 'www', 'ggg', 1, 25, NULL, NULL),
+(5, 'www', 'ggg', 1, 25, NULL, NULL),
+(6, 'employer1', 'ggg', 0, 25, NULL, NULL),
+(7, 'www', 'ggg', 1, 25, NULL, NULL),
+(8, 'employer1', 'ggg', 0, 25, NULL, NULL),
+(9, 'www', 'ggg', 1, 25, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -101,24 +116,24 @@ CREATE TABLE `jobmatch` (
 
 CREATE TABLE `jobpost` (
   `id` int(11) NOT NULL,
-  `title` text NOT NULL,
+  `position` text NOT NULL,
+  `salary` int(11) NOT NULL,
+  `type` text NOT NULL,
   `description` text NOT NULL,
-  `date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `requirements` text NOT NULL,
+  `location` text NOT NULL,
   `employer` text NOT NULL,
   `contact` int(11) NOT NULL,
-  `salary` int(11) NOT NULL,
-  `requirements` text NOT NULL,
-  `type` text NOT NULL,
-  `location` text NOT NULL,
-  `job` text NOT NULL
+  `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 
 --
 -- Dumping data for table `jobpost`
 --
-INSERT INTO `jobpost` (`title`, `description`, `date`, `employer`, `contact`, `salary`, `requirements`, `type`, `location`, `job`) VALUES
-('Software Developer', 'Melbourne Based job', '2021-09-09', 'employer1', '012345', '1000', '2 years exp', 'fulltime', 'Melbourne', 'Dev');
+
+INSERT INTO `jobpost` (`id`, `position`, `salary`, `type`, `description`, `requirements`, `location`, `employer`, `contact`, `date`) VALUES
+(0, 'Dev', 1000, 'fulltime', 'Melbourne Based job', '2 years exp', 'Melbourne', 'employer1', 12345, '2021-09-09 00:00:00'),
+(1, 'test', 25, 'fulltime', 'ggg', 'dsfds', 'nsw', 'www', 123123, '2021-10-20 03:02:04');
 
 -- --------------------------------------------------------
 
@@ -146,7 +161,7 @@ CREATE TABLE `jobseeker` (
 
 INSERT INTO `jobseeker` (`id`, `firstName`, `lastName`, `username`, `password`, `dateOfBirth`, `phone`, `email`, `field`, `experience`, `Image`) VALUES
 (12, 'see', 'see', 'see', 'see', '2021-09-17', 123123, 'see@gmail.com', 'Education & Training', NULL, NULL),
-(17, 'ggg', 'ggg', 'ggg', 'ggg', '2021-09-15', 123123, 'ggg@gmail.com', 'Science & Technology', NULL, NULL);
+(17, 'ggg', 'ggg', 'ggg', 'ggg', '2021-09-15', 123123, 'ggg@gmail.com', 'Consulting', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -176,9 +191,6 @@ ALTER TABLE `jobmatch`
 ALTER TABLE `jobpost`
   ADD PRIMARY KEY (`id`);
 
--- add foriegn key
-ALTER TABLE `jobmatch`
-  ADD CONSTRAINT jobmatch_jobpost_fk FOREIGN KEY (jobPost) REFERENCES jobpost(id);
 --
 -- Indexes for table `jobseeker`
 --
@@ -205,13 +217,13 @@ ALTER TABLE `employer`
 -- AUTO_INCREMENT for table `jobmatch`
 --
 ALTER TABLE `jobmatch`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `jobpost`
 --
 ALTER TABLE `jobpost`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `jobseeker`

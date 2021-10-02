@@ -3,34 +3,21 @@ class MatchmakingController {
 
     public function getAllMatches($user){
         require_once '../model/matchmaking_model.php';
-        require_once '../model/user_object.php';
         include '../model/db_connection.php';
 
         $mmm = new MatchmakingModel();
-        $jobMatch = array();
-        $jobMatch = $mmm->getJobMatch($db, $user);
-
-        return $jobMatch;
+        return $mmm->getJobMatch($db, $user);
     }
 
-    public function compareParam($salary, $location, $type, $job, $jobseeker){
+    public function findMatch($position, $salary, $location, $type, $jobseeker){
         require_once '../model/matchmaking_model.php';
-        require_once '../model/user_object.php';
         require_once '../model/db_connection.php';
-        require_once '../controller/session_controller.php';
 
         $mmm = new MatchmakingModel();
-        $jobposts = array();
-        $jobposts = $mmm->getJobPost($db);
-        $feedback = "test";
-        $id = 1;
-
-
-
-        foreach($jobposts as $post){
-            if($post->salary == $salary || $post->location == $location || $post->type == $type || $post->job == $job){
-                $mmm->setJobMatch($db, $post->employer, $jobseeker, $id, $feedback);
-            }
+        if($mmm->findMatch($db, $position, $salary, $location, $type, $jobseeker)){
+            header("location: ../view/jobseeker_match.php?success=matchfound");
+        }else{
+            header("location: ../view/jobseeker_match.php?failed=nomatch");
         }
     }
 
