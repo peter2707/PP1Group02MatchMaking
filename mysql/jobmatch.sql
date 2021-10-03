@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 02, 2021 at 03:33 PM
+-- Generation Time: Oct 03, 2021 at 05:31 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -61,7 +61,7 @@ CREATE TABLE `employer` (
   `username` text NOT NULL,
   `password` text NOT NULL,
   `dateOfBirth` date NOT NULL,
-  `phone` int(11) NOT NULL,
+  `phone` text NOT NULL,
   `email` text NOT NULL,
   `position` text NOT NULL,
   `rating` int(11) DEFAULT NULL,
@@ -73,7 +73,8 @@ CREATE TABLE `employer` (
 --
 
 INSERT INTO `employer` (`id`, `firstName`, `lastName`, `username`, `password`, `dateOfBirth`, `phone`, `email`, `position`, `rating`, `image`) VALUES
-(11, 'www', 'www', 'www', 'www', '2021-09-09', 111, 'www@gmail.com', 'www', 0, NULL);
+(11, 'wwww', 'wwww', 'wwww', 'www', '2021-09-09', '111', 'www@gmail.com', 'www', 0, NULL),
+(12, 'ggg', 'ggg', 'gggG1', 'ggg', '2021-10-07', '123123', 'ggg@gmail.com', 'ggg', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -113,7 +114,7 @@ CREATE TABLE `jobpost` (
   `requirements` text NOT NULL,
   `location` text NOT NULL,
   `employer` text NOT NULL,
-  `contact` int(11) NOT NULL,
+  `contact` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -122,9 +123,7 @@ CREATE TABLE `jobpost` (
 --
 
 INSERT INTO `jobpost` (`id`, `position`, `salary`, `type`, `description`, `requirements`, `location`, `employer`, `contact`, `date`) VALUES
-(1, 'Accountant', '25-30', 'casual', 'test', 'teset', 'nt', 'www', 123123, '2021-10-02 12:59:38'),
-(2, 'IT', '30-35', 'partime', 'ert', 'ert', 'nsw', 'www', 123123, '2021-10-02 13:00:03'),
-(3, 'test', '40-45', 'fulltime', 'awdawd', 'awdawd', 'vic', 'www', 123123, '2021-10-02 13:00:20');
+(6, 'Asd', '25-30', 'casual', 'asd', 'asd', 'act', 'wwww', '1231231', '2021-10-03 03:24:02');
 
 -- --------------------------------------------------------
 
@@ -139,7 +138,7 @@ CREATE TABLE `jobseeker` (
   `username` text NOT NULL,
   `password` text NOT NULL,
   `dateOfBirth` date NOT NULL,
-  `phone` int(11) NOT NULL,
+  `phone` text NOT NULL,
   `email` text NOT NULL,
   `field` text NOT NULL,
   `experience` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL,
@@ -151,7 +150,9 @@ CREATE TABLE `jobseeker` (
 --
 
 INSERT INTO `jobseeker` (`id`, `firstName`, `lastName`, `username`, `password`, `dateOfBirth`, `phone`, `email`, `field`, `experience`, `Image`) VALUES
-(17, 'ggg', 'ggg', 'ggg', 'ggg', '2021-09-15', 123123, 'ggg@gmail.com', 'Consulting', NULL, NULL);
+(25, 'Qweww', 'Qweww', 'qweG1', 'qweG1', '2021-10-21', '123123', 'qwe@gmail.com', 'Government & Defence', NULL, NULL),
+(28, 'dfgfgfg', 'thfthth', 'hhh1111G', 'hhh1111G', '2021-10-28', '1231236', 'asd@gmail.com', 'Hospitality & Tourism', NULL, NULL),
+(29, 'Ggg111G', 'Ggg111G', 'ggg111G', 'ggg111G', '2021-10-21', '433245898', 'ggg111G@gmail.com', 'Information Technology', NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -201,7 +202,7 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `employer`
 --
 ALTER TABLE `employer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `jobmatch`
@@ -213,13 +214,13 @@ ALTER TABLE `jobmatch`
 -- AUTO_INCREMENT for table `jobpost`
 --
 ALTER TABLE `jobpost`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `jobseeker`
 --
 ALTER TABLE `jobseeker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
