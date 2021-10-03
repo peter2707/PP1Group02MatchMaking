@@ -23,7 +23,7 @@ class MatchmakingModel{
 	public function getJobMatch($db, $user){
 		require_once '../model/job_object.php';
 		$jobMatch = array();
-		$query = "SELECT * FROM jobpost INNER JOIN jobmatch ON jobpost.employer = jobmatch.employer	WHERE jobmatch.jobSeeker='$user'";
+		$query = "SELECT * FROM jobpost INNER JOIN jobmatch ON jobpost.employer = jobmatch.employer	WHERE jobmatch.jobSeeker='$user' AND jobmatch.jobPostID = jobpost.id";
 		$result = $db->query($query);
 		$numResults = $result->num_rows;
 
