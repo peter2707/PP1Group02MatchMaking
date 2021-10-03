@@ -50,36 +50,51 @@ class AdminController {
         }
     }
 
-    public function deleteJobSeeker($username){
+    public function deleteAccount($username, $usertype){
         require_once '../model/db_connection.php';
         require_once '../model/admin_model.php';
         $adminModel = new AdminModel();
-        $adminModel->deleteJobSeeker($db, $username);
-    }
-
-    public function deleteEmployer($username){
-        require_once '../model/db_connection.php';
-        require_once '../model/admin_model.php';
-        $adminModel = new AdminModel();
-        $adminModel->deleteEmployer($db, $username);
+        $adminModel->deleteAccount($db, $username, $usertype);
     }
 
     public function getAllJobSeeker(){
-
-		//return array of object
+        require_once '../model/admin_model.php';
+        include '../model/db_connection.php';
+        $adminModel = new AdminModel();
+        return $adminModel->getAllJobSeeker($db);
 	}
 
 	public function getAllEmployer(){
-
-		//return array of object
+        require_once '../model/admin_model.php';
+        include '../model/db_connection.php';
+        $adminModel = new AdminModel();
+        return $adminModel->getAllEmployer($db);
 	}
 
-	public function editJobSeeker($username){
+    public function getAllAdmin(){
+        require_once '../model/admin_model.php';
+        include '../model/db_connection.php';
+        $adminModel = new AdminModel();
+        return $adminModel->getAllAdmin($db);
+	}
+
+	public function editJobSeeker($id){
 
 	}
 
-	public function editEmployer($username){
+	public function editEmployer($id){
 
+	}
+
+    public function editAdmin($id){
+
+	}
+
+    public function generateReport($table){
+        require_once '../model/admin_model.php';
+        include '../model/db_connection.php';
+        $adminModel = new AdminModel();
+        $adminModel->generateReport($db, $table);
 	}
     
 }

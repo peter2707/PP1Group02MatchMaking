@@ -18,8 +18,6 @@ class MatchmakingModel{
 		return $jobposts;
 	}
 
-	
-
 	public function getJobMatch($db, $user){
 		require_once '../model/job_object.php';
 		$jobMatch = array();
@@ -39,7 +37,7 @@ class MatchmakingModel{
 
 	public function setJobMatch($db, $employer, $jobseeker, $jobPostID, $percentage){
 		$query = "INSERT INTO jobmatch (employer, jobseeker, jobPostID, percentage) VALUES ('$employer', '$jobseeker', '$jobPostID', '$percentage')";
-		mysqli_query($db, $query);
+		mysqli_query($db, $query) or die(mysqli_error($db));
 	}
 
 	public function findMatch($db, $position, $salary, $location, $type, $jobseeker){

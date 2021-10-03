@@ -427,6 +427,13 @@
             <!-- end of row -->
         </div>
         <!-- end of container -->
+
+        <!-- START Bootstrap-Cookie-Alert -->
+        <div class="alert text-center cookiealert" role="alert">
+            <b>Do you like cookies?</b> &#x1F36A; We use cookies to ensure you get the best experience on our website. <a href="https://cookiesandyou.com/" target="_blank">Learn more</a>
+            <button type="button" class="btn btn-primary btn-sm acceptcookies">I agree</button>
+        </div>
+        <!-- END Bootstrap-Cookie-Alert -->
     </div>
     <!-- end of form-1 -->
     <!-- end of contact -->
@@ -437,6 +444,9 @@
         require_once("component/footer.php");
     ?>
     <!-- end of footer -->
+
+    
+
 
 </body>
 </html>

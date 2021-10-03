@@ -1,3 +1,14 @@
+<?php
+require_once "../controller/admin_controller.php";
+$adminController = new AdminController();
+if (isset($_POST["exportJobSeeker"])) {
+    $adminController->generateReport("jobseeker");
+}elseif (isset($_POST["exportEmployer"])) {
+    $adminController->generateReport("employer");
+}elseif (isset($_POST["exportAdmin"])) {
+    $adminController->generateReport("admin");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -5,7 +16,7 @@
     <!-- Webpage Title -->
     <title>JobMatch | Admin</title>
     <?php
-        require_once("component/header.php");
+    require_once("component/header.php");
     ?>
 </head>
 
@@ -13,7 +24,7 @@
 
     <!-- Navigation Start  -->
     <?php
-        require_once("component/navbar.php");
+    require_once("component/navbar.php");
     ?>
     <!-- Navigation End  -->
 
@@ -36,7 +47,7 @@
                             } else if ($_GET["error"] == "incorrect") {
                                 echo "Incorrect password or email. Please try again!";
                             } else if ($_GET["error"] == "errordelete") {
-                                echo "There was a problem while trying to delete :(";
+                                echo "There was a problem while trying to delete.";
                             }
                         }
                         ?>
@@ -47,20 +58,58 @@
                         if (isset($_GET["success"])) {
                             if ($_GET["success"] == "created") {
                                 echo "Account has been successfully created.";
-                            }elseif ($_GET["success"] == "deletedEmployer") {
-                                echo "Employer has been successfully deleted.";
-                            }elseif ($_GET["success"] == "deletedSeeker") {
-                                echo "Job Seeker has been successfully deleted.";
+                            } elseif ($_GET["success"] == "successdelete") {
+                                echo "Account has been successfully deleted.";
                             }
                         }
                         ?>
                     </p>
                 </div>
 
-                <div class="col-md-4 offset-md-4">
-                    <a style="text-decoration : none" href="jobseeker_list.php" class="mb-4 w-100 btn btn-primary">Display all Job Seeker</a>
-                    <a style="text-decoration : none" href="employer_list.php" class="mb-4 w-100 btn btn-primary">Display all Employer</a>
-                    <a style="text-decoration : none" href="admin_add_user.php" class="mb-4 w-100 btn btn-primary">Add new user</a>
+                <div class="row col-md-6 offset-md-3">
+                    <div class="col">
+                        <a style="text-decoration : none" href="admin_add_user.php" class="mb-4 w-100 btn btn-success btn-lg"><i class="fa fa-user-plus" aria-hidden="true"></i> Add User</a>
+                    </div>
+                    <div class="col">
+                        <button  data-bs-toggle="modal" data-bs-target="#generateReportModal" class="mb-4 w-100 btn btn-primary btn-lg"><i class="fa fa-file" aria-hidden="true"></i> Generate Report</button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="generateReportModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="profileModalLabel">Generate Report</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <form method="POST" enctype="multipart/form-data">
+                                        <div class="modal-body">
+                                            <div class="mb-3"><small id="message">Choose a table to generate to CSV File</small></div>
+                                            <form method="POST">
+                                                <button type="submit" name="exportJobSeeker" class="btn btn-primary">JobSeeker</button>
+                                                <button type="submit" name="exportEmployer" class="btn btn-primary">Employer</button>
+                                                <button type="submit" name="exportAdmin" class="btn btn-primary">Admin</button>
+                                            </form>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="row mb-5">
+                    <div class="col">
+                        <a style="text-decoration : none" href="jobseeker_list.php" class="mb-4 w-100 btn btn-secondary"><i class="fa fa-list" aria-hidden="true"></i> JobSeeker List</a>
+                    </div>
+                    <div class="col">
+                        <a style="text-decoration : none" href="employer_list.php" class="mb-4 w-100 btn btn-secondary"><i class="fa fa-list" aria-hidden="true"></i> Employer List</a>
+                    </div>
+                    <div class="col">
+                        <a style="text-decoration : none" href="admin_list.php" class="mb-4 w-100 btn btn-secondary"><i class="fa fa-list" aria-hidden="true"></i> Admin List</a>
+                    </div>
                 </div>
             </div>
             <!-- end of row -->
@@ -73,7 +122,7 @@
 
     <!-- footer start -->
     <?php
-        require_once("component/footer.php");
+    require_once("component/footer.php");
     ?>
     <!-- end of footer -->
 

@@ -1,5 +1,6 @@
 <?php
 class AdminModel {
+	
 	public function registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position) {
 		$query = "INSERT INTO employer (firstName, lastName, username, password, dateOfBirth, phone, email, position) 
 				VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$position')";
@@ -24,51 +25,49 @@ class AdminModel {
 		header("location: ../view/admin_index.php?success=created");
 	}
 
-
-	public function deleteJobSeeker($db, $username) {
-		$query = "DELETE FROM jobseeker WHERE username = ?";
-		$stmt = $db->prepare($query);
-		$stmt->bind_param("s", $username);
-		$stmt->execute();
-
-		$affectedRows = $stmt->affected_rows;
-		$stmt->close();
-		$db->close();
-
-		if ($affectedRows == 1) {
-			header("location: ../view/admin_index.php?success=deletedSeeker");
-		} else {
-			header("location: ../view/admin_index.php?error=errordelete");
-		}
-	}
-
-	public function deleteEmployer($db, $username) {
-		$query = "DELETE FROM employer WHERE username = ?";
-		$stmt = $db->prepare($query);
-		$stmt->bind_param("s", $username);
-		$stmt->execute();
-
-		$affectedRows = $stmt->affected_rows;
-		$stmt->close();
-		$db->close();
-
-		if ($affectedRows == 1) {
-			header("location: ../view/admin_index.php?success=deletedEmployer");
-		} else {
-			header("location: ../view/admin_index.php?error=errordelete");
-		}
-	}
-
 	public function getAllJobSeeker($db) {
+		require_once '../model/user_object.php';
+		$allJobSeekers = array();
 		$query = "SELECT * FROM jobseeker ORDER BY id";
 		$result = $db->query($query);
 		$numResults = $result->num_rows;
+		for ($i = 0; $i < $numResults; $i++) {
+			$row = $result->fetch_assoc();
+			$allJobSeekers[$i] = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['Image']);
+		}
+		$result->free();
+		$db->close();
+		return $allJobSeekers;
 	}
 
 	public function getAllEmployer($db) {
+		require_once '../model/user_object.php';
+		$allEmployers = array();
 		$query = "SELECT * FROM employer ORDER BY id";
 		$result = $db->query($query);
 		$numResults = $result->num_rows;
+		for ($i = 0; $i < $numResults; $i++) {
+			$row = $result->fetch_assoc();
+			$allEmployers[$i] = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['rating'], $row['image']);
+		}
+		$result->free();
+		$db->close();
+		return $allEmployers;
+	}
+
+	public function getAllAdmin($db) {
+		require_once '../model/user_object.php';
+		$allAdmins = array();
+		$query = "SELECT * FROM admin ORDER BY id";
+		$result = $db->query($query);
+		$numResults = $result->num_rows;
+		for ($i = 0; $i < $numResults; $i++) {
+			$row = $result->fetch_assoc();
+			$allAdmins[$i] = new Admin($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['image']);
+		}
+		$result->free();
+		$db->close();
+		return $allAdmins;
 	}
 
 	public function updateAdmin($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id) {
@@ -86,6 +85,69 @@ class AdminModel {
 		} else {
 			header("location: ../view/admin_index.php?error=errorupdate");
 		}
+	}
+
+	public function deleteAccount($db, $username, $type) {
+		$query = "DELETE FROM $type WHERE username = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("s", $username);
+		$stmt->execute();
+
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			header("location: ../view/admin_index.php?success=successdelete");
+		} else {
+			header("location: ../view/admin_index.php?error=errordelete");
+		}
+	}
+
+	public function generateReport($db, $table){
+		// Fetch records from database 
+		$query = $db->query("SELECT * FROM $table ORDER BY id ASC"); 
+		
+		if($query->num_rows > 0){ 
+			$delimiter = ","; 
+			$filename = $table . "_list_" . date('Y-m-d') . ".csv"; 
+			
+			// Create a file pointer 
+			$f = fopen('php://memory', 'w'); 
+			
+			// Set column headers
+			if($table == "jobseeker"){
+				$fields = array('ID', 'FIRSTNAME', 'LASTNAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'FIELD', 'EXPERIENCE');
+			}elseif($table == "employer"){
+				$fields = array('ID', 'FIRST NAME', 'LAST NAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'POSITION', 'RATING');
+			}elseif($table == "admin"){
+				$fields = array('ID', 'FIRST NAME', 'LAST NAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'POSITION');
+			}
+			fputcsv($f, $fields, $delimiter);
+			
+			// Output each row of the data, format line as csv and write to file pointer 
+			while($row = $query->fetch_assoc()){
+				if($table == "jobseeker"){
+					$lineData = array($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['experience']); 
+				}elseif($table == "employer"){
+					$lineData = array($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['rating']); 
+				}elseif($table == "admin"){
+					$lineData = array($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position']); 
+				}
+				fputcsv($f, $lineData, $delimiter); 
+			} 
+			
+			// Move back to beginning of file 
+			fseek($f, 0); 
+			
+			// Set headers to download file rather than displayed 
+			header('Content-Type: text/csv'); 
+			header('Content-Disposition: attachment; filename="' . $filename . '";'); 
+			
+			//output all remaining data on a file pointer 
+			fpassthru($f); 
+		} 
+		exit; 
 	}
 
 }

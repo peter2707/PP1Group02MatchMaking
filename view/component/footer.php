@@ -91,6 +91,7 @@
     <script src="../js/bootstrap.min.js"></script> <!-- Bootstrap framework -->
     <script src="../js/swiper.min.js"></script> <!-- Swiper for image and text sliders -->
     <script src="../js/scripts.js"></script> <!-- Custom scripts -->
+    <script src="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.js"></script>
     
     END;
 

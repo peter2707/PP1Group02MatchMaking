@@ -3,7 +3,7 @@ if (isset($_POST['delete'])) {
     require_once "../controller/admin_controller.php";
     $adminController= new AdminController();
     $username = $_POST['username'];    
-    $adminController->deleteEmployer($username);
+    $adminController->deleteAccount($username, "employer");
 }
 ?>
 <!DOCTYPE html>
@@ -11,7 +11,7 @@ if (isset($_POST['delete'])) {
 
 <head>
     <!-- Webpage Title -->
-    <title>JobMatch | Employer</title>
+    <title>JobMatch | Employer List</title>
     <?php
         require_once("component/header.php");
     ?>
@@ -30,82 +30,80 @@ if (isset($_POST['delete'])) {
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-xl-11 mb-2">
-                    <h1>All Employer</h1>
+                    <h1>All Employers</h1>
                     
                 </div>
                 <div class="col-xl-11 mb-5" style="min-height: 200px;">
-                    <?php
-                    require_once '../model/db_connection.php';
-                    $query = "SELECT * FROM employer ORDER BY id";
-                    $result = $db->query($query);
-                    $numResults = $result->num_rows;
+                <?php
+                    require_once '../controller/admin_controller.php';
+                    require_once '../controller/session_controller.php';
+                    // call controllers
+                    $sc = new SessionController();
+                    $ac = new AdminController();
+
+                    // check if the session has not started yet
+                    if (session_status() === PHP_SESSION_NONE) {
+                        session_start();
+                    }
+
+                    $allEmployers = array();
+                    $allEmployers = $ac->getAllEmployer();
+                    if (count($allEmployers) < 1) {
+                            echo "<h3>No result found yet.</h3> <small>To add a user, click on the Add New User button</small>";
+                    } else {
+                            echo "<table class='table'>";
+                            echo "      <thead>";
+                            echo "        <tr>";
+                            echo "            <th scope='col'>ID</th>";
+                            echo "            <th scope='col'>FirstName</th>";
+                            echo "            <th scope='col'>LastName</th>";
+                            echo "            <th scope='col'>Username</th>";
+                            echo "            <th scope='col'>DateOfBirth</th>";
+                            echo "            <th scope='col'>Phone</th>";
+                            echo "            <th scope='col'>Email</th>";
+                            echo "            <th scope='col'>Position</th>";
+                            echo "            <th scope='col'>Rating</th>";
+                            echo "            <th scope='col'>Action</th>";
+                            echo "            <th scope='col'></th>";
+                            echo "        </tr>";
+                            echo "      </thead>";
+                            echo "      <tbody>";
+                        foreach ($allEmployers as $employer) {
+                            echo "        <tr>";
+                            echo "          <td scope=\"row\">$employer->id</td>";
+                            echo "          <td scope=\"row\">$employer->firstName</td>";
+                            echo "          <td scope=\"row\">$employer->lastName</td>";
+                            echo "          <td scope=\"row\">$employer->username</td>";
+                            echo "          <td scope=\"row\">$employer->dob</td>";
+                            echo "          <td scope=\"row\">$employer->phone</td>";
+                            echo "          <td scope=\"row\">$employer->email</td>";
+                            echo "          <td scope=\"row\">$employer->position</td>";
+                            echo "          <td scope=\"row\">$employer->rating</td>";
+                            createEditButton("id", $employer->id, "Edit", "edit_emp.php");
+                            createDeleteButton("username", $employer->username, "Delete");
+                            echo "        </tr>";
+                        }
+                            echo "      </tbody>";
+                            echo "</table>";
+                            unset($allEmployers);
+                    }
+                    function createEditButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
+                        echo "<td>";
+                        echo "<form action=$actionPage method=\"GET\">";
+                        echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
+                        echo "<button type=\"submit\" class=\"btn btn-primary\">$buttonText</button>";
+                        echo "</form>";
+                        echo "</td>";
+                    }
+                    function createDeleteButton($hiddenName, $employer, $buttonText){
+                        echo "<td>";
+                        echo "<form method=\"POST\">";
+                        echo "<input type=\"hidden\" name=$hiddenName value=$employer>";
+                        echo "<button name=\"delete\" type=\"submit\" class=\"btn btn-danger\" onclick=\"return confirm('Are you sure you want to delete $employer ?')\" >$buttonText</button>";
+                        echo "</form>";
+                        echo "</td>";
+                    }
                     ?>
-
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th scope="col">ID</th>
-                                <th scope="col">FirstName</th>
-                                <th scope="col">LastName</th>
-                                <th scope="col">Username</th>
-                                <th scope="col">DateOfBirth</th>
-                                <th scope="col">Phone</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Rating</th>
-                                <th scope="col"></th>
-                                <th scope="col"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php
-                            for ($i = 0; $i < $numResults; $i++) {
-                                $row = $result->fetch_assoc();
-                                $id = $row['id'];
-                                $firstName = $row['firstName'];
-                                $lastName = $row['lastName'];
-                                $username = $row['username'];
-                                $dob = $row['dateOfBirth'];
-                                $phone = $row['phone'];
-                                $email = $row['email'];
-                                $rate = $row['rating'];
-
-                                echo "<tr>";
-                                echo "<td scope=\"row\">$id</td>";
-                                echo "<td scope=\"row\">$firstName</td>";
-                                echo "<td scope=\"row\">$lastName</td>";
-                                echo "<td scope=\"row\">$username</td>";
-                                echo "<td scope=\"row\">$dob</td>";
-                                echo "<td scope=\"row\">$phone</td>";
-                                echo "<td scope=\"row\">$email</td>";
-                                echo "<td scope=\"row\">$rate</td>";
-                                createEditButton("id", $id, "Edit", "edit_emp.php");
-                                createDeleteButton("username", $username, "Delete");
-                                echo "</tr>";
-                            }
-
-                            $result->free();
-                            $db->close();
-
-                            function createEditButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
-                                echo "<td>";
-                                echo "<form action=$actionPage method=\"GET\">";
-                                echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-                                echo "<button type=\"submit\" class=\"btn btn-primary\">$buttonText</button>";
-                                echo "</form>";
-                                echo "</td>";
-                            }
-                            function createDeleteButton($hiddenName, $username, $buttonText){
-                                echo "<td>";
-                                echo "<form method=\"POST\">";
-                                echo "<input type=\"hidden\" name=$hiddenName value=$username>";
-                                echo "<button name=\"delete\" type=\"submit\" class=\"btn btn-danger\" onclick=\"return confirm('Are you sure you want to delete $username ?')\" >$buttonText</button>";
-                                echo "</form>";
-                                echo "</td>";
-                            }
-                            ?>
-
-                        </tbody>
-                    </table>
                 </div>
                 
             </div>
