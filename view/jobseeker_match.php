@@ -180,9 +180,11 @@ if (isset($_POST['match'])) {
             }
                 echo "            </tbody>";
                 echo "            </table>";
+                unset($jobposts);
         }
-        
+
         ?>
+        
     </div>
 
     <!-- footer start -->
