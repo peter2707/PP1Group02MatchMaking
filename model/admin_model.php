@@ -59,22 +59,33 @@ class AdminModel {
 		}
 	}
 
-	public function getAllJobSeeker() {
-
-		//return array of object
+	public function getAllJobSeeker($db) {
+		$query = "SELECT * FROM jobseeker ORDER BY id";
+		$result = $db->query($query);
+		$numResults = $result->num_rows;
 	}
 
-	public function getAllEmployer() {
-
-		//return array of object
+	public function getAllEmployer($db) {
+		$query = "SELECT * FROM employer ORDER BY id";
+		$result = $db->query($query);
+		$numResults = $result->num_rows;
 	}
 
-	public function editJobSeeker($username) {
+	public function updateAdmin($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id) {
+		$query = "UPDATE admin SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, position=? WHERE id=?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("ssssisss", $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id);
+		$stmt->execute();
 
-	}
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
 
-	public function editEmployer($username) {
-
+		if ($affectedRows == 1) {
+			header("location: ../view/admin_index.php?success=successupdate");
+		} else {
+			header("location: ../view/admin_index.php?error=errorupdate");
+		}
 	}
 
 }

@@ -16,7 +16,7 @@ if(isset($_POST['register'])){
     $positionAdmin = $_POST['positionAdmin'];
     $field = $_POST['field'];
     
-    $adminController->register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $positionEmployer, $positionAdmin, $field);
+    $adminController->register(ucfirst($firstName), ucfirst($lastName), $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $positionEmployer, $positionAdmin, $field);
 }
 ?>
 <!DOCTYPE html>
@@ -52,35 +52,35 @@ if(isset($_POST['register'])){
                     <main class="form-register">
                         <form action="" method="POST">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="Firstname" name="firstName">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Firstname" name="firstName" required>
                                 <label for="floatingInput">Firstname</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="Lastname" name="lastName">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Lastname" name="lastName" required>
                                 <label for="floatingInput">Lastname</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one number and one uppercase and lowercase letter, and 5 to 20 characters" required>
                                 <label for="floatingInput">Username</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one number and one uppercase and lowercase letter, and 5 to 20 characters" required>
                                 <label for="floatingPassword">Password</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm Password" name="confirmPassword">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm Password" name="confirmPassword" required>
                                 <label for="floatingPassword">Confirm Password</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="date" class="form-control" id="floatingInput" placeholder="Date of Birth" name="dateOfBirth">
+                                <input type="date" class="form-control" id="floatingInput" placeholder="Date of Birth" name="dateOfBirth" required>
                                 <label for="floatingInput">Date of Birth</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="tel" class="form-control" id="floatingInput" placeholder="Phone" name="phone">
+                                <input type="tel" class="form-control" id="floatingInput" placeholder="Phone" name="phone" required>
                                 <label for="floatingInput">Phone</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email">
+                                <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email" required>
                                 <label for="floatingInput">Email</label>
                             </div>
 

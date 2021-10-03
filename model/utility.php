@@ -12,7 +12,7 @@ function emptyInputRegister($firstName, $lastName, $username, $password, $dateOf
 // Check invalid username
 function invalidUsername($username) {
 	$result = false;
-	if (!preg_match("/^[a-zA-Z0-9]*$/", $username)) {
+	if (!preg_match('/^[a-z\d_]{5,20}$/i', $username)) {
 		$result = true;
 	}
 	return $result;

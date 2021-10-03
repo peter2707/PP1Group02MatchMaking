@@ -60,7 +60,7 @@
                 <div class="col-md-4 offset-md-4">
                     <a style="text-decoration : none" href="jobseeker_list.php" class="mb-4 w-100 btn btn-primary">Display all Job Seeker</a>
                     <a style="text-decoration : none" href="employer_list.php" class="mb-4 w-100 btn btn-primary">Display all Employer</a>
-                    <a style="text-decoration : none" href="add_user.php" class="mb-4 w-100 btn btn-primary">Add new user</a>
+                    <a style="text-decoration : none" href="admin_add_user.php" class="mb-4 w-100 btn btn-primary">Add new user</a>
                 </div>
             </div>
             <!-- end of row -->

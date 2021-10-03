@@ -232,7 +232,7 @@ function showFindMatchForm() {
     var jobmatch = document.getElementById("jobmatch");
     if (jobmatch.classList.contains('h-show')) {
         jobmatch.classList.remove('h-show');
-        document.getElementById("findMatchBtn").innerText = "Find Match";
+        document.getElementById("findMatchBtn").innerHTML = "<i class='fa fa-search' aria-hidden='true'></i>";
         document.getElementById("positionInput").disabled = true;
         document.getElementById("match-salary-field").disabled = true;
         document.getElementById("match-location-field").disabled = true;
@@ -253,7 +253,7 @@ function showNewPostForm() {
     var newpost = document.getElementById("newpost");
     if (newpost.classList.contains('h-show')) {
         newpost.classList.remove('h-show');
-        document.getElementById("newPostBtn").innerText = "New Post";
+        document.getElementById("newPostBtn").innerHTML = "<i class='fa fa-paper-plane' aria-hidden='true'></i>";
         document.getElementById("positionInput").disabled = true;
         document.getElementById("descriptionTextArea").disabled = true;
         document.getElementById("requirementsTextArea").disabled = true;
