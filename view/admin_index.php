@@ -36,7 +36,7 @@
                             } else if ($_GET["error"] == "incorrect") {
                                 echo "Incorrect password or email. Please try again!";
                             } else if ($_GET["error"] == "errordelete") {
-                                echo "There was a problem while trying to delete :(";
+                                echo "There was a problem while trying to delete.";
                             }
                         }
                         ?>
@@ -47,10 +47,8 @@
                         if (isset($_GET["success"])) {
                             if ($_GET["success"] == "created") {
                                 echo "Account has been successfully created.";
-                            }elseif ($_GET["success"] == "deletedEmployer") {
-                                echo "Employer has been successfully deleted.";
-                            }elseif ($_GET["success"] == "deletedSeeker") {
-                                echo "Job Seeker has been successfully deleted.";
+                            }elseif ($_GET["success"] == "successdelete") {
+                                echo "Account has been successfully deleted.";
                             }
                         }
                         ?>
@@ -58,8 +56,9 @@
                 </div>
 
                 <div class="col-md-4 offset-md-4">
-                    <a style="text-decoration : none" href="jobseeker_list.php" class="mb-4 w-100 btn btn-primary">Display all Job Seeker</a>
-                    <a style="text-decoration : none" href="employer_list.php" class="mb-4 w-100 btn btn-primary">Display all Employer</a>
+                    <a style="text-decoration : none" href="jobseeker_list.php" class="mb-4 w-100 btn btn-primary">JobSeeker List</a>
+                    <a style="text-decoration : none" href="employer_list.php" class="mb-4 w-100 btn btn-primary">Employer List</a>
+                    <a style="text-decoration : none" href="admin_list.php" class="mb-4 w-100 btn btn-primary">Admin List</a>
                     <a style="text-decoration : none" href="admin_add_user.php" class="mb-4 w-100 btn btn-primary">Add new user</a>
                 </div>
             </div>
