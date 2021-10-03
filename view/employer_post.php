@@ -16,7 +16,7 @@ if (isset($_POST['post'])) {
     $type = $_POST['type'];
     $contact = $_POST['contact'];
 
-    $mmc->postJob($position, $salary, $type, $description, $requirements, $location, $sc->getUserName(), $contact);
+    $mmc->postJob(ucfirst($position), $salary, $type, $description, $requirements, $location, $sc->getUserName(), $contact);
 }
 ?>
 
@@ -69,7 +69,7 @@ if (isset($_POST['post'])) {
                     <h1>Your Posts</h1>
                 </div>
                 <div class="col-4 text-end">
-                    <button id="newPostBtn" class="btn btn-primary btn-lg" type="submit" onclick="showNewPostForm()">New Post</button>
+                    <button id="newPostBtn" style="width:100px;" class="btn btn-primary btn-lg" type="submit" onclick="showNewPostForm()"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                 </div>
                 <div class="col-md-4 offset-md-4">
                     <form method="POST" id="newpost">
@@ -122,7 +122,7 @@ if (isset($_POST['post'])) {
                             <label for="match-location-field">Location</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input disabled type="tel" class="form-control" id="contactInput" placeholder="Contact" name="contact">
+                            <input disabled type="tel" class="form-control" id="contactInput" placeholder="Contact" name="contact" pattern="^(\+?\(61\)|\(\+?61\)|\+?61|\(0[1-9]\)|0[1-9])?( ?-?[0-9]){7,9}$" title="Must have phone number format and at least 7 characters long" required>
                             <label for="contactInput">Contact</label>
                         </div>
                         <button disabled class="btn btn-success btn-lg mt-1 w-100 fw-bolder" type="submit" id="postBtn" name="post">Post</button>
@@ -150,38 +150,43 @@ if (isset($_POST['post'])) {
         $mmc = new MatchmakingController();
         $jobposts = array();
         $jobposts = $mmc->getJobPosts($sc->getUserName());
-        function createOpenButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
-            echo "<td>";
-            echo "  <form action=$actionPage method=\"GET\">";
-            echo "      <input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-            echo "      <button type=\"submit\" class=\"btn btn-primary\">$buttonText</button>";
-            echo "  </form>";
-            echo "</td>";
+        if(count($jobposts) < 1){
+            echo "<h3>You don't have any post yet.</h3> <small>To make a new post, click on the <i class='fa fa-paper-plane' aria-hidden='true'></i> button and fill in the job details</small>";
+        }else{
+            function createOpenButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
+                echo "<td>";
+                echo "  <form action=$actionPage method=\"GET\">";
+                echo "      <input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
+                echo "      <button type=\"submit\" class=\"btn btn-primary\">$buttonText</button>";
+                echo "  </form>";
+                echo "</td>";
+            }
+                echo "<table class='table table-striped'>";
+                echo "            <thead style='height: 50px;' class='table-dark'>";
+                echo "                <tr>";
+                echo "                    <th scope='col'>Position</th>";
+                echo "                    <th scope='col'>Salary</th>";
+                echo "                    <th scope='col'>Type</th>";
+                echo "                    <th scope='col'>Location</th>";
+                echo "                    <th scope='col'>Matches</th>";
+                echo "                    <th scope='col'></th>";
+                echo "                </tr>";
+                echo "            </thead>";
+                echo "            <tbody>";
+            foreach ($jobposts as $post) {
+                echo "                <tr>";
+                echo "                    <td scope='row'>$post->position</td>";
+                echo "                    <td scope='row'>$post->salary</td>";
+                echo "                    <td scope='row'>$post->type</td>";
+                echo "                    <td scope='row'>$post->location</td>";
+                echo "                    <td scope='row'>$post->matches times</td>";
+                createOpenButton('open', $post->id, 'Open', 'post.php');
+                echo "                </tr>";
+            }
+                echo "            </tbody>";
+                echo "            </table>";
         }
-            echo "<table class='table table-striped'>";
-            echo "            <thead style='height: 50px;' class='table-dark'>";
-            echo "                <tr>";
-            echo "                    <th scope='col'>Position</th>";
-            echo "                    <th scope='col'>Salary</th>";
-            echo "                    <th scope='col'>Type</th>";
-            echo "                    <th scope='col'>Location</th>";
-            echo "                    <th scope='col'>Matches</th>";
-            echo "                    <th scope='col'></th>";
-            echo "                </tr>";
-            echo "            </thead>";
-            echo "            <tbody>";
-        foreach ($jobposts as $post) {
-            echo "                <tr>";
-            echo "                    <td scope='row'>$post->position</td>";
-            echo "                    <td scope='row'>$post->salary</td>";
-            echo "                    <td scope='row'>$post->type</td>";
-            echo "                    <td scope='row'>$post->location</td>";
-            echo "                    <td scope='row'>$post->matches times</td>";
-            createOpenButton('open', $post->id, 'Open', 'post.php');
-            echo "                </tr>";
-        }
-            echo "            </tbody>";
-            echo "            </table>";
+        
         ?>
     </div>
 

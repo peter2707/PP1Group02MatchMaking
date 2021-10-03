@@ -10,7 +10,7 @@ class MatchmakingController {
 
     public function findMatch($position, $salary, $location, $type, $jobseeker){
         if(!$position||!$salary||!$type||!$location||!$jobseeker){
-            header("location: ../view/employer_post.php?error=emptyinput");
+            header("location: ../view/jobseeker_match.php?error=emptyinput");
         }else{
             require_once '../model/matchmaking_model.php';
             require_once '../model/db_connection.php';

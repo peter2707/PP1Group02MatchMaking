@@ -21,12 +21,12 @@
 		$dbUser = 'root';
 		$dbPass = '';
 		$dbName = 'jobmatch';
-
-		if ($db = mysqli_connect($dbAddress, $dbUser, $dbPass, $dbName)) {
-			//do something
-		}else {
-			throw new Exception('Unable to connect');
-			exit;
+		$db = mysqli_connect($dbAddress, $dbUser, $dbPass, $dbName);
+    
+		// Check connection
+		if (mysqli_connect_errno()) {
+			echo "Failed to connect to MySQL: " . mysqli_connect_error();
+			exit();
 		}
 	}catch(Exception $e) {
 		echo $e->getMessage();

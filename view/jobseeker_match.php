@@ -66,7 +66,7 @@ if (isset($_POST['match'])) {
                     <h1>Your Matches</h1>
                 </div>
                 <div class="col-4 text-end">
-                    <button id="findMatchBtn" class="btn btn-primary btn-lg" type="submit" onclick="showFindMatchForm()">Find Match</button>
+                    <button id="findMatchBtn" style="width:100px;" class="btn btn-primary btn-lg" type="submit" onclick="showFindMatchForm()"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </div>
                 <form method="POST" id="jobmatch">
                     <div class="row">
@@ -143,42 +143,46 @@ if (isset($_POST['match'])) {
         // call controllers
         $sc = new SessionController();
         $mmc = new MatchmakingController();
-        $jobposts = array();
-        $jobposts = $mmc->getAllMatches($sc->getUserName());
-        function createOpenButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
-            echo "<td>";
-            echo "  <form action=$actionPage method=\"GET\">";
-            echo "      <input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-            echo "      <button type=\"submit\" class=\"btn btn-primary\">$buttonText</button>";
-            echo "  </form>";
-            echo "</td>";
+        $jobmatches = array();
+        $jobmatches = $mmc->getAllMatches($sc->getUserName());
+        if(count($jobmatches) < 1){
+            echo "<h3>You don't have any match yet.</h3> <small>To find match, click on the <i class='fa fa-search' aria-hidden='true'></i> button</small>";
+        }else{
+            function createOpenButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
+                echo "<td>";
+                echo "  <form action=$actionPage method=\"GET\">";
+                echo "      <input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
+                echo "      <button type=\"submit\" class=\"btn btn-primary\">$buttonText</button>";
+                echo "  </form>";
+                echo "</td>";
+            }
+                echo "<table class='table table-striped'>";
+                echo "            <thead style='height: 50px;' class='table-dark'>";
+                echo "                <tr>";
+                echo "                    <th scope='col'>Position</th>";
+                echo "                    <th scope='col'>Salary</th>";
+                echo "                    <th scope='col'>Type</th>";
+                echo "                    <th scope='col'>Location</th>";
+                echo "                    <th scope='col'>Match Percentage</th>";
+                echo "                    <th scope='col'></th>";
+                echo "                </tr>";
+                echo "            </thead>";
+                echo "            <tbody>";
+            foreach ($jobmatches as $match) {
+                echo "                <tr>";
+                echo "                    <td scope='row'>$match->position</td>";
+                echo "                    <td scope='row'>$match->salary</td>";
+                echo "                    <td scope='row'>$match->type</td>";
+                echo "                    <td scope='row'>$match->location</td>";
+                echo "                    <td scope='row'>$match->percentage %</td>";
+                createOpenButton('open', $match->id, 'Open', 'match.php');
+                echo "                </tr>";
+            }
+                echo "            </tbody>";
+                echo "            </table>";
+                unset($jobposts);
         }
-            echo "<table class='table table-striped'>";
-            echo "            <thead style='height: 50px;' class='table-dark'>";
-            echo "                <tr>";
-            echo "                    <th scope='col'>Position</th>";
-            echo "                    <th scope='col'>Salary</th>";
-            echo "                    <th scope='col'>Type</th>";
-            echo "                    <th scope='col'>Location</th>";
-            echo "                    <th scope='col'>Match Percentage</th>";
-            echo "                    <th scope='col'></th>";
-            echo "                </tr>";
-            echo "            </thead>";
-            echo "            <tbody>";
-        foreach ($jobposts as $post) {
-            echo "                <tr>";
-            echo "                    <td scope='row'>$post->position</td>";
-            echo "                    <td scope='row'>$post->salary</td>";
-            echo "                    <td scope='row'>$post->type</td>";
-            echo "                    <td scope='row'>$post->location</td>";
-            echo "                    <td scope='row'>$post->percentage %</td>";
-            createOpenButton('open', $post->id, 'Open', 'match.php');
-            echo "                </tr>";
-        }
-            echo "            </tbody>";
-            echo "            </table>";
 
-            unset($jobposts);
         ?>
         
     </div>
