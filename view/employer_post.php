@@ -74,7 +74,7 @@ if (isset($_POST['post'])) {
                 <div class="col-md-4 offset-md-4">
                     <form method="POST" id="newpost">
                         <div class="form-floating mb-3">
-                            <input disabled type="text" class="form-control" id="positionInput" placeholder="Position" name="position">
+                            <input disabled type="text" class="form-control" id="positionInput" placeholder="Position" name="position" required>
                             <label for="positionInput">Position</label>
                         </div>
                         <div class="form-floating mb-3">

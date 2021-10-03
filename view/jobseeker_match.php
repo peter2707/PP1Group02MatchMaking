@@ -72,7 +72,7 @@ if (isset($_POST['match'])) {
                     <div class="row">
                         <div class="col-sm-3">
                             <div class="form-floating">
-                                <input disabled type="text" class="form-control" id="positionInput" placeholder="Position" name="position">
+                                <input disabled type="text" class="form-control" id="positionInput" placeholder="Position" name="position" required>
                                 <label for="positionInput">Position</label>
                             </div>
                         </div>
