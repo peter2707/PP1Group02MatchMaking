@@ -52,11 +52,15 @@ class MatchmakingModel{
 				$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 100);
 				unset($jobposts[$post]);
 				$found = true;
-			}elseif(strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->location == $location){
+			}elseif(strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->location == $location
+					|| strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->type == $type
+					|| strtolower($val->position) == strtolower($position) && $val->location == $location && $val->type == $type){
 				$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 75);
 				unset($jobposts[$post]);
 				$found = true;
-			}elseif(strtolower($val->position) == strtolower($position) && $val->salary == $salary){
+			}elseif(strtolower($val->position) == strtolower($position) && $val->salary == $salary
+					|| strtolower($val->position) == strtolower($position) && $val->location == $location
+					|| strtolower($val->position) == strtolower($position) && $location && $val->type == $type){
 				$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 50);
 				unset($jobposts[$post]);
 				$found = true;
