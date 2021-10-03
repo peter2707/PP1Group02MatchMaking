@@ -89,5 +89,12 @@ class AdminController {
     public function editAdmin($id){
 
 	}
+
+    public function generateReport($table){
+        require_once '../model/admin_model.php';
+        include '../model/db_connection.php';
+        $adminModel = new AdminModel();
+        $adminModel->generateReport($db, $table);
+	}
     
 }

@@ -275,3 +275,8 @@ function showNewPostForm() {
         document.getElementById("contactInput").disabled = false;
     }
 }
+
+//window show alert when accept cookies
+// window.addEventListener("cookieAlertAccept", function() {
+//     alert("cookies accepted")
+// })

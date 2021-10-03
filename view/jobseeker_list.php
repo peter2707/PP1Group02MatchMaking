@@ -30,7 +30,7 @@ if (isset($_POST['delete'])) {
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-xl-11 mb-5">
-                    <h1>All Job Seeker</h1>
+                    <h1>All JobSeekers</h1>
 
                 </div>
 
@@ -50,24 +50,24 @@ if (isset($_POST['delete'])) {
                     $allJobSeekers = array();
                     $allJobSeekers = $ac->getAllJobSeeker();
                     if (count($allJobSeekers) < 1) {
-                        echo "<h3>No result found yet.</h3> <small>To add a user, click on the Add New User button</small>";
+                            echo "<h3>No result found yet.</h3> <small>To add a user, click on the Add New User button</small>";
                     } else {
-                        echo "<table class='table'>";
-                        echo "    <thead>";
-                        echo "        <tr>";
-                        echo "            <th scope='col'>ID</th>";
-                        echo "            <th scope='col'>FirstName</th>";
-                        echo "            <th scope='col'>LastName</th>";
-                        echo "            <th scope='col'>Username</th>";
-                        echo "            <th scope='col'>DateOfBirth</th>";
-                        echo "            <th scope='col'>Phone</th>";
-                        echo "            <th scope='col'>Email</th>";
-                        echo "            <th scope='col'>field</th>";
-                        echo "            <th scope='col'>Action</th>";
-                        echo "            <th scope='col'></th>";
-                        echo "        </tr>";
-                        echo "    </thead>";
-                        echo "<tbody>";
+                            echo "<table class='table'>";
+                            echo "    <thead>";
+                            echo "        <tr>";
+                            echo "            <th scope='col'>ID</th>";
+                            echo "            <th scope='col'>FirstName</th>";
+                            echo "            <th scope='col'>LastName</th>";
+                            echo "            <th scope='col'>Username</th>";
+                            echo "            <th scope='col'>DateOfBirth</th>";
+                            echo "            <th scope='col'>Phone</th>";
+                            echo "            <th scope='col'>Email</th>";
+                            echo "            <th scope='col'>field</th>";
+                            echo "            <th scope='col'>Action</th>";
+                            echo "            <th scope='col'></th>";
+                            echo "        </tr>";
+                            echo "    </thead>";
+                            echo "<tbody>";
                         foreach ($allJobSeekers as $jobSeeker) {
                             echo "    <tr>";
                             echo "        <td scope=\"row\">$jobSeeker->id</td>";
@@ -82,9 +82,9 @@ if (isset($_POST['delete'])) {
                             createDeleteButton("username", $jobSeeker->username, "Delete");
                             echo "    </tr>";
                         }
-                        echo "</tbody>";
-                        echo "</table>";
-                        unset($allJobSeekers);
+                            echo "</tbody>";
+                            echo "</table>";
+                            unset($allJobSeekers);
                     }
                     function createEditButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
                         echo "<td>";

@@ -30,7 +30,7 @@ if (isset($_POST['delete'])) {
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-xl-11 mb-2">
-                    <h1>All Admin List</h1>
+                    <h1>All Admins</h1>
                     
                 </div>
                 <div class="col-xl-11 mb-5" style="min-height: 200px;">
