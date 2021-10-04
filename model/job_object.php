@@ -38,4 +38,5 @@ class JobMatch{
         $this->percentage = $percentage;
     }
 }
+
 ?>

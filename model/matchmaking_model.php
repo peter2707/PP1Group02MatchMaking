@@ -35,6 +35,23 @@ class MatchmakingModel{
 		return $jobMatch;
 	}
 
+	public function getPreviousMatch($db, $jobseeker, $jobID){
+		$query = "SELECT count(*) FROM jobmatch WHERE jobSeeker = '$jobseeker' AND jobPostID = '$jobID'";		
+		$stmt = $db->prepare($query);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$stmt->close();
+
+		if (!$result) {
+			return false;
+			$db->close();
+		}
+		$row = $result->fetch_row();
+		if ($row[0] > 0) {
+			return true;
+		}
+	}
+
 	public function setJobMatch($db, $employer, $jobseeker, $jobPostID, $percentage){
 		$query = "INSERT INTO jobmatch (employer, jobseeker, jobPostID, percentage) VALUES ('$employer', '$jobseeker', '$jobPostID', '$percentage')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
@@ -44,28 +61,35 @@ class MatchmakingModel{
 		$found = false;
 		$jobposts = array();
         $jobposts = $this->getAllPosts($db);
-
 		foreach($jobposts as $post => $val){
 			if(strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->location == $location && $val->type == $type){
-				$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 100);
-				unset($jobposts[$post]);
-				$found = true;
+				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
+					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 100);
+					unset($jobposts[$post]);
+					$found = true;
+				}
 			}elseif(strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->location == $location
 					|| strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->type == $type
 					|| strtolower($val->position) == strtolower($position) && $val->location == $location && $val->type == $type){
-				$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 75);
-				unset($jobposts[$post]);
-				$found = true;
+				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
+					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 75);
+					unset($jobposts[$post]);
+					$found = true;
+				}
 			}elseif(strtolower($val->position) == strtolower($position) && $val->salary == $salary
 					|| strtolower($val->position) == strtolower($position) && $val->location == $location
 					|| strtolower($val->position) == strtolower($position) && $location && $val->type == $type){
-				$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 50);
-				unset($jobposts[$post]);
-				$found = true;
+				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
+					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 50);
+					unset($jobposts[$post]);
+					$found = true;
+				}
 			}elseif(strtolower($val->position) == strtolower($position)){
-				$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 25);
-				unset($jobposts[$post]);
-				$found = true;
+				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
+					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 25);
+					unset($jobposts[$post]);
+					$found = true;
+				}
 			}
 		}
 		return $found;
