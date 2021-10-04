@@ -63,6 +63,41 @@ class MatchmakingModel{
 		return $jobPost;
 	}
 
+	public function updatePost($db, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id){
+		$query = "UPDATE jobpost SET position=?, field=?, salary=?, type=?, description=?, requirements=?, location=?, contact=? WHERE id=?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("ssssssssi", $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
+		$stmt->execute();
+
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			header("location: ../view/employer_post.php?success=successupdate");
+		} else {
+			header("location: ../view/employer_post.php?error=errorupdate");
+		}
+	}
+
+	public function deletePost($db, $id) {
+		$this->deleteMatch($db, $id);
+		$query = "DELETE FROM jobpost WHERE id = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("i", $id);
+		$stmt->execute();
+
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			header("location: ../view/employer_post.php?success=successdelete");
+		} else {
+			header("location: ../view/employer_post.php?error=errordelete");
+		}
+	}
+
 	public function getJobMatch($db, $user){
 		require_once '../model/job_object.php';
 		$jobMatch = array();
@@ -162,6 +197,14 @@ class MatchmakingModel{
 			}
 		}
 		return $found;
+	}
+
+	public function deleteMatch($db, $id) {
+		$query = "DELETE FROM jobmatch WHERE jobPostID = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("i", $id);
+		$stmt->execute();
+		$stmt->close();
 	}
 	
 }

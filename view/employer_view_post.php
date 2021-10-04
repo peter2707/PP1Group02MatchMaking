@@ -1,13 +1,32 @@
 <?php
 $id = $_GET['id'];
 require_once '../controller/matchmaking_controller.php';
+require_once '../controller/session_controller.php';
 // check if the session has not started yet
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 // call controllers
 $mmc = new MatchmakingController();
+$sc = new SessionController();
 $jobpost = $mmc->getJobPostByID($id);
+
+
+if (isset($_POST['update'])) {
+    $position = $_POST['position'];
+    $field = $_POST['field'];
+    $salary = $_POST['salary'];
+    $description = $_POST['description'];
+    $requirements = $_POST['requirements'];
+    $location = $_POST['location'];
+    $type = $_POST['type'];
+    $contact = $_POST['contact'];
+
+    $mmc->updatePost($position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
+}elseif(isset($_POST['delete'])){
+    $mmc->deletePost($id);
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -114,7 +133,7 @@ $jobpost = $mmc->getJobPostByID($id);
                             <h3 class="mb-3">Job Requirements</h3>
                             <hr>
                             <textarea class="form-control" id="requirementsTextArea" placeholder="Requirements" name="requirements" rows="3" required>
-                                <?php echo htmlspecialchars_decode($jobpost->requirement) ?>
+                                <?php echo htmlspecialchars_decode($jobpost->requirements) ?>
                             </textarea>
                         </div><br>
                         <div class="row">
@@ -167,10 +186,14 @@ $jobpost = $mmc->getJobPostByID($id);
                                 </div>
                             </div>
                         </div>
-
-
-
-                        <button class="btn btn-primary btn-lg mt-1 w-100 fw-bolder" type="submit" name="update">Update</button>
+                        <div class="row">
+                            <div class="col text-end">
+                                <button class="btn btn-danger btn-lg mt-1 w-50 fw-bolder" type="submit" name="delete" onclick="javascript:return confirm('Are you sure you want to delete your post?');">Delete</button>
+                            </div>
+                            <div class="col text-start">
+                                <button class="btn btn-primary btn-lg mt-1 w-50 fw-bolder" type="submit" name="update">Update</button>
+                            </div>
+                        </div>
                     </form>
                 </div>
 

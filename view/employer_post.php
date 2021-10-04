@@ -50,10 +50,12 @@ if (isset($_POST['post'])) {
                     if (isset($_GET["error"])) {
                         if ($_GET["error"] == "emptyinput") {
                             echo "Please complete all required columns!";
-                        } elseif ($_GET["error"] == "notanumber") {
-                            echo "Contact must be a number!";
-                        } else if ($_GET["error"] == "fieldnull") {
+                        }else if ($_GET["error"] == "fieldnull") {
                             echo "You have to choose a field of expertise";
+                        }else if ($_GET["error"] == "errorupdate") {
+                            echo "There was a problem while trying to update.";
+                        }else if ($_GET["error"] == "errordelete") {
+                            echo "There was a problem while trying to delete.";
                         }
                     }
                     ?>
@@ -64,6 +66,10 @@ if (isset($_POST['post'])) {
                     if (isset($_GET["success"])) {
                         if ($_GET["success"] == "posted") {
                             echo "You have posted a new job! You can view it in the table below.";
+                        }elseif ($_GET["success"] == "successupdate") {
+                            echo "Your post have been updated successfully.";
+                        }elseif ($_GET["success"] == "successdelete") {
+                            echo "Your post have been deleted successfully.";
                         }
                     }
                     ?>
