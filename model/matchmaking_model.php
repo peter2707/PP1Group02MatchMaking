@@ -38,11 +38,29 @@ class MatchmakingModel{
 			$result2 = $db->query("SELECT COUNT(*) as totalmatches FROM jobmatch WHERE jobPostID='$jobID'");
 			$row2 = $result2->fetch_assoc();
 			$countMatch = $row2['totalmatches'];
-			$jobposts[$i] = new EmpJobPost($row['id'], $row['position'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['contact'], $countMatch);
+			$jobposts[$i] = new EmpJobPost($row['id'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['contact'], $countMatch);
 		}
 
 		$result->free();
 		return $jobposts;
+	}
+
+	public function getJobPostByID($db, $jobID){
+		require_once '../model/job_object.php';
+		$query = "SELECT * FROM jobpost 
+					WHERE id='$jobID'";
+		$result = $db->query($query);
+		$row = $result->fetch_assoc();
+		
+		$result2 = $db->query("SELECT COUNT(*) as totalmatches FROM jobmatch WHERE jobPostID='$jobID'");
+		$row2 = $result2->fetch_assoc();
+		$countMatch = $row2['totalmatches'];
+
+		$jobPost = new EmpJobPost($row['id'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['contact'], $countMatch);
+		$result->free();
+		$db->close();
+
+		return $jobPost;
 	}
 
 	public function getJobMatch($db, $user){
@@ -78,7 +96,7 @@ class MatchmakingModel{
 		$result2 = $db->query("SELECT rating as Emprating FROM employer WHERE username='$employer'");
 		$row2 = $result2->fetch_assoc();
 		$rating = $row2['Emprating'];
-		
+
 		$jobMatch = new JobMatch($row['id'], $row['employer'], $rating, $row['contact'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage']);
 		$result->free();
 		$db->close();

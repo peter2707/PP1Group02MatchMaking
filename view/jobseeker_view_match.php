@@ -9,11 +9,6 @@ if (session_status() === PHP_SESSION_NONE) {
 $mmc = new MatchmakingController();
 $jobmatch = $mmc->getJobMatchByID($id);
 
-if($_POST["accept"]) {
-    
-    mail("prummonkolsophearith@gmail.com", "Accept Job",
-    $_POST["body"]. "From: jane@janedoe.com");
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -33,8 +33,6 @@ class MatchmakingController {
     public function postJob($position, $field, $salary, $type, $description, $requirements, $location, $username, $contact){
         if(!$position||!$salary||!$type||!$description||!$requirements||!$location||!$username||!$contact){
             header("location: ../view/employer_post.php?error=emptyinput");
-        }elseif(!is_numeric($contact)){
-            header("location: ../view/employer_post.php?error=notanumber");
         }elseif(!$field){
             header("location: ../view/employer_post.php?error=fieldnull");
         }else{
@@ -50,6 +48,13 @@ class MatchmakingController {
         include '../model/db_connection.php';
         $mmm = new MatchmakingModel();
         return $mmm->getJobPosts($db, $username);
+    }
+
+    public function getJobPostByID($jobID){
+        require_once '../model/matchmaking_model.php';
+        include '../model/db_connection.php';
+        $mmm = new MatchmakingModel();
+        return $mmm->getJobPostByID($db, $jobID);
     }
 
 }
