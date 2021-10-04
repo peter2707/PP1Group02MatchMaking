@@ -35,6 +35,7 @@
 
     <!-- Scripts -->
     <script src="../js/jquery-3.6.0.min.js"></script>
+    <script src="../js/ckeditor/ckeditor.js"></script>
 
     <!-- Favicon  -->
     <link rel="icon" href="../images/favicon.png">

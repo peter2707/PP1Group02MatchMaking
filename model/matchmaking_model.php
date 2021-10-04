@@ -1,6 +1,13 @@
 <?php
 class MatchmakingModel{
 
+	public function postNewJob($db, $position, $field, $salary, $type, $description, $requirements, $location, $username, $contact){
+		$query = "INSERT INTO jobpost (position, field, salary, type, description, requirements, location, employer, contact) VALUES ('$position', '$field', '$salary', '$type', '$description', '$requirements', '$location', '$username', '$contact')";
+		mysqli_query($db, $query) or die(mysqli_error($db));
+		$db->close();
+		header("location: ../view/employer_post.php?success=posted");
+	}
+	
 	public function getAllPosts($db){
 		require_once '../model/job_object.php';
 		$jobposts = array();
@@ -18,17 +25,61 @@ class MatchmakingModel{
 		return $jobposts;
 	}
 
+	public function getJobPosts($db, $username){
+		require_once '../model/job_object.php';
+		$jobposts = array();
+
+		$query = "SELECT * FROM jobpost WHERE employer='$username'";
+		$result = $db->query($query) or die(mysqli_error($db));
+		$numResults = $result->num_rows;
+		for ($i = 0; $i < $numResults; $i++) {
+			$row = $result->fetch_assoc();
+			$jobID=$row['id'];
+			$result2 = $db->query("SELECT COUNT(*) as totalmatches FROM jobmatch WHERE jobPostID='$jobID'");
+			$row2 = $result2->fetch_assoc();
+			$countMatch = $row2['totalmatches'];
+			$jobposts[$i] = new EmpJobPost($row['id'], $row['position'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['contact'], $countMatch);
+		}
+
+		$result->free();
+		return $jobposts;
+	}
+
 	public function getJobMatch($db, $user){
 		require_once '../model/job_object.php';
 		$jobMatch = array();
-		$query = "SELECT * FROM jobpost INNER JOIN jobmatch ON jobpost.employer = jobmatch.employer	WHERE jobmatch.jobSeeker='$user' AND jobmatch.jobPostID = jobpost.id";
+		$query = "SELECT * FROM jobpost 
+					INNER JOIN jobmatch ON jobpost.employer = jobmatch.employer	
+					WHERE jobmatch.jobSeeker='$user' 
+					AND jobmatch.jobPostID = jobpost.id";
 		$result = $db->query($query);
 		$numResults = $result->num_rows;
 
 		for ($i = 0; $i < $numResults; $i++) {
 			$row = $result->fetch_assoc();
-			$jobMatch[$i] = new JobMatch($row['id'], $row['employer'], $row['contact'], $row['position'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage']);
+			$jobMatch[$i] = new JobMatch($row['id'], $row['employer'], '', $row['contact'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage']);
 		}
+		$result->free();
+		$db->close();
+
+		return $jobMatch;
+	}
+
+	public function getJobMatchByID($db, $jobID){
+		require_once '../model/job_object.php';
+		$query = "SELECT * FROM jobpost 
+					INNER JOIN jobmatch ON jobpost.employer = jobmatch.employer 
+					WHERE jobmatch.id='$jobID' 
+					AND jobmatch.jobPostID = jobpost.id";
+		$result = $db->query($query);
+		$row = $result->fetch_assoc();
+
+		$employer = $row['employer'];
+		$result2 = $db->query("SELECT rating as Emprating FROM employer WHERE username='$employer'");
+		$row2 = $result2->fetch_assoc();
+		$rating = $row2['Emprating'];
+		
+		$jobMatch = new JobMatch($row['id'], $row['employer'], $rating, $row['contact'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage']);
 		$result->free();
 		$db->close();
 
@@ -93,33 +144,6 @@ class MatchmakingModel{
 			}
 		}
 		return $found;
-	}
-
-	public function postNewJob($db, $position, $salary, $type, $description, $requirements, $location, $username, $contact){
-		$query = "INSERT INTO jobpost (position, salary, type, description, requirements, location, employer, contact) VALUES ('$position', '$salary', '$type', '$description', '$requirements', '$location', '$username', '$contact')";
-		mysqli_query($db, $query) or die(mysqli_error($db));
-		$db->close();
-		header("location: ../view/employer_post.php?success=posted");
-	}
-
-	public function getJobPosts($db, $username){
-		require_once '../model/job_object.php';
-		$jobposts = array();
-
-		$query = "SELECT * FROM jobpost WHERE employer='$username'";
-		$result = $db->query($query) or die(mysqli_error($db));
-		$numResults = $result->num_rows;
-		for ($i = 0; $i < $numResults; $i++) {
-			$row = $result->fetch_assoc();
-			$jobID=$row['id'];
-			$result2 = $db->query("SELECT COUNT(*) as totalmatches FROM jobmatch WHERE jobPostID='$jobID'");
-			$row2 = $result2->fetch_assoc();
-			$countMatch = $row2['totalmatches'];
-			$jobposts[$i] = new EmpJobPost($row['id'], $row['position'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['contact'], $countMatch);
-		}
-
-		$result->free();
-		return $jobposts;
 	}
 	
 }

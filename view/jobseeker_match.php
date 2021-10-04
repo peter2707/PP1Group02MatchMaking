@@ -14,6 +14,19 @@ if (isset($_POST['match'])) {
     $type = $_POST['type'];
 
     $mmc->findMatch($position, $salary, $location, $type, $sc->getUserName());
+}else{
+    require_once '../controller/matchmaking_controller.php';
+    require_once '../controller/session_controller.php';
+    // check if the session has not started yet
+    if (session_status() === PHP_SESSION_NONE) {
+        session_start();
+    }
+
+    // call controllers
+    $sc = new SessionController();
+    $mmc = new MatchmakingController();
+    $jobmatches = array();
+    $jobmatches = $mmc->getAllMatches($sc->getUserName());
 }
 ?>
 
@@ -133,18 +146,6 @@ if (isset($_POST['match'])) {
 
     <div class="col-md-6 offset-md-3 mt-5 mb-5" style="min-height: 200px;">
         <?php
-        require_once '../controller/matchmaking_controller.php';
-        require_once '../controller/session_controller.php';
-        // check if the session has not started yet
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        // call controllers
-        $sc = new SessionController();
-        $mmc = new MatchmakingController();
-        $jobmatches = array();
-        $jobmatches = $mmc->getAllMatches($sc->getUserName());
         if(count($jobmatches) < 1){
             echo "<h3>You don't have any match yet.</h3> <small>To find match, click on the <i class='fa fa-search' aria-hidden='true'></i> button</small>";
         }else{
@@ -164,7 +165,7 @@ if (isset($_POST['match'])) {
                 echo "                    <th scope='col'>Type</th>";
                 echo "                    <th scope='col'>Location</th>";
                 echo "                    <th scope='col'>Match Percentage</th>";
-                echo "                    <th scope='col'></th>";
+                echo "                    <th scope='col'>Action</th>";
                 echo "                </tr>";
                 echo "            </thead>";
                 echo "            <tbody>";
@@ -175,7 +176,7 @@ if (isset($_POST['match'])) {
                 echo "                    <td scope='row'>$match->type</td>";
                 echo "                    <td scope='row'>$match->location</td>";
                 echo "                    <td scope='row'>$match->percentage %</td>";
-                createOpenButton('open', $match->id, 'Open', 'match.php');
+                createOpenButton('id', $match->id, 'Open', 'jobseeker_view_match.php');
                 echo "                </tr>";
             }
                 echo "            </tbody>";
