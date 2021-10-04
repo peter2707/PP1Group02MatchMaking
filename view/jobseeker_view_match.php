@@ -105,7 +105,7 @@ $jobmatch = $mmc->getJobMatchByID($id);
                     <br><br>
                     <h3 class="mb-3">Job Requirements</h3>
                     <hr>
-                    <p><?php echo htmlspecialchars_decode("$jobmatch->requirement") ?></p>
+                    <p><?php echo htmlspecialchars_decode("$jobmatch->requirements") ?></p>
                     <br><br>
                     <h3 class="mb-3">Play it safe</h3>
                     <hr>

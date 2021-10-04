@@ -57,4 +57,18 @@ class MatchmakingController {
         return $mmm->getJobPostByID($db, $jobID);
     }
 
+    public function updatePost($position, $field, $salary, $type, $description, $requirements, $location, $contact, $id){
+        require_once '../model/matchmaking_model.php';
+        include '../model/db_connection.php';
+        $mmm = new MatchmakingModel();
+        return $mmm->updatePost($db, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
+    }
+
+    public function deletePost($id) {
+        require_once '../model/matchmaking_model.php';
+        include '../model/db_connection.php';
+        $mmm = new MatchmakingModel();
+        $mmm->deletePost($db, $id);
+    }
+
 }
