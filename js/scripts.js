@@ -219,7 +219,7 @@ var fieldOptions = {
     val26: 'Trades & Services'
 };
 
-var fieldSelect = $('#job-seeker-form-field');
+var fieldSelect = $('#fieldOfExpertise-form');
 $.each(fieldOptions, function(val, text) {
     fieldSelect.append(
         $('<option></option>').val(text).html(text)
@@ -255,6 +255,7 @@ function showNewPostForm() {
         newpost.classList.remove('h-show');
         document.getElementById("newPostBtn").innerHTML = "<i class='fa fa-paper-plane' aria-hidden='true'></i>";
         document.getElementById("positionInput").disabled = true;
+        document.getElementById("fieldOfExpertise-form").disabled = true;
         document.getElementById("descriptionTextArea").disabled = true;
         document.getElementById("requirementsTextArea").disabled = true;
         document.getElementById("contactInput").disabled = true;
@@ -266,6 +267,7 @@ function showNewPostForm() {
         newpost.classList.add('h-show');
         document.getElementById("newPostBtn").innerHTML = "<i class='fa fa-chevron-up' aria-hidden='true'></i>";
         document.getElementById("positionInput").disabled = false;
+        document.getElementById("fieldOfExpertise-form").disabled = false;
         document.getElementById("match-salary-field").disabled = false;
         document.getElementById("match-location-field").disabled = false;
         document.getElementById("job-type-field").disabled = false;
@@ -275,6 +277,18 @@ function showNewPostForm() {
         document.getElementById("contactInput").disabled = false;
     }
 }
+
+CKEDITOR.replace('descriptionTextArea', {
+    extraPlugins: 'editorplaceholder',
+    editorplaceholder: 'Job Descriptions...',
+    height: "150px"
+});
+
+CKEDITOR.replace('requirementsTextArea', {
+    extraPlugins: 'editorplaceholder',
+    editorplaceholder: 'Job requirements...',
+    height: "150px"
+});
 
 //window show alert when accept cookies
 // window.addEventListener("cookieAlertAccept", function() {

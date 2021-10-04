@@ -232,7 +232,7 @@ echo <<<END
                                                     <h6 class="mt-2 ms-5">Field of Expertise</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary text-start">
-                                                    <select class="form-select" aria-label=".form-select-lg example" id="job-seeker-form-field" name="field">
+                                                    <select class="form-select" aria-label=".form-select-lg example" id="fieldOfExpertise-form" name="field" required>
                                                         <option readonly selected value="$user->field">$user->field</option>
                                                     </select>
                                                 </div>
