@@ -9,6 +9,17 @@ if (session_status() === PHP_SESSION_NONE) {
 $mmc = new MatchmakingController();
 $jobmatch = $mmc->getJobMatchByID($id);
 
+if (isset($_POST['deny'])) {
+
+}
+
+function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPage, $rating){
+    echo "<form action=$actionPage method=\"GET\">";
+    echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
+    echo "<button type='submit' class='btn btn-secondary'>$buttonText &nbsp;|&nbsp; $rating <i class='fa fa-star' style='color:#FFD700' aria-hidden='true'></i></button>";
+    echo "</form>";
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -41,12 +52,18 @@ $jobmatch = $mmc->getJobMatchByID($id);
                         <h6 class="text-muted"><?php echo "$jobmatch->field"; ?></h6>
                     </div>
                     <div class="col row text-end">
-                        <p class="text-muted"><?php echo "$jobmatch->employer &nbsp;&nbsp; $jobmatch->rating <i class='fa fa-star' style='color:#FFD700' aria-hidden='true'></i>"; ?> </p>
+                        <p class="text-muted">
+                            <?php 
+                                createUserLinkButton('username', $jobmatch->employer, $jobmatch->employer, 'jobseeker_view_employer.php', $jobmatch->rating);
+                            ?> 
+                        </p>
                     </div>
                 </div>
                 <div class="text-start">
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#acceptModal">Accept</button>
-                    <button class="btn btn-secondary">Deny</button>
+                    <button class="btn btn-primary" style="float:left" data-bs-toggle="modal" data-bs-target="#acceptModal">Accept</button>
+                    <form method="POST" style="float:left; margin-left:20px;">
+                        <button class="btn btn-danger" name="deny" type="submit">Deny</button>
+                    </form>
 
                     <!-- Modal -->
                     <div class="modal fade" id="acceptModal" tabindex="-1" aria-labelledby="acceptModalLabel" aria-hidden="true">
@@ -56,33 +73,21 @@ $jobmatch = $mmc->getJobMatchByID($id);
                                     <h5 class="modal-title" id="acceptModalLabel">Accept Match</h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                 </div>
-                                <form method="POST" enctype="multipart/form-data">
-                                    <div class="modal-body">
-                                        <div class="text-start">
-                                            <h6>Employer: <?php echo "$jobmatch->employer "; ?></h6>
-                                            <p>Contact: <?php echo "$jobmatch->contact "; ?></p>
-                                        </div>
-                                        <hr>
-                                        <small id="message">You can also send a message to your employer here</small>
-                                        <div class="">
-                                            <form action="mailto:contact@yourdomain.com" method="POST" enctype="multipart/form-data" name="EmailForm">
-                                                <div class="form-floating mb-3">
-                                                    <input type="text" class="form-control" id="nameInput" placeholder="Full Name" name="name" required>
-                                                    <label for="nameInput">Full Name</label>
-                                                </div>
-                                                <div class="form-floating mb-3">
-                                                    <input type="email" class="form-control" id="emailInput" placeholder="Email" name="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" title="Must contain email format E.g. johndoe@mail.com" required>
-                                                    <label for="emailInput">Your Email Address</label>
-                                                </div>
-                                                <textarea class="form-control" id="emailTextArea" placeholder="Message..." name="body" rows="5" required></textarea>
-                                            </form>
-                                        </div>
+                                <div class="modal-body">
+                                    <div class="text-start">
+                                        <h6><?php echo "$jobmatch->position"; ?></h6>
+                                        <small><?php echo "$jobmatch->employer"; ?></small>
+                                        <p>Contact: <?php echo "$jobmatch->contact"; ?></p>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit" name="accept" class="btn btn-primary">Submit</button>
-                                    </div>
-                                </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <?php echo "
+                                        <a href='mailto:$jobmatch->contact?subject=Subject...&body=Message...'>
+                                            <button class='btn btn-primary'>Send Email</button>
+                                        </a>
+                                    "; ?>
+                                </div>
                             </div>
                         </div>
                     </div>

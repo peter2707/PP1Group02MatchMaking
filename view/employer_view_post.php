@@ -21,8 +21,15 @@ if (isset($_POST['update'])) {
     $location = $_POST['location'];
     $type = $_POST['type'];
     $contact = $_POST['contact'];
-
-    $mmc->updatePost($position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
+    if($position == $jobpost->position && $field == $jobpost->field && $salary == $jobpost->salary 
+    && $description == $jobpost->description && $requirements == $jobpost->requirements 
+    && $location == $jobpost->location && $location == $jobpost->location 
+    && $type == $jobpost->type && $contact == $jobpost->contact){
+        $script = "<script>window.location = '../view/employer_post.php?error=samevalue';</script>";
+		echo $script;
+    }else{
+        $mmc->updatePost($position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
+    }
 }elseif(isset($_POST['delete'])){
     $mmc->deletePost($id);
 }

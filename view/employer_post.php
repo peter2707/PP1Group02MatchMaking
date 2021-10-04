@@ -56,6 +56,8 @@ if (isset($_POST['post'])) {
                             echo "There was a problem while trying to update.";
                         }else if ($_GET["error"] == "errordelete") {
                             echo "There was a problem while trying to delete.";
+                        }else if ($_GET["error"] == "samevalue") {
+                            echo "You didn't make any changes.";
                         }
                     }
                     ?>

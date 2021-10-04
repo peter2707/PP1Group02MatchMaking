@@ -34,5 +34,12 @@ class UserController {
         $userModel = new UserModel();
         $userModel->changeProfilePicture($db, $file, $username, $userType);
     }
+
+    public function getUserByName($usertype, $username) {
+        require_once '../model/user_model.php';
+        require_once '../model/db_connection.php';
+        $userModel = new UserModel();
+        return $userModel->getUserByName($db, $usertype, $username);
+    }
 }
 ?> 

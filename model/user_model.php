@@ -28,6 +28,30 @@ class UserModel {
 		}
 	}
 
+	public function getUserByName($db, $usertype, $username) {
+		include '../model/user_object.php';
+		$query = "SELECT * FROM $usertype WHERE username = ?";
+		$stmtEmp = $db->prepare($query);
+		$stmtEmp->bind_param("s", $username);
+
+		$stmtEmp->execute();
+		$result = $stmtEmp->get_result();
+		$stmtEmp->close();
+		$row = $result->fetch_assoc();
+		$db->close();
+
+		if($usertype == "jobseeker"){
+			$jobseeker = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['Image']);
+			return $jobseeker;
+		}elseif($usertype == "employer"){
+			$employer = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['rating'], $row['image']);
+			return $employer;
+		}elseif($usertype == "admin"){
+			$admin = new Admin($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['image']);
+			return $admin;
+		}
+	}
+
 	public function updateJobSeeker($db, $firstName, $lastName, $password, $dob, $phone, $email, $field, $username) {
 		$query = "UPDATE jobseeker SET firstName=?, lastName=?, password=?, dateOfBirth=?, phone=?, email=?, field=? WHERE username = ?";
 		$stmt = $db->prepare($query);
