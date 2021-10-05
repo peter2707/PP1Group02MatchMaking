@@ -26,9 +26,10 @@ class EmpJobPost{
 }
 
 class JobMatch{
-    public function __construct($id, $employer, $rating, $contact, $position, $field, $salary, $type, $description, $requirements, $location, $percentage) {
+    public function __construct($id, $employer, $jobseeker, $rating, $contact, $position, $field, $salary, $type, $description, $requirements, $location, $percentage) {
         $this->id = $id;
         $this->employer = $employer;
+        $this->jobseeker = $jobseeker;
         $this->rating = $rating;
         $this->contact = $contact;
         $this->position = $position;

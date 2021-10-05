@@ -72,6 +72,8 @@ if (isset($_POST['post'])) {
                             echo "Your post have been updated successfully.";
                         }elseif ($_GET["success"] == "successdelete") {
                             echo "Your post have been deleted successfully.";
+                        }elseif ($_GET["success"] == "successdeny") {
+                            echo "Match denied successfully";
                         }
                     }
                     ?>
@@ -189,8 +191,7 @@ if (isset($_POST['post'])) {
         if (count($jobposts) < 1) {
             echo "<h3>You don't have any post yet.</h3> <small>To make a new post, click on the <i class='fa fa-paper-plane' aria-hidden='true'></i> button and fill in the job details</small>";
         } else {
-            function createOpenButton($hiddenName, $hiddenValue, $buttonText, $actionPage)
-            {
+            function createOpenButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
                 echo "<td>";
                 echo "  <form action=$actionPage method=\"GET\">";
                 echo "      <input type=\"hidden\" name=$hiddenName value=$hiddenValue>";

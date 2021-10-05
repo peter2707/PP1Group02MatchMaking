@@ -81,7 +81,7 @@ class MatchmakingModel{
 	}
 
 	public function deletePost($db, $id) {
-		$this->deleteMatch($db, $id);
+		$this->deleteMatchByPostID($db, $id);
 		$query = "DELETE FROM jobpost WHERE id = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("i", $id);
@@ -110,7 +110,27 @@ class MatchmakingModel{
 
 		for ($i = 0; $i < $numResults; $i++) {
 			$row = $result->fetch_assoc();
-			$jobMatch[$i] = new JobMatch($row['id'], $row['employer'], '', $row['contact'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage']);
+			$jobMatch[$i] = new JobMatch($row['id'], $row['employer'], $row['jobSeeker'], '', $row['contact'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage']);
+		}
+		$result->free();
+		$db->close();
+
+		return $jobMatch;
+	}
+
+	public function getJobMatchbyPostID($db, $postID, $employer){
+		require_once '../model/job_object.php';
+		$jobMatch = array();
+		$query = "SELECT * FROM jobpost 
+					INNER JOIN jobmatch ON jobpost.employer = jobmatch.employer	
+					WHERE jobmatch.employer= '$employer' 
+					AND jobmatch.jobPostID = '$postID'";
+		$result = $db->query($query);
+		$numResults = $result->num_rows;
+
+		for ($i = 0; $i < $numResults; $i++) {
+			$row = $result->fetch_assoc();
+			$jobMatch[$i] = new JobMatch($row['id'], $row['employer'], $row['jobSeeker'], '', $row['contact'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage']);
 		}
 		$result->free();
 		$db->close();
@@ -132,7 +152,7 @@ class MatchmakingModel{
 		$row2 = $result2->fetch_assoc();
 		$rating = $row2['Emprating'];
 
-		$jobMatch = new JobMatch($row['id'], $row['employer'], $rating, $row['contact'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage']);
+		$jobMatch = new JobMatch($row['id'], $row['employer'], $row['jobSeeker'], $rating, $row['contact'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage']);
 		$result->free();
 		$db->close();
 
@@ -199,12 +219,35 @@ class MatchmakingModel{
 		return $found;
 	}
 
-	public function deleteMatch($db, $id) {
+	public function deleteMatchByPostID($db, $id) {
 		$query = "DELETE FROM jobmatch WHERE jobPostID = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("i", $id);
 		$stmt->execute();
 		$stmt->close();
+	}
+
+	public function denyMatch($db, $id, $usertype) {
+		$query = "DELETE FROM jobmatch WHERE id = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("i", $id);
+		$stmt->execute();
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+
+		if ($affectedRows == 1) {
+			if($usertype == 'jobseeker'){
+				header("location: ../view/jobseeker_match.php?success=successdeny");
+			}else{
+				header("location: ../view/employer_post.php?success=successdeny");
+			}
+		} else {
+			if($usertype == 'jobseeker'){
+				header("location: ../view/jobseeker_match.php?error=errordeny");
+			}else{
+				header("location: ../view/employer_post.php?error=errordeny");
+			}
+		}
 	}
 	
 }

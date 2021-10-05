@@ -65,9 +65,13 @@ if (isset($_POST['update'])) {
                 <div class="row">
                     <div class="col mb-5 text-start">
                         <h6 class="text-muted"><?php echo "$jobpost->field"; ?></h6>
+                        <small>Match: <?php echo "$jobpost->matches"; ?> times</small>
                     </div>
                     <div class="col row text-end">
-                        <p class="text-muted">Match: <?php echo "$jobpost->matches"; ?> times</p>
+                        <form action='employer_view_matches.php' method='GET'>
+                            <?php echo "<input type='hidden' name='id' value='$id'>"; ?>
+                            <button type='submit' class='btn btn-primary'>Matches</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -198,7 +202,7 @@ if (isset($_POST['update'])) {
                                 <button class="btn btn-danger btn-lg mt-1 w-50 fw-bolder" type="submit" name="delete" onclick="javascript:return confirm('Are you sure you want to delete your post?');">Delete</button>
                             </div>
                             <div class="col text-start">
-                                <button class="btn btn-primary btn-lg mt-1 w-50 fw-bolder" type="submit" name="update">Update</button>
+                                <button class="btn btn-success btn-lg mt-1 w-50 fw-bolder" type="submit" name="update">Update</button>
                             </div>
                         </div>
                     </form>

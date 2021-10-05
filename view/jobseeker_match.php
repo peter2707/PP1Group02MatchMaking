@@ -1,10 +1,11 @@
 <?php
+require_once '../controller/matchmaking_controller.php';
+require_once '../controller/session_controller.php';
+// check if the session has not started yet
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 if (isset($_POST['match'])) {
-    require_once '../controller/matchmaking_controller.php';
-    require_once '../controller/session_controller.php';
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
     $mmc = new MatchmakingController();
     $sc = new SessionController();
 
@@ -15,13 +16,6 @@ if (isset($_POST['match'])) {
 
     $mmc->findMatch($position, $salary, $location, $type, $sc->getUserName());
 }else{
-    require_once '../controller/matchmaking_controller.php';
-    require_once '../controller/session_controller.php';
-    // check if the session has not started yet
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-
     // call controllers
     $sc = new SessionController();
     $mmc = new MatchmakingController();
@@ -69,8 +63,10 @@ if (isset($_POST['match'])) {
                     <?php
                     // Account created message
                     if (isset($_GET["success"])) {
-                        if ($_GET["success"] == "posted") {
-                            echo "You have posted a new job! You can view it in the table below.";
+                        if ($_GET["success"] == "matchfound") {
+                            echo "You have a new match! You can view it in the table below.";
+                        }elseif ($_GET["success"] == "successdeny") {
+                            echo "Match denied successfully";
                         }
                     }
                     ?>

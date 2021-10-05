@@ -15,6 +15,13 @@ class MatchmakingController {
         return $mmm->getJobMatchByID($db, $jobID);
     }
 
+    public function getJobMatchByPostID($jobID, $employer){
+        require_once '../model/matchmaking_model.php';
+        include '../model/db_connection.php';
+        $mmm = new MatchmakingModel();
+        return $mmm->getJobMatchByPostID($db, $jobID, $employer);
+    }
+
     public function findMatch($position, $salary, $location, $type, $jobseeker){
         if(!$position||!$salary||!$type||!$location||!$jobseeker){
             header("location: ../view/jobseeker_match.php?error=emptyinput");
@@ -69,6 +76,13 @@ class MatchmakingController {
         include '../model/db_connection.php';
         $mmm = new MatchmakingModel();
         $mmm->deletePost($db, $id);
+    }
+
+    public function denyMatch($id, $usertype){
+        require_once '../model/matchmaking_model.php';
+        include '../model/db_connection.php';
+        $mmm = new MatchmakingModel();
+        $mmm->denyMatch($db, $id, $usertype);
     }
 
 }

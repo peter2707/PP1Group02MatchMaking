@@ -92,7 +92,7 @@ if(isset($_POST['register'])){
                             <label class="form-check-label" for="employer">Employer</label>
                         </div>
                         <div class="form-floating mb-3" id="job-seeker-form">
-                            <select class="form-select mb-3" aria-label=".form-select-lg example" id="fieldOfExpertise-form" name="field" required>
+                            <select class="form-select mb-3" aria-label=".form-select-lg example" id="fieldOfExpertise-form" name="field">
                                 <option disabled selected value="">--- Choose one ---</option>
                             </select>
                             <label for="fieldOfExpertise-form">Field of Expertise</label>

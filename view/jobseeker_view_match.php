@@ -1,5 +1,6 @@
 <?php
 $id = $_GET['id'];
+require_once '../controller/session_controller.php';
 require_once '../controller/matchmaking_controller.php';
 // check if the session has not started yet
 if (session_status() === PHP_SESSION_NONE) {
@@ -7,13 +8,14 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 // call controllers
 $mmc = new MatchmakingController();
+$sc = new SessionController();
 $jobmatch = $mmc->getJobMatchByID($id);
 
 if (isset($_POST['deny'])) {
+    $mmc->denyMatch($id, $sc->getUserType());
 }
 
-function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPage, $rating)
-{
+function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPage, $rating) {
     echo "<form action=$actionPage method=\"GET\">";
     echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
     echo "<button type='submit' class='btn btn-secondary'>$buttonText &nbsp;|&nbsp; $rating <i class='fa fa-star' style='color:#FFD700' aria-hidden='true'></i></button>";
@@ -54,7 +56,7 @@ function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPag
                     <div class="col row text-end">
                         <p class="text-muted">
                             <?php
-                            createUserLinkButton('username', $jobmatch->employer, $jobmatch->employer, 'jobseeker_view_employer.php', $jobmatch->rating);
+                                createUserLinkButton('employer', $jobmatch->employer, $jobmatch->employer, 'user_view_other.php', $jobmatch->rating);
                             ?>
                         </p>
                     </div>
@@ -62,7 +64,7 @@ function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPag
                 <div class="text-start">
                     <button class="btn btn-primary" style="float:left" data-bs-toggle="modal" data-bs-target="#acceptModal">Accept</button>
                     <form method="POST" style="float:left; margin-left:20px;">
-                        <button class="btn btn-danger" name="deny" type="submit">Deny</button>
+                        <button class="btn btn-danger" onclick="return confirm('Are you sure you want to deny this match ?')" name="deny" type="submit">Deny</button>
                     </form>
 
                     <!-- Modal -->
