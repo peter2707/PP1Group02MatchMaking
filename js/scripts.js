@@ -278,6 +278,26 @@ function showNewPostForm() {
     }
 }
 
+function edit() {
+    var inputField = document.querySelectorAll("#linkedinLink, #githubLink, #twitterLink, #instagramLink, #facebookLink");
+    for (var i = 0; i < inputField.length; i++) {
+        inputField[i].disabled = false;
+    }
+    document.getElementById("editInputLink").style.display = 'none';
+    document.getElementById("cancelInputLink").style.display = '';
+    document.getElementById("doneInputLink").style.display = '';
+}
+
+function cancel() {
+    var inputField = document.querySelectorAll("#linkedinLink, #githubLink, #twitterLink, #instagramLink, #facebookLink");
+    for (var i = 0; i < inputField.length; i++) {
+        inputField[i].disabled = true;
+    }
+    document.getElementById("editInputLink").style.display = '';
+    document.getElementById("cancelInputLink").style.display = 'none';
+    document.getElementById("doneInputLink").style.display = 'none';
+}
+
 CKEDITOR.replace('descriptionTextArea', {
     extraPlugins: 'editorplaceholder',
     editorplaceholder: 'Job Descriptions...',

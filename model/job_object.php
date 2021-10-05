@@ -42,4 +42,15 @@ class JobMatch{
     }
 }
 
+class Social{
+    public function __construct($username, $linkedin, $github, $twitter, $instagram, $facebook) {
+        $this->username = $username;
+        $this->linkedin = $linkedin;
+        $this->github = $github;
+        $this->twitter = $twitter;
+        $this->instagram = $instagram;
+        $this->facebook = $facebook;
+    }
+}
+
 ?>

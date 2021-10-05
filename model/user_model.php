@@ -132,4 +132,69 @@ class UserModel {
 		}
 	}
 
+	public function getSocialLink($db, $username){
+		include '../model/job_object.php';
+		$query = "SELECT * FROM social WHERE username = '$username'";
+		$stmtEmp = $db->prepare($query);
+		$stmtEmp->execute();
+		$result = $stmtEmp->get_result();
+		$row = $result->fetch_assoc();
+		if(mysqli_num_rows($result)==0){
+			$social = new Social('Not added', 'Not added', 'Not added', 'Not added', 'Not added', 'Not added');
+		}else{
+			$social = new Social($row['username'], $row['linkedin'], $row['github'], $row['twitter'], $row['instagram'], $row['facebook']);
+		}
+		$stmtEmp->close();
+		$row = $result->fetch_assoc();
+		$db->close();
+
+		
+		return $social;
+	}
+	
+	public function addSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook){
+		$query = "INSERT INTO social (username, linkedin, github, twitter, instagram, facebook) 
+            VALUES ('$username', '$linkedin', '$github', '$twitter', '$instagram', '$facebook')";
+		mysqli_query($db, $query) or die(mysqli_error($db));
+		$db->close();
+		$script = "<script>window.location = '../view/user_profile.php?success=successupdate';</script>";
+		echo $script;
+	}
+
+	public function editSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook){
+		$queryCheck = "SELECT count(*) FROM social WHERE username=?";
+		$stmt = $db->prepare($queryCheck);
+		$stmt->bind_param("s", $username);
+		$stmt->execute();
+		
+		$result = $stmt->get_result();
+		$stmt->close();
+
+		if (!$result) {
+			echo "Couldn't check at the moment";
+			exit;
+		}
+		$row = $result->fetch_row();
+		if ($row[0] > 0) {
+			$query = "UPDATE social SET linkedin=?, github=?, twitter=?, instagram=?, facebook=? WHERE username = ?";
+			$stmt = $db->prepare($query);
+			$stmt->bind_param("ssssss", $linkedin, $github, $twitter, $instagram, $facebook, $username);
+			$stmt->execute();
+
+			$affectedRows = $stmt->affected_rows;
+			$stmt->close();
+			$db->close();
+
+			if ($affectedRows == 1) {
+				$script = "<script>window.location = '../view/user_profile.php?success=successupdate';</script>";
+				echo $script;
+			} else {
+				$script = "<script>window.location = '../view/user_profile.php?error=errorupdate';</script>";
+				echo $script;
+			}
+		}else {
+			$this->addSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook);
+		}
+	}
+
 }

@@ -10,10 +10,10 @@ $mmc = new MatchmakingController();
 $jobmatch = $mmc->getJobMatchByID($id);
 
 if (isset($_POST['deny'])) {
-
 }
 
-function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPage, $rating){
+function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPage, $rating)
+{
     echo "<form action=$actionPage method=\"GET\">";
     echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
     echo "<button type='submit' class='btn btn-secondary'>$buttonText &nbsp;|&nbsp; $rating <i class='fa fa-star' style='color:#FFD700' aria-hidden='true'></i></button>";
@@ -53,9 +53,9 @@ function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPag
                     </div>
                     <div class="col row text-end">
                         <p class="text-muted">
-                            <?php 
-                                createUserLinkButton('username', $jobmatch->employer, $jobmatch->employer, 'jobseeker_view_employer.php', $jobmatch->rating);
-                            ?> 
+                            <?php
+                            createUserLinkButton('username', $jobmatch->employer, $jobmatch->employer, 'jobseeker_view_employer.php', $jobmatch->rating);
+                            ?>
                         </p>
                     </div>
                 </div>
@@ -120,7 +120,14 @@ function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPag
                     </p>
                     <h6>Looking Suspicious?</h6>
                     <p>If you found a job that is suspicious, please report it to <b>JobMatch</b> so that we can review it.</p>
-                    <button class="btn btn-secondary"><i class="fa fa-info-circle" aria-hidden="true"></i> Report</button>
+                    <div class="row">
+                        <div class="col text-start">
+                            <button class="btn btn-secondary"><i class="fa fa-info-circle" aria-hidden="true"></i> Report</button>
+                        </div>
+                        <div class="col text-end">
+                            <button class="btn btn-secondary"><i class="fa fa-comments" aria-hidden="true"></i> Feedback</button>
+                        </div>
+                    </div>
                 </div>
                 <!-- end of col -->
             </div>

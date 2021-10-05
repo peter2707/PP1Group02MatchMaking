@@ -41,5 +41,19 @@ class UserController {
         $userModel = new UserModel();
         return $userModel->getUserByName($db, $usertype, $username);
     }
+
+    public function editSocialLink($username, $linkedin, $github, $twitter, $instagram, $facebook){
+        require_once '../model/db_connection.php';
+        require_once '../model/user_model.php';
+        $userModel = new UserModel();
+        $userModel->editSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook);
+    }
+
+    public function getSocialLink($username) {
+        require_once '../model/user_model.php';
+        include '../model/db_connection.php';
+        $userModel = new UserModel();
+        return $userModel->getSocialLink($db, $username);
+    }
 }
 ?> 
