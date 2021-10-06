@@ -1,4 +1,7 @@
 <?php
+
+
+
 class MatchmakingModel{
 
 	public function postNewJob($db, $position, $field, $salary, $type, $description, $requirements, $location, $username, $contact){

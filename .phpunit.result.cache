@@ -1,0 +1,1 @@
+{"version":1,"defects":{"Warning":6,"SampleTest::testTrueAssertsToTrue":3,"JobPostTest::testGetPost":4},"times":{"Warning":0.005,"SampleTest::testTrueAssertsToTrue":0.005,"JobPostTest::testGetPost":0.001}}

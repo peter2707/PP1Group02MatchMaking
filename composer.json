@@ -1,5 +1,13 @@
 {
-    "require": {
+    "autoload": {
+        "classmap": [
+            "view/"
+        ]
+    },
+    "require-dev": {
         "ext-mysqli": "*"
+    },
+    "require": {
+        "phpunit/phpunit": "^9.5"
     }
 }
