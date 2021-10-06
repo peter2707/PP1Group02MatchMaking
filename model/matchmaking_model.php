@@ -121,8 +121,8 @@ class MatchmakingModel{
 	public function getJobMatchbyPostID($db, $postID, $employer){
 		require_once '../model/job_object.php';
 		$jobMatch = array();
-		$query = "SELECT * FROM jobpost 
-					INNER JOIN jobmatch ON jobpost.employer = jobmatch.employer	
+		$query = "SELECT * FROM jobmatch 
+					INNER JOIN jobpost ON jobpost.id = jobmatch.jobPostID	
 					WHERE jobmatch.employer= '$employer' 
 					AND jobmatch.jobPostID = '$postID'";
 		$result = $db->query($query);

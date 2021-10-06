@@ -96,7 +96,7 @@ if (isset($_POST['deny'])) {
             }
                 echo "  </tbody>";
                 echo "</table>";
-                unset($jobposts);
+                unset($jobmatches);
         }
 
         ?>
