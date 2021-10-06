@@ -115,7 +115,7 @@ END;
                                             <div class="mt-3">
                                                 <h4>$user->firstName $user->lastName</h4>
                                                 <p class="text-secondary">$user->field </p>
-                                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">Change Picture</button>
+                                                <button class="btn btn-solid-sm" data-bs-toggle="modal" data-bs-target="#profileModal">Change Picture</button>
 
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
@@ -131,8 +131,8 @@ END;
                                                                     <input type="file" class="form-control" id="image" name="image"/>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                                    <button type="submit" name="changeImage" class="btn btn-primary">Save changes</button>
+                                                                    <button type="button" class="btn btn-secondary-sm" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" name="changeImage" class="btn btn-solid-sm">Save changes</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -214,11 +214,11 @@ END;
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col text-start">
-                                                    <button type="submit" id="doneInputLink" class="btn btn-primary w-100" name="done" style='display:none;'>Done</button>
+                                                    <button type="submit" id="doneInputLink" class="btn btn-solid-sm w-100" name="done" style='display:none;'>Done</button>
                                                 </div>
                                                 <div class="col text-end">
-                                                    <button type="button" id="editInputLink" class="btn btn-secondary w-100" onclick="edit()"><i class='fas fa-edit'></i> Edit</button>
-                                                    <button type="button" id="cancelInputLink" class="btn btn-secondary w-100" style='display:none;' onclick="cancel()">Cancel</button>
+                                                    <button type="button" id="editInputLink" class="btn btn-secondary-sm w-100" onclick="edit()"><i class='fas fa-edit'></i> Edit</button>
+                                                    <button type="button" id="cancelInputLink" class="btn btn-secondary-sm w-100" style='display:none;' onclick="cancel()">Cancel</button>
                                                 </div>
                                             </div>
                                         </li>
@@ -307,8 +307,8 @@ END;
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <button class="btn btn-success" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update">Save Changes</button>
-                                                    <button class="btn btn-danger" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete">Delete Account</button>
+                                                    <button class="btn btn-success-lg" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update">Save Changes</button>
+                                                    <button class="btn btn-danger-lg" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete">Delete Account</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -360,7 +360,7 @@ END;
                                             <div class="mt-3">
                                                 <h4>$user->firstName $user->lastName</h4>
                                                 <p class="text-secondary">$user->position </p>
-                                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#profileModal">Change Picture</button>
+                                                <button class="btn btn-solid-sm" data-bs-toggle="modal" data-bs-target="#profileModal">Change Picture</button>
 
                                                 <!-- Modal -->
                                                 <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
@@ -376,8 +376,8 @@ END;
                                                                     <input type="file" class="form-control" id="image" name="image"/>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                                                    <button type="submit" name="changeImage" class="btn btn-primary">Save changes</button>
+                                                                    <button type="button" class="btn btn-secondary-sm" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="submit" name="changeImage" class="btn btn-solid-sm">Save changes</button>
                                                                 </div>
                                                             </form>
                                                         </div>
@@ -458,11 +458,11 @@ END;
                                         <li class="list-group-item">
                                             <div class="row">
                                                 <div class="col text-start">
-                                                    <button type="submit" id="doneInputLink" name="done" class="btn btn-primary w-100" style='display:none;'>Done</button>
+                                                    <button type="submit" id="doneInputLink" name="done" class="btn btn-solid-sm w-100" style='display:none;'>Done</button>
                                                 </div>
                                                 <div class="col text-end">
-                                                    <button type="button" id="editInputLink" class="btn btn-secondary w-100" onclick="edit()"><i class='fas fa-edit'></i> Edit</button>
-                                                    <button type="button" id="cancelInputLink" class="btn btn-secondary w-100" style='display:none;' onclick="cancel()">Cancel</button>
+                                                    <button type="button" id="editInputLink" class="btn btn-secondary-sm w-100" onclick="edit()"><i class='fas fa-edit'></i> Edit</button>
+                                                    <button type="button" id="cancelInputLink" class="btn btn-secondary-sm w-100" style='display:none;' onclick="cancel()">Cancel</button>
                                                 </div>
                                             </div>
                                         </li>
@@ -549,8 +549,8 @@ END;
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <button class="btn btn-secondary" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update">Update</button>
-                                                    <button class="btn btn-danger" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete">Delete Account</button>
+                                                    <button class="btn btn-success-lg" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update">Save Changes</button>
+                                                    <button class="btn btn-danger-lg" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete">Delete Account</button>
                                                 </div>
                                             </div>
                                         </form>

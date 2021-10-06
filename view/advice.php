@@ -20,10 +20,10 @@
 
     <!-- Header -->
     <header class="ex-header">
-        <div class="container">
+        <div class="container mb-5">
             <div class="row">
-                <div class="col-xl-10 offset-xl-1">
-                    <h1>Career Advice</h1>
+                <div class="col-xl-10">
+                    <h1>Career & Hiring Advice</h1>
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
         </div> <!-- end of container -->
@@ -31,20 +31,17 @@
     <!-- end of header -->
 
   <!-- Contact -->
-  <div id="contact" class="form-1">
-        <div class="container">
+        <div class="container mt-5 mb-5">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="text-container">
-                       
                         <h2>How can we help?</h2>
                         <p>Please select the correct topic related to your enquiry and we will get back to you immediately.</p>
-                       
                     </div>
                     <!-- end of text-container -->
-                    <!-- <div class="image-container">
-                            <img class="img-fluid" src="../images/careeradvice-1.png" alt="alternative">
-                        </div> -->
+                    <div class="image-container">
+                        <img class="img-fluid" src="../images/careeradvice-2.png" alt="alternative">
+                    </div>
                     <!-- end of image-container -->
                 </div>
                 <!-- end of col -->
@@ -56,8 +53,7 @@
                             <select class="form-control-input" required>
                                 <option selected disabled hidded>Select your enquiry...</option>
                                 <option value="careerAdvice">Career Advice</option>
-                                <option value="CustomerService">Customer Service</option>
-                                <option value="contactUs">Contact Us</option>
+                                <option value="hiringAdvice">Hiring Advice</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -90,9 +86,8 @@
             <!-- end of row -->
         </div>
         <!-- end of container -->
-    </div>
-    <!-- end of form-1 -->
-    <!-- end of contact -->
+
+    <!-- end of advice -->
 
 
     <!-- footer start -->

@@ -230,6 +230,132 @@ a:hover {
     text-decoration: none;
 }
 
+.btn-success-sm {
+    display: inline-block;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    border: 1px solid #16c66d;
+    border-radius: 30px;
+    background-color: #16c66d;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 0;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-success-sm:hover {
+    background-color: transparent;
+    color: #16c66d;
+    /* needs to stay here because of the color property of a tag */
+    text-decoration: none;
+}
+
+.btn-success-lg {
+    display: inline-block;
+    padding: 1.625rem 2.625rem 1.625rem 2.625rem;
+    border: 1px solid #16c66d;
+    border-radius: 30px;
+    background-color: #16c66d;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 0;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-success-lg:hover {
+    background-color: transparent;
+    color: #16c66d;
+    /* needs to stay here because of the color property of a tag */
+    text-decoration: none;
+}
+
+.btn-danger-sm {
+    display: inline-block;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    border: 1px solid #d9534f;
+    border-radius: 30px;
+    background-color: #d9534f;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 0;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-danger-sm:hover {
+    background-color: transparent;
+    color: #d9534f;
+    /* needs to stay here because of the color property of a tag */
+    text-decoration: none;
+}
+
+.btn-danger-lg {
+    display: inline-block;
+    padding: 1.625rem 2.625rem 1.625rem 2.625rem;
+    border: 1px solid #d9534f;
+    border-radius: 30px;
+    background-color: #d9534f;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 0;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-danger-lg:hover {
+    background-color: transparent;
+    color: #d9534f;
+    /* needs to stay here because of the color property of a tag */
+    text-decoration: none;
+}
+
+.btn-secondary-sm {
+    display: inline-block;
+    padding: 1rem 1.5rem 1rem 1.5rem;
+    border: 1px solid #5f5f5f;
+    border-radius: 30px;
+    background-color: #5f5f5f;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 0;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-secondary-sm:hover {
+    background-color: transparent;
+    color: #5f5f5f;
+    /* needs to stay here because of the color property of a tag */
+    text-decoration: none;
+}
+
+.btn-secondary-lg {
+    display: inline-block;
+    padding: 1.625rem 2.625rem 1.625rem 2.625rem;
+    border: 1px solid #5f5f5f;
+    border-radius: 30px;
+    background-color: #5f5f5f;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 0;
+    text-decoration: none;
+    transition: all 0.2s;
+}
+
+.btn-secondary-lg:hover {
+    background-color: transparent;
+    color: #5f5f5f;
+    /* needs to stay here because of the color property of a tag */
+    text-decoration: none;
+}
+
 .btn-outline-reg {
     display: inline-block;
     padding: 1.375rem 2.25rem 1.375rem 2.25rem;

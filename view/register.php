@@ -129,7 +129,7 @@ if(isset($_POST['register'])){
                             ?>
                         </p>
 
-                        <button class="w-50 btn btn-lg btn-primary mb-5 mt-2" type="submit" name="register">Register</button>
+                        <button class="w-50 btn btn-solid-lg mb-5 mt-2" type="submit" name="register">Register</button>
                         <p class="mb-3">Already have an account? <a href="login.php">Log In</a></p>
                     </form>
                 </main>

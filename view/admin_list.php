@@ -89,7 +89,7 @@ if (isset($_POST['delete'])) {
                         echo "<td>";
                         echo "<form action=$actionPage method=\"GET\">";
                         echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-                        echo "<button type=\"submit\" class=\"btn btn-primary\">$buttonText</button>";
+                        echo "<button type=\"submit\" class=\"btn btn-solid-sm\">$buttonText</button>";
                         echo "</form>";
                         echo "</td>";
                     }
@@ -97,7 +97,7 @@ if (isset($_POST['delete'])) {
                         echo "<td>";
                         echo "<form method=\"POST\">";
                         echo "<input type=\"hidden\" name=$hiddenName value=$admin>";
-                        echo "<button name=\"delete\" type=\"submit\" class=\"btn btn-danger\" onclick=\"return confirm('Are you sure you want to delete $admin ?')\" >$buttonText</button>";
+                        echo "<button name=\"delete\" type=\"submit\" class=\"btn btn-danger-sm\" onclick=\"return confirm('Are you sure you want to delete $admin ?')\" >$buttonText</button>";
                         echo "</form>";
                         echo "</td>";
                     }

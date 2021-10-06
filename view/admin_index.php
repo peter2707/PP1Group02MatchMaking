@@ -68,10 +68,10 @@ if (isset($_POST["exportJobSeeker"])) {
 
                 <div class="row col-md-6 offset-md-3">
                     <div class="col">
-                        <a style="text-decoration : none" href="admin_add_user.php" class="mb-4 w-100 btn btn-success btn-lg"><i class="fa fa-user-plus" aria-hidden="true"></i> Add User</a>
+                        <a style="text-decoration : none" href="admin_add_user.php" class="mb-4 w-100 btn btn-success-lg"><i class="fa fa-user-plus" aria-hidden="true"></i> &nbsp;Add User</a>
                     </div>
                     <div class="col">
-                        <button  data-bs-toggle="modal" data-bs-target="#generateReportModal" class="mb-4 w-100 btn btn-primary btn-lg"><i class="fa fa-file" aria-hidden="true"></i> Generate Report</button>
+                        <button  data-bs-toggle="modal" data-bs-target="#generateReportModal" class="mb-4 w-100 btn btn-solid-lg"><i class="fa fa-file" aria-hidden="true"></i> &nbsp;Generate Report</button>
 
                         <!-- Modal -->
                         <div class="modal fade" id="generateReportModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
@@ -85,13 +85,13 @@ if (isset($_POST["exportJobSeeker"])) {
                                         <div class="modal-body">
                                             <div class="mb-3"><small id="message">Choose a table to generate to CSV File</small></div>
                                             <form method="POST">
-                                                <button type="submit" name="exportJobSeeker" class="btn btn-primary">JobSeeker</button>
-                                                <button type="submit" name="exportEmployer" class="btn btn-primary">Employer</button>
-                                                <button type="submit" name="exportAdmin" class="btn btn-primary">Admin</button>
+                                                <button type="submit" name="exportJobSeeker" class="btn btn-solid-sm">JobSeeker</button>
+                                                <button type="submit" name="exportEmployer" class="btn btn-solid-sm">Employer</button>
+                                                <button type="submit" name="exportAdmin" class="btn btn-solid-sm">Admin</button>
                                             </form>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Done</button>
+                                            <button type="button" class="btn btn-secondary-sm" data-bs-dismiss="modal">Done</button>
                                         </div>
                                     </form>
                                 </div>
@@ -102,13 +102,13 @@ if (isset($_POST["exportJobSeeker"])) {
                 </div>
                 <div class="row mb-5">
                     <div class="col">
-                        <a style="text-decoration : none" href="jobseeker_list.php" class="mb-4 w-100 btn btn-secondary"><i class="fa fa-list" aria-hidden="true"></i> JobSeeker List</a>
+                        <a style="text-decoration : none" href="jobseeker_list.php" class="mb-4 w-100 btn btn-secondary-lg"><i class="fa fa-list" aria-hidden="true"></i> &nbsp;JobSeeker List</a>
                     </div>
                     <div class="col">
-                        <a style="text-decoration : none" href="employer_list.php" class="mb-4 w-100 btn btn-secondary"><i class="fa fa-list" aria-hidden="true"></i> Employer List</a>
+                        <a style="text-decoration : none" href="employer_list.php" class="mb-4 w-100 btn btn-secondary-lg"><i class="fa fa-list" aria-hidden="true"></i> &nbsp;Employer List</a>
                     </div>
                     <div class="col">
-                        <a style="text-decoration : none" href="admin_list.php" class="mb-4 w-100 btn btn-secondary"><i class="fa fa-list" aria-hidden="true"></i> Admin List</a>
+                        <a style="text-decoration : none" href="admin_list.php" class="mb-4 w-100 btn btn-secondary-lg"><i class="fa fa-list" aria-hidden="true"></i> &nbsp;Admin List</a>
                     </div>
                 </div>
             </div>

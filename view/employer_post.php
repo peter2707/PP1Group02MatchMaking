@@ -82,7 +82,7 @@ if (isset($_POST['post'])) {
                     <h1>Your Posts</h1>
                 </div>
                 <div class="col-4 text-end">
-                    <button id="newPostBtn" style="width:100px;" class="btn btn-primary btn-lg" type="submit" onclick="showNewPostForm()"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                    <button id="newPostBtn" style="width:120px;" class="btn btn-solid-lg" type="submit" onclick="showNewPostForm()"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
                 </div>
 
                 <div class="col-xl-10 offset-xl-1">
@@ -164,7 +164,7 @@ if (isset($_POST['post'])) {
 
 
 
-                        <button disabled class="btn btn-success btn-lg mt-1 w-100 fw-bolder" type="submit" id="postBtn" name="post">Post</button>
+                        <button disabled class="btn btn-success-lg mt-1 w-100 fw-bolder" type="submit" id="postBtn" name="post">Post</button>
                     </form>
                 </div>
             </div> <!-- end of row -->
@@ -195,7 +195,7 @@ if (isset($_POST['post'])) {
                 echo "<td>";
                 echo "  <form action=$actionPage method=\"GET\">";
                 echo "      <input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-                echo "      <button type=\"submit\" class=\"btn btn-primary\">$buttonText</button>";
+                echo "      <button type=\"submit\" class=\"btn btn-solid-sm\">$buttonText</button>";
                 echo "  </form>";
                 echo "</td>";
             }

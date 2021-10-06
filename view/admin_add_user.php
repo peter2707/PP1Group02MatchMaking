@@ -139,10 +139,10 @@ if(isset($_POST['register'])){
                             </p>
                             <div class="row mb-5 mt-2">
                                 <div class="col">
-                                    <a style="text-decoration : none" class="w-100 btn btn-lg btn-secondary" href="admin_index.php">Cancel</a>
+                                    <a style="text-decoration : none" class="w-100 btn btn-secondary-lg" href="admin_index.php">Cancel</a>
                                 </div>
                                 <div class="col">
-                                    <button class="w-100 btn btn-lg btn-primary" type="submit" name="register">Add</button>
+                                    <button class="w-100 btn btn-solid-lg" type="submit" name="register">Add</button>
                                 </div>
                             </div>
                         </form>

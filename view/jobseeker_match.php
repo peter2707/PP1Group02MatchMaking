@@ -75,7 +75,7 @@ if (isset($_POST['match'])) {
                     <h1>Your Matches</h1>
                 </div>
                 <div class="col-4 text-end">
-                    <button id="findMatchBtn" style="width:100px;" class="btn btn-primary btn-lg" type="submit" onclick="showFindMatchForm()"><i class="fa fa-search" aria-hidden="true"></i></button>
+                    <button id="findMatchBtn" style="width:100px;" class="btn form-control-submit-button btn-lg" type="submit" onclick="showFindMatchForm()"><i class="fa fa-search" aria-hidden="true"></i></button>
                 </div>
                 <form method="POST" id="jobmatch">
                     <div class="row">
@@ -129,7 +129,7 @@ if (isset($_POST['match'])) {
                                 <label for="job-type-field">Job Type</label>
                             </div>
                         </div>
-                        <div class="col-sm-2"><button disabled class="btn btn-success btn-lg mt-1 w-100 fw-bolder" type="submit" id="matchBtn" name="match">Find</button></div>
+                        <div class="col-sm-2"><button disabled class="btn btn-success btn-success-lg w-100 fw-bolder" type="submit" id="matchBtn" name="match">Find</button></div>
 
                     </div>
                 </form>
@@ -149,7 +149,7 @@ if (isset($_POST['match'])) {
                 echo "<td>";
                 echo "  <form action=$actionPage method=\"GET\">";
                 echo "      <input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-                echo "      <button type=\"submit\" class=\"btn btn-primary\">$buttonText</button>";
+                echo "      <button type=\"submit\" class=\"btn btn-solid-sm\">$buttonText</button>";
                 echo "  </form>";
                 echo "</td>";
             }
@@ -172,7 +172,7 @@ if (isset($_POST['match'])) {
                 echo "                    <td scope='row'>$match->type</td>";
                 echo "                    <td scope='row'>$match->location</td>";
                 echo "                    <td scope='row'>$match->percentage %</td>";
-                createOpenButton('id', $match->id, 'Open', 'jobseeker_view_match.php');
+                createOpenButton('id', $match->id, 'View', 'jobseeker_view_match.php');
                 echo "                </tr>";
             }
                 echo "            </tbody>";

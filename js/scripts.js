@@ -310,6 +310,22 @@ CKEDITOR.replace('requirementsTextArea', {
     height: "150px"
 });
 
+
+//active link detect
+
+// $(document).ready(function() {
+//     $("[href]").each(function() {
+//         if (this.href == window.location.href) {
+//             $(this).addClass("linkActive");
+//         } else {
+//             $(this).addClass("linkInactive");
+//         }
+//     });
+// });
+
+
+
+
 //window show alert when accept cookies
 // window.addEventListener("cookieAlertAccept", function() {
 //     alert("cookies accepted")

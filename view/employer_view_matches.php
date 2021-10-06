@@ -60,7 +60,7 @@ if (isset($_POST['deny'])) {
                 echo "<td>";
                 echo "  <form action=$actionPage method=\"GET\">";
                 echo "      <input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-                echo "      <button type=\"submit\" class=\"btn btn-primary\"><i class='fa fa-user' aria-hidden='true'></i> $buttonText</button>";
+                echo "      <button type=\"submit\" class=\"btn btn-solid-sm\"><i class='fa fa-user' aria-hidden='true'></i> $buttonText</button>";
                 echo "  </form>";
                 echo "</td>";
             }
@@ -68,7 +68,7 @@ if (isset($_POST['deny'])) {
                 echo "<td>";
                 echo "  <form method=\"POST\">";
                 echo "      <input type=\"hidden\" name='matchID' value=$matchID>";
-                echo "      <button name=\"deny\" type=\"submit\" class=\"btn btn-danger\" onclick=\"return confirm('Are you sure you want to deny this match ?')\" ><i class='fa fa-times' aria-hidden='true'></i> $buttonText</button>";
+                echo "      <button name=\"deny\" type=\"submit\" class=\"btn btn-danger-sm\" onclick=\"return confirm('Are you sure you want to deny this match ?')\" ><i class='fa fa-times' aria-hidden='true'></i> $buttonText</button>";
                 echo "  </form>";
                 echo "</td>";
             }
@@ -79,8 +79,8 @@ if (isset($_POST['deny'])) {
                 echo "      <th scope='col'>Salary</th>";
                 echo "      <th scope='col'>Type</th>";
                 echo "      <th scope='col' style='width: 20%;'>Match Percentage</th>";
-                echo "      <th scope='col' style='width: 12%;'>Action</th>";
-                echo "      <th scope='col' style='width: 12%;'></th>";
+                echo "      <th scope='col' style='width: 13%;'>Action</th>";
+                echo "      <th scope='col' style='width: 14%;'></th>";
                 echo "  </tr>";
                 echo "  </thead>";
                 echo "  <tbody>";

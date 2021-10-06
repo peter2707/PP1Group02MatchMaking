@@ -38,7 +38,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                             <a class="nav-link" href="jobseeker_match.php">Your Matches</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="index.php#contact">Career Advices</a>
+                            <a class="nav-link" href="advice.php">Career Advices</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">$username</a>
@@ -94,7 +94,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                         <a class="nav-link" href="employer_post.php">Your Posts</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Hiring Advices</a>
+                        <a class="nav-link" href="advice.php">Hiring Advices</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">$username</a>
@@ -149,10 +149,6 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">$username</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                            <li><a class="dropdown-item" href="user_profile.php">Profile</a></li>
-                            <li>
-                                <div class="dropdown-divider"></div>
-                            </li>
                             <li><a class="dropdown-item" href="#">Settings</a></li>
                             <li>
                                 <div class="dropdown-divider"></div>
@@ -198,7 +194,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                         <a class="nav-link" href="index.php#aboutUs">About</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php#contact">Career Advices</a>
+                        <a class="nav-link" href="index.php#contact">Help & Support</a>
                     </li>
                 </ul>
                 <span class="nav-item">

@@ -18,7 +18,7 @@ if (isset($_POST['deny'])) {
 function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPage, $rating) {
     echo "<form action=$actionPage method=\"GET\">";
     echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-    echo "<button type='submit' class='btn btn-secondary'>$buttonText &nbsp;|&nbsp; $rating <i class='fa fa-star' style='color:#FFD700' aria-hidden='true'></i></button>";
+    echo "<button type='submit' class='btn btn-secondary-sm'>$buttonText &nbsp;|&nbsp; $rating <i class='fa fa-star' style='color:#FFD700' aria-hidden='true'></i></button>";
     echo "</form>";
 }
 
@@ -62,9 +62,9 @@ function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPag
                     </div>
                 </div>
                 <div class="text-start">
-                    <button class="btn btn-primary" style="float:left" data-bs-toggle="modal" data-bs-target="#acceptModal">Accept</button>
+                    <button class="btn btn-solid-lg" style="float:left" data-bs-toggle="modal" data-bs-target="#acceptModal">Accept</button>
                     <form method="POST" style="float:left; margin-left:20px;">
-                        <button class="btn btn-danger" onclick="return confirm('Are you sure you want to deny this match ?')" name="deny" type="submit">Deny</button>
+                        <button class="btn btn-danger-lg" onclick="return confirm('Are you sure you want to deny this match ?')" name="deny" type="submit">Deny</button>
                     </form>
 
                     <!-- Modal -->
@@ -83,10 +83,10 @@ function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPag
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="button" class="btn btn-secondary-sm" data-bs-dismiss="modal">Cancel</button>
                                     <?php echo "
                                         <a href='mailto:$jobmatch->contact?subject=Subject...&body=Message...'>
-                                            <button class='btn btn-primary'>Send Email</button>
+                                            <button class='btn btn-solid-sm'>Send Email</button>
                                         </a>
                                     "; ?>
                                 </div>
@@ -124,10 +124,10 @@ function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPag
                     <p>If you found a job that is suspicious, please report it to <b>JobMatch</b> so that we can review it.</p>
                     <div class="row">
                         <div class="col text-start">
-                            <button class="btn btn-secondary"><i class="fa fa-info-circle" aria-hidden="true"></i> Report</button>
+                            <button class="btn btn-secondary-sm"><i class="fa fa-info-circle" aria-hidden="true"></i> Report</button>
                         </div>
                         <div class="col text-end">
-                            <button class="btn btn-secondary"><i class="fa fa-comments" aria-hidden="true"></i> Feedback</button>
+                            <button class="btn btn-secondary-sm"><i class="fa fa-comments" aria-hidden="true"></i> Feedback</button>
                         </div>
                     </div>
                 </div>

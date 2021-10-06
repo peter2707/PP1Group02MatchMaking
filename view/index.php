@@ -372,7 +372,7 @@
             <div class="row">
                 <div class="col-lg-6">
                     <div class="text-container">
-                        <div class="section-title">CAREER ADVICE</div>
+                        <div class="section-title">HELP & SUPPORT</div>
                         <h2>Got a question? Just ask us!</h2>
                         <p>Whether you require support or have an issue with your experience, let us know!</p>
                         <ul class="list-unstyled li-space-lg">
@@ -389,7 +389,7 @@
                                 <div class="flex-grow-1">Submit your enquiry & we'll make sure to get back to you within 1-3 business days.</div>
                             </li>
                         </ul>
-                        <a class="btn-solid-reg" href="career_advice.php">Contact Us</a>
+                        <a class="btn-solid-reg" href="advice.php">Contact Us</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
@@ -431,7 +431,7 @@
         <!-- START Bootstrap-Cookie-Alert -->
         <div class="alert text-center cookiealert" role="alert">
             <b>Do you like cookies?</b> &#x1F36A; We use cookies to ensure you get the best experience on our website. <a href="https://cookiesandyou.com/" target="_blank">Learn more</a>
-            <button type="button" class="btn btn-primary btn-sm acceptcookies">I agree</button>
+            <button type="button" class="btn btn-primary btn-sm acceptcookies btn-solid-sm">I agree</button>
         </div>
         <!-- END Bootstrap-Cookie-Alert -->
     </div>

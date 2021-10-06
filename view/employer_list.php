@@ -79,7 +79,7 @@ if (isset($_POST['delete'])) {
                             echo "          <td scope=\"row\">$employer->email</td>";
                             echo "          <td scope=\"row\">$employer->position</td>";
                             echo "          <td scope=\"row\">$employer->rating</td>";
-                            createEditButton("id", $employer->id, "Edit", "edit_emp.php");
+                            createEditButton("employer", $employer->username, "Edit", "admin_edit_user.php");
                             createDeleteButton("username", $employer->username, "Delete");
                             echo "        </tr>";
                         }
@@ -91,7 +91,7 @@ if (isset($_POST['delete'])) {
                         echo "<td>";
                         echo "<form action=$actionPage method=\"GET\">";
                         echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-                        echo "<button type=\"submit\" class=\"btn btn-primary\">$buttonText</button>";
+                        echo "<button type=\"submit\" class=\"btn btn-solid-sm\">$buttonText</button>";
                         echo "</form>";
                         echo "</td>";
                     }
@@ -99,7 +99,7 @@ if (isset($_POST['delete'])) {
                         echo "<td>";
                         echo "<form method=\"POST\">";
                         echo "<input type=\"hidden\" name=$hiddenName value=$employer>";
-                        echo "<button name=\"delete\" type=\"submit\" class=\"btn btn-danger\" onclick=\"return confirm('Are you sure you want to delete $employer ?')\" >$buttonText</button>";
+                        echo "<button name=\"delete\" type=\"submit\" class=\"btn btn-danger-sm\" onclick=\"return confirm('Are you sure you want to delete $employer ?')\" >$buttonText</button>";
                         echo "</form>";
                         echo "</td>";
                     }
