@@ -307,8 +307,8 @@ END;
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <button class="btn btn-success-lg" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update">Save Changes</button>
-                                                    <button class="btn btn-danger-lg" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete">Delete Account</button>
+                                                    <button class="btn btn-success-lg" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update"><i class='fa fa-check' aria-hidden='true'></i> Save Changes</button>
+                                                    <button class="btn btn-danger-lg" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete"><i class='fa fa-trash' aria-hidden='true'></i> Delete Account</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -549,8 +549,8 @@ END;
                                             <hr>
                                             <div class="row">
                                                 <div class="col-sm-12">
-                                                    <button class="btn btn-success-lg" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update">Save Changes</button>
-                                                    <button class="btn btn-danger-lg" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete">Delete Account</button>
+                                                    <button class="btn btn-success-sm" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update"><i class='fa fa-check' aria-hidden='true'></i> Save Changes</button>
+                                                    <button class="btn btn-danger-sm" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete"><i class='fa fa-trash' aria-hidden='true'></i> Delete Account</button>
                                                 </div>
                                             </div>
                                         </form>

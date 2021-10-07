@@ -170,7 +170,7 @@ if ($viewUser->image == NULL) {
                                     <div class="col-sm-12">
                                         <?php echo "
                                             <a href='mailto:$viewUser->email?subject=Subject...&body=Message...'>
-                                                <button class='btn btn-success-lg'>Send Email</button>
+                                                <button class='btn btn-success-sm'><i class='fa fa-envelope' aria-hidden='true'></i> Send Email</button>
                                             </a>
                                         "; ?>
                                     </div>

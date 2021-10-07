@@ -52,6 +52,8 @@ if (isset($_POST['post'])) {
                             echo "Please complete all required columns!";
                         }else if ($_GET["error"] == "fieldnull") {
                             echo "You have to choose a field of expertise";
+                        }else if ($_GET["error"] == "positionnumeric") {
+                            echo "Position cannot be a number!";
                         }else if ($_GET["error"] == "errorupdate") {
                             echo "There was a problem while trying to update.";
                         }else if ($_GET["error"] == "errordelete") {

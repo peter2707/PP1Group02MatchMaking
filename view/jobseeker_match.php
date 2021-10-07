@@ -53,6 +53,8 @@ if (isset($_POST['match'])) {
                     if (isset($_GET["error"])) {
                         if ($_GET["error"] == "emptyinput") {
                             echo "Please complete all required columns!";
+                        }else if ($_GET["error"] == "positionnumeric") {
+                            echo "Position cannot be a number!";
                         }elseif($_GET["error"] == "nomatch"){
                             echo "There are no match found at the moment :(<br>Hint: Try searching for a different position!";
                         }

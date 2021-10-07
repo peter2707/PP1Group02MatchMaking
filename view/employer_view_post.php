@@ -199,10 +199,10 @@ if (isset($_POST['update'])) {
                         </div>
                         <div class="row">
                             <div class="col text-end">
-                                <button class="btn btn-danger-lg btn-lg mt-1 w-50 fw-bolder" type="submit" name="delete" onclick="javascript:return confirm('Are you sure you want to delete your post?');">Delete</button>
+                                <button class="btn btn-danger-sm mt-1 w-50 fw-bolder" type="submit" name="delete" onclick="javascript:return confirm('Are you sure you want to delete your post?');"><i class="fa fa-trash" aria-hidden="true"></i> Delete</button>
                             </div>
                             <div class="col text-start">
-                                <button class="btn btn-success-lg btn-lg mt-1 w-50 fw-bolder" type="submit" name="update">Update</button>
+                                <button class="btn btn-success-sm mt-1 w-50 fw-bolder" type="submit" name="update"><i class="fa fa-check" aria-hidden="true"></i> Update</button>
                             </div>
                         </div>
                     </form>

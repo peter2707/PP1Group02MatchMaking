@@ -25,6 +25,8 @@ class MatchmakingController {
     public function findMatch($position, $salary, $location, $type, $jobseeker){
         if(!$position||!$salary||!$type||!$location||!$jobseeker){
             header("location: ../view/jobseeker_match.php?error=emptyinput");
+        }elseif(is_numeric($position)){
+            header("location: ../view/jobseeker_match.php?error=positionnumeric");
         }else{
             require_once '../model/matchmaking_model.php';
             require_once '../model/db_connection.php';
@@ -40,6 +42,8 @@ class MatchmakingController {
     public function postJob($position, $field, $salary, $type, $description, $requirements, $location, $username, $contact){
         if(!$position||!$salary||!$type||!$description||!$requirements||!$location||!$username||!$contact){
             header("location: ../view/employer_post.php?error=emptyinput");
+        }elseif(is_numeric($position)){
+            header("location: ../view/employer_post.php?error=positionnumeric");
         }elseif(!$field){
             header("location: ../view/employer_post.php?error=fieldnull");
         }else{
