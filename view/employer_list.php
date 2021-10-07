@@ -17,7 +17,7 @@ if (isset($_POST['delete'])) {
     ?>
 </head>
 
-<body data-bs-spy="scroll" data-bs-target="#navbarExample" class="text-center  d-flex flex-column">
+<body data-bs-spy="scroll" data-bs-target="#navbarExample" class="text-center">
 
     <!-- Navigation Start  -->
     <?php

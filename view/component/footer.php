@@ -2,7 +2,7 @@
     echo <<<END
 
     <!-- Footer -->
-    <footer class="footer mt-auto py-3 bg-light">
+    <div class="footer bg-light">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12">
@@ -48,33 +48,33 @@
         <!-- end of container -->
 
         
-        <!-- Copyright -->
-        <div class="copyright">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-12 col-sm-12">
-                        <ul class="list-unstyled li-space-lg p-small">
-                            <li><a href="article.php" style="color: white;">Article Details</a></li>
-                            <li><a href="terms.php" style="color: white;">Terms & Conditions</a></li>
-                            <li><a href="privacy.php" style="color: white;">Privacy Policy</a></li>
-                        </ul>
-                    </div>
-                    
-                    <!-- end of col -->
-                    <div class="col-lg-6 col-md-12 col-md-12">
-                        <p class="p-small statement" style="color: white;">&copy; Copyright 2021 PP1Group02JobMatch</a></p>
-                    </div>
-                    <!-- end of col -->
-                    
+    <!-- Copyright -->
+    <div class="copyright">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12">
+                    <ul class="list-unstyled li-space-lg p-small">
+                        <li><a href="article.php" style="color: white;">Article Details</a></li>
+                        <li><a href="terms.php" style="color: white;">Terms & Conditions</a></li>
+                        <li><a href="privacy.php" style="color: white;">Privacy Policy</a></li>
+                    </ul>
                 </div>
-                <!-- enf of row -->
+                
+                <!-- end of col -->
+                <div class="col-lg-6 col-md-12 col-md-12">
+                    <p class="p-small statement" style="color: white;">&copy; Copyright 2021 PP1Group02JobMatch</a></p>
+                </div>
+                <!-- end of col -->
+                
             </div>
-            <!-- end of container -->
+            <!-- enf of row -->
         </div>
-        <!-- end of copyright -->
-        <!-- end of copyright -->
+        <!-- end of container -->
+    </div>
+    <!-- end of copyright -->
+    <!-- end of copyright -->
 
-    </footer>
+    </div>
     <!-- end of footer -->
     <!-- end of footer -->
 

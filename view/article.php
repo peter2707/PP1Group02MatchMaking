@@ -9,7 +9,7 @@
     ?>
 </head>
 
-<body class="text-center d-flex flex-column">
+<body>
 
     <!-- Navigation Start  -->
 		<?php
