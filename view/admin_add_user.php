@@ -31,7 +31,7 @@ if(isset($_POST['register'])){
 </head>
 
 
-<body class="text-center">
+<body class="text-center d-flex flex-column">
 
     <!-- Navigation Start  -->
     <?php

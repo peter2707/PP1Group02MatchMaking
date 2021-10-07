@@ -7,7 +7,7 @@
         require_once("component/header.php");
     ?>
 </head>
-<body>
+<body class="text-center d-flex flex-column">
     
     <!-- Navigation Start  -->
 		<?php

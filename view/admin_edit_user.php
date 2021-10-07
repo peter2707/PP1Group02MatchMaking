@@ -93,7 +93,7 @@ if (isset($_POST['update'])) {
     ?>
 </head>
 
-<body data-bs-spy="scroll" data-bs-target="#navbarExample" class="text-center">
+<body data-bs-spy="scroll" data-bs-target="#navbarExample" class="text-center  d-flex flex-column">
 
     <!-- Navigation Start  -->
     <?php
