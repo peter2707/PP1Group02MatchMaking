@@ -98,18 +98,11 @@ class UserModel {
 
 		$affectedRows = $stmt->affected_rows;
 		$stmt->close();
-		$db->close();
 
 		if ($affectedRows == 1) {
-			session_start();
-			unset($_SESSION["username"]);
-			unset($_SESSION["password"]);
-			session_destroy();
-			$script = "<script>window.location = '../view/login.php?success=accountdeleted';</script>";
-			echo $script;
+			return true;
 		} else {
-			$script = "<script>window.location = '../view/login.php?error=errordelete';</script>";
-			echo $script;
+			return false;
 		}
 	}
 

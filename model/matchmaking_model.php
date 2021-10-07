@@ -2,16 +2,26 @@
 
 
 
-class MatchmakingModel{
+class MatchmakingModel
+{
 
-	public function postNewJob($db, $position, $field, $salary, $type, $description, $requirements, $location, $username, $contact){
-		$query = "INSERT INTO jobpost (position, field, salary, type, description, requirements, location, employer, contact) VALUES ('$position', '$field', '$salary', '$type', '$description', '$requirements', '$location', '$username', '$contact')";
-		mysqli_query($db, $query) or die(mysqli_error($db));
+	public function postNewJob($db, $position, $field, $salary, $type, $description, $requirements, $location, $username, $contact)
+	{
+
+		$sql = "INSERT INTO jobpost (position, field, salary, type, description, requirements, location, employer, contact) VALUES('$position', '$field', '$salary', '$type', '$description', '$requirements', '$location', '$username', '$contact')";
+
+		if ($stmt = $db->prepare($sql)) {
+			if ($stmt->execute()) {
+				return true;   
+			} else {
+				return false;
+			}
+		}
 		$db->close();
-		header("location: ../view/employer_post.php?success=posted");
 	}
-	
-	public function getAllPosts($db){
+
+	public function getAllPosts($db)
+	{
 		require_once '../model/job_object.php';
 		$jobposts = array();
 
@@ -28,8 +38,9 @@ class MatchmakingModel{
 		return $jobposts;
 	}
 
-	public function getJobPosts($db, $username){
-		require_once '../model/job_object.php';
+	public function getJobPosts($db, $username, $path)
+	{
+		require_once $path;
 		$jobposts = array();
 
 		$query = "SELECT * FROM jobpost WHERE employer='$username'";
@@ -37,7 +48,7 @@ class MatchmakingModel{
 		$numResults = $result->num_rows;
 		for ($i = 0; $i < $numResults; $i++) {
 			$row = $result->fetch_assoc();
-			$jobID=$row['id'];
+			$jobID = $row['id'];
 			$result2 = $db->query("SELECT COUNT(*) as totalmatches FROM jobmatch WHERE jobPostID='$jobID'");
 			$row2 = $result2->fetch_assoc();
 			$countMatch = $row2['totalmatches'];
@@ -48,13 +59,14 @@ class MatchmakingModel{
 		return $jobposts;
 	}
 
-	public function getJobPostByID($db, $jobID){
+	public function getJobPostByID($db, $jobID)
+	{
 		require_once '../model/job_object.php';
 		$query = "SELECT * FROM jobpost 
 					WHERE id='$jobID'";
 		$result = $db->query($query);
 		$row = $result->fetch_assoc();
-		
+
 		$result2 = $db->query("SELECT COUNT(*) as totalmatches FROM jobmatch WHERE jobPostID='$jobID'");
 		$row2 = $result2->fetch_assoc();
 		$countMatch = $row2['totalmatches'];
@@ -66,7 +78,8 @@ class MatchmakingModel{
 		return $jobPost;
 	}
 
-	public function updatePost($db, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id){
+	public function updatePost($db, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id)
+	{
 		$query = "UPDATE jobpost SET position=?, field=?, salary=?, type=?, description=?, requirements=?, location=?, contact=? WHERE id=?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("ssssssssi", $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
@@ -83,25 +96,30 @@ class MatchmakingModel{
 		}
 	}
 
-	public function deletePost($db, $id) {
+	public function deletePost($db, $id)
+	{
+		
 		$this->deleteMatchByPostID($db, $id);
-		$query = "DELETE FROM jobpost WHERE id = ?";
-		$stmt = $db->prepare($query);
-		$stmt->bind_param("i", $id);
-		$stmt->execute();
-
-		$affectedRows = $stmt->affected_rows;
-		$stmt->close();
-		$db->close();
-
-		if ($affectedRows == 1) {
-			header("location: ../view/employer_post.php?success=successdelete");
-		} else {
-			header("location: ../view/employer_post.php?error=errordelete");
+		$query = "DELETE FROM jobpost WHERE id = '$id'";
+		if ($stmt = $db->prepare($query)) {
+			if ($stmt->execute()) {
+				$affectedRows = $stmt->affected_rows;
+					if ($affectedRows == 1) {
+						return true;
+					} else {
+						return false;
+					}
+				$stmt->close();
+				$db->close();
+			} else {
+				return false;
+			}
 		}
+		
 	}
 
-	public function getJobMatch($db, $user){
+	public function getJobMatch($db, $user)
+	{
 		require_once '../model/job_object.php';
 		$jobMatch = array();
 		$query = "SELECT * FROM jobpost 
@@ -121,7 +139,8 @@ class MatchmakingModel{
 		return $jobMatch;
 	}
 
-	public function getJobMatchbyPostID($db, $postID, $employer){
+	public function getJobMatchbyPostID($db, $postID, $employer)
+	{
 		require_once '../model/job_object.php';
 		$jobMatch = array();
 		$query = "SELECT * FROM jobmatch 
@@ -141,7 +160,8 @@ class MatchmakingModel{
 		return $jobMatch;
 	}
 
-	public function getJobMatchByID($db, $jobID){
+	public function getJobMatchByID($db, $jobID)
+	{
 		require_once '../model/job_object.php';
 		$query = "SELECT * FROM jobpost 
 					INNER JOIN jobmatch ON jobpost.employer = jobmatch.employer 
@@ -162,8 +182,9 @@ class MatchmakingModel{
 		return $jobMatch;
 	}
 
-	public function getPreviousMatch($db, $jobseeker, $jobID){
-		$query = "SELECT count(*) FROM jobmatch WHERE jobSeeker = '$jobseeker' AND jobPostID = '$jobID'";		
+	public function getPreviousMatch($db, $jobseeker, $jobID)
+	{
+		$query = "SELECT count(*) FROM jobmatch WHERE jobSeeker = '$jobseeker' AND jobPostID = '$jobID'";
 		$stmt = $db->prepare($query);
 		$stmt->execute();
 		$result = $stmt->get_result();
@@ -179,40 +200,46 @@ class MatchmakingModel{
 		}
 	}
 
-	public function setJobMatch($db, $employer, $jobseeker, $jobPostID, $percentage){
+	public function setJobMatch($db, $employer, $jobseeker, $jobPostID, $percentage)
+	{
 		$query = "INSERT INTO jobmatch (employer, jobseeker, jobPostID, percentage) VALUES ('$employer', '$jobseeker', '$jobPostID', '$percentage')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
 	}
 
-	public function findMatch($db, $position, $salary, $location, $type, $jobseeker){
+	public function findMatch($db, $position, $salary, $location, $type, $jobseeker)
+	{
 		$found = false;
 		$jobposts = array();
-        $jobposts = $this->getAllPosts($db);
-		foreach($jobposts as $post => $val){
-			if(strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->location == $location && $val->type == $type){
-				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
+		$jobposts = $this->getAllPosts($db);
+		foreach ($jobposts as $post => $val) {
+			if (strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->location == $location && $val->type == $type) {
+				if (!$this->getPreviousMatch($db, $jobseeker, $val->id)) {
 					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 100);
 					unset($jobposts[$post]);
 					$found = true;
 				}
-			}elseif(strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->location == $location
-					|| strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->type == $type
-					|| strtolower($val->position) == strtolower($position) && $val->location == $location && $val->type == $type){
-				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
+			} elseif (
+				strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->location == $location
+				|| strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->type == $type
+				|| strtolower($val->position) == strtolower($position) && $val->location == $location && $val->type == $type
+			) {
+				if (!$this->getPreviousMatch($db, $jobseeker, $val->id)) {
 					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 75);
 					unset($jobposts[$post]);
 					$found = true;
 				}
-			}elseif(strtolower($val->position) == strtolower($position) && $val->salary == $salary
-					|| strtolower($val->position) == strtolower($position) && $val->location == $location
-					|| strtolower($val->position) == strtolower($position) && $location && $val->type == $type){
-				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
+			} elseif (
+				strtolower($val->position) == strtolower($position) && $val->salary == $salary
+				|| strtolower($val->position) == strtolower($position) && $val->location == $location
+				|| strtolower($val->position) == strtolower($position) && $location && $val->type == $type
+			) {
+				if (!$this->getPreviousMatch($db, $jobseeker, $val->id)) {
 					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 50);
 					unset($jobposts[$post]);
 					$found = true;
 				}
-			}elseif(strtolower($val->position) == strtolower($position)){
-				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
+			} elseif (strtolower($val->position) == strtolower($position)) {
+				if (!$this->getPreviousMatch($db, $jobseeker, $val->id)) {
 					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 25);
 					unset($jobposts[$post]);
 					$found = true;
@@ -222,15 +249,27 @@ class MatchmakingModel{
 		return $found;
 	}
 
-	public function deleteMatchByPostID($db, $id) {
-		$query = "DELETE FROM jobmatch WHERE jobPostID = ?";
-		$stmt = $db->prepare($query);
-		$stmt->bind_param("i", $id);
-		$stmt->execute();
-		$stmt->close();
+	public function deleteMatchByPostID($db, $id)
+	{
+		$query = "DELETE FROM jobmatch WHERE jobPostID = '$id'";
+		if ($stmt = $db->prepare($query)) {
+			if ($stmt->execute()) {
+				$affectedRows = $stmt->affected_rows;
+					if ($affectedRows == 1) {
+						return true;
+					} else {
+						return false;
+					}
+				$stmt->close();
+				$db->close();
+			} else {
+				return false;
+			}
+		}
 	}
 
-	public function denyMatch($db, $id, $usertype) {
+	public function denyMatch($db, $id, $usertype)
+	{
 		$query = "DELETE FROM jobmatch WHERE id = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("i", $id);
@@ -239,18 +278,17 @@ class MatchmakingModel{
 		$stmt->close();
 
 		if ($affectedRows == 1) {
-			if($usertype == 'jobseeker'){
+			if ($usertype == 'jobseeker') {
 				header("location: ../view/jobseeker_match.php?success=successdeny");
-			}else{
+			} else {
 				header("location: ../view/employer_post.php?success=successdeny");
 			}
 		} else {
-			if($usertype == 'jobseeker'){
+			if ($usertype == 'jobseeker') {
 				header("location: ../view/jobseeker_match.php?error=errordeny");
-			}else{
+			} else {
 				header("location: ../view/employer_post.php?error=errordeny");
 			}
 		}
 	}
-	
 }

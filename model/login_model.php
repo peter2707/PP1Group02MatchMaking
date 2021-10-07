@@ -113,7 +113,6 @@
 	
 			if (!$result) {
 				header("location: ../view/login.php?error=failed");
-				$db->close();
 				exit();
 			}
 			

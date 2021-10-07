@@ -28,6 +28,7 @@ class RegisterController {
                 exit();
               }else{
                 $registerModel->registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position);
+                header("location: ../view/login.php?success=created");
               }
             }else{
               if (!$field){
@@ -37,6 +38,7 @@ class RegisterController {
                 exit();
               }else{
                 $registerModel->registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $field);
+                header("location: ../view/login.php?success=created");
               }
             }
         }
