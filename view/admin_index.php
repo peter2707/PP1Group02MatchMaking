@@ -60,6 +60,8 @@ if (isset($_POST["exportJobSeeker"])) {
                                 echo "Account has been successfully created.";
                             } elseif ($_GET["success"] == "successdelete") {
                                 echo "Account has been successfully deleted.";
+                            } elseif ($_GET["success"] == "successupdate") {
+                                echo "Account has been successfully updated.";
                             }
                         }
                         ?>

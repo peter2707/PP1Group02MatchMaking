@@ -78,16 +78,25 @@ class AdminController {
         return $adminModel->getAllAdmin($db);
 	}
 
-	public function editJobSeeker($id){
-
+	public function updateJobSeeker($firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $id){
+        require_once '../model/admin_model.php';
+        include '../model/db_connection.php';
+        $adminModel = new AdminModel();
+        $adminModel->updateJobSeeker($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $id);
 	}
 
-	public function editEmployer($id){
-
+	public function updateEmployer($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id){
+        require_once '../model/admin_model.php';
+        include '../model/db_connection.php';
+        $adminModel = new AdminModel();
+        $adminModel->updateEmployer($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id);
 	}
 
-    public function editAdmin($id){
-
+    public function updateAdmin($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id){
+        require_once '../model/admin_model.php';
+        include '../model/db_connection.php';
+        $adminModel = new AdminModel();
+        $adminModel->updateAdmin($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id);
 	}
 
     public function generateReport($table){

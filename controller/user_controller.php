@@ -29,7 +29,7 @@ class UserController {
     }
 
     public function changeProfilePicture($file, $username, $userType){
-        require_once '../model/db_connection.php';
+        include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
         $userModel->changeProfilePicture($db, $file, $username, $userType);
@@ -43,7 +43,7 @@ class UserController {
     }
 
     public function editSocialLink($username, $linkedin, $github, $twitter, $instagram, $facebook){
-        require_once '../model/db_connection.php';
+        include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
         $userModel->editSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook);

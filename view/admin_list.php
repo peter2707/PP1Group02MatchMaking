@@ -77,7 +77,7 @@ if (isset($_POST['delete'])) {
                             echo "          <td scope=\"row\">$admin->phone</td>";
                             echo "          <td scope=\"row\">$admin->email</td>";
                             echo "          <td scope=\"row\">$admin->position</td>";
-                            createEditButton("id", $admin->id, "Edit", "edit_emp.php");
+                            createEditButton("admin", $admin->username, "Edit", "admin_edit_user.php");
                             createDeleteButton("username", $admin->username, "Delete");
                             echo "        </tr>";
                         }

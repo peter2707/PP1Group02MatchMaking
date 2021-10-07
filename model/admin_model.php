@@ -73,7 +73,41 @@ class AdminModel {
 	public function updateAdmin($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id) {
 		$query = "UPDATE admin SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, position=? WHERE id=?";
 		$stmt = $db->prepare($query);
-		$stmt->bind_param("ssssisss", $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id);
+		$stmt->bind_param("ssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id);
+		$stmt->execute();
+
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			header("location: ../view/admin_index.php?success=successupdate");
+		} else {
+			header("location: ../view/admin_index.php?error=errorupdate");
+		}
+	}
+
+	public function updateJobSeeker($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $id) {
+		$query = "UPDATE jobseeker SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, field=? WHERE id=?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("ssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $id);
+		$stmt->execute();
+
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			header("location: ../view/admin_index.php?success=successupdate");
+		} else {
+			header("location: ../view/admin_index.php?error=errorupdate");
+		}
+	}
+
+	public function updateEmployer($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id) {
+		$query = "UPDATE employer SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, position=? WHERE id=?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("ssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id);
 		$stmt->execute();
 
 		$affectedRows = $stmt->affected_rows;

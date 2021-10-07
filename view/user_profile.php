@@ -88,23 +88,23 @@
             <!-- User Profile section start -->
             <header class="ex-header">
                 <div class="container">
-                <p style="color: red;">
+                    <p style="color: red;">
 END;
-            if (isset($_GET["error"])) {
-                if ($_GET["error"] == "emptyusername") {
-                    echo "You must enter a valid username!";
-                } else if ($_GET["error"] == "emptypassword") {
-                    echo "You must enter a valid password!";
-                } else if ($_GET["error"] == "failed") {
-                    echo "Something went wrong. Please try again!";
-                } else if ($_GET["error"] == "imagenotfound") {
-                    echo "Please select an image.";
-                } else if ($_GET["error"] == "errordelete") {
-                    echo "There was a problem while deleting your account. Please try again!";
-                }
-            }
-            echo <<<END
-                </p>
+                    if (isset($_GET["error"])) {
+                        if ($_GET["error"] == "emptyusername") {
+                            echo "You must enter a valid username!";
+                        } else if ($_GET["error"] == "emptypassword") {
+                            echo "You must enter a valid password!";
+                        } else if ($_GET["error"] == "failed") {
+                            echo "Something went wrong. Please try again!";
+                        } else if ($_GET["error"] == "imagenotfound") {
+                            echo "Please select an image.";
+                        } else if ($_GET["error"] == "errordelete") {
+                            echo "There was a problem while deleting your account. Please try again!";
+                        }
+                    }
+                    echo <<<END
+                    </p>
                     <div class="main-body">
                         <div class="row gutters-sm">
                             <div class="col-md-4 mb-3">
@@ -312,11 +312,9 @@ END;
                                                 </div>
                                             </div>
                                         </form>
-                                        
                                     
                                     </div>
                                 </div>
-    
                                 
                             </div>
                         </div>
@@ -327,7 +325,6 @@ END;
             <!-- User Profile section End -->
         END;
         } elseif ($userType == "employer") {
-
             echo <<<END
             <!-- User Profile section start -->
             <header class="ex-header">
@@ -359,7 +356,7 @@ END;
 
                                             <div class="mt-3">
                                                 <h4>$user->firstName $user->lastName</h4>
-                                                <p class="text-secondary">$user->position </p>
+                                                <p class="text-secondary">$user->position</p>
                                                 <button class="btn btn-solid-sm" data-bs-toggle="modal" data-bs-target="#profileModal">Change Picture</button>
 
                                                 <!-- Modal -->
@@ -554,12 +551,10 @@ END;
                                                 </div>
                                             </div>
                                         </form>
-                                        
                                     
                                     </div>
                                 </div>
     
-                                
                             </div>
                         </div>
                     </div>
