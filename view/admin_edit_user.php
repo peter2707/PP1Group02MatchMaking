@@ -225,6 +225,7 @@ if (isset($_POST['update'])) {
                                             </div>
                                         </div>
                                     </li>
+                                </form>
                             </ul>
                         </div>
                     </div>
@@ -450,6 +451,7 @@ END;
                                             </div>
                                         </div>
                                     </li>
+                                </form>
                             </ul>
                         </div>
                     </div>
