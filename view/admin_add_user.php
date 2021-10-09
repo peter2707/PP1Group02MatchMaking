@@ -46,6 +46,30 @@ if(isset($_POST['register'])){
             <div class="row">
                 <div class="col-xl-10 offset-md-1 mb-3">
                     <h1>Add New User</h1>
+                    <?php
+                    // Error messages
+                    if (isset($_GET["error"])) {
+                        echo "<h5><span class='mt-5 mb-2 badge bg-danger'>";
+                        if ($_GET["error"] == "emptyinput") {
+                            echo "Fill in all fields!";
+                        } else if ($_GET["error"] == "invalidusername") {
+                            echo "Choose a proper username!";
+                        } else if ($_GET["error"] == "invalidemail") {
+                            echo "Choose a proper email!";
+                        } else if ($_GET["error"] == "passwordsdontmatch") {
+                            echo "Passwords doesn't match!";
+                        } else if ($_GET["error"] == "stmtfailed") {
+                            echo "Something went wrong!";
+                        } else if ($_GET["error"] == "usernametaken") {
+                            echo "Username already taken!";
+                        } else if ($_GET["error"] == "fieldnull") {
+                            echo "You have to choose a field of expertise";
+                        } else if ($_GET["error"] == "positionnull") {
+                            echo "You have to enter a position";
+                        }
+                        echo "</span></h5>";
+                    }
+                    ?>
                     <p class="mt-5 mb-2 text-muted">Enter your details below:</p>
                 </div>
                 <div class="col-md-4 offset-md-4">
@@ -112,31 +136,6 @@ if(isset($_POST['register'])){
                                 <input type="text" class="form-control" id="admin-form-position" name="positionAdmin" placeholder="Position">
                                 <label for="admin-form-position">Position</label>
                             </div>
-
-                            <p class="mt-5 mb-2" style="color: red;">
-                                <?php
-                                // Error messages
-                                if (isset($_GET["error"])) {
-                                    if ($_GET["error"] == "emptyinput") {
-                                        echo "Fill in all fields!";
-                                    } else if ($_GET["error"] == "invalidusername") {
-                                        echo "Choose a proper username!";
-                                    } else if ($_GET["error"] == "invalidemail") {
-                                        echo "Choose a proper email!";
-                                    } else if ($_GET["error"] == "passwordsdontmatch") {
-                                        echo "Passwords doesn't match!";
-                                    } else if ($_GET["error"] == "stmtfailed") {
-                                        echo "Something went wrong!";
-                                    } else if ($_GET["error"] == "usernametaken") {
-                                        echo "Username already taken!";
-                                    } else if ($_GET["error"] == "fieldnull") {
-                                        echo "You have to choose a field of expertise";
-                                    } else if ($_GET["error"] == "positionnull") {
-                                        echo "You have to enter a position";
-                                    }
-                                }
-                                ?>
-                            </p>
                             <div class="row mb-5 mt-2">
                                 <div class="col">
                                     <a style="text-decoration : none" class="w-100 btn btn-secondary-lg" href="admin_index.php">Cancel</a>

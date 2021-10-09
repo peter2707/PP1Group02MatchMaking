@@ -44,10 +44,10 @@ if (isset($_POST['post'])) {
     <header class="ex-header">
         <div class="container">
             <div class="row col-xl-10 offset-xl-1">
-                <p style="color: red;">
                     <?php
                     // Error messages
                     if (isset($_GET["error"])) {
+                        echo "<h5><span class='mb-2 badge bg-danger'>";
                         if ($_GET["error"] == "emptyinput") {
                             echo "Please complete all required columns!";
                         }else if ($_GET["error"] == "fieldnull") {
@@ -61,13 +61,9 @@ if (isset($_POST['post'])) {
                         }else if ($_GET["error"] == "samevalue") {
                             echo "You didn't make any changes.";
                         }
-                    }
-                    ?>
-                </p>
-                <p style="color: #4BB543;">
-                    <?php
-                    // Account created message
-                    if (isset($_GET["success"])) {
+                        echo "</span></h5>";
+                    }elseif (isset($_GET["success"])) {
+                        echo "<h5><span class='mb-2 badge bg-success'>";
                         if ($_GET["success"] == "posted") {
                             echo "You have posted a new job! You can view it in the table below.";
                         }elseif ($_GET["success"] == "successupdate") {
@@ -77,9 +73,9 @@ if (isset($_POST['post'])) {
                         }elseif ($_GET["success"] == "successdeny") {
                             echo "Match denied successfully";
                         }
+                        echo "</span></h5>";
                     }
                     ?>
-                </p>
                 <div class="col-8 text-start">
                     <h1>Your Posts</h1>
                 </div>

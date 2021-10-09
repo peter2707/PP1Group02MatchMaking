@@ -47,31 +47,28 @@ if (isset($_POST['match'])) {
     <header class="ex-header">
         <div class="container">
             <div class="row">
-                <p style="color: red;">
-                    <?php
-                    // Error messages
-                    if (isset($_GET["error"])) {
-                        if ($_GET["error"] == "emptyinput") {
-                            echo "Please complete all required columns!";
-                        }else if ($_GET["error"] == "positionnumeric") {
-                            echo "Position cannot be a number!";
-                        }elseif($_GET["error"] == "nomatch"){
-                            echo "There are no match found at the moment :(<br>Hint: Try searching for a different position!";
-                        }
+                <?php
+                // Error messages
+                if (isset($_GET["error"])) {
+                    echo "<h5><span class='mb-2 badge bg-danger'>";
+                    if ($_GET["error"] == "emptyinput") {
+                        echo "Please complete all required columns!";
+                    }else if ($_GET["error"] == "positionnumeric") {
+                        echo "Position cannot be a number!";
+                    }elseif($_GET["error"] == "nomatch"){
+                        echo "There are no match found at the moment...<br>Hint: Try searching for a different position!";
                     }
-                    ?>
-                </p>
-                <p style="color: #4BB543;">
-                    <?php
-                    // Account created message
-                    if (isset($_GET["success"])) {
-                        if ($_GET["success"] == "matchfound") {
-                            echo "You have a new match! You can view it in the table below.";
-                        }elseif ($_GET["success"] == "successdeny") {
-                            echo "Match denied successfully";
-                        }
+                    echo "</span></h5>";
+                }elseif (isset($_GET["success"])) {
+                    echo "<h5><span class='mb-2 badge bg-success'>";
+                    if ($_GET["success"] == "matchfound") {
+                        echo "You have a new match! You can view it in the table below.";
+                    }elseif ($_GET["success"] == "successdeny") {
+                        echo "Match denied successfully";
                     }
-                    ?>
+                    echo "</span></h5>";
+                }
+                ?>
                 </p>
                 <div class="col-8 text-start">
                     <h1>Your Matches</h1>
