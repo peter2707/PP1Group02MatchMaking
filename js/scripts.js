@@ -227,6 +227,64 @@ $.each(fieldOptions, function(val, text) {
 
 });
 
+
+//find match and post job salary drop down
+var salaryOptions = {
+    val1: '$25-$30/hr',
+    val2: '$30-$35/hr',
+    val3: '$35-$40/hr',
+    val4: '$40-$45/hr',
+    val5: '$45-$50/hr',
+    val6: '$50-$55/hr',
+    val7: '$55-$60/hr',
+    val8: '$60/hr or more'
+};
+
+var salarySelect = $('#salary-field');
+$.each(salaryOptions, function(val, text) {
+    salarySelect.append(
+        $('<option></option>').val(text).html(text)
+    );
+
+});
+
+//find match and post job location drop down
+var locationOptions = {
+    val1: 'Queensland',
+    val2: 'Northern Territory',
+    val3: 'Western Australia',
+    val4: 'South Australia',
+    val5: 'Victoria',
+    val6: 'Australian Capital Territory',
+    val7: 'Tasmania'
+};
+
+var locationSelect = $('#location-field');
+$.each(locationOptions, function(val, text) {
+    locationSelect.append(
+        $('<option></option>').val(text).html(text)
+    );
+
+});
+
+
+//find match and post job type drop down
+var jobOptions = {
+    val1: 'Full Time',
+    val2: 'Part Time',
+    val3: 'Casual',
+    val4: 'Contract'
+};
+
+var jobSelect = $('#job-type-field');
+$.each(jobOptions, function(val, text) {
+    jobSelect.append(
+        $('<option></option>').val(text).html(text)
+    );
+
+});
+
+
 //show match div
 function showFindMatchForm() {
     var jobmatch = document.getElementById("jobmatch");
@@ -234,16 +292,16 @@ function showFindMatchForm() {
         jobmatch.classList.remove('h-show');
         document.getElementById("findMatchBtn").innerHTML = "<i class='fa fa-search' aria-hidden='true'></i>";
         document.getElementById("positionInput").disabled = true;
-        document.getElementById("match-salary-field").disabled = true;
-        document.getElementById("match-location-field").disabled = true;
+        document.getElementById("salary-field").disabled = true;
+        document.getElementById("location-field").disabled = true;
         document.getElementById("job-type-field").disabled = true;
         document.getElementById("matchBtn").disabled = true;
     } else {
         jobmatch.classList.add('h-show');
         document.getElementById("findMatchBtn").innerHTML = "<i class='fa fa-chevron-up' aria-hidden='true'></i>";
         document.getElementById("positionInput").disabled = false;
-        document.getElementById("match-salary-field").disabled = false;
-        document.getElementById("match-location-field").disabled = false;
+        document.getElementById("salary-field").disabled = false;
+        document.getElementById("location-field").disabled = false;
         document.getElementById("job-type-field").disabled = false;
         document.getElementById("matchBtn").disabled = false;
     }
@@ -259,8 +317,8 @@ function showNewPostForm() {
         document.getElementById("descriptionTextArea").disabled = true;
         document.getElementById("requirementsTextArea").disabled = true;
         document.getElementById("contactInput").disabled = true;
-        document.getElementById("match-salary-field").disabled = true;
-        document.getElementById("match-location-field").disabled = true;
+        document.getElementById("salary-field").disabled = true;
+        document.getElementById("location-field").disabled = true;
         document.getElementById("job-type-field").disabled = true;
         document.getElementById("postBtn").disabled = true;
     } else {
@@ -268,8 +326,8 @@ function showNewPostForm() {
         document.getElementById("newPostBtn").innerHTML = "<i class='fa fa-chevron-up' aria-hidden='true'></i>";
         document.getElementById("positionInput").disabled = false;
         document.getElementById("fieldOfExpertise-form").disabled = false;
-        document.getElementById("match-salary-field").disabled = false;
-        document.getElementById("match-location-field").disabled = false;
+        document.getElementById("salary-field").disabled = false;
+        document.getElementById("location-field").disabled = false;
         document.getElementById("job-type-field").disabled = false;
         document.getElementById("postBtn").disabled = false;
         document.getElementById("descriptionTextArea").disabled = false;

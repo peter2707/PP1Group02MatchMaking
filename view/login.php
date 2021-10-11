@@ -76,7 +76,7 @@ if (isset($_POST['login'])) {
                             </div>
 
                             <div class="mb-3">
-                                <a href="reset_password.php">Forgot Password?</a>
+                                <a href="forget_password.php">Forgot Password?</a>
                             </div>
                             <button class="w-50 btn-success-lg mb-5 mt-2" type="submit" name="login">Log In</button>
                             <p class="mb-3">New user?</br><a href="register.php">Create an account</a></p>

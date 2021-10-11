@@ -1,42 +1,47 @@
 <?php
 require_once('../vendor/autoload.php');
-
-use Sendinblue\Mailin;
-
-include '../model/db_connection.php';
-include '../model/login_model.php';
+require_once '../model/db_connection.php';
+require_once '../model/login_model.php';
 
 if (isset($_POST['send'])) {
-    $email = "prummonkolsophearith@gmail.com";
-    $result = mysqli_query($db, "SELECT email, password FROM jobseeker WHERE email='$email'");
-    $row = mysqli_fetch_array($result);
+    $type = $_POST['type'];
+    $email = $_POST['email'];
+    $query = "SELECT * FROM $type WHERE email = ?";
+    $stmtEmp = $db->prepare($query);
+    $stmtEmp->bind_param("s", $email);
+
+    $stmtEmp->execute();
+    $result = $stmtEmp->get_result();
+    $stmtEmp->close();
+    $row = $result->fetch_assoc();
+    $db->close();
 
     if ($row) {
-        $email = md5($row['email']);
-        $pass = md5($row['password']);
+        // $email = md5($row['email']);
+        // $pass = md5($row['password']);
 
-        $mailin = new Mailin('https://api.sendinblue.com/v2.0', 'Your access key');
-        /** Prepare variables for easy use **/
-        $to = array("to@example.net" => "to whom!");
-        //mandatory
-        $subject = "My subject";
-        //mandatory
-        $from = array("from@email.com", "from email!");
-        //mandatory
-        $html = "This is the <h1>HTML</h1>";
-        //mandatory
-        $text = "This is the text";
-        $cc = array("cc@example.net" => "cc whom!");
-        $bcc = array("bcc@example.net" => "bcc whom!");
-        $replyto = array("replyto@email.com", "reply to!");
-        $attachment = array();
-        //provide the absolute url of the attachment/s
-        $headers = array("Content-Type" => "text/html; charset=iso-8859-1", "X-Ewiufkdsjfhn" => "hello", "X-Custom" => "Custom");
-        var_dump($mailin->send_email($to, $subject, $from, $html, $text, $cc, $bcc, $replyto, $attachment, $headers));
+        $mail = new \SendGrid\Mail\Mail();
+        $mail->setFrom("jobmatchdemo@gmail.com", "JobMatch");
+        $mail->setSubject("Reset Password");
+        $mail->addTo($email, $row['username']);
+        $mail->addContent("text/plain", "and easy to do anywhere, even with PHP");
+        $mail->addContent(
+            "text/html",
+            "<strong>and easy to do anywhere, even with PHP</strong>"
+        );
+        // $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
+        $sendgrid = new \SendGrid('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');
+        try {
+            $response = $sendgrid->send($mail);
+            print $response->statusCode() . "\n";
+            print_r($response->headers());
+            print $response->body() . "\n";
+        } catch (Exception $e) {
+            echo 'Caught exception: ' . $e->getMessage() . "\n";
+        }
     }
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
