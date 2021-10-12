@@ -389,20 +389,13 @@
                                 <div class="flex-grow-1">Submit your enquiry & we'll make sure to get back to you within 1-3 business days.</div>
                             </li>
                         </ul>
-                        <a class="btn-solid-reg" href="advice.php">Contact Us</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
                 <!-- end of col -->
-                <div class="col-lg-6">
-
-                    <div class="image-container">
-                            <img class="img-fluid" src="../images/careeradvice-2.png" alt="alternative">
-                        </div>
-                    <!-- end of image-container -->
-
+                <div class="col-lg-6 mt-5">
                     <!-- Contact Form -->
-                    <!-- <form>
+                     <form>
                         <div class="form-group">
                             <input type="text" class="form-control-input" placeholder="Name" required>
                         </div>
@@ -418,9 +411,8 @@
                         <div class="form-group">
                             <button type="submit" class="form-control-submit-button">Submit</button>
                         </div>
-                    </form> -->
+                    </form>
                     <!-- end of contact form -->
-
                 </div>
                 <!-- end of col -->
             </div>

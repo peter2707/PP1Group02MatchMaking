@@ -44,6 +44,30 @@ if(isset($_POST['register'])){
             <div class="row">
                 <div class="col-xl-10 offset-xl-1 mb-3">
                     <h1>Create an Account</h1>
+                    <?php
+                    // Error messages
+                    if (isset($_GET["error"])) {
+                        echo "<h5><span class='mt-5 mb-2 badge bg-danger'>";
+                        if ($_GET["error"] == "emptyinput") {
+                            echo "Fill in all required fields!";
+                        } else if ($_GET["error"] == "invalidusername") {
+                            echo "Enter a valid username!";
+                        } else if ($_GET["error"] == "invalidemail") {
+                            echo "Enter a valid email!";
+                        } else if ($_GET["error"] == "passwordsdontmatch") {
+                            echo "Passwords do not match. Please try again!";
+                        } else if ($_GET["error"] == "stmtfailed") {
+                            echo "Something went wrong. Please try again!";
+                        } else if ($_GET["error"] == "usernametaken") {
+                            echo "Username is already taken!";
+                        } else if ($_GET["error"] == "fieldnull") {
+                            echo "You have to choose a field of expertise";
+                        } else if ($_GET["error"] == "positionnull") {
+                            echo "You have to enter your position";
+                        }
+                        echo "</span></h5>";
+                    }
+                    ?>
                     <p class="mt-5 mb-2 text-muted">Enter your details below:</p>
                 </div>
                 <div class="col-md-4 offset-md-4">
@@ -102,34 +126,7 @@ if(isset($_POST['register'])){
                             <label for="employer-form-label">Position</label>
                         </div>
 
-                        
-
-                        <p class="mt-5 mb-2" style="color: red;">
-                            <?php
-                            // Error messages
-                            if (isset($_GET["error"])) {
-                                if ($_GET["error"] == "emptyinput") {
-                                    echo "Fill in all required fields!";
-                                } else if ($_GET["error"] == "invalidusername") {
-                                    echo "Enter a valid username!";
-                                } else if ($_GET["error"] == "invalidemail") {
-                                    echo "Enter a valid email!";
-                                } else if ($_GET["error"] == "passwordsdontmatch") {
-                                    echo "Passwords do not match. Please try again!";
-                                } else if ($_GET["error"] == "stmtfailed") {
-                                    echo "Something went wrong. Please try again!";
-                                } else if ($_GET["error"] == "usernametaken") {
-                                    echo "Username is already taken!";
-                                } else if ($_GET["error"] == "fieldnull") {
-                                    echo "You have to choose a field of expertise";
-                                } else if ($_GET["error"] == "positionnull") {
-                                    echo "You have to enter your position";
-                                }
-                            }
-                            ?>
-                        </p>
-
-                        <button class="w-50 btn btn-solid-lg mb-5 mt-2" type="submit" name="register">Register</button>
+                        <button class="w-50 btn btn-success-lg mb-5 mt-2" type="submit" name="register">Register</button>
                         <p class="mb-3">Already have an account? <a href="login.php">Log In</a></p>
                     </form>
                 </main>

@@ -32,6 +32,7 @@ if (isset($_POST['update'])) {
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $field = $_POST['field'];
+        $username = $_POST['username'];
         $password = $_POST['password'];
 
         $ac->updateJobSeeker($firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $user->id);
@@ -42,6 +43,7 @@ if (isset($_POST['update'])) {
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $position = $_POST['position'];
+        $username = $_POST['username'];
         $password = $_POST['password'];
 
         $ac->updateEmployer($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $user->id);
@@ -52,6 +54,7 @@ if (isset($_POST['update'])) {
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $position = $_POST['position'];
+        $username = $_POST['username'];
         $password = $_POST['password'];
 
         $ac->updateAdmin($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $user->id);

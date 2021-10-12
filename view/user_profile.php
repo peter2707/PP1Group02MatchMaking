@@ -88,9 +88,9 @@
             <!-- User Profile section start -->
             <header class="ex-header">
                 <div class="container">
-                    <p style="color: red;">
 END;
                     if (isset($_GET["error"])) {
+                        echo "<h5><span class='mb-2 badge bg-danger'>";
                         if ($_GET["error"] == "emptyusername") {
                             echo "You must enter a valid username!";
                         } else if ($_GET["error"] == "emptypassword") {
@@ -102,9 +102,9 @@ END;
                         } else if ($_GET["error"] == "errordelete") {
                             echo "There was a problem while deleting your account. Please try again!";
                         }
+                        echo "</span></h5>";
                     }
                     echo <<<END
-                    </p>
                     <div class="main-body">
                         <div class="row gutters-sm">
                             <div class="col-md-4 mb-3">
@@ -330,9 +330,9 @@ END;
             <!-- User Profile section start -->
             <header class="ex-header">
                 <div class="container">
-                <p style="color: red;">
 END;
             if (isset($_GET["error"])) {
+                echo "<h5><span class='mb-2 badge bg-danger'>";
                 if ($_GET["error"] == "emptyusername") {
                     echo "You must enter a valid username!";
                 } else if ($_GET["error"] == "emptypassword") {
@@ -344,9 +344,9 @@ END;
                 } else if ($_GET["error"] == "errordelete") {
                     echo "There was a problem while deleting your account. Please try again!";
                 }
+                echo "</span></h5>";
             }
             echo <<<END
-                    </p>
                     <div class="main-body">
                         <div class="row gutters-sm">
                             <div class="col-md-4 mb-3">

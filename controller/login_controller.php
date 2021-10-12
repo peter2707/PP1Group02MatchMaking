@@ -2,8 +2,6 @@
 class LoginController{
 
 	public function login($username, $password){
-		require_once '../model/login_model.php';
-		$loginModel = new LoginModel();
 		if (!isset($username) || empty($username)) {
 			header("location: ../view/login.php?error=emptyusername");
 			exit();
@@ -11,6 +9,8 @@ class LoginController{
 			header("location: ../view/login.php?error=emptypassword");
 			exit();
 		}else {
+			require_once '../model/login_model.php';
+			$loginModel = new LoginModel();
 			$loginModel->login($username, $password);
 		}
 	}
@@ -19,6 +19,17 @@ class LoginController{
 		require_once '../model/login_model.php';
 		$loginModel = new LoginModel();
 		$loginModel->logOut();
+	}
+
+	public function resetPassword($type, $email){
+		if(!isset($type) || !isset($email)){
+			header("location: ../view/forget_password.php?error=emptyinput");
+		}else{
+			require_once '../model/db_connection.php';
+			require_once '../model/login_model.php';
+			$loginModel = new LoginModel();
+			$loginModel->resetPassword($db, $type, $email);
+		}
 	}
 	
 }

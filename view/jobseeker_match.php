@@ -47,31 +47,28 @@ if (isset($_POST['match'])) {
     <header class="ex-header">
         <div class="container">
             <div class="row">
-                <p style="color: red;">
-                    <?php
-                    // Error messages
-                    if (isset($_GET["error"])) {
-                        if ($_GET["error"] == "emptyinput") {
-                            echo "Please complete all required columns!";
-                        }else if ($_GET["error"] == "positionnumeric") {
-                            echo "Position cannot be a number!";
-                        }elseif($_GET["error"] == "nomatch"){
-                            echo "There are no match found at the moment :(<br>Hint: Try searching for a different position!";
-                        }
+                <?php
+                // Error messages
+                if (isset($_GET["error"])) {
+                    echo "<h5><span class='mb-2 badge bg-danger'>";
+                    if ($_GET["error"] == "emptyinput") {
+                        echo "Please complete all required columns!";
+                    }else if ($_GET["error"] == "positionnumeric") {
+                        echo "Position cannot be a number!";
+                    }elseif($_GET["error"] == "nomatch"){
+                        echo "There are no match found at the moment...<br>Hint: Try searching for a different position!";
                     }
-                    ?>
-                </p>
-                <p style="color: #4BB543;">
-                    <?php
-                    // Account created message
-                    if (isset($_GET["success"])) {
-                        if ($_GET["success"] == "matchfound") {
-                            echo "You have a new match! You can view it in the table below.";
-                        }elseif ($_GET["success"] == "successdeny") {
-                            echo "Match denied successfully";
-                        }
+                    echo "</span></h5>";
+                }elseif (isset($_GET["success"])) {
+                    echo "<h5><span class='mb-2 badge bg-success'>";
+                    if ($_GET["success"] == "matchfound") {
+                        echo "You have a new match! You can view it in the table below.";
+                    }elseif ($_GET["success"] == "successdeny") {
+                        echo "Match denied successfully";
                     }
-                    ?>
+                    echo "</span></h5>";
+                }
+                ?>
                 </p>
                 <div class="col-8 text-start">
                     <h1>Your Matches</h1>
@@ -89,44 +86,24 @@ if (isset($_POST['match'])) {
                         </div>
                         <div class="col-sm-2">
                             <div class="form-floating">
-                                <select disabled class="form-select" aria-label=".form-select-lg example" id="match-salary-field" name="salary">
+                                <select disabled class="form-select" aria-label=".form-select-lg example" id="salary-field" name="salary">
                                     <option selected>Choose...</option>
-                                    <option value="$25-$30/hr">$25-$30/hr</option>
-                                    <option value="$30-$35/hr">$30-$35/hr</option>
-                                    <option value="$35-$40/hr">$35-$40/hr</option>
-                                    <option value="$40-$45/hr">$40-$45/hr</option>
-                                    <option value="$45-$50/hr">$45-$50/hr</option>
-                                    <option value="$50-$55/hr">$50-$55/hr</option>
-                                    <option value="$55-$60/hr">$55-$60/hr</option>
-                                    <option value="$60/hr or more">$60/hr or more</option>
                                 </select>
-                                <label for="match-salary-field">Salary Range</label>
+                                <label for="salary-field">Salary Range</label>
                             </div>
                         </div>
                         <div class="col-sm-3">
                             <div class="form-floating">
-                                <select disabled class="form-select" aria-label=".form-select-lg example" id="match-location-field" name="location">
+                                <select disabled class="form-select" aria-label=".form-select-lg example" id="location-field" name="location">
                                     <option selected>Choose...</option>
-                                    <option value="New South Wales">New South Wales</option>
-                                    <option value="Queensland">Queensland</option>
-                                    <option value="Northern Territory">Northern Territory</option>
-                                    <option value="Western Australia">Western Australia</option>
-                                    <option value="South Australia">South Australia</option>
-                                    <option value="Victoria">Victoria</option>
-                                    <option value="Australian Capital Territory">Australian Capital Territory</option>
-                                    <option value="Tasmania">Tasmania</option>
                                 </select>
-                                <label for="match-location-field">Location</label>
+                                <label for="location-field">Location</label>
                             </div>
                         </div>
                         <div class="col-sm-2">
                             <div class="form-floating">
                                 <select disabled class="form-select" aria-label=".form-select-lg example" id="job-type-field" name="type">
                                     <option selected>Choose...</option>
-                                    <option value="Full Time">Full Time</option>
-                                    <option value="Part Time">Part Time</option>
-                                    <option value="Casual">Casual</option>
-                                    <option value="Contract">Contract</option>
                                 </select>
                                 <label for="job-type-field">Job Type</label>
                             </div>

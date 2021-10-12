@@ -34,38 +34,34 @@ if (isset($_POST["exportJobSeeker"])) {
             <div class="row">
                 <div class="col-xl-10 offset-xl-1 mb-3">
                     <h1>Admin Home</h1>
-                    <p class="mt-5 mb-2" style="color: red;">
-                        <?php
-                        // Error messages
-                        if (isset($_GET["error"])) {
-                            if ($_GET["error"] == "emptyusername") {
-                                echo "You must enter a valid username!";
-                            } else if ($_GET["error"] == "emptypassword") {
-                                echo "You must enter a valid password!";
-                            } else if ($_GET["error"] == "failed") {
-                                echo "Something went wrong. Please try again!";
-                            } else if ($_GET["error"] == "incorrect") {
-                                echo "Incorrect password or email. Please try again!";
-                            } else if ($_GET["error"] == "errordelete") {
-                                echo "There was a problem while trying to delete.";
-                            }
+                    <?php
+                    // Error messages
+                    if (isset($_GET["error"])) {
+                        echo "<h5><span class='mb-2 badge bg-danger'>";
+                        if ($_GET["error"] == "emptyusername") {
+                            echo "You must enter a valid username!";
+                        } else if ($_GET["error"] == "emptypassword") {
+                            echo "You must enter a valid password!";
+                        } else if ($_GET["error"] == "failed") {
+                            echo "Something went wrong. Please try again!";
+                        } else if ($_GET["error"] == "incorrect") {
+                            echo "Incorrect password or email. Please try again!";
+                        } else if ($_GET["error"] == "errordelete") {
+                            echo "There was a problem while trying to delete.";
                         }
-                        ?>
-                    </p>
-                    <p class="mt-5 mb-2" style="color: #4BB543;">
-                        <?php
-                        // Success message
-                        if (isset($_GET["success"])) {
-                            if ($_GET["success"] == "created") {
-                                echo "Account has been successfully created.";
-                            } elseif ($_GET["success"] == "successdelete") {
-                                echo "Account has been successfully deleted.";
-                            } elseif ($_GET["success"] == "successupdate") {
-                                echo "Account has been successfully updated.";
-                            }
+                        echo "</span></h5>";
+                    }elseif (isset($_GET["success"])) {
+                        echo "<h5><span class='mb-2 badge bg-success'>";
+                        if ($_GET["success"] == "created") {
+                            echo "Account has been successfully created.";
+                        } elseif ($_GET["success"] == "successdelete") {
+                            echo "Account has been successfully deleted.";
+                        } elseif ($_GET["success"] == "successupdate") {
+                            echo "Account has been successfully updated.";
                         }
-                        ?>
-                    </p>
+                        echo "</span></h5>";
+                    }
+                    ?>
                 </div>
 
                 <div class="row col-md-6 offset-md-3">

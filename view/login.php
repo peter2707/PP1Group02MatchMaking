@@ -33,39 +33,37 @@ if (isset($_POST['login'])) {
         <div class="container">
             <div class="row">
                 <div class="col-xl-10 offset-xl-1 mb-3">
-                    <h1>Login</h1>
-                    <p class="mt-5 mb-2" style="color: red;">
-                        <?php
-                        // Error messages
-                        if (isset($_GET["error"])) {
-                            if ($_GET["error"] == "emptyusername") {
-                                echo "You must enter a valid username!";
-                            } else if ($_GET["error"] == "emptypassword") {
-                                echo "You must enter a valid password!";
-                            } else if ($_GET["error"] == "failed") {
-                                echo "Something went wrong. Please try again!";
-                            } else if ($_GET["error"] == "incorrect") {
-                                echo "Incorrect password or email. Please try again!";
-                            } else if ($_GET["error"] == "errordelete") {
-                                echo "There was a problem while deleting your account. Please try again!";
-                            }
+                    <h1>Log In</h1>
+                    <?php
+                    // Error messages
+                    if (isset($_GET["error"])) {
+                        echo "<h5><span class='mt-5 mb-2 badge bg-danger'>";
+                        if ($_GET["error"] == "emptyusername") {
+                            echo "You must enter a valid username!";
+                        } else if ($_GET["error"] == "emptypassword") {
+                            echo "You must enter a valid password!";
+                        } else if ($_GET["error"] == "failed") {
+                            echo "Something went wrong. Please try again!";
+                        } else if ($_GET["error"] == "incorrect") {
+                            echo "Incorrect password or email. Please try again!";
+                        } else if ($_GET["error"] == "errordelete") {
+                            echo "There was a problem while deleting your account. Please try again!";
                         }
-                        ?>
-                    </p>
-                    <p class="mt-5 mb-2" style="color: #4BB543;">
-                        <?php
-                        // Account created message
-                        if (isset($_GET["success"])) {
-                            if ($_GET["success"] == "created") {
-                                echo "Your account has been successfully created.<br>Please log in to continue!";
-                            } elseif ($_GET["success"] == "accountdeleted") {
-                                echo "Your account has been deleted. Thank you for using our service :)";
-                            } elseif ($_GET["success"] == "logout") {
-                                echo "Successfully logged out.";
-                            }
+                        echo "</span></h5>";
+                    }elseif (isset($_GET["success"])) {
+                        echo "<h5><span class='mt-5 mb-2 badge bg-success'>";
+                        if ($_GET["success"] == "created") {
+                            echo "Your account has been successfully created.";
+                        } elseif ($_GET["success"] == "accountdeleted") {
+                            echo "Your account has been deleted. Thank you for using our service :)";
+                        } elseif ($_GET["success"] == "logout") {
+                            echo "Successfully logged out.";
+                        } elseif ($_GET["success"] == "reset") {
+                            echo "Your password has been reset, Please log in to continue.";
                         }
-                        ?>
-                    </p>
+                        echo"</span></h5>";
+                    }
+                    ?>
                 </div>
                 <div class="col-md-4 offset-md-4">
                     <main class="form-signin">
@@ -79,12 +77,10 @@ if (isset($_POST['login'])) {
                                 <label for="floatingPassword">Password</label>
                             </div>
 
-                            <div class="checkbox mb-3">
-                                <label>
-                                    <input type="checkbox" value="remember-me"> Remember me
-                                </label>
+                            <div class="mb-3">
+                                <a href="forget_password.php">Forgot Password?</a>
                             </div>
-                            <button class="w-50 form-control-submit-button mb-5 mt-2" type="submit" name="login">Log In</button>
+                            <button class="w-50 btn-success-lg mb-5 mt-2" type="submit" name="login">Log In</button>
                             <p class="mb-3">New user?</br><a href="register.php">Create an account</a></p>
                         </form>
                     </main>
