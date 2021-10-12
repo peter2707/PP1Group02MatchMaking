@@ -22,7 +22,7 @@ class LoginController{
 	}
 
 	public function resetPassword($type, $email){
-		if(!isset($type) || empty($email)){
+		if(!isset($type) || !isset($email)){
 			header("location: ../view/forget_password.php?error=emptyinput");
 		}else{
 			require_once '../model/db_connection.php';
