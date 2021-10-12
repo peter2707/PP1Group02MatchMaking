@@ -58,6 +58,12 @@ if (isset($_POST['submit'])) {
                 echo "Please complete all required columns!";
             }
             echo "</span></h5>";
+        }elseif (isset($_GET["success"])) {
+            echo "<h5><span class='mb-2 badge bg-success'>";
+            if ($_GET["success"] == "reported") {
+                echo "Your report has been submitted, our team will review it soon.";
+            }
+            echo "</span></h5>";
         }
         ?>
             <div class="col-lg-6">
