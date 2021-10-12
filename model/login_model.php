@@ -46,10 +46,7 @@
 	
 		function checkAdmin($db, $username, $password) {
 			$admin = false;
-			$query = "SELECT count(*) 
-					FROM admin
-					WHERE username=? AND password =?";
-					  
+			$query = "SELECT count(*) FROM admin WHERE username=? AND password =?";  
 			$stmt = $db->prepare($query);
 			$stmt->bind_param("ss", $username, $password);
 			$stmt->execute();
@@ -73,10 +70,7 @@
 	
 		function checkEmployer($db, $username, $password) {
 			$employer = false;
-			$query = "SELECT count(*) 
-					FROM employer
-					WHERE username=? AND password =?";
-					  
+			$query = "SELECT count(*) FROM employer WHERE username=? AND password =?";
 			$stmt = $db->prepare($query);
 			$stmt->bind_param("ss", $username, $password);
 			$stmt->execute();
@@ -100,10 +94,7 @@
 	
 		function checkJobSeeker($db, $username, $password) {
 			$jobseeker = false;
-			$query = "SELECT count(*) 
-					FROM jobseeker
-					WHERE username=? AND password =?";
-					  
+			$query = "SELECT count(*) FROM jobseeker WHERE username=? AND password =?"; 
 			$stmt = $db->prepare($query);
 			$stmt->bind_param("ss", $username, $password);
 			$stmt->execute();

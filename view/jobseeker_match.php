@@ -47,29 +47,6 @@ if (isset($_POST['match'])) {
     <header class="ex-header">
         <div class="container">
             <div class="row">
-                <?php
-                // Error messages
-                if (isset($_GET["error"])) {
-                    echo "<h5><span class='mb-2 badge bg-danger'>";
-                    if ($_GET["error"] == "emptyinput") {
-                        echo "Please complete all required columns!";
-                    }else if ($_GET["error"] == "positionnumeric") {
-                        echo "Position cannot be a number!";
-                    }elseif($_GET["error"] == "nomatch"){
-                        echo "There are no match found at the moment...<br>Hint: Try searching for a different position!";
-                    }
-                    echo "</span></h5>";
-                }elseif (isset($_GET["success"])) {
-                    echo "<h5><span class='mb-2 badge bg-success'>";
-                    if ($_GET["success"] == "matchfound") {
-                        echo "You have a new match! You can view it in the table below.";
-                    }elseif ($_GET["success"] == "successdeny") {
-                        echo "Match denied successfully";
-                    }
-                    echo "</span></h5>";
-                }
-                ?>
-                </p>
                 <div class="col-8 text-start">
                     <h1>Your Matches</h1>
                 </div>
@@ -121,6 +98,27 @@ if (isset($_POST['match'])) {
 
     <div class="col-md-6 offset-md-3 mt-5 mb-5" style="min-height: 200px;">
         <?php
+        // Error messages
+        if (isset($_GET["error"])) {
+            echo "<h5><span class='mb-5 badge bg-danger'>";
+            if ($_GET["error"] == "emptyinput") {
+                echo "Please complete all required columns!";
+            }else if ($_GET["error"] == "positionnumeric") {
+                echo "Position cannot be a number!";
+            }elseif($_GET["error"] == "nomatch"){
+                echo "There are no match found at the moment...<br>Hint: Try searching for a different position!";
+            }
+            echo "</span></h5>";
+        }elseif (isset($_GET["success"])) {
+            echo "<h5><span class='mb-5 badge bg-success'>";
+            if ($_GET["success"] == "matchfound") {
+                echo "You have a new match! You can view it in the table below.";
+            }elseif ($_GET["success"] == "successdeny") {
+                echo "Match denied successfully";
+            }
+            echo "</span></h5>";
+        }
+
         if(count($jobmatches) < 1){
             echo "<h3>You don't have any match yet.</h3> <small>To find match, click on the <i class='fa fa-search' aria-hidden='true'></i> button</small>";
         }else{

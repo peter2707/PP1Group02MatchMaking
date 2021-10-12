@@ -37,7 +37,7 @@ if (isset($_POST["exportJobSeeker"])) {
                     <?php
                     // Error messages
                     if (isset($_GET["error"])) {
-                        echo "<h5><span class='mb-2 badge bg-danger'>";
+                        echo "<h5><span class='mb-2 mt-5 badge bg-danger'>";
                         if ($_GET["error"] == "emptyusername") {
                             echo "You must enter a valid username!";
                         } else if ($_GET["error"] == "emptypassword") {
@@ -51,7 +51,7 @@ if (isset($_POST["exportJobSeeker"])) {
                         }
                         echo "</span></h5>";
                     }elseif (isset($_GET["success"])) {
-                        echo "<h5><span class='mb-2 badge bg-success'>";
+                        echo "<h5><span class='mb-2 mt-5 badge bg-success'>";
                         if ($_GET["success"] == "created") {
                             echo "Account has been successfully created.";
                         } elseif ($_GET["success"] == "successdelete") {
