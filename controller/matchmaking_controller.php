@@ -89,4 +89,25 @@ class MatchmakingController {
         $mmm->denyMatch($db, $id, $usertype);
     }
 
+    public function addFeedback($rating, $feedback, $id){
+        if(!isset($rating)||!isset($feedback)||!isset($id)){
+            header("location: ../view/feedback.php?error=emptyinput");
+        }else{
+            require_once '../model/matchmaking_model.php';
+            include '../model/db_connection.php';
+            $mmm = new MatchmakingModel();
+            $mmm->addFeedback($db, $rating, $feedback, $id);
+        }
+    }
+
+    public function reportMatch($username, $type, $id, $reason, $comment){
+        if(!isset($username)||!isset($type)||!isset($id)||!isset($reason)||!isset($comment)){
+            header("location: ../view/report.php?error=emptyinput");
+        }else{
+            require_once '../model/matchmaking_model.php';
+            include '../model/db_connection.php';
+            $mmm = new MatchmakingModel();
+            $mmm->reportMatch($db, $username, $type, $id, $reason, $comment);
+        }
+    }
 }

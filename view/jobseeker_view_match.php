@@ -124,10 +124,16 @@ function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPag
                     <p>If you found a job that is suspicious, please report it to <b>JobMatch</b> so that we can review it.</p>
                     <div class="row">
                         <div class="col text-start">
-                            <button class="btn btn-secondary-sm"><i class="fa fa-info-circle" aria-hidden="true"></i> Report</button>
+                            <form action="report.php" method="GET">
+                                <input type="hidden" name="id" value= <?php echo "$id" ?> >
+                                <button type="submit" class="btn btn-secondary-sm"><i class="fa fa-info-circle" aria-hidden="true"></i> Report</button>
+                            </form>
                         </div>
                         <div class="col text-end">
-                            <button class="btn btn-secondary-sm"><i class="fa fa-comments" aria-hidden="true"></i> Feedback</button>
+                            <form action="feedback.php" method="GET">
+                                <input type="hidden" name="id" value= <?php echo "$id" ?> >
+                                <button type="submit" class="btn btn-secondary-sm"><i class="fa fa-comments" aria-hidden="true"></i> Feedback</button>
+                            </form>
                         </div>
                     </div>
                 </div>

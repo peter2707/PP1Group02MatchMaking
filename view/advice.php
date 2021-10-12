@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <!-- Webpage Title -->
-    <title>JobMatch | Home</title>
+    <title>JobMatch | Advice</title>
     <?php
         require_once("component/header.php");
     ?>
@@ -39,7 +39,7 @@
                         <p>Please select the correct topic related to your enquiry and we will get back to you immediately.</p>
                     </div>
                     <!-- end of text-container -->
-                    <div class="image-container">
+                    <div class="col-md-4 offset-md-4 image-container">
                         <img class="img-fluid" src="../images/careeradvice-2.png" alt="alternative">
                     </div>
                     <!-- end of image-container -->

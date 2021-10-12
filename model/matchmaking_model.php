@@ -249,5 +249,28 @@ class MatchmakingModel{
 			}
 		}
 	}
+
+	public function addFeedback($db, $rating, $feedback, $id){
+		$query = "UPDATE jobmatch SET rating=?, feedback=? WHERE id=?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("isi", $rating, $feedback, $id);
+		$stmt->execute();
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			header("location: ../view/jobseeker_match.php?success=donefeedback");
+		} else {
+			header("location: ../view/jobseeker_match.php?error=errorfeedback");
+		}
+	}
+
+	public function reportMatch($db, $username, $type, $id, $reason, $comment){
+		$query = "INSERT INTO report (username, type, matchID, reason, comment) VALUES ('$username', '$type', '$id', '$reason', '$comment')";
+		mysqli_query($db, $query) or die(mysqli_error($db));
+		$db->close();
+		header("location: ../view/report.php?success=reported");
+	}
 	
 }
