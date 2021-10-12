@@ -1,49 +1,14 @@
 <?php
+if (isset($_POST['reset'])) {
+    require_once '../controller/user_controller.php';
+    $userController = new UserController();
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-use PHPMailer\PHPMailer\Exception;
-include '../model/db_connection.php';
-
-if(isset($_POST['submit_email']) && $_POST['email']){
-    $result = mysqli_query($conn,"SELECT * FROM users WHERE email='" . $emailId . "'");
-    $row= mysqli_fetch_array($result);
- 
-  if($row){
-    $email=md5($row['email']);
-    $pass=md5($row['password']);
-
-    $link="<a href='www.samplewebsite.com/reset.php?key=".$email."&reset=".$pass."'>Click To Reset password</a>";
-    require_once('phpmail/PHPMailerAutoload.php');
-    $mail = new PHPMailer();
-    $mail->CharSet =  "utf-8";
-    $mail->IsSMTP();
-    // enable SMTP authentication
-    $mail->SMTPAuth = true;                  
-    // GMAIL username
-    $mail->Username = "your_email_id@gmail.com";
-    // GMAIL password
-    $mail->Password = "your_gmail_password";
-    $mail->SMTPSecure = "ssl";  
-    // sets GMAIL as the SMTP server
-    $mail->Host = "smtp.gmail.com";
-    // set the SMTP port for the GMAIL server
-    $mail->Port = "465";
-    $mail->From='your_gmail_id@gmail.com';
-    $mail->FromName='your_name';
-    $mail->AddAddress('reciever_email_id', 'reciever_name');
-    $mail->Subject  =  'Reset Password';
-    $mail->IsHTML(true);
-    $mail->Body    = 'Click On This Link to Reset Password '.$pass.'';
-    if($mail->Send())
-    {
-      echo "Check Your Email and Click on the link sent to your email";
-    }
-    else
-    {
-      echo "Mail Error - >".$mail->ErrorInfo;
-    }
-  }	
+    $token = $_GET['token'];
+    $email = $_GET['email'];
+    $type = $_GET['type'];
+    $password = $_POST['password'];
+    $confirmPassword = $_POST['confirmPassword'];
+    $userController->resetPassword($type, $password, $confirmPassword, $email, $token);
 }
 ?>
 
@@ -72,28 +37,46 @@ if(isset($_POST['submit_email']) && $_POST['email']){
         <div class="container">
             <div class="row">
                 <div class="col-md-6 offset-md-3 mb-3">
-                    <h2>Forgot Password?</h2>
+                    <h2>Reset Password</h2>
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <h3><i class="fa fa-lock fa-4x"></i></h3>
                             <div class="panel-body mt-5">
-                                <p>You can reset your password here.</p>
+                                <?php
+                                    // Error messages
+                                    if (isset($_GET["error"])) {
+                                        echo "<h5><span class='mb-2 badge bg-danger'>";
+                                        if ($_GET["error"] == "passwordsdontmatch") {
+                                            echo "Passwords does not match";
+                                        }else if ($_GET["error"] == "sthwentwrong") {
+                                            echo "There was a problem trying to reset the password.";
+                                        }else if ($_GET["error"] == "emptyinput") {
+                                            echo "Please fill in all field before continue!";
+                                        }else if ($_GET["error"] == "notfound") {
+                                            echo "Invalid token or email.";
+                                        }else if ($_GET["error"] == "expired") {
+                                            echo "This link has already expired.";
+                                        }
+                                        echo "</span></h5>";
+                                    }elseif (isset($_GET["success"])) {
+                                        echo "<h5><span class='mb-2 badge bg-success'>";
+                                        if ($_GET["success"] == "tokengenerated") {
+                                            echo "A link has been sent to your email, please check your inbox or spam folder.";
+                                        }
+                                        echo "</span></h5>";
+                                    }
+                                ?>
+                                <p>Enter your new password here.</p>
                                 <form method="POST" autocomplete="off">
-                                    <div class="form-floating mb-3">
-                                        <input type="text" class="form-control" id="floatingInput" placeholder="Email Address" name="email">
-                                        <label for="floatingInput">Email Address</label>
-                                    </div>
-                                    <div class="form-floating mb-3">
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="type" id="job-seeker" value="jobseeker" checked>
-                                            <label class="form-check-label" for="job-seeker">Job Seeker</label>
-                                        </div>
-                                        <div class="form-check form-check-inline">
-                                            <input class="form-check-input" type="radio" name="type" id="employer" value="employer">
-                                            <label class="form-check-label" for="employer">Employer</label>
-                                        </div>
-                                    </div>
-                                    <button class="w-50 btn-solid-lg mb-5 mt-2" type="submit" name="send">Send Recovery Link</button>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="floatingPassword" placeholder="New Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one number and one uppercase and lowercase letter, and 5 to 20 characters" required>
+                                    <label for="floatingPassword">New Password</label>
+                                </div>
+                                <div class="form-floating mb-3">
+                                    <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm Password" name="confirmPassword" required>
+                                    <label for="floatingPassword">Confirm Password</label>
+                                </div>
+                                    <button class="w-50 btn-solid-lg mb-5 mt-2" type="submit" name="reset">Reset Password</button>
                                 </form>
                             </div>
                         </div>

@@ -1,45 +1,11 @@
 <?php
-require_once('../vendor/autoload.php');
-require_once '../model/db_connection.php';
-require_once '../model/login_model.php';
+require_once '../controller/login_controller.php';
 
 if (isset($_POST['send'])) {
     $type = $_POST['type'];
     $email = $_POST['email'];
-    $query = "SELECT * FROM $type WHERE email = ?";
-    $stmtEmp = $db->prepare($query);
-    $stmtEmp->bind_param("s", $email);
-
-    $stmtEmp->execute();
-    $result = $stmtEmp->get_result();
-    $stmtEmp->close();
-    $row = $result->fetch_assoc();
-    $db->close();
-
-    if ($row) {
-        // $email = md5($row['email']);
-        // $pass = md5($row['password']);
-
-        $mail = new \SendGrid\Mail\Mail();
-        $mail->setFrom("jobmatchdemo@gmail.com", "JobMatch");
-        $mail->setSubject("Reset Password");
-        $mail->addTo($email, $row['username']);
-        $mail->addContent("text/plain", "and easy to do anywhere, even with PHP");
-        $mail->addContent(
-            "text/html",
-            "<strong>and easy to do anywhere, even with PHP</strong>"
-        );
-        // $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
-        $sendgrid = new \SendGrid('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');
-        try {
-            $response = $sendgrid->send($mail);
-            print $response->statusCode() . "\n";
-            print_r($response->headers());
-            print $response->body() . "\n";
-        } catch (Exception $e) {
-            echo 'Caught exception: ' . $e->getMessage() . "\n";
-        }
-    }
+    $loginController = new LoginController();
+    $loginController->resetPassword($type, $email);
 }
 ?>
 <!DOCTYPE html>
@@ -72,6 +38,26 @@ if (isset($_POST['send'])) {
                         <div class="panel-body">
                             <h3><i class="fa fa-lock fa-4x"></i></h3>
                             <div class="panel-body mt-5">
+                            <?php
+                                // Error messages
+                                if (isset($_GET["error"])) {
+                                    echo "<h5><span class='mb-2 badge bg-danger'>";
+                                    if ($_GET["error"] == "usernotfound") {
+                                        echo "User not found!";
+                                    }else if ($_GET["error"] == "sthwentwrong") {
+                                        echo "There was a problem trying to generate the link.";
+                                    }else if ($_GET["error"] == "emptyinput") {
+                                        echo "Please fill in all field before continue!";
+                                    }
+                                    echo "</span></h5>";
+                                }elseif (isset($_GET["success"])) {
+                                    echo "<h5><span class='mb-2 badge bg-success'>";
+                                    if ($_GET["success"] == "tokengenerated") {
+                                        echo "A link has been sent to your email, please check your inbox or spam folder.";
+                                    }
+                                    echo "</span></h5>";
+                                }
+                            ?>
                                 <p>You can reset your password here.</p>
                                 <form method="POST" autocomplete="off">
                                     <div class="form-floating mb-3">

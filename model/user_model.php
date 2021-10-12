@@ -7,12 +7,12 @@ class UserModel {
 		$username = $sessionController->getUserName();
 
 		$query = "SELECT * FROM $userType WHERE username = ?";
-		$stmtEmp = $db->prepare($query);
-		$stmtEmp->bind_param("s", $username);
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("s", $username);
 
-		$stmtEmp->execute();
-		$result = $stmtEmp->get_result();
-		$stmtEmp->close();
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$stmt->close();
 		$row = $result->fetch_assoc();
 		$db->close();
 
@@ -31,12 +31,12 @@ class UserModel {
 	public function getUserByName($db, $usertype, $username) {
 		include '../model/user_object.php';
 		$query = "SELECT * FROM $usertype WHERE username = ?";
-		$stmtEmp = $db->prepare($query);
-		$stmtEmp->bind_param("s", $username);
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("s", $username);
 
-		$stmtEmp->execute();
-		$result = $stmtEmp->get_result();
-		$stmtEmp->close();
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$stmt->close();
 		$row = $result->fetch_assoc();
 		$db->close();
 
@@ -135,17 +135,16 @@ class UserModel {
 	public function getSocialLink($db, $username){
 		include '../model/job_object.php';
 		$query = "SELECT * FROM social WHERE username = '$username'";
-		$stmtEmp = $db->prepare($query);
-		$stmtEmp->execute();
-		$result = $stmtEmp->get_result();
+		$stmt = $db->prepare($query);
+		$stmt->execute();
+		$result = $stmt->get_result();
 		$row = $result->fetch_assoc();
 		if(mysqli_num_rows($result)==0){
 			$social = new Social('Not added', 'Not added', 'Not added', 'Not added', 'Not added', 'Not added');
 		}else{
 			$social = new Social($row['username'], $row['linkedin'], $row['github'], $row['twitter'], $row['instagram'], $row['facebook']);
 		}
-		$stmtEmp->close();
-		$row = $result->fetch_assoc();
+		$stmt->close();
 		$db->close();
 
 		
@@ -194,6 +193,48 @@ class UserModel {
 			}
 		}else {
 			$this->addSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook);
+		}
+	}
+
+	public function checkToken($db, $email, $token) {
+		$success = false;
+		$query = "SELECT * FROM password_reset WHERE email=? AND token =?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("ss", $email, $token);
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$row = $result->fetch_assoc();
+		if (mysqli_num_rows($result)==0) {
+			header("location: ../view/reset_password.php?error=notfound");
+			exit();
+		}else{
+			$nowFormat = mktime(date("H"), date("i"), date("s"), date("m") ,date("d"), date("Y"));
+			$now = date("Y-m-d H:i:s", $nowFormat);
+			$exp = $row['expDate'];
+			if($exp >= $now){
+				$success = true;
+			}else{
+				header("location: ../view/reset_password.php?error=expired");
+			}
+		}
+		$stmt->close();
+		return $success;
+	}
+
+	public function resetPassword($db, $type, $password, $email, $token){
+		if($this->checkToken($db, $email, $token)){
+			$query = "UPDATE $type SET password=? WHERE email = ?";
+			$stmt = $db->prepare($query);
+			$stmt->bind_param("ss", $password, $email);
+			$stmt->execute();
+			$affectedRows = $stmt->affected_rows;
+			$stmt->close();
+			$db->close();
+			if ($affectedRows == 1) {
+				header("location: ../view/login.php?success=reset");
+			} else {
+				header("location: ../view/reset_password.php?error=sthwentwrong");
+			}
 		}
 	}
 

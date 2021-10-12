@@ -58,6 +58,8 @@ if (isset($_POST['login'])) {
                             echo "Your account has been deleted. Thank you for using our service :)";
                         } elseif ($_GET["success"] == "logout") {
                             echo "Successfully logged out.";
+                        } elseif ($_GET["success"] == "reset") {
+                            echo "Your password has been reset, Please log in to continue.";
                         }
                         echo"</span></h5>";
                     }
