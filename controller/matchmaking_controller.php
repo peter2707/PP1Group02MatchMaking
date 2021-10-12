@@ -23,7 +23,7 @@ class MatchmakingController {
     }
 
     public function findMatch($position, $salary, $location, $type, $jobseeker){
-        if(!$position||!$salary||!$type||!$location||!$jobseeker){
+        if(!isset($position)||!isset($salary)||!isset($type)||!isset($location)||!isset($jobseeker)){
             header("location: ../view/jobseeker_match.php?error=emptyinput");
         }elseif(is_numeric($position)){
             header("location: ../view/jobseeker_match.php?error=positionnumeric");
@@ -40,7 +40,7 @@ class MatchmakingController {
     }
 
     public function postJob($position, $field, $salary, $type, $description, $requirements, $location, $username, $contact){
-        if(!$position||!$salary||!$type||!$description||!$requirements||!$location||!$username||!$contact){
+        if(!isset($position)||!isset($salary)||!isset($type)||!isset($description)||!isset($requirements)||!isset($location)||!isset($username)||!isset($contact)){
             header("location: ../view/employer_post.php?error=emptyinput");
         }elseif(is_numeric($position)){
             header("location: ../view/employer_post.php?error=positionnumeric");

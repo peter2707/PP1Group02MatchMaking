@@ -44,38 +44,6 @@ if (isset($_POST['post'])) {
     <header class="ex-header">
         <div class="container">
             <div class="row col-xl-10 offset-xl-1">
-                    <?php
-                    // Error messages
-                    if (isset($_GET["error"])) {
-                        echo "<h5><span class='mb-2 badge bg-danger'>";
-                        if ($_GET["error"] == "emptyinput") {
-                            echo "Please complete all required columns!";
-                        }else if ($_GET["error"] == "fieldnull") {
-                            echo "You have to choose a field of expertise";
-                        }else if ($_GET["error"] == "positionnumeric") {
-                            echo "Position cannot be a number!";
-                        }else if ($_GET["error"] == "errorupdate") {
-                            echo "There was a problem while trying to update.";
-                        }else if ($_GET["error"] == "errordelete") {
-                            echo "There was a problem while trying to delete.";
-                        }else if ($_GET["error"] == "samevalue") {
-                            echo "You didn't make any changes.";
-                        }
-                        echo "</span></h5>";
-                    }elseif (isset($_GET["success"])) {
-                        echo "<h5><span class='mb-2 badge bg-success'>";
-                        if ($_GET["success"] == "posted") {
-                            echo "You have posted a new job! You can view it in the table below.";
-                        }elseif ($_GET["success"] == "successupdate") {
-                            echo "Your post have been updated successfully.";
-                        }elseif ($_GET["success"] == "successdelete") {
-                            echo "Your post have been deleted successfully.";
-                        }elseif ($_GET["success"] == "successdeny") {
-                            echo "Match denied successfully";
-                        }
-                        echo "</span></h5>";
-                    }
-                    ?>
                 <div class="col-8 text-start">
                     <h1>Your Posts</h1>
                 </div>
@@ -164,6 +132,38 @@ if (isset($_POST['post'])) {
         // call controllers
         $sc = new SessionController();
         $mmc = new MatchmakingController();
+        // Error messages
+        if (isset($_GET["error"])) {
+            echo "<h5><span class='mb-5 badge bg-danger'>";
+            if ($_GET["error"] == "emptyinput") {
+                echo "Please complete all required columns!";
+            }else if ($_GET["error"] == "fieldnull") {
+                echo "You have to choose a field of expertise";
+            }else if ($_GET["error"] == "positionnumeric") {
+                echo "Position cannot be a number!";
+            }else if ($_GET["error"] == "errorupdate") {
+                echo "There was a problem while trying to update.";
+            }else if ($_GET["error"] == "errordelete") {
+                echo "There was a problem while trying to delete.";
+            }else if ($_GET["error"] == "errordeny") {
+                echo "There was a problem while trying to deny the match.";
+            }else if ($_GET["error"] == "samevalue") {
+                echo "You didn't make any changes.";
+            }
+            echo "</span></h5>";
+        }elseif (isset($_GET["success"])) {
+            echo "<h5><span class='mb-5 badge bg-success'>";
+            if ($_GET["success"] == "posted") {
+                echo "You have posted a new job! You can view it in the table below.";
+            }elseif ($_GET["success"] == "successupdate") {
+                echo "Your post have been updated successfully.";
+            }elseif ($_GET["success"] == "successdelete") {
+                echo "Your post have been deleted successfully.";
+            }elseif ($_GET["success"] == "successdeny") {
+                echo "Match denied successfully";
+            }
+            echo "</span></h5>";
+        }
         $jobposts = array();
         $jobposts = $mmc->getJobPosts($sc->getUserName());
         if (count($jobposts) < 1) {

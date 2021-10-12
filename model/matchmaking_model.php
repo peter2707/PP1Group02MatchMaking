@@ -121,7 +121,7 @@ class MatchmakingModel{
 	public function getJobMatchbyPostID($db, $postID, $employer){
 		require_once '../model/job_object.php';
 		$jobMatch = array();
-		$query = "SELECT * FROM jobmatch 
+		$query = "SELECT *, jobpost.id as jid, jobmatch.id as mid FROM jobmatch 
 					INNER JOIN jobpost ON jobpost.id = jobmatch.jobPostID	
 					WHERE jobmatch.employer= '$employer' 
 					AND jobmatch.jobPostID = '$postID'";
@@ -130,7 +130,7 @@ class MatchmakingModel{
 
 		for ($i = 0; $i < $numResults; $i++) {
 			$row = $result->fetch_assoc();
-			$jobMatch[$i] = new JobMatch($row['id'], $row['employer'], $row['jobSeeker'], '', $row['contact'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage']);
+			$jobMatch[$i] = new JobMatch($row['mid'], $row['employer'], $row['jobSeeker'], '', $row['contact'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage']);
 		}
 		$result->free();
 		$db->close();

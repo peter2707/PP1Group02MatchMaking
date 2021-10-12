@@ -39,16 +39,20 @@ class UserModel {
 		$stmt->close();
 		$row = $result->fetch_assoc();
 		$db->close();
-
-		if($usertype == "jobseeker"){
-			$jobseeker = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['Image']);
-			return $jobseeker;
-		}elseif($usertype == "employer"){
-			$employer = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['rating'], $row['image']);
-			return $employer;
-		}elseif($usertype == "admin"){
-			$admin = new Admin($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['image']);
-			return $admin;
+		if(mysqli_num_rows($result)==0){
+			echo "<h3>User not Found.</h3> <small>This user might have been deleted or has invalid details.</small>";
+			exit();
+		}else{
+			if($usertype == "jobseeker"){
+				$jobseeker = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['Image']);
+				return $jobseeker;
+			}elseif($usertype == "employer"){
+				$employer = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['rating'], $row['image']);
+				return $employer;
+			}elseif($usertype == "admin"){
+				$admin = new Admin($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['image']);
+				return $admin;
+			}
 		}
 	}
 
