@@ -56,6 +56,69 @@ class UserController {
         return $userModel->getSocialLink($db, $username);
     }
 
+    public function getSkills($username){
+        require_once '../model/user_model.php';
+        include '../model/db_connection.php';
+        $userModel = new UserModel();
+        return $userModel->getSkills($db, $username);
+    }
+
+    public function addSkill($username, $skill, $experience){
+        include '../model/db_connection.php';
+        require_once '../model/user_model.php';
+        $userModel = new UserModel();
+        $userModel->addSkill($db, $username, $skill, $experience);
+    }
+
+    public function deleteSkill($id){
+        include '../model/db_connection.php';
+        require_once '../model/user_model.php';
+        $userModel = new UserModel();
+        $userModel->deleteSkill($db, $id);
+    }
+
+    public function getEducations($username){
+        require_once '../model/user_model.php';
+        include '../model/db_connection.php';
+        $userModel = new UserModel();
+        return $userModel->getEducations($db, $username);
+    }
+
+    public function addEducation($username, $institution, $degree, $graduation){
+        include '../model/db_connection.php';
+        require_once '../model/user_model.php';
+        $userModel = new UserModel();
+        $userModel->addEducation($db, $username, $institution, $degree, $graduation);
+    }
+
+    public function deleteEducation($id){
+        include '../model/db_connection.php';
+        require_once '../model/user_model.php';
+        $userModel = new UserModel();
+        $userModel->deleteEducation($db, $id);
+    }
+
+    public function getCareers($username){
+        require_once '../model/user_model.php';
+        include '../model/db_connection.php';
+        $userModel = new UserModel();
+        return $userModel->getCareers($db, $username);
+    }
+
+    public function addCareer($username, $position, $company, $experience){
+        include '../model/db_connection.php';
+        require_once '../model/user_model.php';
+        $userModel = new UserModel();
+        $userModel->addCareer($db, $username, $position, $company, $experience);
+    }
+
+    public function deleteCareer($id){
+        include '../model/db_connection.php';
+        require_once '../model/user_model.php';
+        $userModel = new UserModel();
+        $userModel->deleteCareer($db, $id);
+    }
+
     public function resetPassword($type, $password, $confirmPassword, $email, $token) {
         require_once '../model/utility.php';
         if(!isset($type) || !isset($password) || !isset($confirmPassword) || !isset($email) || !isset($token)){

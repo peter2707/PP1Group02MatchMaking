@@ -285,6 +285,33 @@ $.each(jobOptions, function(val, text) {
 });
 
 
+//year field drop down
+var yearOptions = {
+    val1: 'Less than a year',
+    val2: '1 - 3 Years',
+    val3: '3 - 5 Years',
+    val4: '5 - 7 Years',
+    val5: '7 - 9 Years',
+    val6: '10 years or more'
+};
+
+var yearSelect = $('#skill-year-field');
+$.each(yearOptions, function(val, text) {
+    yearSelect.append(
+        $('<option></option>').val(text).html(text)
+    );
+
+});
+
+var yearSelect = $('#career-year-field');
+$.each(yearOptions, function(val, text) {
+    yearSelect.append(
+        $('<option></option>').val(text).html(text)
+    );
+
+});
+
+
 //show match div
 function showFindMatchForm() {
     var jobmatch = document.getElementById("jobmatch");
@@ -354,6 +381,42 @@ function cancel() {
     document.getElementById("editInputLink").style.display = '';
     document.getElementById("cancelInputLink").style.display = 'none';
     document.getElementById("doneInputLink").style.display = 'none';
+}
+
+function addSkill() {
+    document.getElementById("skillForm").style.display = '';
+    document.getElementById("cancelSkillBtn").style.display = '';
+    document.getElementById("addSkillBtn").style.display = 'none';
+}
+
+function cancelSkill() {
+    document.getElementById("skillForm").style.display = 'none';
+    document.getElementById("cancelSkillBtn").style.display = 'none';
+    document.getElementById("addSkillBtn").style.display = '';
+}
+
+function addEducation() {
+    document.getElementById("educationForm").style.display = '';
+    document.getElementById("cancelEducationBtn").style.display = '';
+    document.getElementById("addEducationBtn").style.display = 'none';
+}
+
+function cancelEducation() {
+    document.getElementById("educationForm").style.display = 'none';
+    document.getElementById("cancelEducationBtn").style.display = 'none';
+    document.getElementById("addEducationBtn").style.display = '';
+}
+
+function addCareer() {
+    document.getElementById("careerForm").style.display = '';
+    document.getElementById("cancelCareerBtn").style.display = '';
+    document.getElementById("addCareerBtn").style.display = 'none';
+}
+
+function cancelCareer() {
+    document.getElementById("careerForm").style.display = 'none';
+    document.getElementById("cancelCareerBtn").style.display = 'none';
+    document.getElementById("addCareerBtn").style.display = '';
 }
 
 CKEDITOR.replace('descriptionTextArea', {
