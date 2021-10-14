@@ -7,18 +7,18 @@ class UserController {
         return $userModel->getUser($db, $userType);
     }
 
-    public function updateJobSeeker($firstName, $lastName, $password, $dob, $phone, $email, $field, $username) {
+    public function updateJobSeeker($firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $username) {
         require_once '../model/user_model.php';
         require_once '../model/db_connection.php';
         $userModel = new UserModel();
-        $userModel->updateJobSeeker($db, $firstName, $lastName, $password, $dob, $phone, $email, $field, $username);
+        $userModel->updateJobSeeker($db, $firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $username);
     }
 
-    public function updateEmployer($firstName, $lastName, $password, $dob, $phone, $email, $position, $username) {
+    public function updateEmployer($firstName, $lastName, $password, $dob, $phone, $email, $position, $location, $username) {
         require_once '../model/user_model.php';
         require_once '../model/db_connection.php';
         $userModel = new UserModel();
-        $userModel->updateEmployer($db, $firstName, $lastName, $password, $dob, $phone, $email, $position, $username);
+        $userModel->updateEmployer($db, $firstName, $lastName, $password, $dob, $phone, $email, $position, $location, $username);
     }
 
     public function deleteAccount($username, $type){

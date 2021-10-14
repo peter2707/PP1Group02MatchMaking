@@ -23,9 +23,10 @@
             $email = $_POST['email'];
             $phone = $_POST['phone'];
             $field = $_POST['field'];
+            $location = $_POST['location'];
             $password = $_POST['password'];
 
-            $userController->updateJobSeeker($firstName, $lastName, $password, $dob, $phone, $email, $field, $sessionController->getUserName());
+            $userController->updateJobSeeker($firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $sessionController->getUserName());
         } elseif ($userType == "employer") {
             $firstName = $_POST['firstName'];
             $lastName = $_POST['lastName'];
@@ -33,9 +34,10 @@
             $email = $_POST['email'];
             $phone = $_POST['phone'];
             $position = $_POST['position'];
+            $location = $_POST['location'];
             $password = $_POST['password'];
 
-            $userController->updateEmployer($firstName, $lastName, $password, $dob, $phone, $email, $position, $sessionController->getUserName());
+            $userController->updateEmployer($firstName, $lastName, $password, $dob, $phone, $email, $position, $location, $sessionController->getUserName());
         }
     } elseif (isset($_POST['delete'])) {
         $userController->deleteAccount($sessionController->getUserName(), $userType);
@@ -144,6 +146,17 @@ END;
                                                 <div class="col-sm-7 text-secondary text-start">
                                                     <select class="form-select" aria-label=".form-select-lg example" id="fieldOfExpertise-form" name="field" required>
                                                         <option readonly selected value="$user->field">$user->field</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-4 text-start">
+                                                    <h6 class="mt-2 ms-5">Location</h6>
+                                                </div>
+                                                <div class="col-sm-7 text-secondary text-start">
+                                                    <select class="form-select" aria-label=".form-select-lg example" id="location-field" name="location" required>
+                                                        <option readonly selected value="$user->location">$user->location</option>
                                                     </select>
                                                 </div>
                                             </div>
@@ -281,6 +294,17 @@ END;
                                                 </div>
                                                 <div class="col-sm-7 text-secondary text-start ">
                                                     <input type="text" class="form-control" id="position" name="position" value="$user->position" required/>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                            <div class="row">
+                                                <div class="col-sm-4 text-start">
+                                                    <h6 class="mt-2 ms-5">Location</h6>
+                                                </div>
+                                                <div class="col-sm-7 text-secondary text-start">
+                                                    <select class="form-select" aria-label=".form-select-lg example" id="location-field" name="location" required>
+                                                        <option readonly selected value="$user->location">$user->location</option>
+                                                    </select>
                                                 </div>
                                             </div>
                                             <hr>

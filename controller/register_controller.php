@@ -1,13 +1,13 @@
 <?php
 class RegisterController {
 
-    public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $field, $position){
+    public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type, $field, $position){
         require_once '../model/register_model.php';
         require_once '../model/utility.php';
         require_once '../model/db_connection.php';
         $registerModel = new RegisterModel();
 
-        if (emptyInputRegister($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type) !== false) {
+        if (emptyInputRegister($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type) !== false) {
             header("location: ../view/register.php?error=emptyinput");
             exit();
         } elseif (invalidUsername($username) !== false) {                         // Proper username chosen
@@ -27,7 +27,7 @@ class RegisterController {
                 header("location: ../view/register.php?error=usernametaken");
                 exit();
               }else{
-                $registerModel->registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position);
+                $registerModel->registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position, $location);
               }
             }else{
               if (!$field){
@@ -36,7 +36,7 @@ class RegisterController {
                 header("location: ../view/register.php?error=usernametaken");
                 exit();
               }else{
-                $registerModel->registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $field);
+                $registerModel->registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $field, $location);
               }
             }
         }

@@ -250,13 +250,14 @@ $.each(salaryOptions, function(val, text) {
 
 //find match and post job location drop down
 var locationOptions = {
-    val1: 'Queensland',
-    val2: 'Northern Territory',
-    val3: 'Western Australia',
-    val4: 'South Australia',
-    val5: 'Victoria',
-    val6: 'Australian Capital Territory',
-    val7: 'Tasmania'
+    val1: 'New South Wales',
+    val2: 'Queensland',
+    val3: 'Northern Territory',
+    val4: 'Western Australia',
+    val5: 'South Australia',
+    val6: 'Victoria',
+    val7: 'Australian Capital Territory',
+    val8: 'Tasmania'
 };
 
 var locationSelect = $('#location-field');

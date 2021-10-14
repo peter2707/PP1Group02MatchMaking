@@ -14,8 +14,9 @@ if(isset($_POST['register'])){
     $type = $_POST['type'];
     $field = $_POST['field'];
     $position = $_POST['position'];
+    $location = $_POST['location'];
     
-    $registerController->register(ucfirst($firstName), ucfirst($lastName), $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $field, $position);
+    $registerController->register(ucfirst($firstName), ucfirst($lastName), $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type, $field, $position);
   }
 ?>
 <!DOCTYPE html>
@@ -105,6 +106,12 @@ if(isset($_POST['register'])){
                             <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" title="Must contain email format E.g. johndoe@mail.com" required>
                             <label for="floatingInput">Email</label>
                         </div>
+                        <div class="form-floating mb-3">
+                            <select class="form-select mb-3" aria-label=".form-select-lg example" id="location-field" name="location" required>
+                                <option disabled selected value="">Choose...</option>"
+                            </select>
+                            <label for="location-field">Location</label>
+                        </div>
 
 
                         <div class="form-check form-check-inline">
@@ -117,7 +124,7 @@ if(isset($_POST['register'])){
                         </div>
                         <div class="form-floating mb-3" id="job-seeker-form">
                             <select class="form-select mb-3" aria-label=".form-select-lg example" id="fieldOfExpertise-form" name="field">
-                                <option disabled selected value="">--- Choose one ---</option>
+                                <option disabled selected value="">Choose...</option>
                             </select>
                             <label for="fieldOfExpertise-form">Field of Expertise</label>
                         </div>

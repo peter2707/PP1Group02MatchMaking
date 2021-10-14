@@ -1,12 +1,12 @@
 <?php
 class AdminController {
-    public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $positionEmployer, $positionAdmin, $field){
+    public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type, $positionEmployer, $positionAdmin, $field){
         require_once '../model/utility.php';
         require_once '../model/db_connection.php';
         require_once '../model/admin_model.php';
         $adminModel = new AdminModel();
 
-        if (emptyInputRegister($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type) !== false) {
+        if (emptyInputRegister($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type) !== false) {
             header("location: ../view/admin_add_user.php?error=emptyinput");
             exit();
         } elseif (invalidUsername($username) !== false) {                         // Proper username chosen
@@ -26,7 +26,7 @@ class AdminController {
                     header("location: ../view/admin_add_user.php?error=usernametaken");
                     exit();
                 }else{
-                    $adminModel->registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $positionEmployer);
+                    $adminModel->registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $positionEmployer, $location);
                 }
             }elseif($type == "admin"){
                 if (!$positionAdmin){
@@ -44,7 +44,7 @@ class AdminController {
                     header("location: ../view/admin_add_user.php?error=usernametaken");
                     exit();
                 }else{
-                    $adminModel->registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $field);
+                    $adminModel->registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $field, $location);
                 }
             }
         }
@@ -78,18 +78,18 @@ class AdminController {
         return $adminModel->getAllAdmin($db);
 	}
 
-	public function updateJobSeeker($firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $id){
+	public function updateJobSeeker($firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $id){
         require_once '../model/admin_model.php';
         include '../model/db_connection.php';
         $adminModel = new AdminModel();
-        $adminModel->updateJobSeeker($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $id);
+        $adminModel->updateJobSeeker($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $id);
 	}
 
-	public function updateEmployer($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id){
+	public function updateEmployer($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $id){
         require_once '../model/admin_model.php';
         include '../model/db_connection.php';
         $adminModel = new AdminModel();
-        $adminModel->updateEmployer($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id);
+        $adminModel->updateEmployer($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $id);
 	}
 
     public function updateAdmin($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id){

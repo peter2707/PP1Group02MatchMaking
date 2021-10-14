@@ -447,7 +447,7 @@ END;
                 <!-- end of container -->
             </header>
             <!-- User Profile section End -->
-        END;
+END;
         } elseif ($userType == "employer") {
             echo <<<END
             <!-- User Profile section start -->
@@ -585,95 +585,36 @@ END;
                                     </ul>
                                 </div>
                             </div>
-    
+
                             <div class="col-md-8">
                                 <div class="card mb-3">
                                     <div class="card-body">
-                                        <form method="POST">
-
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">First Name</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" required/>
-                                                </div>
-                                            </div>
+                                        <div class="row text-start ms-2 mx-2">
+                                            <h2>Overview</h2>
+                    
+                                            
                                             <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Last Name</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" required/>
-                                                </div>
-                                            </div>
+                                        </div>
+                                        <div class="row text-start ms-2 mx-2">
+                                            <h2>Contact</h2>
+                    
+                                            
                                             <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Email</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="text" class="form-control" id="email" name="email" value="$user->email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" title="Must contain email format E.g. johndoe@mail.com" required/>
-                                                </div>
-                                            </div>
+                                        </div>
+                                        <div class="row text-start ms-2 mx-2">
+                                            <h2>Reviews</h2>
+                    
+                                            
                                             <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Phone</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="tel" class="form-control" id="phone" name="phone" value="$user->phone" pattern="^(\+?\(61\)|\(\+?61\)|\+?61|\(0[1-9]\)|0[1-9])?( ?-?[0-9]){7,9}$" title="Must have phone number format and at least 7 characters long" required/>
-                                                </div>
-                                            </div>
+                                        </div>
+                                        <div class="row text-start ms-2 mx-2">
+                                            <h2>Location</h2>
+                    
+                                            
                                             <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Date of Birth</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="date" class="form-control" id="dob" name="dob" value="$user->dob" required/>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Username</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start ">
-                                                    <input type="text" class="form-control" id="username" name="username" value="$user->username" readonly/>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Password</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start ">
-                                                    <input type="password" class="form-control" id="password" name="password" value="$user->password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one number and one uppercase and lowercase letter, and 5 to 20 characters" required/>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Position</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start ">
-                                                    <input type="text" class="form-control" id="position" name="position" value="$user->position" required/>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <button class="btn btn-success-sm" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update"><i class='fa fa-check' aria-hidden='true'></i> Save Changes</button>
-                                                    <button class="btn btn-danger-sm" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete"><i class='fa fa-trash' aria-hidden='true'></i> Delete Account</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    
+                                        </div>
                                     </div>
                                 </div>
-    
                             </div>
                         </div>
                     </div>
@@ -681,7 +622,8 @@ END;
                 <!-- end of container -->
             </header>
             <!-- User Profile section End -->
-        END;
+                            
+END;
         }
     } else {
         echo "<header class='ex-header'>

@@ -17,10 +17,10 @@ class UserModel {
 		$db->close();
 
 		if($userType == "jobseeker"){
-			$jobseeker = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['Image']);
+			$jobseeker = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['location'], $row['Image']);
 			return $jobseeker;
 		}elseif($userType == "employer"){
-			$employer = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['rating'], $row['image']);
+			$employer = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['location'], $row['rating'], $row['image']);
 			return $employer;
 		}elseif($userType == "admin"){
 			$admin = new Admin($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['image']);
@@ -44,10 +44,10 @@ class UserModel {
 			exit();
 		}else{
 			if($usertype == "jobseeker"){
-				$jobseeker = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['Image']);
+				$jobseeker = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['location'], $row['Image']);
 				return $jobseeker;
 			}elseif($usertype == "employer"){
-				$employer = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['rating'], $row['image']);
+				$employer = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['location'], $row['rating'], $row['image']);
 				return $employer;
 			}elseif($usertype == "admin"){
 				$admin = new Admin($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['image']);
@@ -170,10 +170,10 @@ class UserModel {
 		}
 	}
 
-	public function updateJobSeeker($db, $firstName, $lastName, $password, $dob, $phone, $email, $field, $username) {
-		$query = "UPDATE jobseeker SET firstName=?, lastName=?, password=?, dateOfBirth=?, phone=?, email=?, field=? WHERE username = ?";
+	public function updateJobSeeker($db, $firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $username) {
+		$query = "UPDATE jobseeker SET firstName=?, lastName=?, password=?, dateOfBirth=?, phone=?, email=?, field=?, location=? WHERE username = ?";
 		$stmt = $db->prepare($query);
-		$stmt->bind_param("ssssisss", $firstName, $lastName, $password, $dob, $phone, $email, $field, $username);
+		$stmt->bind_param("ssssissss", $firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $username);
 		$stmt->execute();
 
 		$affectedRows = $stmt->affected_rows;
@@ -187,10 +187,10 @@ class UserModel {
 		}
 	}
 
-	public function updateEmployer($db, $firstName, $lastName, $password, $dob, $phone, $email, $position, $username) {
-		$query = "UPDATE employer SET firstName=?, lastName=?, password=?, dateOfBirth=?, phone=?, email=?, position=? WHERE username = ?";
+	public function updateEmployer($db, $firstName, $lastName, $password, $dob, $phone, $email, $position, $location, $username) {
+		$query = "UPDATE employer SET firstName=?, lastName=?, password=?, dateOfBirth=?, phone=?, email=?, position=?, location=? WHERE username = ?";
 		$stmt = $db->prepare($query);
-		$stmt->bind_param("ssssisss", $firstName, $lastName, $password, $dob, $phone, $email, $position, $username);
+		$stmt->bind_param("ssssissss", $firstName, $lastName, $password, $dob, $phone, $email, $position, $location, $username);
 		$stmt->execute();
 
 		$affectedRows = $stmt->affected_rows;
