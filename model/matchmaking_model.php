@@ -47,8 +47,7 @@ class MatchmakingModel{
 
 	public function getJobPostByID($db, $jobID){
 		require_once '../model/job_object.php';
-		$query = "SELECT * FROM jobpost 
-					WHERE id='$jobID'";
+		$query = "SELECT * FROM jobpost WHERE id='$jobID'";
 		$result = $db->query($query);
 		$row = $result->fetch_assoc();
 		
@@ -61,6 +60,13 @@ class MatchmakingModel{
 		$db->close();
 
 		return $jobPost;
+	}
+
+	public function countJobPosts($db, $employer){
+		$result = $db->query("SELECT COUNT(*) as totalPosts FROM jobpost WHERE employer='$employer'");
+		$row = $result->fetch_assoc();
+		$countJobPosts = $row['totalPosts'];
+		return $countJobPosts;
 	}
 
 	public function updatePost($db, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id){

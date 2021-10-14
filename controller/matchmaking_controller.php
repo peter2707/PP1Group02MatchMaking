@@ -68,6 +68,13 @@ class MatchmakingController {
         return $mmm->getJobPostByID($db, $jobID);
     }
 
+    public function countJobPosts($employer){
+        require_once '../model/matchmaking_model.php';
+        include '../model/db_connection.php';
+        $mmm = new MatchmakingModel();
+        return $mmm->countJobPosts($db, $employer);
+    }
+
     public function updatePost($position, $field, $salary, $type, $description, $requirements, $location, $contact, $id){
         require_once '../model/matchmaking_model.php';
         include '../model/db_connection.php';

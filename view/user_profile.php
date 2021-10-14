@@ -6,10 +6,12 @@ if (session_status() === PHP_SESSION_NONE) {
 // require files
 require_once '../controller/session_controller.php';
 require_once '../controller/user_controller.php';
+require_once '../controller/matchmaking_controller.php';
 
 // call controllers
 $sessionController = new SessionController();
 $userController = new UserController();
+$matchmakingController = new MatchmakingController();
 
 // get current user session
 $validSession = $sessionController->checkSession();
@@ -449,6 +451,10 @@ END;
             <!-- User Profile section End -->
 END;
         } elseif ($userType == "employer") {
+            $totalPosts = $matchmakingController->countJobPosts($sessionController->getUserName());
+            $rating = number_format((float)$user->rating, 1, '.', '');
+            $map = $userController->getMap($user->location);
+            
             echo <<<END
             <!-- User Profile section start -->
             <header class="ex-header">
@@ -589,29 +595,47 @@ END;
                             <div class="col-md-8">
                                 <div class="card mb-3">
                                     <div class="card-body">
-                                        <div class="row text-start ms-2 mx-2">
-                                            <h2>Overview</h2>
+                                        <div class="text-start ms-2 mx-2">
+                                            <h2 class="mb-5">Overview</h2>
+                                            <div class="row ms-2 mx-2">
+                                                <div class="col text-center">
+                                                    <p><b>Job Posts:</b> $totalPosts</p>
+                                                </div>
+                                                <div class="col text-center">
+                                                    <p><b>Position:</b> $user->position</p>
+                                                </div>
+                                                <div class="col text-center">
+                                                    <p><b>Rating:</b> $rating <i class="fa fa-star mb-1" style="color:gold" aria-hidden="true"></i></p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                        <div class="text-start ms-2 mx-2">
+                                            <h2 class="mb-5">Contact</h2>
+                                            <div class="row ms-2 mx-2">
+                                                <div class="col text-center">
+                                                    <p><b>Email:</b> $user->email</p>
+                                                </div>
+                                                <div class="col text-center">
+                                                    <p><b>Phone:</b> $user->phone</p>
+                                                </div>
+                                            </div>
+                                            <hr>
+                                        </div>
+                                        <div class="text-start ms-2 mx-2">
+                                            <h2 class="mb-5">Reviews</h2>
                     
                                             
                                             <hr>
                                         </div>
-                                        <div class="row text-start ms-2 mx-2">
-                                            <h2>Contact</h2>
-                    
-                                            
-                                            <hr>
-                                        </div>
-                                        <div class="row text-start ms-2 mx-2">
-                                            <h2>Reviews</h2>
-                    
-                                            
-                                            <hr>
-                                        </div>
-                                        <div class="row text-start ms-2 mx-2">
-                                            <h2>Location</h2>
-                    
-                                            
-                                            <hr>
+                                        <div class="text-start ms-2 mx-2">
+                                            <h2 class="mb-5">Location</h2>
+                                            <div class="row ms-2 mx-2">
+                                                <div class="col">
+                                                    <h5 class="mb-4 ms-5"><i class="fa fa-map-pin" style="color:red" aria-hidden="true"></i> $user->location</h5>
+                                                    $map
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

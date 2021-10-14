@@ -151,7 +151,7 @@ class AdminModel {
 			
 			// Set column headers
 			if($table == "jobseeker"){
-				$fields = array('ID', 'FIRSTNAME', 'LASTNAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'FIELD', 'LOCATION', 'EXPERIENCE');
+				$fields = array('ID', 'FIRSTNAME', 'LASTNAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'FIELD', 'LOCATION');
 			}elseif($table == "employer"){
 				$fields = array('ID', 'FIRST NAME', 'LAST NAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'POSITION', 'LOCATION', 'RATING');
 			}elseif($table == "admin"){
