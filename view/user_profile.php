@@ -321,7 +321,7 @@ END;
                                         <input type="text" class="form-control" name="degree" placeholder="Degree" required/>
                                     </div>
                                     <div class="col-sm-4 mt-2 mb-2">
-                                        <input type="month" class="form-control" name="graduation" />
+                                        <input id="calendar" class="form-control" name="graduation" />
                                     </div>
                                     <button type="submit" name="addEducation" class="btn-success-sm mt-1">Add</button>
                                 </form>
