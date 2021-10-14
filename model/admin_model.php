@@ -33,7 +33,7 @@ class AdminModel {
 		$numResults = $result->num_rows;
 		for ($i = 0; $i < $numResults; $i++) {
 			$row = $result->fetch_assoc();
-			$allJobSeekers[$i] = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'],$row['location'], $row['Image']);
+			$allJobSeekers[$i] = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'],$row['location'], $row['image']);
 		}
 		$result->free();
 		$db->close();
