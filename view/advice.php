@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <!-- Webpage Title -->
-    <title>JobMatch | Home</title>
+    <title>JobMatch | Advice</title>
     <?php
         require_once("component/header.php");
     ?>

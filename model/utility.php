@@ -1,9 +1,9 @@
 <?php
 
 // Check for empty input register
-function emptyInputRegister($firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $type) {
+function emptyInputRegister($firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $location, $type) {
 	$result = false;
-	if (empty($firstName) || empty($lastName) || empty($username) || empty($password) || empty($dateOfBirth) || empty($phone) || empty($email) || empty($type)) {
+	if (empty($firstName) || empty($lastName) || empty($username) || empty($password) || empty($dateOfBirth) || empty($phone) || empty($email) || empty($location) || empty($type)) {
 		$result = true;
 	}
 	return $result;

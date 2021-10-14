@@ -107,6 +107,8 @@ if (isset($_POST['match'])) {
                 echo "Position cannot be a number!";
             }elseif($_GET["error"] == "nomatch"){
                 echo "There are no match found at the moment...<br>Hint: Try searching for a different position!";
+            }elseif($_GET["error"] == "errorfeedback"){
+                echo "There was a problem trying to post the feedback.";
             }
             echo "</span></h5>";
         }elseif (isset($_GET["success"])) {
@@ -115,6 +117,8 @@ if (isset($_POST['match'])) {
                 echo "You have a new match! You can view it in the table below.";
             }elseif ($_GET["success"] == "successdeny") {
                 echo "Match denied successfully";
+            }elseif ($_GET["success"] == "donefeedback") {
+                echo "Feedback posted successfully";
             }
             echo "</span></h5>";
         }

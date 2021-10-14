@@ -1,11 +1,11 @@
-<svg width="150" height="40" xmlns="http://www.w3.org/2000/svg" data-name="Layer 4">
+<svg width="140" height="40" xmlns="http://www.w3.org/2000/svg" data-name="Layer 1">
  <title>logo</title>
 
  <g>
   <title>Layer 1</title>
-  <path class="cls-1" d="m14.521,18.06l2.449,13.945l-15.197,0a1.776,1.776 0 0 1 -1.773,-1.778l0,-9.6l14.521,-2.567z" fill="#3b58e3" id="svg_1"/>
-  <path class="cls-2" d="m30.145,0a1.776,1.776 0 0 1 1.773,1.778l0,28.449a1.776,1.776 0 0 1 -1.773,1.778l-9.572,0l-5.628,-32.005l15.2,0z" fill="#0092ff" id="svg_2"/>
-  <path class="cls-3" d="m11.343,0l2.557,14.559l-13.9,2.457l0,-15.238a1.776,1.776 0 0 1 1.773,-1.778l9.57,0z" fill="#f0483e" id="svg_3"/>
-  <text fill="#666666" x="35.09303" y="22.86298" id="svg_9" stroke-width="0" font-size="24" font-family="Comic Sans MS" text-anchor="start" xml:space="preserve" font-weight="bold" font-style="normal" transform="matrix(0.954343 0 0 1.2728 3.48708 -2.68962)">JobMatch</text>
+  <path class="cls-1" d="m22.48452,15.82529l0,15.889l-17.238,0a1.44,1.44 0 0 1 -1.437,-1.444l0,-14.445l18.675,0z" fill="#ff5574" id="svg_1"/>
+  <path class="cls-2" d="m32.53952,15.82529l0,14.445a1.44,1.44 0 0 1 -1.436,1.444l-5.746,0l0,-15.889l7.182,0z" fill="#ffc043" id="svg_2"/>
+  <path class="cls-3" d="m31.10352,5.71429a1.44,1.44 0 0 1 1.436,1.444l0,5.778l-28.73,0l0,-5.778a1.44,1.44 0 0 1 1.437,-1.444l25.857,0z" fill="#6168ff" id="svg_3"/>
+  <text fill="#ffffff" x="35.09303" y="22.86298" id="svg_9" stroke-width="0" font-size="24" font-family="Comic Sans MS" text-anchor="start" xml:space="preserve" font-weight="bold" font-style="normal" transform="matrix(0.881605, 0, 0, 1.22327, 5.93078, 1.58403)">JobMatch</text>
  </g>
 </svg>

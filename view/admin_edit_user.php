@@ -32,10 +32,11 @@ if (isset($_POST['update'])) {
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $field = $_POST['field'];
+        $location = $_POST['location'];
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $ac->updateJobSeeker($firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $user->id);
+        $ac->updateJobSeeker($firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $user->id);
     } elseif ($usertype == "employer") {
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
@@ -43,10 +44,11 @@ if (isset($_POST['update'])) {
         $email = $_POST['email'];
         $phone = $_POST['phone'];
         $position = $_POST['position'];
+        $location = $_POST['location'];
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $ac->updateEmployer($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $user->id);
+        $ac->updateEmployer($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $user->id);
     } elseif ($usertype == "admin") {
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
@@ -296,6 +298,17 @@ if (isset($_POST['update'])) {
                                     <hr>
                                     <div class="row">
                                         <div class="col-sm-4 text-start">
+                                            <h6 class="mt-2 ms-5">Location</h6>
+                                        </div>
+                                        <div class="col-sm-7 text-secondary text-start">
+                                            <select class="form-select" aria-label=".form-select-lg example" id="location-field" name="location" required>
+                                                <option readonly selected value="$user->location">$user->location</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-4 text-start">
                                             <h6 class="mt-2 ms-5">Username</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
@@ -515,6 +528,17 @@ END;
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start ">
                                             <input type="text" class="form-control" id="position" name="position" value="$user->position" required/>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                    <div class="row">
+                                        <div class="col-sm-4 text-start">
+                                            <h6 class="mt-2 ms-5">Location</h6>
+                                        </div>
+                                        <div class="col-sm-7 text-secondary text-start">
+                                            <select class="form-select" aria-label=".form-select-lg example" id="location-field" name="location" required>
+                                                <option readonly selected value="$user->location">$user->location</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <hr>

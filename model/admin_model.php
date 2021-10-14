@@ -1,17 +1,17 @@
 <?php
 class AdminModel {
 	
-	public function registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position) {
-		$query = "INSERT INTO employer (firstName, lastName, username, password, dateOfBirth, phone, email, position) 
-				VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$position')";
+	public function registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position, $location) {
+		$query = "INSERT INTO employer (firstName, lastName, username, password, dateOfBirth, phone, email, position, location) 
+				VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$position', '$location')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
 		$db->close();
 		header("location: ../view/admin_index.php?success=created");
 	}
 
-	public function registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $field) {
-		$query = "INSERT INTO jobseeker (firstName, lastName, username, password, dateOfBirth, phone, email, field) 
-				VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$field')";
+	public function registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $field, $location) {
+		$query = "INSERT INTO jobseeker (firstName, lastName, username, password, dateOfBirth, phone, email, field, location) 
+				VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$field', '$location')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
 		$db->close();
 		header("location: ../view/admin_index.php?success=created");
@@ -33,7 +33,7 @@ class AdminModel {
 		$numResults = $result->num_rows;
 		for ($i = 0; $i < $numResults; $i++) {
 			$row = $result->fetch_assoc();
-			$allJobSeekers[$i] = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['Image']);
+			$allJobSeekers[$i] = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'],$row['location'], $row['image']);
 		}
 		$result->free();
 		$db->close();
@@ -48,7 +48,7 @@ class AdminModel {
 		$numResults = $result->num_rows;
 		for ($i = 0; $i < $numResults; $i++) {
 			$row = $result->fetch_assoc();
-			$allEmployers[$i] = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['rating'], $row['image']);
+			$allEmployers[$i] = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['location'],$row['rating'], $row['image']);
 		}
 		$result->free();
 		$db->close();
@@ -87,10 +87,10 @@ class AdminModel {
 		}
 	}
 
-	public function updateJobSeeker($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $id) {
-		$query = "UPDATE jobseeker SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, field=? WHERE id=?";
+	public function updateJobSeeker($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $id) {
+		$query = "UPDATE jobseeker SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, field=?, location=? WHERE id=?";
 		$stmt = $db->prepare($query);
-		$stmt->bind_param("ssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $id);
+		$stmt->bind_param("sssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $id);
 		$stmt->execute();
 
 		$affectedRows = $stmt->affected_rows;
@@ -104,10 +104,10 @@ class AdminModel {
 		}
 	}
 
-	public function updateEmployer($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id) {
-		$query = "UPDATE employer SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, position=? WHERE id=?";
+	public function updateEmployer($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $id) {
+		$query = "UPDATE employer SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, position=?, location=? WHERE id=?";
 		$stmt = $db->prepare($query);
-		$stmt->bind_param("ssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id);
+		$stmt->bind_param("sssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $id);
 		$stmt->execute();
 
 		$affectedRows = $stmt->affected_rows;
@@ -151,9 +151,9 @@ class AdminModel {
 			
 			// Set column headers
 			if($table == "jobseeker"){
-				$fields = array('ID', 'FIRSTNAME', 'LASTNAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'FIELD', 'EXPERIENCE');
+				$fields = array('ID', 'FIRSTNAME', 'LASTNAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'FIELD', 'LOCATION');
 			}elseif($table == "employer"){
-				$fields = array('ID', 'FIRST NAME', 'LAST NAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'POSITION', 'RATING');
+				$fields = array('ID', 'FIRST NAME', 'LAST NAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'POSITION', 'LOCATION', 'RATING');
 			}elseif($table == "admin"){
 				$fields = array('ID', 'FIRST NAME', 'LAST NAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'POSITION');
 			}
@@ -162,9 +162,9 @@ class AdminModel {
 			// Output each row of the data, format line as csv and write to file pointer 
 			while($row = $query->fetch_assoc()){
 				if($table == "jobseeker"){
-					$lineData = array($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['experience']); 
+					$lineData = array($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['location']); 
 				}elseif($table == "employer"){
-					$lineData = array($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['rating']); 
+					$lineData = array($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['location'], $row['rating']); 
 				}elseif($table == "admin"){
 					$lineData = array($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position']); 
 				}

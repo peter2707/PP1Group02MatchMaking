@@ -98,6 +98,11 @@ h6 {
     line-height: 1.375rem;
 }
 
+span {
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+
 .p-large {
     font-size: 1.125rem;
     line-height: 1.75rem;
@@ -485,7 +490,6 @@ a:hover {
 /**********************/
 
 .navbar {
-    background-color: #fcfafb;
     font-weight: 600;
     font-size: 0.875rem;
     line-height: 0.875rem;
@@ -499,7 +503,7 @@ a:hover {
 
 .navbar .logo-image img {
     width: 150px;
-    height: 40px;
+    height: 50px;
 }
 
 .navbar .logo-text {
@@ -541,7 +545,7 @@ a:hover {
 .navbar .nav-item .nav-link {
     padding-top: 0.625rem;
     padding-bottom: 0.625rem;
-    color: #5e6576;
+    color: white;
     text-decoration: none;
     transition: all 0.2s ease;
 }
@@ -549,7 +553,7 @@ a:hover {
 .navbar .nav-item.dropdown.show .nav-link,
 .navbar .nav-item .nav-link:hover,
 .navbar .nav-item .nav-link.active {
-    color: #0092ff;
+    color: #0091ff;
 }
 
 
@@ -620,7 +624,7 @@ a:hover {
 .header {
     padding-top: 8rem;
     padding-bottom: 4em;
-    background: url('../images/header-background2.jpg') center center no-repeat;
+    background: url('../images/header-background.jpg') center center no-repeat;
     background-size: cover;
     text-align: center;
 }
@@ -1071,6 +1075,8 @@ a:hover {
     position: relative;
     padding-top: 7rem;
     padding-bottom: 6rem;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
     text-align: center;
     background: url('../images/footer-background.jpg') center no-repeat;
     -webkit-background-size: cover;
@@ -1301,9 +1307,13 @@ a:hover {
     /* Navigation */
     .navbar {
         padding-top: 1.75rem;
-        background-color: #fcfafb;
+        background: url('../images/navbackground.jpg') scroll top transparent;
         box-shadow: none;
         transition: all 0.2s;
+        width: 100%;
+        background-size: 100%;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
     }
     .navbar.top-nav-collapse {
         padding-top: 0.5rem;
@@ -1587,9 +1597,6 @@ a:hover {
         border-radius: 0 10px 10px 0;
     }
 }
-
-
-/*--------------------------------new css-------------------------------------------------------*/
 
 
 /* end of min-width 1200px */

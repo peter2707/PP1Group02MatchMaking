@@ -47,8 +47,7 @@ class MatchmakingModel{
 
 	public function getJobPostByID($db, $jobID){
 		require_once '../model/job_object.php';
-		$query = "SELECT * FROM jobpost 
-					WHERE id='$jobID'";
+		$query = "SELECT * FROM jobpost WHERE id='$jobID'";
 		$result = $db->query($query);
 		$row = $result->fetch_assoc();
 		
@@ -61,6 +60,13 @@ class MatchmakingModel{
 		$db->close();
 
 		return $jobPost;
+	}
+
+	public function countJobPosts($db, $employer){
+		$result = $db->query("SELECT COUNT(*) as totalPosts FROM jobpost WHERE employer='$employer'");
+		$row = $result->fetch_assoc();
+		$countJobPosts = $row['totalPosts'];
+		return $countJobPosts;
 	}
 
 	public function updatePost($db, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id){
@@ -248,6 +254,29 @@ class MatchmakingModel{
 				header("location: ../view/employer_post.php?error=errordeny");
 			}
 		}
+	}
+
+	public function addFeedback($db, $rating, $feedback, $id){
+		$query = "UPDATE jobmatch SET rating=?, feedback=? WHERE id=?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("isi", $rating, $feedback, $id);
+		$stmt->execute();
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			header("location: ../view/jobseeker_match.php?success=donefeedback");
+		} else {
+			header("location: ../view/jobseeker_match.php?error=errorfeedback");
+		}
+	}
+
+	public function reportMatch($db, $username, $type, $id, $reason, $comment){
+		$query = "INSERT INTO report (username, type, matchID, reason, comment) VALUES ('$username', '$type', '$id', '$reason', '$comment')";
+		mysqli_query($db, $query) or die(mysqli_error($db));
+		$db->close();
+		header("location: ../view/report.php?success=reported");
 	}
 	
 }

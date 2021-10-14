@@ -47,7 +47,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
-                                <li><a class="dropdown-item" href="#">Settings</a></li>
+                                <li><a class="dropdown-item" href="user_settings.php">Settings</a></li>
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
@@ -103,7 +103,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="user_settings.php">Settings</a></li>
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>
@@ -149,7 +149,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">$username</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                            <li><a class="dropdown-item" href="#">Settings</a></li>
+                            <li><a class="dropdown-item" href="user_settings.php">Settings</a></li>
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>

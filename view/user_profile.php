@@ -1,3 +1,63 @@
+<?php
+// check if the session has not started yet
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+// require files
+require_once '../controller/session_controller.php';
+require_once '../controller/user_controller.php';
+require_once '../controller/matchmaking_controller.php';
+
+// call controllers
+$sessionController = new SessionController();
+$userController = new UserController();
+$matchmakingController = new MatchmakingController();
+
+// get current user session
+$validSession = $sessionController->checkSession();
+$userType = $sessionController->getUserType();
+
+if (isset($_POST['done'])) {
+    $linkedin = $_POST['linkedin'];
+    $github = $_POST['github'];
+    $twitter = $_POST['twitter'];
+    $instagram = $_POST['instagram'];
+    $facebook = $_POST['facebook'];
+    $userController->editSocialLink($sessionController->getUserName(), $linkedin, $github, $twitter, $instagram, $facebook);
+}elseif (isset($_POST['changeImage'])) {
+    $input = $_FILES["image"]["tmp_name"];
+    if (file_exists($input)) {
+        $file = file_get_contents($input);
+        $base64 = base64_encode($file);
+        $userController->changeProfilePicture($base64, $sessionController->getUserName(), $sessionController->getUserType());
+    } else {
+        header("location: ../view/user_profile.php?error=imagenotfound");
+    }
+}elseif (isset($_POST['addSkill'])){
+    $skill = $_POST['skill'];
+    $skillExp = $_POST['skillExp'];
+    $userController->addSkill($sessionController->getUserName(), $skill, $skillExp);
+}elseif (isset($_POST['deleteSkill'])){
+    $skillId = $_POST['deleteSkill'];
+    $userController->deleteSkill($skillId);
+}elseif (isset($_POST['addEducation'])){
+    $institution = $_POST['institution'];
+    $degree = $_POST['degree'];
+    $graduation = $_POST['graduation'];
+    $userController->addEducation($sessionController->getUserName(), $institution, $degree, $graduation);
+}elseif (isset($_POST['deleteEducation'])){
+    $educationId = $_POST['deleteEducation'];
+    $userController->deleteEducation($educationId);
+}elseif (isset($_POST['addCareer'])){
+    $position = $_POST['position'];
+    $company = $_POST['company'];
+    $experience = $_POST['experience'];
+    $userController->addCareer($sessionController->getUserName(), $position, $company, $experience);
+}elseif (isset($_POST['deleteCareer'])){
+    $careerId = $_POST['deleteCareer'];
+    $userController->deleteCareer($careerId);
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,66 +78,15 @@
     <!-- Navigation End  -->
 
     <?php
-    // check if the session has not started yet
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    // require files
-    require_once '../controller/session_controller.php';
-    require_once '../controller/user_controller.php';
-
-    // call controllers
-    $sessionController = new SessionController();
-    $userController = new UserController();
-
-    // get current user session
-    $validSession = $sessionController->checkSession();
-    $userType = $sessionController->getUserType();
-
-    if (isset($_POST['update'])) {
-        if ($userType == "jobseeker") {
-            $firstName = $_POST['firstName'];
-            $lastName = $_POST['lastName'];
-            $dob = $_POST['dob'];
-            $email = $_POST['email'];
-            $phone = $_POST['phone'];
-            $field = $_POST['field'];
-            $password = $_POST['password'];
-
-            $userController->updateJobSeeker($firstName, $lastName, $password, $dob, $phone, $email, $field, $sessionController->getUserName());
-        } elseif ($userType == "employer") {
-            $firstName = $_POST['firstName'];
-            $lastName = $_POST['lastName'];
-            $dob = $_POST['dob'];
-            $email = $_POST['email'];
-            $phone = $_POST['phone'];
-            $position = $_POST['position'];
-            $password = $_POST['password'];
-
-            $userController->updateEmployer($firstName, $lastName, $password, $dob, $phone, $email, $position, $sessionController->getUserName());
-        }
-    } elseif (isset($_POST['done'])) {
-        $linkedin = $_POST['linkedin'];
-        $github = $_POST['github'];
-        $twitter = $_POST['twitter'];
-        $instagram = $_POST['instagram'];
-        $facebook = $_POST['facebook'];
-        $userController->editSocialLink($sessionController->getUserName(), $linkedin, $github, $twitter, $instagram, $facebook);
-    } elseif (isset($_POST['delete'])) {
-        $userController->deleteAccount($sessionController->getUserName(), $userType);
-    } elseif (isset($_POST['changeImage'])) {
-        $input = $_FILES["image"]["tmp_name"];
-        if (file_exists($input)) {
-            $file = file_get_contents($input);
-            $base64 = base64_encode($file);
-            $userController->changeProfilePicture($base64, $sessionController->getUserName(), $sessionController->getUserType());
-        } else {
-            $script = "<script>window.location = '../view/user_profile.php?error=imagenotfound';</script>";
-            echo $script;
-        }
-    } elseif ($validSession) {
+    if ($validSession) {
         $user = $userController->getUserData($userType);
         $social = $userController->getSocialLink($user->username);
+        $skills = array();
+        $educations = array();
+        $careers = array();
+        $skills = $userController->getSkills($user->username);
+        $educations = $userController->getEducations($user->username);
+        $careers = $userController->getCareers($user->username);
         $userImage = $user->image;
         if ($user->image == NULL) {
             $defaultImage = file_get_contents("../images/user.png");
@@ -89,22 +98,16 @@
             <header class="ex-header">
                 <div class="container">
 END;
-                    if (isset($_GET["error"])) {
-                        echo "<h5><span class='mb-2 badge bg-danger'>";
-                        if ($_GET["error"] == "emptyusername") {
-                            echo "You must enter a valid username!";
-                        } else if ($_GET["error"] == "emptypassword") {
-                            echo "You must enter a valid password!";
-                        } else if ($_GET["error"] == "failed") {
-                            echo "Something went wrong. Please try again!";
-                        } else if ($_GET["error"] == "imagenotfound") {
-                            echo "Please select an image.";
-                        } else if ($_GET["error"] == "errordelete") {
-                            echo "There was a problem while deleting your account. Please try again!";
-                        }
-                        echo "</span></h5>";
-                    }
-                    echo <<<END
+            if (isset($_GET["error"])) {
+                echo "<h5><span class='mb-2 badge bg-danger'>";
+                if ($_GET["error"] == "failed") {
+                    echo "Something went wrong. Please try again!";
+                } else if ($_GET["error"] == "imagenotfound") {
+                    echo "Please select an image.";
+                }
+                echo "</span></h5>";
+            }
+            echo <<<END
                     <div class="main-body">
                         <div class="row gutters-sm">
                             <div class="col-md-4 mb-3">
@@ -131,7 +134,7 @@ END;
                                                                     <input type="file" class="form-control" id="image" name="image"/>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary-sm" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="button" class="btn-secondary-sm" data-bs-dismiss="modal">Cancel</button>
                                                                     <button type="submit" name="changeImage" class="btn btn-solid-sm">Save changes</button>
                                                                 </div>
                                                             </form>
@@ -217,8 +220,8 @@ END;
                                                     <button type="submit" id="doneInputLink" class="btn btn-solid-sm w-100" name="done" style='display:none;'>Done</button>
                                                 </div>
                                                 <div class="col text-end">
-                                                    <button type="button" id="editInputLink" class="btn btn-secondary-sm w-100" onclick="edit()"><i class='fas fa-edit'></i> Edit</button>
-                                                    <button type="button" id="cancelInputLink" class="btn btn-secondary-sm w-100" style='display:none;' onclick="cancel()">Cancel</button>
+                                                    <button type="button" id="editInputLink" class="btn-secondary-sm w-100" onclick="edit()"><i class='fas fa-edit'></i> Edit</button>
+                                                    <button type="button" id="cancelInputLink" class="btn-secondary-sm w-100" style='display:none;' onclick="cancel()">Cancel</button>
                                                 </div>
                                             </div>
                                         </li>
@@ -226,97 +229,219 @@ END;
                                     </ul>
                                 </div>
                             </div>
-    
+
                             <div class="col-md-8">
                                 <div class="card mb-3">
                                     <div class="card-body">
-                                        <form method="POST">
-                                            
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">First Name</h6>
+                                        <div class="row text-start ms-2 mx-2">
+                                            <h2>Resume</h2>
+                                            <form method="POST">
+                                                <div class="row mt-3">
+                                                    <div class="col text-start mt-1">
+                                                        <input type="file" class="form-control" name="resume" value="" required/>
+                                                    </div>
+                                                    <div class="col">
+                                                        <button type="submit" class="btn btn-solid-sm mt-2">Submit</button>
+                                                    </div>
                                                 </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" required/>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Last Name</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" required/>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Email</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="text" class="form-control" id="email" name="email" value="$user->email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" title="Must contain email format E.g. johndoe@mail.com" required/>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Phone</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="tel" class="form-control" id="phone" name="phone" value="$user->phone" pattern="^(\+?\(61\)|\(\+?61\)|\+?61|\(0[1-9]\)|0[1-9])?( ?-?[0-9]){7,9}$" title="Must have phone number format and at least 7 characters long" required/>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Date of Birth</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="date" class="form-control" id="dob" name="dob" value="$user->dob" required/>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Field of Expertise</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <select class="form-select" aria-label=".form-select-lg example" id="fieldOfExpertise-form" name="field" required>
-                                                        <option readonly selected value="$user->field">$user->field</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Username</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="text" class="form-control" id="username" name="username" value="$user->username" readonly/>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Password</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start ">
-                                                    <input type="password" class="form-control" id="password" name="password" value="$user->password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one number and one uppercase and lowercase letter, and 5 to 20 characters" required/>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <button class="btn btn-success-lg" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update"><i class='fa fa-check' aria-hidden='true'></i> Save Changes</button>
-                                                    <button class="btn btn-danger-lg" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete"><i class='fa fa-trash' aria-hidden='true'></i> Delete Account</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    
+                                            </form>
+                                        </div>
+                                        <hr>
+                                        <div class="row text-start ms-2 mx-2">
+                                            <h2>Skills</h2>
+                    END;
+                    if(count($skills) < 1){
+                        echo <<<END
+                            <form method="POST">
+                                <div class="col-sm-6 mt-2 mb-2">
+                                    <input type="text" class="form-control" name="skill" placeholder="Skill" required/>
+                                </div>
+                                <div class="col-sm-3 mt-2 mb-2">
+                                    <select class="form-select" aria-label=".form-select-lg example" id="skill-year-field" name="skillExp" required>
+                                        <option selected disabled value="">Experience</option>
+                                    </select>
+                                </div>
+                                <button type="submit" name="addSkill" class="btn-success-sm mt-1">Add</button>
+                            </form>
+                        END;
+                    }else{
+                        foreach ($skills as $skill) {
+                            echo <<<END
+                            <div class="row mt-3">
+                                <div class="col-sm-5">
+                                    <h5>$skill->skill</h5>
+                                </div>
+                                <div class="col-sm-4 text-end">
+                                    <p><i class="fa fa-clock" aria-hidden="true"></i> $skill->experience</p>
+                                </div>
+                                <div class="col text-end">
+                                    <form method="POST">
+                                        <input type="hidden" name="deleteSkill" value="$skill->id">
+                                        <button type="submit" onclick="javascript:return confirm('Remove Skill?');" class="btn-danger-sm mt-1">Remove</button>
+                                    </form>
+                                </div>
+                            </div>
+                            END;
+                        }
+                        echo <<<END
+                                <div class="row mb-3 mt-3">
+                                    <div class="col text-end">
+                                        <button type="button" id="addSkillBtn" class="btn-solid-sm" onclick="addSkill()">Add Skill</button>
+                                        <button type="button" style="display:none" id="cancelSkillBtn" class="btn-secondary-sm" onclick="cancelSkill()">Cancel</button>
                                     </div>
                                 </div>
+                                <form method="POST" id="skillForm" style="display:none">
+                                    <div class="col-sm-6 mt-2 mb-2">
+                                        <input type="text" class="form-control" name="skill" placeholder="Skill" required/>
+                                    </div>
+                                    <div class="col-sm-3 mt-2 mb-2">
+                                        <select class="form-select" aria-label=".form-select-lg example" id="skill-year-field" name="skillExp" required>
+                                            <option selected disabled value="">Experience</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" name="addSkill" class="btn-success-sm mt-1">Add</button>
+                                </form>
                                 
+                        END;
+                    }
+                    echo <<<END
+                            </div>
+                            <hr>
+                            <div class="row text-start ms-2 mx-2">
+                                <h2>Education</h2>
+
+                        END;
+                        if(count($educations) < 1){
+                            echo <<<END
+                                <form method="POST">
+                                    <div class="col-sm-7 mt-2 mb-2">
+                                        <input type="text" class="form-control" name="institution" placeholder="Institution" required/>
+                                    </div>
+                                    <div class="col-sm-7 mt-2 mb-2">
+                                        <input type="text" class="form-control" name="degree" placeholder="Degree" required/>
+                                    </div>
+                                    <div class="col-sm-4 mt-2 mb-2">
+                                        <input type="month" class="form-control" name="graduation" />
+                                    </div>
+                                    <button type="submit" name="addEducation" class="btn-success-sm mt-1">Add</button>
+                                </form>
+                            END;
+                        }else{
+                            foreach ($educations as $education) {
+                                echo <<<END
+                                <div class="row mt-3">
+                                    <div class="col-sm-5">
+                                        <h5>$education->degree</h5>
+                                        <p><i class="fa fa-graduation-cap" aria-hidden="true"></i> $education->graduation</p>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h5><i class="fa fa-building" aria-hidden="true"></i> $education->institution</h5>
+                                    </div>
+                                    
+                                    <div class="col text-end">
+                                        <form method="POST">
+                                            <input type="hidden" name="deleteEducation" value="$education->id">
+                                            <button type="submit" onclick="javascript:return confirm('Remove Education?');" class="btn-danger-sm mt-1">Remove</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                END;
+                            }
+                            echo <<<END
+                                    <div class="row mb-3 mt-3">
+                                        <div class="col text-end">
+                                            <button type="button" id="addEducationBtn" class="btn-solid-sm" onclick="addEducation()">Add Education</button>
+                                            <button type="button" style="display:none" id="cancelEducationBtn" class="btn-secondary-sm" onclick="cancelEducation()">Cancel</button>
+                                        </div>
+                                    </div>
+                                    <form method="POST" id="educationForm" style="display:none">
+                                        <div class="col-sm-7 mt-2 mb-2">
+                                            <input type="text" class="form-control" name="institution" placeholder="Institution" required/>
+                                        </div>
+                                        <div class="col-sm-7 mt-2 mb-2">
+                                            <input type="text" class="form-control" name="degree" placeholder="Degree" required/>
+                                        </div>
+                                        <div class="col-sm-4 mt-2 mb-2">
+                                            <input type="month" class="form-control" name="graduation" />
+                                        </div>
+                                        <button type="submit" name="addEducation" class="btn-success-sm mt-1">Add</button>
+                                    </form>
+                                    
+                            END;
+                        }
+                        echo <<<END
+                                    </div>
+                                    <hr>
+                                    <div class="row text-start ms-2 mx-2">
+                                        <h2>Career History</h2>
+
+
+                        END;
+                        if(count($careers) < 1){
+                            echo <<<END
+                                <form method="POST">
+                                    <div class="col-sm-7 mt-2 mb-2">
+                                        <input type="text" class="form-control" name="company" placeholder="Company" required/>
+                                    </div>
+                                    <div class="col-sm-7 mt-2 mb-2">
+                                        <input type="text" class="form-control" name="position" placeholder="Position" required/>
+                                    </div>
+                                    <div class="col-sm-4 mt-2 mb-2">
+                                        <select class="form-select" aria-label=".form-select-lg example" id="career-year-field" name="experience" required>
+                                            <option selected disabled value="">Experience</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" name="addCareer" class="btn-success-sm mt-2">Add</button>
+                                </form>
+                            END;
+                        }else{
+                            foreach ($careers as $career) {
+                                echo <<<END
+                                <div class="row mt-3">
+                                    <div class="col-sm-5">
+                                        <h5>$career->position</h5>
+                                        <p><i class="fa fa-clock" aria-hidden="true"></i> $career->experience</p>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <h5><i class="fa fa-building" aria-hidden="true"></i> $career->company</h5>
+                                    </div>
+                                    <div class="col text-end">
+                                        <form method="POST">
+                                            <input type="hidden" name="deleteCareer" value="$career->id">
+                                            <button type="submit" onclick="javascript:return confirm('Remove Career?');" class="btn-danger-sm mt-1">Remove</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                END;
+                            }
+                            echo <<<END
+                                <div class="row mt-3">
+                                    <div class="col text-end">
+                                        <button type="button" id="addCareerBtn" class="btn-solid-sm" onclick="addCareer()">Add Career</button>
+                                        <button type="button" style="display:none" id="cancelCareerBtn" class="btn-secondary-sm" onclick="cancelCareer()">Cancel</button>
+                                    </div>
+                                </div>
+                                <form method="POST" id="careerForm" style="display:none">
+                                    <div class="col-sm-7 mt-2 mb-2">
+                                        <input type="text" class="form-control" name="company" placeholder="Company" required/>
+                                    </div>
+                                    <div class="col-sm-7 mt-2 mb-2">
+                                        <input type="text" class="form-control" name="position" placeholder="Position" required/>
+                                    </div>
+                                    <div class="col-sm-4 mt-2 mb-2">
+                                        <select class="form-select" aria-label=".form-select-lg example" id="career-year-field" name="experience" required>
+                                            <option selected disabled value="">Experience</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" name="addCareer" class="btn-success-sm mt-2">Add</button>
+                                </form>
+                            END;
+                        }
+                        echo <<<END
+
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -324,8 +449,12 @@ END;
                 <!-- end of container -->
             </header>
             <!-- User Profile section End -->
-        END;
+END;
         } elseif ($userType == "employer") {
+            $totalPosts = $matchmakingController->countJobPosts($sessionController->getUserName());
+            $rating = number_format((float)$user->rating, 1, '.', '');
+            $map = $userController->getMap($user->location);
+            
             echo <<<END
             <!-- User Profile section start -->
             <header class="ex-header">
@@ -333,16 +462,10 @@ END;
 END;
             if (isset($_GET["error"])) {
                 echo "<h5><span class='mb-2 badge bg-danger'>";
-                if ($_GET["error"] == "emptyusername") {
-                    echo "You must enter a valid username!";
-                } else if ($_GET["error"] == "emptypassword") {
-                    echo "You must enter a valid password!";
-                } else if ($_GET["error"] == "failed") {
+                if ($_GET["error"] == "failed") {
                     echo "Something went wrong. Please try again!";
                 } else if ($_GET["error"] == "imagenotfound") {
                     echo "Please select an image.";
-                } else if ($_GET["error"] == "errordelete") {
-                    echo "There was a problem while deleting your account. Please try again!";
                 }
                 echo "</span></h5>";
             }
@@ -374,7 +497,7 @@ END;
                                                                     <input type="file" class="form-control" id="image" name="image"/>
                                                                 </div>
                                                                 <div class="modal-footer">
-                                                                    <button type="button" class="btn btn-secondary-sm" data-bs-dismiss="modal">Cancel</button>
+                                                                    <button type="button" class="btn-secondary-sm" data-bs-dismiss="modal">Cancel</button>
                                                                     <button type="submit" name="changeImage" class="btn btn-solid-sm">Save changes</button>
                                                                 </div>
                                                             </form>
@@ -459,8 +582,8 @@ END;
                                                     <button type="submit" id="doneInputLink" name="done" class="btn btn-solid-sm w-100" style='display:none;'>Done</button>
                                                 </div>
                                                 <div class="col text-end">
-                                                    <button type="button" id="editInputLink" class="btn btn-secondary-sm w-100" onclick="edit()"><i class='fas fa-edit'></i> Edit</button>
-                                                    <button type="button" id="cancelInputLink" class="btn btn-secondary-sm w-100" style='display:none;' onclick="cancel()">Cancel</button>
+                                                    <button type="button" id="editInputLink" class="btn-secondary-sm w-100" onclick="edit()"><i class='fas fa-edit'></i> Edit</button>
+                                                    <button type="button" id="cancelInputLink" class="btn-secondary-sm w-100" style='display:none;' onclick="cancel()">Cancel</button>
                                                 </div>
                                             </div>
                                         </li>
@@ -468,95 +591,54 @@ END;
                                     </ul>
                                 </div>
                             </div>
-    
+
                             <div class="col-md-8">
                                 <div class="card mb-3">
                                     <div class="card-body">
-                                        <form method="POST">
-
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">First Name</h6>
+                                        <div class="text-start ms-2 mx-2">
+                                            <h2 class="mb-5">Overview</h2>
+                                            <div class="row ms-2 mx-2">
+                                                <div class="col text-center">
+                                                    <p><b>Job Posts:</b> $totalPosts</p>
                                                 </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" required/>
+                                                <div class="col text-center">
+                                                    <p><b>Position:</b> $user->position</p>
                                                 </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Last Name</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" required/>
+                                                <div class="col text-center">
+                                                    <p><b>Rating:</b> $rating <i class="fa fa-star mb-1" style="color:gold" aria-hidden="true"></i></p>
                                                 </div>
                                             </div>
                                             <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Email</h6>
+                                        </div>
+                                        <div class="text-start ms-2 mx-2">
+                                            <h2 class="mb-5">Contact</h2>
+                                            <div class="row ms-2 mx-2">
+                                                <div class="col text-center">
+                                                    <p><b>Email:</b> $user->email</p>
                                                 </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="text" class="form-control" id="email" name="email" value="$user->email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" title="Must contain email format E.g. johndoe@mail.com" required/>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Phone</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="tel" class="form-control" id="phone" name="phone" value="$user->phone" pattern="^(\+?\(61\)|\(\+?61\)|\+?61|\(0[1-9]\)|0[1-9])?( ?-?[0-9]){7,9}$" title="Must have phone number format and at least 7 characters long" required/>
+                                                <div class="col text-center">
+                                                    <p><b>Phone:</b> $user->phone</p>
                                                 </div>
                                             </div>
                                             <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Date of Birth</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="date" class="form-control" id="dob" name="dob" value="$user->dob" required/>
-                                                </div>
-                                            </div>
+                                        </div>
+                                        <div class="text-start ms-2 mx-2">
+                                            <h2 class="mb-5">Reviews</h2>
+                    
+                                            
                                             <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Username</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start ">
-                                                    <input type="text" class="form-control" id="username" name="username" value="$user->username" readonly/>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Password</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start ">
-                                                    <input type="password" class="form-control" id="password" name="password" value="$user->password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one number and one uppercase and lowercase letter, and 5 to 20 characters" required/>
+                                        </div>
+                                        <div class="text-start ms-2 mx-2">
+                                            <h2 class="mb-5">Location</h2>
+                                            <div class="row ms-2 mx-2">
+                                                <div class="col">
+                                                    <h5 class="mb-4 ms-5"><i class="fa fa-map-pin" style="color:red" aria-hidden="true"></i> $user->location</h5>
+                                                    $map
                                                 </div>
                                             </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-4 text-start">
-                                                    <h6 class="mt-2 ms-5">Position</h6>
-                                                </div>
-                                                <div class="col-sm-7 text-secondary text-start ">
-                                                    <input type="text" class="form-control" id="position" name="position" value="$user->position" required/>
-                                                </div>
-                                            </div>
-                                            <hr>
-                                            <div class="row">
-                                                <div class="col-sm-12">
-                                                    <button class="btn btn-success-sm" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update"><i class='fa fa-check' aria-hidden='true'></i> Save Changes</button>
-                                                    <button class="btn btn-danger-sm" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete"><i class='fa fa-trash' aria-hidden='true'></i> Delete Account</button>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    
+                                        </div>
                                     </div>
                                 </div>
-    
                             </div>
                         </div>
                     </div>
@@ -564,7 +646,8 @@ END;
                 <!-- end of container -->
             </header>
             <!-- User Profile section End -->
-        END;
+                            
+END;
         }
     } else {
         echo "<header class='ex-header'>

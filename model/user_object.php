@@ -1,6 +1,6 @@
 <?php
 class JobSeeker {
-    public function __construct($id, $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $image) {
+    public function __construct($id, $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $image) {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -10,13 +10,14 @@ class JobSeeker {
         $this->phone = $phone;
         $this->email = $email;
         $this->field = $field;
+        $this->location = $location;
         $this->image = $image;
     }
     
 }
 
 class Employer {
-    public function __construct($id, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $rating, $image) {
+    public function __construct($id, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $rating, $image) {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -26,6 +27,7 @@ class Employer {
         $this->phone = $phone;
         $this->email = $email;
         $this->position = $position;
+        $this->location = $location;
         $this->rating = $rating;
         $this->image = $image;
     }

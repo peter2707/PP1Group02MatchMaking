@@ -17,10 +17,10 @@ class UserModel {
 		$db->close();
 
 		if($userType == "jobseeker"){
-			$jobseeker = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['Image']);
+			$jobseeker = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['location'], $row['image']);
 			return $jobseeker;
 		}elseif($userType == "employer"){
-			$employer = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['rating'], $row['image']);
+			$employer = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['location'], $row['rating'], $row['image']);
 			return $employer;
 		}elseif($userType == "admin"){
 			$admin = new Admin($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['image']);
@@ -44,10 +44,10 @@ class UserModel {
 			exit();
 		}else{
 			if($usertype == "jobseeker"){
-				$jobseeker = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['Image']);
+				$jobseeker = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['location'], $row['image']);
 				return $jobseeker;
 			}elseif($usertype == "employer"){
-				$employer = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['rating'], $row['image']);
+				$employer = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['location'], $row['rating'], $row['image']);
 				return $employer;
 			}elseif($usertype == "admin"){
 				$admin = new Admin($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['image']);
@@ -56,29 +56,124 @@ class UserModel {
 		}
 	}
 
-	public function updateJobSeeker($db, $firstName, $lastName, $password, $dob, $phone, $email, $field, $username) {
-		$query = "UPDATE jobseeker SET firstName=?, lastName=?, password=?, dateOfBirth=?, phone=?, email=?, field=? WHERE username = ?";
-		$stmt = $db->prepare($query);
-		$stmt->bind_param("ssssisss", $firstName, $lastName, $password, $dob, $phone, $email, $field, $username);
-		$stmt->execute();
+	public function getSkills($db, $username) {
+		require_once '../model/job_object.php';
+		$skills = array();
+		$query = "SELECT * FROM skill WHERE username='$username'";
+		$result = $db->query($query) or die(mysqli_error($db));
+		$numResults = $result->num_rows;
+		for ($i = 0; $i < $numResults; $i++) {
+			$row = $result->fetch_assoc();
+			$skills[$i] = new Skill($row['id'], $row['username'], $row['skill'], $row['experience']);
+		}
+		$result->free();
+		return $skills;
+	}
 
+	public function addSkill($db, $username, $skill, $experience){
+		$query = "INSERT INTO skill (username, skill, experience) 
+            VALUES ('$username', '$skill', '$experience')";
+		mysqli_query($db, $query) or die(mysqli_error($db));
+		$db->close();
+		header("location: ../view/user_profile.php?success=skilladded");
+	}
+
+	public function deleteSkill($db, $id) {
+		$query = "DELETE FROM skill WHERE id = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("i", $id);
+		$stmt->execute();
 		$affectedRows = $stmt->affected_rows;
 		$stmt->close();
 		$db->close();
 
 		if ($affectedRows == 1) {
-			$script = "<script>window.location = '../view/user_profile.php?success=successupdate';</script>";
-			echo $script;
+			header("location: ../view/user_profile.php?success=skilldeleted");
 		} else {
-			$script = "<script>window.location = '../view/user_profile.php?error=errorupdate';</script>";
-			echo $script;
+			header("location: ../view/user_profile.php?error=errordelete");
 		}
 	}
 
-	public function updateEmployer($db, $firstName, $lastName, $password, $dob, $phone, $email, $position, $username) {
-		$query = "UPDATE employer SET firstName=?, lastName=?, password=?, dateOfBirth=?, phone=?, email=?, position=? WHERE username = ?";
+	public function getEducations($db, $username) {
+		require_once '../model/job_object.php';
+		$educations = array();
+		$query = "SELECT * FROM education WHERE username='$username'";
+		$result = $db->query($query) or die(mysqli_error($db));
+		$numResults = $result->num_rows;
+		for ($i = 0; $i < $numResults; $i++) {
+			$row = $result->fetch_assoc();
+			$educations[$i] = new Education($row['id'], $row['username'], $row['institution'], $row['degree'], $row['graduation']);
+		}
+		$result->free();
+		return $educations;
+	}
+
+	public function addEducation($db, $username, $institution, $degree, $graduation){
+		$query = "INSERT INTO education (username, institution, degree, graduation) 
+            VALUES ('$username', '$institution', '$degree', '$graduation')";
+		mysqli_query($db, $query) or die(mysqli_error($db));
+		$db->close();
+		header("location: ../view/user_profile.php?success=educationadded");
+	}
+
+	public function deleteEducation($db, $id) {
+		$query = "DELETE FROM education WHERE id = ?";
 		$stmt = $db->prepare($query);
-		$stmt->bind_param("ssssisss", $firstName, $lastName, $password, $dob, $phone, $email, $position, $username);
+		$stmt->bind_param("i", $id);
+		$stmt->execute();
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			header("location: ../view/user_profile.php?success=educationdeleted");
+		} else {
+			header("location: ../view/user_profile.php?error=errordelete");
+		}
+	}
+
+	public function getCareers($db, $username) {
+		require_once '../model/job_object.php';
+		$careers = array();
+		$query = "SELECT * FROM career WHERE username='$username'";
+		$result = $db->query($query) or die(mysqli_error($db));
+		$numResults = $result->num_rows;
+		for ($i = 0; $i < $numResults; $i++) {
+			$row = $result->fetch_assoc();
+			$careers[$i] = new Career($row['id'], $row['username'], $row['position'], $row['company'], $row['experience']);
+		}
+		$result->free();
+		return $careers;
+	}
+
+	public function addCareer($db, $username, $position, $company, $experience){
+		$query = "INSERT INTO career (username, position, company, experience) 
+            VALUES ('$username', '$position', '$company', '$experience')";
+		mysqli_query($db, $query) or die(mysqli_error($db));
+		$db->close();
+		header("location: ../view/user_profile.php?success=careeradded");
+	}
+
+	public function deleteCareer($db, $id) {
+		$query = "DELETE FROM career WHERE id = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("i", $id);
+		$stmt->execute();
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			header("location: ../view/user_profile.php?success=careerdeleted");
+		} else {
+			header("location: ../view/user_profile.php?error=errordelete");
+		}
+	}
+
+	public function updateJobSeeker($db, $firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $username) {
+		$query = "UPDATE jobseeker SET firstName=?, lastName=?, password=?, dateOfBirth=?, phone=?, email=?, field=?, location=? WHERE username = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("ssssissss", $firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $username);
 		$stmt->execute();
 
 		$affectedRows = $stmt->affected_rows;
@@ -86,11 +181,26 @@ class UserModel {
 		$db->close();
 
 		if ($affectedRows == 1) {
-			$script = "<script>window.location = '../view/user_profile.php?success=successupdate';</script>";
-			echo $script;
+			header("location: ../view/user_profile.php?success=successupdate");
 		} else {
-			$script = "<script>window.location = '../view/user_profile.php?error=errorupdate';</script>";
-			echo $script;
+			header("location: ../view/user_profile.php?error=errorupdate");
+		}
+	}
+
+	public function updateEmployer($db, $firstName, $lastName, $password, $dob, $phone, $email, $position, $location, $username) {
+		$query = "UPDATE employer SET firstName=?, lastName=?, password=?, dateOfBirth=?, phone=?, email=?, position=?, location=? WHERE username = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("ssssissss", $firstName, $lastName, $password, $dob, $phone, $email, $position, $location, $username);
+		$stmt->execute();
+
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			header("location: ../view/user_profile.php?success=successupdate");
+		} else {
+			header("location: ../view/user_profile.php?error=errorupdate");
 		}
 	}
 
@@ -109,11 +219,9 @@ class UserModel {
 			unset($_SESSION["username"]);
 			unset($_SESSION["password"]);
 			session_destroy();
-			$script = "<script>window.location = '../view/login.php?success=accountdeleted';</script>";
-			echo $script;
+			header("location: ../view/user_profile.php?success=accountdelete");
 		} else {
-			$script = "<script>window.location = '../view/login.php?error=errordelete';</script>";
-			echo $script;
+			header("location: ../view/user_profile.php?error=errordelete");
 		}
 	}
 
@@ -128,11 +236,9 @@ class UserModel {
 		$db->close();
 
 		if ($affectedRows == 1) {
-			$script = "<script>window.location = '../view/user_profile.php?success=successupdate';</script>";
-			echo $script;
+			header("location: ../view/user_profile.php?success=successupdate");
 		} else {
-			$script = "<script>window.location = '../view/user_profile.php?error=errorupdate';</script>";
-			echo $script;
+			header("location: ../view/user_profile.php?error=errorupdate");
 		}
 	}
 
@@ -150,8 +256,6 @@ class UserModel {
 		}
 		$stmt->close();
 		$db->close();
-
-		
 		return $social;
 	}
 	
@@ -160,8 +264,7 @@ class UserModel {
             VALUES ('$username', '$linkedin', '$github', '$twitter', '$instagram', '$facebook')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
 		$db->close();
-		$script = "<script>window.location = '../view/user_profile.php?success=successupdate';</script>";
-		echo $script;
+		header("location: ../view/user_profile.php?success=successupdate");
 	}
 
 	public function editSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook){
@@ -189,11 +292,9 @@ class UserModel {
 			$db->close();
 
 			if ($affectedRows == 1) {
-				$script = "<script>window.location = '../view/user_profile.php?success=successupdate';</script>";
-				echo $script;
+				header("location: ../view/user_profile.php?success=successupdate");
 			} else {
-				$script = "<script>window.location = '../view/user_profile.php?error=errorupdate';</script>";
-				echo $script;
+				header("location: ../view/user_profile.php?error=errorupdate");
 			}
 		}else {
 			$this->addSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook);
