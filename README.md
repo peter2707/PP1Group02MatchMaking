@@ -3,19 +3,19 @@
 ## How to run the web app
 
 - Prerequisites & Notes:
-    - Make sure XAMPP is installed on your system
+    - Ensure that you have XAMPP installed on your system
     - Works both on Mac and Window OS
 
 <p>&nbsp;</p>
 
 ### Run the App locally on Window OS
 
-1. Copy the project and place it under this directory
+1. Copy the project and place it in your `XAMPP` folder under this directory
     ```
     xampp/htdocs/
     ```
 2. Open XAMPP and Turn on both Apache and MySQL
-3. Go to `model/db_connection.php` and replace the content with this
+3. In JobMatch directory, go to `model/db_connection.php` and replace the content with the code below
     ```
     <?php
         try {
@@ -40,13 +40,13 @@
     ```
     https://localhost/phpmyadmin
     ```
-5. Go to directory `mysql/jobmatch.sql`
+5. Go to jobmatch directory `mysql/jobmatch.sql`
     ```
     Open and copy the script in the sql file
     ```
-6. On the `phpmyadmin` page
+6. On the `phpmyadmin` page in your browser
     ```
-    Click on SQL, paste the script, and click 'Go'
+    Click on 'SQL' tab, paste the script, and click 'Go'
     ```
 7. Now time to see the application. On your browser, go to 
     ```
@@ -64,7 +64,7 @@
     ```
     iampp/htdocs/
     ```
-3. Go to `model/db_connection.php` and replace the content with this
+3. In JobMatch directory, go to `model/db_connection.php` and replace the content with the code below
     ```
     <?php
         try {
@@ -88,11 +88,11 @@
     ```
     https://localhost:<port>/phpmyadmin
     ```
-5. Go to directory `mysql/jobmatch.sql`
+5. In JobMatch directory, go to `mysql/jobmatch.sql`
     ```
     Open and copy the script in the sql file
     ```
-6. On the `phpmyadmin` page
+6. On the `phpmyadmin` page in your browser
     ```
     Click on SQL, paste the script, and click 'Go'
     ```
