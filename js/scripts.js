@@ -312,6 +312,12 @@ $.each(yearOptions, function(val, text) {
 
 });
 
+jSuites.calendar(document.getElementById('calendar'), {
+    type: 'year-month-picker',
+    format: 'MMM-YYYY',
+    validRange: ['1900-01-01', '2021-12-31']
+});
+
 
 //show match div
 function showFindMatchForm() {

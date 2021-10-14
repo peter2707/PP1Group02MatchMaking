@@ -31,11 +31,12 @@
     <link href="../css/swiper.css" rel="stylesheet">
     <link href="../css/styles.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">
-
-
+    <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+    
     <!-- Scripts -->
     <script src="../js/jquery-3.6.0.min.js"></script>
     <script src="../js/ckeditor/ckeditor.js"></script>
+    <script src="https://jsuites.net/v4/jsuites.js"></script>
 
     <!-- Favicon  -->
     <link rel="icon" href="../images/favicon.png">
