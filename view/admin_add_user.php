@@ -136,11 +136,11 @@ if(isset($_POST['register'])){
                                 <label for="job-seeker-form-field">Field of Expertise</label>
                             </div>
                             <div class="form-floating mb-3" id="employer-form" style="display:none;">
-                                <input type="text" class="form-control" id="employer-form-position" name="positionEmp" placeholder="Position">
+                                <input type="text" class="form-control" id="employer-form-position" name="positionEmp" placeholder="Position" pattern="^[a-zA-Z]+$" title="Must contain only letters">
                                 <label for="employer-form-label">Position</label>
                             </div>
                             <div class="form-floating mb-3" id="admin-form" style="display:none;">
-                                <input type="text" class="form-control" id="admin-form-position" name="positionAdmin" placeholder="Position">
+                                <input type="text" class="form-control" id="admin-form-position" name="positionAdmin" placeholder="Position" pattern="^[a-zA-Z]+$" title="Must contain only letters">
                                 <label for="admin-form-position">Position</label>
                             </div>
                             <div class="row mb-5 mt-2">

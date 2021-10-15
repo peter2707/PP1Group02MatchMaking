@@ -63,7 +63,7 @@ if (isset($_POST['delete'])) {
                 echo "            <th scope='col'>DateOfBirth</th>";
                 echo "            <th scope='col'>Phone</th>";
                 echo "            <th scope='col'>Email</th>";
-                echo "            <th scope='col'>field</th>";
+                echo "            <th scope='col'>Field</th>";
                 echo "            <th scope='col'>Location</th>";
                 echo "            <th scope='col'>Action</th>";
                 echo "            <th scope='col'></th>";

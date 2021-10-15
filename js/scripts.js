@@ -166,26 +166,17 @@ function topFunction() {
     document.documentElement.scrollTop = 0; // for Chrome, Firefox, IE and Opera
 }
 
-
-
-
-// add field row
-$("#addRow").click(function() {
-    var html = '';
-    html += '<div id="inputFormRow">';
-    html += '<div class="input-group mb-3">';
-    html += '<input type="text" name="title[]" class="form-control m-input" placeholder="Enter title" autocomplete="off">';
-    html += '<div class="input-group-append">';
-    html += '<button id="removeRow" type="button" class="btn btn-danger">Remove</button>';
-    html += '</div>';
-    html += '</div>';
-
-    $('#newRow').append(html);
+//add rich text editor
+CKEDITOR.replace('descriptionTextArea', {
+    extraPlugins: 'editorplaceholder',
+    editorplaceholder: 'Job Descriptions...',
+    height: "150px"
 });
 
-// remove row
-$(document).on('click', '#removeRow', function() {
-    $(this).closest('#inputFormRow').remove();
+CKEDITOR.replace('requirementsTextArea', {
+    extraPlugins: 'editorplaceholder',
+    editorplaceholder: 'Job requirements...',
+    height: "150px"
 });
 
 
@@ -425,19 +416,6 @@ function cancelCareer() {
     document.getElementById("cancelCareerBtn").style.display = 'none';
     document.getElementById("addCareerBtn").style.display = '';
 }
-
-CKEDITOR.replace('descriptionTextArea', {
-    extraPlugins: 'editorplaceholder',
-    editorplaceholder: 'Job Descriptions...',
-    height: "150px"
-});
-
-CKEDITOR.replace('requirementsTextArea', {
-    extraPlugins: 'editorplaceholder',
-    editorplaceholder: 'Job requirements...',
-    height: "150px"
-});
-
 
 //active link detect
 
