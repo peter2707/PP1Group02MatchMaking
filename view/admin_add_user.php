@@ -11,7 +11,7 @@ if(isset($_POST['register'])){
     $dateOfBirth = $_POST['dateOfBirth'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
-    $position = $_POST['position'];
+    $location = $_POST['location'];
     $type = $_POST['type'];
     $positionEmployer = $_POST['positionEmp'];
     $positionAdmin = $_POST['positionAdmin'];
