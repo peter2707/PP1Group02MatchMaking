@@ -26,7 +26,7 @@
             $location = $_POST['location'];
             $password = $_POST['password'];
 
-            $userController->updateJobSeeker($firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $sessionController->getUserName());
+            $userController->updateJobSeeker(ucfirst($firstName), ucfirst($lastName), $password, $dob, $phone, $email, $field, $location, $sessionController->getUserName());
         } elseif ($userType == "employer") {
             $firstName = $_POST['firstName'];
             $lastName = $_POST['lastName'];
@@ -37,7 +37,7 @@
             $location = $_POST['location'];
             $password = $_POST['password'];
 
-            $userController->updateEmployer($firstName, $lastName, $password, $dob, $phone, $email, $position, $location, $sessionController->getUserName());
+            $userController->updateEmployer(ucfirst($firstName), ucfirst($lastName), $password, $dob, $phone, $email, $position, $location, $sessionController->getUserName());
         }
     } elseif (isset($_POST['delete'])) {
         $userController->deleteAccount($sessionController->getUserName(), $userType);

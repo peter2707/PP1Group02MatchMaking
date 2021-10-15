@@ -36,7 +36,7 @@ if (isset($_POST['update'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $ac->updateJobSeeker($firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $user->id);
+        $ac->updateJobSeeker(ucfirst($firstName), ucfirst($lastName), $username, $password, $dob, $phone, $email, $field, $location, $user->id);
     } elseif ($usertype == "employer") {
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
@@ -48,7 +48,7 @@ if (isset($_POST['update'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $ac->updateEmployer($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $user->id);
+        $ac->updateEmployer(ucfirst($firstName), ucfirst($lastName), $username, $password, $dob, $phone, $email, $position, $location, $user->id);
     } elseif ($usertype == "admin") {
         $firstName = $_POST['firstName'];
         $lastName = $_POST['lastName'];
@@ -59,7 +59,7 @@ if (isset($_POST['update'])) {
         $username = $_POST['username'];
         $password = $_POST['password'];
 
-        $ac->updateAdmin($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $user->id);
+        $ac->updateAdmin(ucfirst($firstName), ucfirst($lastName), $username, $password, $dob, $phone, $email, $position, $user->id);
     }
 } elseif (isset($_POST['cancel'])){
     header("location: ../view/admin_index.php");
