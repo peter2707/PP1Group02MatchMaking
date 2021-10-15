@@ -11,12 +11,13 @@ if(isset($_POST['register'])){
     $dateOfBirth = $_POST['dateOfBirth'];
     $phone = $_POST['phone'];
     $email = $_POST['email'];
+    $position = $_POST['position'];
     $type = $_POST['type'];
     $positionEmployer = $_POST['positionEmp'];
     $positionAdmin = $_POST['positionAdmin'];
     $field = $_POST['field'];
     
-    $adminController->register(ucfirst($firstName), ucfirst($lastName), $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $type, $positionEmployer, $positionAdmin, $field);
+    $adminController->register(ucfirst($firstName), ucfirst($lastName), $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type, $positionEmployer, $positionAdmin, $field);
 }
 ?>
 <!DOCTYPE html>
@@ -76,15 +77,15 @@ if(isset($_POST['register'])){
                     <main class="form-register">
                         <form action="" method="POST">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="Firstname" name="firstName" required>
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Firstname" name="firstName" pattern="[A-Za-z]" title="Must contain only letters" required>
                                 <label for="floatingInput">Firstname</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="Lastname" name="lastName" required>
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Lastname" name="lastName" pattern="[A-Za-z]" title="Must contain only letters" required>
                                 <label for="floatingInput">Lastname</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one number and one uppercase and lowercase letter, and 5 to 20 characters" required>
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" pattern="(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one uppercase and lowercase letter, and 5 to 20 characters" required>
                                 <label for="floatingInput">Username</label>
                             </div>
                             <div class="form-floating mb-3">
@@ -106,6 +107,12 @@ if(isset($_POST['register'])){
                             <div class="form-floating mb-3">
                                 <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email" required>
                                 <label for="floatingInput">Email</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select mb-3" aria-label=".form-select-lg example" id="location-field" name="location" required>
+                                    <option disabled selected value="">Choose...</option>"
+                                </select>
+                                <label for="location-field">Location</label>
                             </div>
 
 

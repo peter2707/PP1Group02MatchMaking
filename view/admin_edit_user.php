@@ -79,8 +79,7 @@ if (isset($_POST['update'])) {
         $base64 = base64_encode($file);
         $uc->changeProfilePicture($base64, $username, $usertype);
     } else {
-        $script = "<script>window.location = '../view/user_profile.php?error=imagenotfound';</script>";
-        echo $script;
+        header("location: ../view/user_profile.php?error=imagenotfound");
     }
 } elseif ($user->image == NULL) {
     $defaultImage = file_get_contents("../images/user.png");
@@ -245,7 +244,7 @@ if (isset($_POST['update'])) {
                                             <h6 class="mt-2 ms-5">First Name</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
-                                            <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" required />
+                                            <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" pattern="[A-Za-z]" title="Must contain only letters" required />
                                         </div>
                                     </div>
                                     <hr>
@@ -254,7 +253,7 @@ if (isset($_POST['update'])) {
                                             <h6 class="mt-2 ms-5">Last Name</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
-                                            <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" required />
+                                            <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" pattern="[A-Za-z]" title="Must contain only letters" required />
                                         </div>
                                     </div>
                                     <hr>
@@ -312,7 +311,7 @@ if (isset($_POST['update'])) {
                                             <h6 class="mt-2 ms-5">Username</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
-                                            <input type="text" class="form-control" id="username" name="username" value="$user->username" required/>
+                                            <input type="text" class="form-control" id="username" name="username" value="$user->username" pattern="(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one uppercase and lowercase letter, and 5 to 20 characters" required/>
                                         </div>
                                     </div>
                                     <hr>
@@ -482,7 +481,7 @@ END;
                                             <h6 class="mt-2 ms-5">First Name</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
-                                            <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" required />
+                                            <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" pattern="[A-Za-z]" title="Must contain only letters" required />
                                         </div>
                                     </div>
                                     <hr>
@@ -491,7 +490,7 @@ END;
                                             <h6 class="mt-2 ms-5">Last Name</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
-                                            <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" required />
+                                            <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" pattern="[A-Za-z]" title="Must contain only letters" required />
                                         </div>
                                     </div>
                                     <hr>
@@ -527,7 +526,7 @@ END;
                                             <h6 class="mt-2 ms-5">Position</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start ">
-                                            <input type="text" class="form-control" id="position" name="position" value="$user->position" required/>
+                                            <input type="text" class="form-control" id="position" name="position" value="$user->position" pattern="[A-Za-z]" title="Must contain only letters" required/>
                                         </div>
                                     </div>
                                     <hr>
@@ -547,7 +546,7 @@ END;
                                             <h6 class="mt-2 ms-5">Username</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
-                                            <input type="text" class="form-control" id="username" name="username" value="$user->username" required/>
+                                            <input type="text" class="form-control" id="username" name="username" value="$user->username" pattern="(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one uppercase and lowercase letter, and 5 to 20 characters" required/>
                                         </div>
                                     </div>
                                     <hr>

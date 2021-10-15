@@ -75,15 +75,15 @@ if(isset($_POST['register'])){
                 <main class="form-register">
                     <form action="" method="POST">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Firstname" name="firstName" required>
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Firstname" name="firstName" pattern="[A-Za-z]" title="Must contain only letters" required>
                             <label for="floatingInput">Firstname</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Lastname" name="lastName" required>
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Lastname" name="lastName" pattern="[A-Za-z]" title="Must contain only letters" required>
                             <label for="floatingInput">Lastname</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one number and one uppercase and lowercase letter, and 5 to 20 characters" required>
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" pattern="(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one uppercase and lowercase letter, and 5 to 20 characters" required>
                             <label for="floatingInput">Username</label>
                         </div>
                         <div class="form-floating mb-3">
