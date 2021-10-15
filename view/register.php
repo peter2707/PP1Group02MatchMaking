@@ -129,7 +129,7 @@ if(isset($_POST['register'])){
                             <label for="fieldOfExpertise-form">Field of Expertise</label>
                         </div>
                         <div class="form-floating mb-3" id="employer-form" style="display:none;">
-                            <input type="text" class="form-control" id="employer-form-rating" name="position" placeholder="Position">
+                            <input type="text" class="form-control" id="employer-form-rating" name="position" placeholder="Position" pattern="^[a-zA-Z]+$" title="Must contain only letters">
                             <label for="employer-form-label">Position</label>
                         </div>
 
