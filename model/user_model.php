@@ -219,9 +219,9 @@ class UserModel {
 			unset($_SESSION["username"]);
 			unset($_SESSION["password"]);
 			session_destroy();
-			header("location: ../view/user_profile.php?success=accountdelete");
+			header("location: ../view/login.php?success=accountdeleted");
 		} else {
-			header("location: ../view/user_profile.php?error=errordelete");
+			header("location: ../view/login.php?error=errordelete");
 		}
 	}
 
