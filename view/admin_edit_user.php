@@ -609,7 +609,7 @@ END;
                                             <h6 class="mt-2 ms-5">First Name</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
-                                            <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" required />
+                                            <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required />
                                         </div>
                                     </div>
                                     <hr>
@@ -618,7 +618,7 @@ END;
                                             <h6 class="mt-2 ms-5">Last Name</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
-                                            <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" required />
+                                            <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required />
                                         </div>
                                     </div>
                                     <hr>
@@ -654,7 +654,7 @@ END;
                                             <h6 class="mt-2 ms-5">Position</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start ">
-                                            <input type="text" class="form-control" id="position" name="position" value="$user->position" required/>
+                                            <input type="text" class="form-control" id="position" name="position" value="$user->position" pattern="^[a-zA-Z]+$" title="Must contain only letters" required/>
                                         </div>
                                     </div>
                                     <hr>
@@ -663,7 +663,7 @@ END;
                                             <h6 class="mt-2 ms-5">Username</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
-                                            <input type="text" class="form-control" id="username" name="username" value="$user->username" required/>
+                                            <input type="text" class="form-control" id="username" name="username" value="$user->username"value="$user->username" pattern="(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one uppercase and lowercase letter, and 5 to 20 characters" required/>
                                         </div>
                                     </div>
                                     <hr>
@@ -672,7 +672,7 @@ END;
                                             <h6 class="mt-2 ms-5">Password</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start ">
-                                            <input type="password" class="form-control" id="password" name="password" value="$user->password" required />
+                                            <input type="password" class="form-control" id="password" name="password" value="$user->password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one number and one uppercase and lowercase letter, and 5 to 20 characters" required />
                                         </div>
                                     </div>
                                     <hr>
