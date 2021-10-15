@@ -77,11 +77,11 @@ if(isset($_POST['register'])){
                     <main class="form-register">
                         <form action="" method="POST">
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="Firstname" name="firstName" pattern="[A-Za-z]" title="Must contain only letters" required>
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Firstname" name="firstName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required>
                                 <label for="floatingInput">Firstname</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="text" class="form-control" id="floatingInput" placeholder="Lastname" name="lastName" pattern="[A-Za-z]" title="Must contain only letters" required>
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Lastname" name="lastName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required>
                                 <label for="floatingInput">Lastname</label>
                             </div>
                             <div class="form-floating mb-3">
