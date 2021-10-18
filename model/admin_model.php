@@ -81,9 +81,9 @@ class AdminModel {
 		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/admin_index.php?success=successupdate");
+			header("location: ../view/admin_index.php?success=updated");
 		} else {
-			header("location: ../view/admin_index.php?error=errorupdate");
+			header("location: ../view/admin_index.php?error=failed");
 		}
 	}
 
@@ -98,9 +98,9 @@ class AdminModel {
 		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/admin_index.php?success=successupdate");
+			header("location: ../view/admin_index.php?success=updated");
 		} else {
-			header("location: ../view/admin_index.php?error=errorupdate");
+			header("location: ../view/admin_index.php?error=failed");
 		}
 	}
 
@@ -115,9 +115,9 @@ class AdminModel {
 		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/admin_index.php?success=successupdate");
+			header("location: ../view/admin_index.php?success=updated");
 		} else {
-			header("location: ../view/admin_index.php?error=errorupdate");
+			header("location: ../view/admin_index.php?error=failed");
 		}
 	}
 
@@ -132,9 +132,9 @@ class AdminModel {
 		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/admin_index.php?success=successdelete");
+			header("location: ../view/admin_index.php?success=deleted");
 		} else {
-			header("location: ../view/admin_index.php?error=errordelete");
+			header("location: ../view/admin_index.php?error=deletefailed");
 		}
 	}
 

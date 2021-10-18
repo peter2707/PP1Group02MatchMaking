@@ -59,13 +59,11 @@ if(isset($_POST['register'])){
                             echo "Choose a proper email!";
                         } else if ($_GET["error"] == "passwordsdontmatch") {
                             echo "Passwords doesn't match!";
-                        } else if ($_GET["error"] == "stmtfailed") {
-                            echo "Something went wrong!";
                         } else if ($_GET["error"] == "usernametaken") {
                             echo "Username already taken!";
-                        } else if ($_GET["error"] == "fieldnull") {
+                        } else if ($_GET["error"] == "fieldnotfound") {
                             echo "You have to choose a field of expertise";
-                        } else if ($_GET["error"] == "positionnull") {
+                        } else if ($_GET["error"] == "positionnotfound") {
                             echo "You have to enter a position";
                         }
                         echo "</span></h5>";

@@ -44,21 +44,23 @@ if (isset($_POST["exportJobSeeker"])) {
                             echo "You must enter a valid password!";
                         } else if ($_GET["error"] == "failed") {
                             echo "Something went wrong. Please try again!";
-                        } else if ($_GET["error"] == "incorrect") {
-                            echo "Incorrect password or email. Please try again!";
-                        } else if ($_GET["error"] == "errordelete") {
+                        } else if ($_GET["error"] == "deletefailed") {
                             echo "There was a problem while trying to delete.";
                         } else if ($_GET["error"] == "dbnull") {
                             echo "There are no data to generate.";
+                        } else if ($_GET["error"] == "fieldnotfound") {
+                            echo "You have to choose a field of expertise";
+                        } else if ($_GET["error"] == "positionnotfound") {
+                            echo "You have to enter your position";
                         }
                         echo "</span></h5>";
                     }elseif (isset($_GET["success"])) {
                         echo "<h5><span class='mb-2 mt-5 badge bg-success'>";
                         if ($_GET["success"] == "created") {
                             echo "Account has been successfully created.";
-                        } elseif ($_GET["success"] == "successdelete") {
+                        } elseif ($_GET["success"] == "deleted") {
                             echo "Account has been successfully deleted.";
-                        } elseif ($_GET["success"] == "successupdate") {
+                        } elseif ($_GET["success"] == "updated") {
                             echo "Account has been successfully updated.";
                         }
                         echo "</span></h5>";

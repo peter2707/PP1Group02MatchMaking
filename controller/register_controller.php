@@ -22,7 +22,7 @@ class RegisterController {
         } else {
             if($type == "employer"){
               if (!$position){
-                header("location: ../view/register.php?error=positionnull");
+                header("location: ../view/register.php?error=positionnotfound");
               }elseif (usernameExists($db, $username, $email, "employer") !== false) {              // Is the username taken already
                 header("location: ../view/register.php?error=usernametaken");
                 exit();
@@ -31,7 +31,7 @@ class RegisterController {
               }
             }else{
               if (!$field){
-                header("location: ../view/register.php?error=fieldnull");
+                header("location: ../view/register.php?error=fieldnotfound");
               }elseif (usernameExists($db, $username, $email, "jobseeker") !== false) {              // Is the username taken already
                 header("location: ../view/register.php?error=usernametaken");
                 exit();

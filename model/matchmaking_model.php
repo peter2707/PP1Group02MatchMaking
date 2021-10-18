@@ -80,9 +80,9 @@ class MatchmakingModel{
 		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/employer_post.php?success=successupdate");
+			header("location: ../view/employer_post.php?success=updated");
 		} else {
-			header("location: ../view/employer_post.php?error=errorupdate");
+			header("location: ../view/employer_post.php?error=updatefailed");
 		}
 	}
 
@@ -98,9 +98,9 @@ class MatchmakingModel{
 		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/employer_post.php?success=successdelete");
+			header("location: ../view/employer_post.php?success=deleted");
 		} else {
-			header("location: ../view/employer_post.php?error=errordelete");
+			header("location: ../view/employer_post.php?error=deletefailed");
 		}
 	}
 

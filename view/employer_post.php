@@ -137,13 +137,13 @@ if (isset($_POST['post'])) {
             echo "<h5><span class='mb-5 badge bg-danger'>";
             if ($_GET["error"] == "emptyinput") {
                 echo "Please complete all required columns!";
-            }else if ($_GET["error"] == "fieldnull") {
+            }else if ($_GET["error"] == "fieldnotfound") {
                 echo "You have to choose a field of expertise";
             }else if ($_GET["error"] == "positionnumeric") {
                 echo "Position cannot be a number!";
-            }else if ($_GET["error"] == "errorupdate") {
+            }else if ($_GET["error"] == "updatefailed") {
                 echo "There was a problem while trying to update.";
-            }else if ($_GET["error"] == "errordelete") {
+            }else if ($_GET["error"] == "deletefailed") {
                 echo "There was a problem while trying to delete.";
             }else if ($_GET["error"] == "errordeny") {
                 echo "There was a problem while trying to deny the match.";
@@ -155,9 +155,9 @@ if (isset($_POST['post'])) {
             echo "<h5><span class='mb-5 badge bg-success'>";
             if ($_GET["success"] == "posted") {
                 echo "You have posted a new job! You can view it in the table below.";
-            }elseif ($_GET["success"] == "successupdate") {
+            }elseif ($_GET["success"] == "updated") {
                 echo "Your post have been updated successfully.";
-            }elseif ($_GET["success"] == "successdelete") {
+            }elseif ($_GET["success"] == "deleted") {
                 echo "Your post have been deleted successfully.";
             }elseif ($_GET["success"] == "successdeny") {
                 echo "Match denied successfully";

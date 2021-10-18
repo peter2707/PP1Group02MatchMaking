@@ -45,7 +45,7 @@ class MatchmakingController {
         }elseif(is_numeric($position)){
             header("location: ../view/employer_post.php?error=positionnumeric");
         }elseif(!$field){
-            header("location: ../view/employer_post.php?error=fieldnull");
+            header("location: ../view/employer_post.php?error=fieldnotfound");
         }else{
             require_once '../model/matchmaking_model.php';
             require_once '../model/db_connection.php';

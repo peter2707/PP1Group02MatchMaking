@@ -57,14 +57,14 @@ if(isset($_POST['register'])){
                             echo "Enter a valid email!";
                         } else if ($_GET["error"] == "passwordsdontmatch") {
                             echo "Passwords do not match. Please try again!";
-                        } else if ($_GET["error"] == "stmtfailed") {
-                            echo "Something went wrong. Please try again!";
                         } else if ($_GET["error"] == "usernametaken") {
                             echo "Username is already taken!";
-                        } else if ($_GET["error"] == "fieldnull") {
+                        } else if ($_GET["error"] == "fieldnotfound") {
                             echo "You have to choose a field of expertise";
-                        } else if ($_GET["error"] == "positionnull") {
+                        } else if ($_GET["error"] == "positionnotfound") {
                             echo "You have to enter your position";
+                        }else if ($_GET["error"] == "failed") {
+                            echo "Something went wrong. Please try again!";
                         }
                         echo "</span></h5>";
                     }

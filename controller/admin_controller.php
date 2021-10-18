@@ -21,7 +21,7 @@ class AdminController {
         } else {
             if($type == "employer"){
                 if (!$positionEmployer){
-                    header("location: ../view/admin_add_user.php?error=positionnull");
+                    header("location: ../view/admin_add_user.php?error=positionnotfound");
                 }elseif (usernameExists($db, $username, $email, "employer") !== false) {              // Is the username taken already
                     header("location: ../view/admin_add_user.php?error=usernametaken");
                     exit();
@@ -30,7 +30,7 @@ class AdminController {
                 }
             }elseif($type == "admin"){
                 if (!$positionAdmin){
-                    header("location: ../view/admin_add_user.php?error=positionnull");
+                    header("location: ../view/admin_add_user.php?error=positionnotfound");
                 }elseif (usernameExists($db, $username, $email, "admin") !== false) {              // Is the username taken already
                     header("location: ../view/admin_add_user.php?error=usernametaken");
                     exit();
@@ -39,7 +39,7 @@ class AdminController {
                 }
             }else{
                 if (!$field){
-                    header("location: ../view/admin_add_user.php?error=fieldnull");
+                    header("location: ../view/admin_add_user.php?error=fieldnotfound");
                 }elseif (usernameExists($db, $username, $email, "jobseeker") !== false) {              // Is the username taken already
                     header("location: ../view/admin_add_user.php?error=usernametaken");
                     exit();

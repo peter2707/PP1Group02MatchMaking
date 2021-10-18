@@ -77,7 +77,7 @@ END;
                             echo "Please complete all required columns!";
                         } else if ($_GET["error"] == "failed") {
                             echo "Something went wrong. Please try again!";
-                        } else if ($_GET["error"] == "errordelete") {
+                        } else if ($_GET["error"] == "deletefailed") {
                             echo "There was a problem while deleting your account. Please try again!";
                         }
                         echo "</span></h5>";
@@ -212,7 +212,7 @@ END;
                     echo "Please complete all required columns!";
                 } else if ($_GET["error"] == "failed") {
                     echo "Something went wrong. Please try again!";
-                } else if ($_GET["error"] == "errordelete") {
+                } else if ($_GET["error"] == "deletefailed") {
                     echo "There was a problem while deleting your account. Please try again!";
                 }
                 echo "</span></h5>";
