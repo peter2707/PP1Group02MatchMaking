@@ -38,7 +38,8 @@ class MatchmakingModel{
 			$result2 = $db->query("SELECT COUNT(*) as totalmatches FROM jobmatch WHERE jobPostID='$jobID'");
 			$row2 = $result2->fetch_assoc();
 			$countMatch = $row2['totalmatches'];
-			$jobposts[$i] = new EmpJobPost($row['id'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['contact'], $countMatch);
+			$timeElapsed = $this->getTimeElapsed($row['date']);
+			$jobposts[$i] = new EmpJobPost($row['id'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['contact'], $countMatch, $timeElapsed);
 		}
 
 		$result->free();
@@ -54,8 +55,8 @@ class MatchmakingModel{
 		$result2 = $db->query("SELECT COUNT(*) as totalmatches FROM jobmatch WHERE jobPostID='$jobID'");
 		$row2 = $result2->fetch_assoc();
 		$countMatch = $row2['totalmatches'];
-
-		$jobPost = new EmpJobPost($row['id'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['contact'], $countMatch);
+		$timeElapsed = $this->getTimeElapsed($row['date']);
+		$jobPost = new EmpJobPost($row['id'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['contact'], $countMatch, $timeElapsed);
 		$result->free();
 		$db->close();
 
@@ -278,5 +279,23 @@ class MatchmakingModel{
 		$db->close();
 		header("location: ../view/report.php?success=reported");
 	}
+
+	function getTimeElapsed($date) {
+		$timestamp = strtotime($date);	
+		
+		$strTime = array("second", "minute", "hour", "day", "month", "year");
+		$length = array("60","60","24","30","12","10");
+ 
+		$currentTime = time();
+		if($currentTime >= $timestamp) {
+			 $diff     = time()- $timestamp;
+			 for($i = 0; $diff >= $length[$i] && $i < count($length)-1; $i++) {
+			 $diff = $diff / $length[$i];
+			 }
+ 
+			 $diff = round($diff);
+			 return $diff . " " . $strTime[$i] . "(s) ago ";
+		}
+	 }
 	
 }

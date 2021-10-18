@@ -11,7 +11,7 @@ class JobPost{
 }
 
 class EmpJobPost{
-    public function __construct($id, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $matches) {
+    public function __construct($id, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $matches, $date) {
         $this->id = $id;
         $this->position = $position;
         $this->field = $field;
@@ -22,6 +22,7 @@ class EmpJobPost{
         $this->location = $location;
         $this->contact = $contact;
         $this->matches = $matches;
+        $this->date = $date;
     }
 }
 

@@ -329,7 +329,7 @@ class UserModel {
 		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/user_profile.php?success=accountupdate");
+			header("location: ../view/user_profile.php?success=accountupdated");
 		} else {
 			header("location: ../view/user_profile.php?error=failed");
 		}

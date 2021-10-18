@@ -62,17 +62,20 @@ if (isset($_POST['update'])) {
                 <div class="text-start">
                     <h1><?php echo "$jobpost->position"; ?></h1>
                 </div>
-                <div class="row">
-                    <div class="col mb-5 text-start">
+                <div class="row mb-5">
+                    <div class="col text-start">
                         <h6 class="text-muted"><?php echo "$jobpost->field"; ?></h6>
-                        <small>Match: <?php echo "$jobpost->matches"; ?> times</small>
                     </div>
-                    <div class="col row text-end">
+                    <div class="col text-end">
                         <form action='employer_view_matches.php' method='GET'>
                             <?php echo "<input type='hidden' name='id' value='$id'>"; ?>
                             <button type='submit' class='btn btn-solid-lg'>Matches</button>
                         </form>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col text-start"><small>Match: <?php echo "$jobpost->matches"; ?> times</small></div>
+                    <div class="col text-end"><small><?php echo "$jobpost->date"; ?></small></div>
                 </div>
             </div>
             <!-- end of row -->

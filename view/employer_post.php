@@ -185,6 +185,7 @@ if (isset($_POST['post'])) {
             echo "                    <th scope='col'>Type</th>";
             echo "                    <th scope='col'>Location</th>";
             echo "                    <th scope='col'>Matches</th>";
+            echo "                    <th scope='col'>Date</th>";
             echo "                    <th scope='col'></th>";
             echo "                </tr>";
             echo "            </thead>";
@@ -195,7 +196,8 @@ if (isset($_POST['post'])) {
                 echo "                    <td scope='row'>$post->salary</td>";
                 echo "                    <td scope='row'>$post->type</td>";
                 echo "                    <td scope='row'>$post->location</td>";
-                echo "                    <td scope='row'>$post->matches times</td>";
+                echo "                    <td scope='row'>$post->matches time(s)</td>";
+                echo "                    <td scope='row'>$post->date</td>";
                 createOpenButton('id', $post->id, 'Open', 'employer_view_post.php');
                 echo "                </tr>";
             }
