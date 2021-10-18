@@ -8,11 +8,11 @@ class MatchmakingModel{
 		header("location: ../view/employer_post.php?success=posted");
 	}
 	
-	public function getAllPosts($db){
+	public function getAllPostsByField($db, $field){
 		require_once '../model/job_object.php';
 		$jobposts = array();
 
-		$query = "SELECT * FROM jobpost";
+		$query = "SELECT * FROM jobpost WHERE field = '$field'";
 		$result = $db->query($query);
 		$numResults = $result->num_rows;
 
@@ -25,7 +25,7 @@ class MatchmakingModel{
 		return $jobposts;
 	}
 
-	public function getJobPosts($db, $username){
+	public function getJobPostsByEmployer($db, $username){
 		require_once '../model/job_object.php';
 		$jobposts = array();
 
@@ -187,10 +187,10 @@ class MatchmakingModel{
 		mysqli_query($db, $query) or die(mysqli_error($db));
 	}
 
-	public function findMatch($db, $position, $salary, $location, $type, $jobseeker){
+	public function findMatch($db, $position, $salary, $location, $type, $field, $jobseeker){
 		$found = false;
 		$jobposts = array();
-        $jobposts = $this->getAllPosts($db);
+        $jobposts = $this->getAllPostsByField($db, $field);
 		foreach($jobposts as $post => $val){
 			if(strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->location == $location && $val->type == $type){
 				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){

@@ -22,19 +22,19 @@ class MatchmakingController {
         return $mmm->getJobMatchByPostID($db, $jobID, $employer);
     }
 
-    public function findMatch($position, $salary, $location, $type, $jobseeker){
+    public function findMatch($position, $salary, $location, $type, $field, $jobseeker){
         if(!isset($position)||!isset($salary)||!isset($type)||!isset($location)||!isset($jobseeker)){
             header("location: ../view/jobseeker_match.php?error=emptyinput");
         }elseif(is_numeric($position)){
             header("location: ../view/jobseeker_match.php?error=positionnumeric");
         }else{
             require_once '../model/matchmaking_model.php';
-            require_once '../model/db_connection.php';
+            include '../model/db_connection.php';
             $mmm = new MatchmakingModel();
-            if($mmm->findMatch($db, $position, $salary, $location, $type, $jobseeker)){
+            if($mmm->findMatch($db, $position, $salary, $location, $type, $field, $jobseeker)){
                 header("location: ../view/jobseeker_match.php?success=matchfound");
             }else{
-                header("location: ../view/jobseeker_match.php?error=nomatch");
+                header("location: ../view/jobseeker_match.php?warning=nomatch");
             }
         }
     }
@@ -48,17 +48,17 @@ class MatchmakingController {
             header("location: ../view/employer_post.php?error=fieldnotfound");
         }else{
             require_once '../model/matchmaking_model.php';
-            require_once '../model/db_connection.php';
+            include '../model/db_connection.php';
             $mmm = new MatchmakingModel();
             $mmm->postNewJob($db, $position, $field, $salary, $type, $description, $requirements, $location, $username, $contact);
         }
     }
 
-    public function getJobPosts($username){
+    public function getJobPostsByEmployer($username){
         require_once '../model/matchmaking_model.php';
         include '../model/db_connection.php';
         $mmm = new MatchmakingModel();
-        return $mmm->getJobPosts($db, $username);
+        return $mmm->getJobPostsByEmployer($db, $username);
     }
 
     public function getJobPostByID($jobID){
