@@ -22,7 +22,6 @@ if (isset($_GET['jobseeker'])) {
 
 $user = $uc->getUserByName($usertype, $username);
 $social = $uc->getSocialLink($user->username);
-$userImage = $user->image;
 
 if (isset($_POST['update'])) {
     if ($usertype == "jobseeker") {
@@ -81,9 +80,6 @@ if (isset($_POST['update'])) {
     } else {
         header("location: ../view/user_profile.php?error=imagenotfound");
     }
-} elseif ($user->image == NULL) {
-    $defaultImage = file_get_contents("../images/user.png");
-    $userImage = base64_encode($defaultImage);
 }
 ?>
 <!DOCTYPE html>
@@ -107,6 +103,10 @@ if (isset($_POST['update'])) {
 
     <?php
     if ($usertype == "jobseeker") {
+        if ($user->image == NULL) {
+            $defaultImage = file_get_contents("../images/user.png");
+            $user->image = base64_encode($defaultImage);
+        }
     echo <<<END
     <!-- User Profile section start -->
     <header class="ex-header">
@@ -117,7 +117,7 @@ if (isset($_POST['update'])) {
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
-                                    <img src="data:image/png;base64, $userImage" alt="User" class="rounded-circle" width="150" height="150">
+                                    <img src="data:image/png;base64, $user->image" alt="User" class="rounded-circle" width="150" height="150">
                                     <div class="mt-3">
                                         <h4>$user->firstName $user->lastName</h4>
                                         <p class="text-secondary">$user->field </p>
@@ -149,89 +149,6 @@ if (isset($_POST['update'])) {
                                 </div>
                             </div>
                         </div>
-                        <div class="card mt-3">
-                            <ul class="list-group list-group-flush">
-                                <form method="POST">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <div class="row">
-                                            <div class="col-5 text-start mt-2">
-                                                <h6 class="mb-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin icon-inline text-primary">
-                                                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                                                        <rect x="2" y="9" width="4" height="12"></rect>
-                                                        <circle cx="4" cy="4" r="2"></circle>
-                                                    </svg>&nbsp; LinkedIn
-                                                </h6>
-                                            </div>
-                                            <div class="col-7">
-                                                <input disabled type="text" id="linkedinLink" name="linkedin" class="form-control" style="text-align:right;" value="$social->linkedin" required />
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <div class="row">
-                                            <div class="col-5 text-start mt-2">
-                                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github mr-2 icon-inline">
-                                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                                                    </svg>&nbsp; Github</h6>
-                                            </div>
-                                            <div class="col-7">
-                                                <input disabled type="text" id="githubLink" name="github" class="form-control" style="text-align:right;" value="$social->github" required />
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <div class="row">
-                                            <div class="col-5 text-start mt-2">
-                                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter mr-2 icon-inline text-info">
-                                                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-                                                    </svg>&nbsp; Twitter</h6>
-                                            </div>
-                                            <div class="col-7">
-                                                <input disabled type="text" id="twitterLink" name="twitter" class="form-control" style="text-align:right;" value="$social->twitter" required />
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <div class="row">
-                                            <div class="col-5 text-start mt-2">
-                                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram mr-2 icon-inline text-danger">
-                                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                                                    </svg>&nbsp; Instagram</h6>
-                                            </div>
-                                            <div class="col-7">
-                                                <input disabled type="text" id="instagramLink" name="instagram" class="form-control" style="text-align:right;" value="$social->instagram" required />
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <div class="row">
-                                            <div class="col-5 text-start mt-2">
-                                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary">
-                                                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                                                    </svg>&nbsp; Facebook</h6>
-                                            </div>
-                                            <div class="col-7">
-                                                <input disabled type="text" id="facebookLink" name="facebook" class="form-control" style="text-align:right;" value="$social->facebook" required />
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <div class="col text-start">
-                                                <button type="submit" id="doneInputLink" class="btn btn-solid-sm w-100" name="done" style='display:none;'>Done</button>
-                                            </div>
-                                            <div class="col text-end">
-                                                <button type="button" id="editInputLink" class="btn btn-secondary-sm w-100" onclick="edit()"><i class='fas fa-edit'></i> Edit</button>
-                                                <button type="button" id="cancelInputLink" class="btn btn-secondary-sm w-100" style='display:none;' onclick="cancel()">Cancel</button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </form>
-                            </ul>
-                        </div>
                     </div>
 
                     <div class="col-md-8">
@@ -244,7 +161,7 @@ if (isset($_POST['update'])) {
                                             <h6 class="mt-2 ms-5">First Name</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
-                                            <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required />
+                                            <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required />
                                         </div>
                                     </div>
                                     <hr>
@@ -253,7 +170,7 @@ if (isset($_POST['update'])) {
                                             <h6 class="mt-2 ms-5">Last Name</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
-                                            <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required />
+                                            <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required />
                                         </div>
                                     </div>
                                     <hr>
@@ -344,6 +261,10 @@ if (isset($_POST['update'])) {
     <!-- User Profile section End -->
 END;
 } elseif ($usertype == "employer") {
+    if ($user->image == NULL) {
+        $defaultImage = file_get_contents("../images/user.png");
+        $user->image = base64_encode($defaultImage);
+    }
     echo <<<END
     <!-- User Profile section start -->
     <header class="ex-header">
@@ -354,7 +275,7 @@ END;
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
-                                    <img src="data:image/png;base64, $userImage" alt="User" class="rounded-circle" width="150" height="150">
+                                    <img src="data:image/png;base64, $user->image" alt="User" class="rounded-circle" width="150" height="150">
                                     <div class="mt-3">
                                         <h4>$user->firstName $user->lastName</h4>
                                         <p class="text-secondary">$user->position</p>
@@ -386,89 +307,6 @@ END;
                                 </div>
                             </div>
                         </div>
-                        <div class="card mt-3">
-                            <ul class="list-group list-group-flush">
-                                <form method="POST">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <div class="row">
-                                            <div class="col-5 text-start mt-2">
-                                                <h6 class="mb-0">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-linkedin icon-inline text-primary">
-                                                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                                                        <rect x="2" y="9" width="4" height="12"></rect>
-                                                        <circle cx="4" cy="4" r="2"></circle>
-                                                    </svg>&nbsp; LinkedIn
-                                                </h6>
-                                            </div>
-                                            <div class="col-7">
-                                                <input disabled type="text" id="linkedinLink" name="linkedin" class="form-control" style="text-align:right;" value="$social->linkedin" required />
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <div class="row">
-                                            <div class="col-5 text-start mt-2">
-                                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github mr-2 icon-inline">
-                                                        <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path>
-                                                    </svg>&nbsp; Github</h6>
-                                            </div>
-                                            <div class="col-7">
-                                                <input disabled type="text" id="githubLink" name="github" class="form-control" style="text-align:right;" value="$social->github" required />
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <div class="row">
-                                            <div class="col-5 text-start mt-2">
-                                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-twitter mr-2 icon-inline text-info">
-                                                        <path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"></path>
-                                                    </svg>&nbsp; Twitter</h6>
-                                            </div>
-                                            <div class="col-7">
-                                                <input disabled type="text" id="twitterLink" name="twitter" class="form-control" style="text-align:right;" value="$social->twitter" required />
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <div class="row">
-                                            <div class="col-5 text-start mt-2">
-                                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-instagram mr-2 icon-inline text-danger">
-                                                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                                                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                                                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                                                    </svg>&nbsp; Instagram</h6>
-                                            </div>
-                                            <div class="col-7">
-                                                <input disabled type="text" id="instagramLink" name="instagram" class="form-control" style="text-align:right;" value="$social->instagram" required />
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center flex-wrap">
-                                        <div class="row">
-                                            <div class="col-5 text-start mt-2">
-                                                <h6 class="mb-0"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-facebook mr-2 icon-inline text-primary">
-                                                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                                                    </svg>&nbsp; Facebook</h6>
-                                            </div>
-                                            <div class="col-7">
-                                                <input disabled type="text" id="facebookLink" name="facebook" class="form-control" style="text-align:right;" value="$social->facebook" required />
-                                            </div>
-                                        </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <div class="col text-start">
-                                                <button type="submit" id="doneInputLink" class="btn btn-solid-sm w-100" name="done" style='display:none;'>Done</button>
-                                            </div>
-                                            <div class="col text-end">
-                                                <button type="button" id="editInputLink" class="btn btn-secondary-sm w-100" onclick="edit()"><i class='fas fa-edit'></i> Edit</button>
-                                                <button type="button" id="cancelInputLink" class="btn btn-secondary-sm w-100" style='display:none;' onclick="cancel()">Cancel</button>
-                                            </div>
-                                        </div>
-                                    </li>
-                                </form>
-                            </ul>
-                        </div>
                     </div>
 
                     <div class="col-md-8">
@@ -481,7 +319,7 @@ END;
                                             <h6 class="mt-2 ms-5">First Name</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
-                                            <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required />
+                                            <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required />
                                         </div>
                                     </div>
                                     <hr>
@@ -490,7 +328,7 @@ END;
                                             <h6 class="mt-2 ms-5">Last Name</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
-                                            <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required />
+                                            <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required />
                                         </div>
                                     </div>
                                     <hr>
@@ -526,7 +364,7 @@ END;
                                             <h6 class="mt-2 ms-5">Position</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start ">
-                                            <input type="text" class="form-control" id="position" name="position" value="$user->position" pattern="^[a-zA-Z]+$" title="Must contain only letters" required/>
+                                            <input type="text" class="form-control" id="position" name="position" value="$user->position" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required/>
                                         </div>
                                     </div>
                                     <hr>
@@ -579,6 +417,7 @@ END;
     <!-- User Profile section End -->
 END;
 }elseif ($usertype == "admin") {
+    $adminImage = base64_encode(file_get_contents("../images/user.png"));
     echo <<<END
     <!-- User Profile section start -->
     <header class="ex-header">
@@ -589,7 +428,7 @@ END;
                         <div class="card">
                             <div class="card-body">
                                 <div class="d-flex flex-column align-items-center text-center">
-                                    <img src="data:image/png;base64, $userImage" alt="User" class="rounded-circle" width="150" height="150">
+                                    <img src="data:image/png;base64, $adminImage" alt="User" class="rounded-circle" width="150" height="150">
                                     <div class="mt-3">
                                         <h4>$user->firstName $user->lastName</h4>
                                         <p class="text-secondary">$user->position</p>
@@ -609,7 +448,7 @@ END;
                                             <h6 class="mt-2 ms-5">First Name</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
-                                            <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required />
+                                            <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required />
                                         </div>
                                     </div>
                                     <hr>
@@ -618,7 +457,7 @@ END;
                                             <h6 class="mt-2 ms-5">Last Name</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start">
-                                            <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required />
+                                            <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required />
                                         </div>
                                     </div>
                                     <hr>
@@ -654,7 +493,7 @@ END;
                                             <h6 class="mt-2 ms-5">Position</h6>
                                         </div>
                                         <div class="col-sm-7 text-secondary text-start ">
-                                            <input type="text" class="form-control" id="position" name="position" value="$user->position" pattern="^[a-zA-Z]+$" title="Must contain only letters" required/>
+                                            <input type="text" class="form-control" id="position" name="position" value="$user->position" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required/>
                                         </div>
                                     </div>
                                     <hr>

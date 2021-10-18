@@ -149,10 +149,13 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-bs-toggle="dropdown" aria-expanded="false">$username</a>
                         <ul class="dropdown-menu" aria-labelledby="dropdown01">
-                            <li><a class="dropdown-item" href="user_settings.php">Settings</a></li>
                             <li>
-                                <div class="dropdown-divider"></div>
+                                <form action="admin_edit_user.php" method="GET">
+                                    <input type="hidden" name=admin value=$username>
+                                    <button type="submit" class="dropdown-item">Settings</button>
+                                </form>
                             </li>
+                            <li><div class="dropdown-divider"></div></li>
                             <form method="POST">
                                 <li><button class="dropdown-item text-danger" type="submit" name="logout">Log Out</button></li>
                             </form>

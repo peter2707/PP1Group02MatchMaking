@@ -46,8 +46,6 @@ if (isset($_POST['login'])) {
                             echo "Something went wrong. Please try again!";
                         } else if ($_GET["error"] == "incorrect") {
                             echo "Incorrect password or email. Please try again!";
-                        } else if ($_GET["error"] == "errordelete") {
-                            echo "There was a problem while deleting your account. Please try again!";
                         }
                         echo "</span></h5>";
                     }elseif (isset($_GET["success"])) {

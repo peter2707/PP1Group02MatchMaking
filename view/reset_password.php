@@ -48,7 +48,7 @@ if (isset($_POST['reset'])) {
                                         echo "<h5><span class='mb-2 badge bg-danger'>";
                                         if ($_GET["error"] == "passwordsdontmatch") {
                                             echo "Passwords does not match";
-                                        }else if ($_GET["error"] == "sthwentwrong") {
+                                        }else if ($_GET["error"] == "resetfailed") {
                                             echo "There was a problem trying to reset the password.";
                                         }else if ($_GET["error"] == "emptyinput") {
                                             echo "Please fill in all field before continue!";

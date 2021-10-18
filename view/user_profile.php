@@ -39,7 +39,7 @@ if (isset($_POST['done'])) {
     $userController->addSkill($sessionController->getUserName(), $skill, $skillExp);
 }elseif (isset($_POST['deleteSkill'])){
     $skillId = $_POST['deleteSkill'];
-    $userController->deleteSkill($skillId);
+    $userController->deleteSkill($skillId, $sessionController->getUserName());
 }elseif (isset($_POST['addEducation'])){
     $institution = $_POST['institution'];
     $degree = $_POST['degree'];
@@ -47,7 +47,7 @@ if (isset($_POST['done'])) {
     $userController->addEducation($sessionController->getUserName(), $institution, $degree, $graduation);
 }elseif (isset($_POST['deleteEducation'])){
     $educationId = $_POST['deleteEducation'];
-    $userController->deleteEducation($educationId);
+    $userController->deleteEducation($educationId, $sessionController->getUserName());
 }elseif (isset($_POST['addCareer'])){
     $position = $_POST['position'];
     $company = $_POST['company'];
@@ -55,7 +55,7 @@ if (isset($_POST['done'])) {
     $userController->addCareer($sessionController->getUserName(), $position, $company, $experience);
 }elseif (isset($_POST['deleteCareer'])){
     $careerId = $_POST['deleteCareer'];
-    $userController->deleteCareer($careerId);
+    $userController->deleteCareer($careerId, $sessionController->getUserName());
 }
 ?>
 <!DOCTYPE html>
@@ -106,6 +106,12 @@ END;
                     echo "Please select an image.";
                 }
                 echo "</span></h5>";
+            }elseif (isset($_GET["success"])) {
+                echo "<h5><span class='mt-5 mb-2 badge bg-success'>";
+                if ($_GET["success"] == "accountupdated") {
+                    echo "Your account has been successfully Updated.";
+                }
+                echo"</span></h5>";
             }
             echo <<<END
                     <div class="main-body">
@@ -468,6 +474,12 @@ END;
                     echo "Please select an image.";
                 }
                 echo "</span></h5>";
+            }elseif (isset($_GET["success"])) {
+                echo "<h5><span class='mt-5 mb-2 badge bg-success'>";
+                if ($_GET["success"] == "accountupdated") {
+                    echo "Your account has been successfully Updated.";
+                }
+                echo"</span></h5>";
             }
             echo <<<END
                     <div class="main-body">

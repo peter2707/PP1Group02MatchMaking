@@ -32,7 +32,7 @@ if (isset($_POST["exportJobSeeker"])) {
     <header id="ex-header" class="ex-header">
         <div class="container">
             <div class="row">
-                <div class="col-xl-10 offset-xl-1 mb-3">
+                <div class="col-xl-10 offset-xl-1 mb-5">
                     <h1>Admin Home</h1>
                     <?php
                     // Error messages
@@ -48,6 +48,8 @@ if (isset($_POST["exportJobSeeker"])) {
                             echo "Incorrect password or email. Please try again!";
                         } else if ($_GET["error"] == "errordelete") {
                             echo "There was a problem while trying to delete.";
+                        } else if ($_GET["error"] == "dbnull") {
+                            echo "There are no data to generate.";
                         }
                         echo "</span></h5>";
                     }elseif (isset($_GET["success"])) {

@@ -34,7 +34,7 @@ class Employer {
 }
 
 class Admin {
-    public function __construct($id, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $image) {
+    public function __construct($id, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position) {
         $this->id = $id;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
@@ -44,7 +44,6 @@ class Admin {
         $this->phone = $phone;
         $this->email = $email;
         $this->position = $position;
-        $this->image = $image;
     }
 }
 

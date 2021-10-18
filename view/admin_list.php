@@ -33,7 +33,7 @@ if (isset($_POST['delete'])) {
                     <h1>All Admins</h1>
                     
                 </div>
-                <div class="col-xl-11 mb-5" style="min-height: 200px;">
+                <div class="col-xl-11 mb-5" style="min-height: 400px;">
                 <?php
                     require_once '../controller/admin_controller.php';
                     require_once '../controller/session_controller.php';

@@ -8,6 +8,9 @@ class UserController {
     }
 
     public function updateJobSeeker($firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $username) {
+        if(!isset($firstName)||!isset($lastName)||!isset($password)||!isset($dob)||!isset($phone)||!isset($email)||!isset($field)||!isset($location)||!isset($username)){
+            header("location: ../view/user_settings.php?error=emptyInput");
+        }
         require_once '../model/user_model.php';
         require_once '../model/db_connection.php';
         $userModel = new UserModel();
@@ -70,11 +73,11 @@ class UserController {
         $userModel->addSkill($db, $username, $skill, $experience);
     }
 
-    public function deleteSkill($id){
+    public function deleteSkill($id, $username){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
-        $userModel->deleteSkill($db, $id);
+        $userModel->deleteSkill($db, $id, $username);
     }
 
     public function getEducations($username){
@@ -91,11 +94,11 @@ class UserController {
         $userModel->addEducation($db, $username, $institution, $degree, $graduation);
     }
 
-    public function deleteEducation($id){
+    public function deleteEducation($id, $username){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
-        $userModel->deleteEducation($db, $id);
+        $userModel->deleteEducation($db, $id, $username);
     }
 
     public function getCareers($username){
@@ -112,11 +115,11 @@ class UserController {
         $userModel->addCareer($db, $username, $position, $company, $experience);
     }
 
-    public function deleteCareer($id){
+    public function deleteCareer($id, $username){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
-        $userModel->deleteCareer($db, $id);
+        $userModel->deleteCareer($db, $id, $username);
     }
 
     public function resetPassword($type, $password, $confirmPassword, $email, $token) {

@@ -10,10 +10,10 @@ class RegisterController {
         if (emptyInputRegister($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type) !== false) {
             header("location: ../view/register.php?error=emptyinput");
             exit();
-        } elseif (invalidUsername($username) !== false) {                         // Proper username chosen
+        } elseif (invalidUsername($username) !== false) {                               // Proper username chosen
             header("location: ../view/register.php?error=invalidusername");
             exit();
-        } elseif (invalidEmail($email) !== false) {                     // Proper email chosen
+        } elseif (invalidEmail($email) !== false) {                                     // Proper email chosen
             header("location: ../view/register.php?error=invalidemail");
             exit();
         } elseif (passwordMatch($password, $confirmPassword) !== false) {               // Do the two passwords match?

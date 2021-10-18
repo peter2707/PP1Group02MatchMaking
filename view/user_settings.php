@@ -48,7 +48,7 @@
 
 <head>
     <!-- Webpage Title -->
-    <title>JobMatch | User</title>
+    <title>JobMatch | Settings</title>
     <?php
     require_once("component/header.php");
     ?>
@@ -73,18 +73,20 @@
 END;
                     if (isset($_GET["error"])) {
                         echo "<h5><span class='mb-2 badge bg-danger'>";
-                        if ($_GET["error"] == "emptyusername") {
-                            echo "You must enter a valid username!";
-                        } else if ($_GET["error"] == "emptypassword") {
-                            echo "You must enter a valid password!";
+                        if ($_GET["error"] == "emptyinput") {
+                            echo "Please complete all required columns!";
                         } else if ($_GET["error"] == "failed") {
                             echo "Something went wrong. Please try again!";
-                        } else if ($_GET["error"] == "imagenotfound") {
-                            echo "Please select an image.";
                         } else if ($_GET["error"] == "errordelete") {
                             echo "There was a problem while deleting your account. Please try again!";
                         }
                         echo "</span></h5>";
+                    }elseif (isset($_GET["success"])) {
+                        echo "<h5><span class='mt-5 mb-2 badge bg-success'>";
+                        if ($_GET["success"] == "accountupdated") {
+                            echo "Your account has been successfully Updated.";
+                        }
+                        echo"</span></h5>";
                     }
                     echo <<<END
                     <div class="main-body">
@@ -99,7 +101,7 @@ END;
                                                     <h6 class="mt-2 ms-5">First Name</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required/>
+                                                    <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required/>
                                                 </div>
                                             </div>
                                             <hr>
@@ -108,7 +110,7 @@ END;
                                                     <h6 class="mt-2 ms-5">Last Name</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required/>
+                                                    <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required/>
                                                 </div>
                                             </div>
                                             <hr>
@@ -206,16 +208,20 @@ END;
 END;
             if (isset($_GET["error"])) {
                 echo "<h5><span class='mb-2 badge bg-danger'>";
-                if ($_GET["error"] == "emptyusername") {
-                    echo "You must enter a valid username!";
-                } else if ($_GET["error"] == "emptypassword") {
-                    echo "You must enter a valid password!";
+                if ($_GET["error"] == "emptyinput") {
+                    echo "Please complete all required columns!";
                 } else if ($_GET["error"] == "failed") {
                     echo "Something went wrong. Please try again!";
                 } else if ($_GET["error"] == "errordelete") {
                     echo "There was a problem while deleting your account. Please try again!";
                 }
                 echo "</span></h5>";
+            }elseif (isset($_GET["success"])) {
+                echo "<h5><span class='mt-5 mb-2 badge bg-success'>";
+                if ($_GET["success"] == "accountupdated") {
+                    echo "Your account has been successfully Updated.";
+                }
+                echo"</span></h5>";
             }
             echo <<<END
                     <div class="main-body">
@@ -230,7 +236,7 @@ END;
                                                     <h6 class="mt-2 ms-5">First Name</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required/>
+                                                    <input type="text" class="form-control" id="first-name" name="firstName" value="$user->firstName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required/>
                                                 </div>
                                             </div>
                                             <hr>
@@ -239,7 +245,7 @@ END;
                                                     <h6 class="mt-2 ms-5">Last Name</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary text-start">
-                                                    <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required/>
+                                                    <input type="text" class="form-control" id="last-name" name="lastName" value="$user->lastName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required/>
                                                 </div>
                                             </div>
                                             <hr>
@@ -293,7 +299,7 @@ END;
                                                     <h6 class="mt-2 ms-5">Position</h6>
                                                 </div>
                                                 <div class="col-sm-7 text-secondary text-start ">
-                                                    <input type="text" class="form-control" id="position" name="position" value="$user->position" pattern="^[a-zA-Z]+$" title="Must contain only letters" required/>
+                                                    <input type="text" class="form-control" id="position" name="position" value="$user->position" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required/>
                                                 </div>
                                             </div>
                                             <hr>

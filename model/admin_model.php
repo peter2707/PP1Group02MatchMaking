@@ -63,7 +63,7 @@ class AdminModel {
 		$numResults = $result->num_rows;
 		for ($i = 0; $i < $numResults; $i++) {
 			$row = $result->fetch_assoc();
-			$allAdmins[$i] = new Admin($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['image']);
+			$allAdmins[$i] = new Admin($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position']);
 		}
 		$result->free();
 		$db->close();
@@ -142,7 +142,7 @@ class AdminModel {
 		// Fetch records from database 
 		$query = $db->query("SELECT * FROM $table ORDER BY id ASC"); 
 		
-		if($query->num_rows > 0){ 
+		if($query->num_rows > 0){
 			$delimiter = ","; 
 			$filename = $table . "_list_" . date('Y-m-d') . ".csv"; 
 			
@@ -153,9 +153,9 @@ class AdminModel {
 			if($table == "jobseeker"){
 				$fields = array('ID', 'FIRSTNAME', 'LASTNAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'FIELD', 'LOCATION');
 			}elseif($table == "employer"){
-				$fields = array('ID', 'FIRST NAME', 'LAST NAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'POSITION', 'LOCATION', 'RATING');
+				$fields = array('ID', 'FIRSTNAME', 'LASTNAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'POSITION', 'LOCATION', 'RATING');
 			}elseif($table == "admin"){
-				$fields = array('ID', 'FIRST NAME', 'LAST NAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'POSITION');
+				$fields = array('ID', 'FIRSTNAME', 'LASTNAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'POSITION');
 			}
 			fputcsv($f, $fields, $delimiter);
 			
@@ -172,18 +172,19 @@ class AdminModel {
 			} 
 			
 			// Move back to beginning of file 
-			fseek($f, 0); 
+			fseek($f, 0);
 			
-			// Set headers to download file rather than displayed 
-			header('Content-Type: text/csv'); 
-			header('Content-Disposition: attachment; filename="' . $filename . '";'); 
+			// Set headers to download file rather than displayed
+			header('Content-Type: text/csv');
+			header('Content-Disposition: attachment; filename="' . $filename . '";');
 			
-			//output all remaining data on a file pointer 
-			fpassthru($f); 
-		} 
-		exit; 
+			//output all remaining data on a file pointer
+
+			fpassthru($f);
+		}else{
+			header("location: ../view/admin_index.php?error=dbnull");
+		}
+		exit;
 	}
 
 }
-  
-?>

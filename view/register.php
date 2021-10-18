@@ -75,11 +75,11 @@ if(isset($_POST['register'])){
                 <main class="form-register">
                     <form action="" method="POST">
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Firstname" name="firstName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required>
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Firstname" name="firstName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required>
                             <label for="floatingInput">Firstname</label>
                         </div>
                         <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Lastname" name="lastName" pattern="^[a-zA-Z]+$" title="Must contain only letters" required>
+                            <input type="text" class="form-control" id="floatingInput" placeholder="Lastname" name="lastName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required>
                             <label for="floatingInput">Lastname</label>
                         </div>
                         <div class="form-floating mb-3">
@@ -129,7 +129,7 @@ if(isset($_POST['register'])){
                             <label for="fieldOfExpertise-form">Field of Expertise</label>
                         </div>
                         <div class="form-floating mb-3" id="employer-form" style="display:none;">
-                            <input type="text" class="form-control" id="employer-form-rating" name="position" placeholder="Position" pattern="^[a-zA-Z]+$" title="Must contain only letters">
+                            <input type="text" class="form-control" id="employer-form-rating" name="position" placeholder="Position" pattern="^[a-zA-Z, ]+$" title="Must contain only letters">
                             <label for="employer-form-label">Position</label>
                         </div>
 

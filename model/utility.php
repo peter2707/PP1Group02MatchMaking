@@ -3,7 +3,8 @@
 // Check for empty input register
 function emptyInputRegister($firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $location, $type) {
 	$result = false;
-	if (empty($firstName) || empty($lastName) || empty($username) || empty($password) || empty($dateOfBirth) || empty($phone) || empty($email) || empty($location) || empty($type)) {
+	if (empty(trim($firstName, " ")) || empty(trim($lastName, " ")) || empty(trim($username, " ")) || empty(trim($password, " ")) || empty(trim($dateOfBirth, " ")) 
+		|| empty(trim($phone, " ")) || empty(trim($email, " ")) || empty(trim($location, " ")) || empty(trim($type, " "))) {
 		$result = true;
 	}
 	return $result;
