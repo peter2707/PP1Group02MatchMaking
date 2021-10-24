@@ -54,7 +54,7 @@
     ?>
 </head>
 
-<body class="text-center">
+<body>
 
     <!-- Navigation Start  -->
     <?php
@@ -62,13 +62,25 @@
     ?>
     <!-- Navigation End  -->
 
+    <!-- Header -->
+    <header class="ex-header">
+        <div class="container mb-5">
+            <div class="row">
+                <div class="col-xl-10 offset-xl-1 text-center">
+                    <h1>Settings</h1>
+                </div> <!-- end of col -->
+            </div> <!-- end of row -->
+        </div> <!-- end of container -->
+    </header> <!-- end of ex-header -->
+    <!-- end of header -->
+
     <?php
     if ($validSession) {
         $user = $userController->getUser($userType, $sessionController->getUserName());
         if ($userType == "jobseeker") {
             echo <<<END
             <!-- User Profile section start -->
-            <header class="ex-header">
+            <div class="col-xl-10 offset-xl-1 mt-5 mb-5">
                 <div class="container">
 END;
                     if (isset($_GET["error"])) {
@@ -181,7 +193,7 @@ END;
                                                 </div>
                                             </div>
                                             <hr>
-                                            <div class="row">
+                                            <div class="row text-center">
                                                 <div class="col-sm-12">
                                                     <button class="btn btn-success-lg" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update"><i class='fa fa-check' aria-hidden='true'></i> Save Changes</button>
                                                     <button class="btn btn-danger-lg" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete"><i class='fa fa-trash' aria-hidden='true'></i> Delete Account</button>
@@ -197,13 +209,13 @@ END;
                     </div>
                 </div>
                 <!-- end of container -->
-            </header>
+            </div>
             <!-- User Profile section End -->
         END;
         } elseif ($userType == "employer") {
             echo <<<END
             <!-- User Profile section start -->
-            <header class="ex-header">
+            <div class="col-xl-10 offset-xl-1 mt-5 mb-5">
                 <div class="container">
 END;
             if (isset($_GET["error"])) {
@@ -315,7 +327,7 @@ END;
                                             </div>
                                             <hr>
                                             <div class="row">
-                                                <div class="col-sm-12">
+                                                <div class="col-sm-12 text-center">
                                                     <button class="btn btn-success-sm" onclick="javascript:return confirm('Update detail?');" id="update" type="submit" name="update"><i class='fa fa-check' aria-hidden='true'></i> Save Changes</button>
                                                     <button class="btn btn-danger-sm" onclick="javascript:return confirm('Are you sure you want to delete your account?');" id="delete" type="submit" name="delete"><i class='fa fa-trash' aria-hidden='true'></i> Delete Account</button>
                                                 </div>
@@ -330,7 +342,7 @@ END;
                     </div>
                 </div>
                 <!-- end of container -->
-            </header>
+            </div>
             <!-- User Profile section End -->
         END;
         }

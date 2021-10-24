@@ -51,7 +51,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
-                                <li><a class="dropdown-item" href="#">Help Centre</a></li>
+                                <li><a class="dropdown-item" href="helpcentre.php">Help Centre</a></li>
                                 <li>
                                     <div class="dropdown-divider"></div>
                                 </li>
@@ -107,7 +107,7 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>
-                            <li><a class="dropdown-item" href="#">Help Centre</a></li>
+                            <li><a class="dropdown-item" href="helpcentre.php">Help Centre</a></li>
                             <li>
                                 <div class="dropdown-divider"></div>
                             </li>

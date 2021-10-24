@@ -39,7 +39,7 @@ if (isset($_POST['submit'])) {
     <header class="ex-header">
         <div class="container mb-5">
             <div class="row">
-                <div class="col-xl-10">
+                <div class="col-xl-10 offset-xl-1 text-center">
                     <h1>Report a Match <i class="fa fa-info-circle" aria-hidden="true"></i></h1>
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
