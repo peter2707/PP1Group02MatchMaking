@@ -417,6 +417,8 @@ function cancelCareer() {
     document.getElementById("addCareerBtn").style.display = '';
 }
 
+
+
 //active link detect
 
 // $(document).ready(function() {

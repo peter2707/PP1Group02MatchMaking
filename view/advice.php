@@ -22,7 +22,7 @@
     <header class="ex-header">
         <div class="container mb-5">
             <div class="row">
-                <div class="col-xl-10">
+                <div class="col-xl-10 offset-xl-1 text-center">
                     <h1>Career & Hiring Advice</h1>
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
@@ -46,40 +46,35 @@
                 </div>
                 <!-- end of col -->
                 <div class="col-lg-6">
-
                     <!-- Contact Form -->
-                    <form>
+                    <form method="POST">
                         <div class="form-group">
-                            <select class="form-control-input" required>
-                                <option selected disabled hidded>Select your enquiry...</option>
-                                <option value="careerAdvice">Career Advice</option>
-                                <option value="hiringAdvice">Hiring Advice</option>
+                            <input type="text" class="form-control-input" placeholder="Name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-control-input" name="subject" required>
+                                <option selected disabled value="">Select your enquiry...</option>
+                                <option value="Career Advice">Career Advice</option>
+                                <option value="Hiring Advice">Hiring Advice</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control-input" placeholder="Name" required>
+                            <textarea class="form-control-input" rows="4" placeholder="Message" name="message" required></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control-input" placeholder="Email" required>
-                        </div>
-                        <div class="form-group">
-                            <select class="form-control-input" required>
-                                <option selected disabled hidded>Topic</option>
-                                <option value="employer">Employer</option>
-                                <option value="jobSeeker">Job Seeker</option>
-                                <option value="newUser">New User</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <textarea rows="3" class="form-control-input" placeholder="Enter enquiry..." required></textarea>
-                            
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="form-control-submit-button">Submit</button>
+                            <button class='form-control-submit-button' type="submit" name="submitEmail">Submit</button>
                         </div>
                     </form>
+                    <?php
+                    if (isset($_POST['submitEmail'])) {
+                        $name = $_POST['name'];
+                        $subject = $_POST['subject'];
+                        $message = $_POST['message'];
+                        $script = "<script>window.location = 'mailto:jobmatchdemo@gmail.com?subject=Name: $name, Subject: $subject&body=$message'</script>";
+			            echo $script;
+                    }
+                    ?>
                     <!-- end of contact form -->
-
                 </div>
                 <!-- end of col -->
             </div>

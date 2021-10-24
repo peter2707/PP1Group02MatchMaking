@@ -542,14 +542,6 @@ a:hover {
     margin-bottom: 0.5rem;
 }
 
-.navbar .nav-item .nav-link {
-    padding-top: 0.625rem;
-    padding-bottom: 0.625rem;
-    color: white;
-    text-decoration: none;
-    transition: all 0.2s ease;
-}
-
 .navbar .nav-item.dropdown.show .nav-link,
 .navbar .nav-item .nav-link:hover,
 .navbar .nav-item .nav-link.active {
@@ -1257,6 +1249,28 @@ a:hover {
 /*************************/
 
 
+/* Min-width 200px */
+
+@media (min-width: 200px) {
+    .navbar {
+        background: url('../images/navbackground.jpg') scroll top transparent;
+        box-shadow: none;
+        transition: all 0.2s;
+        width: 100%;
+        background-size: 100%;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+    .navbar .nav-item .nav-link {
+        padding-top: 0.625rem;
+        padding-bottom: 0.625rem;
+        color: #5e6576;
+        text-decoration: none;
+        transition: all 0.2s ease;
+    }
+}
+
+
 /* Min-width 768px */
 
 @media (min-width: 768px) {
@@ -1314,6 +1328,13 @@ a:hover {
         background-size: 100%;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
+    }
+    .navbar .nav-item .nav-link {
+        padding-top: 0.625rem;
+        padding-bottom: 0.625rem;
+        color: #fcfafb;
+        text-decoration: none;
+        transition: all 0.2s ease;
     }
     .navbar.top-nav-collapse {
         padding-top: 0.5rem;

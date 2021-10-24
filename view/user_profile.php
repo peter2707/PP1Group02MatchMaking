@@ -16,6 +16,7 @@ $matchmakingController = new MatchmakingController();
 // get current user session
 $validSession = $sessionController->checkSession();
 $userType = $sessionController->getUserType();
+$username = $sessionController->getUserName();
 
 if (isset($_POST['done'])) {
     $linkedin = $_POST['linkedin'];
@@ -79,7 +80,7 @@ if (isset($_POST['done'])) {
 
     <?php
     if ($validSession) {
-        $user = $userController->getUserData($userType);
+        $user = $userController->getUser($userType, $username);
         $social = $userController->getSocialLink($user->username);
         $skills = array();
         $educations = array();

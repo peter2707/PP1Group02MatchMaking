@@ -11,7 +11,7 @@ if (isset($_POST['match'])) {
     $sc = new SessionController();
     $uc = new UserController();
 
-    $user = $uc->getUserByName($sc->getUserType(), $sc->getUserName());
+    $user = $uc->getUser($sc->getUserType(), $sc->getUserName());
     $userField = $user->field;
     $position = $_POST['position'];
     $salary = $_POST['salary'];
@@ -146,7 +146,7 @@ if (isset($_POST['match'])) {
                 echo "                <tr>";
                 echo "                    <th scope='col'>Position</th>";
                 echo "                    <th scope='col'>Salary</th>";
-                echo "                    <th scope='col'>Type</th>";
+                echo "                    <th scope='col'>Since</th>";
                 echo "                    <th scope='col'>Location</th>";
                 echo "                    <th scope='col'>Match Percentage</th>";
                 echo "                    <th scope='col'>Action</th>";
@@ -157,7 +157,7 @@ if (isset($_POST['match'])) {
                 echo "                <tr>";
                 echo "                    <td scope='row'>$match->position</td>";
                 echo "                    <td scope='row'>$match->salary</td>";
-                echo "                    <td scope='row'>$match->type</td>";
+                echo "                    <td scope='row'>$match->date</td>";
                 echo "                    <td scope='row'>$match->location</td>";
                 echo "                    <td scope='row'>$match->percentage %</td>";
                 createOpenButton('id', $match->id, 'View', 'jobseeker_view_match.php');

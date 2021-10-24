@@ -76,9 +76,8 @@ if (isset($_POST['deny'])) {
                 echo "  <thead style='height: 50px;' class='table-dark'>";
                 echo "  <tr>";
                 echo "      <th scope='col'>Job Seeker</th>";
-                echo "      <th scope='col'>Salary</th>";
-                echo "      <th scope='col'>Type</th>";
                 echo "      <th scope='col' style='width: 20%;'>Match Percentage</th>";
+                echo "      <th scope='col'>Since</th>";
                 echo "      <th scope='col' style='width: 13%;'>Action</th>";
                 echo "      <th scope='col' style='width: 14%;'></th>";
                 echo "  </tr>";
@@ -87,9 +86,8 @@ if (isset($_POST['deny'])) {
             foreach ($jobmatches as $match) {
                 echo "  <tr>";
                 echo "      <td scope='row'>$match->jobseeker</td>";
-                echo "      <td scope='row'>$match->salary</td>";
-                echo "      <td scope='row'>$match->type</td>";
                 echo "      <td scope='row'>$match->percentage %</td>";
+                echo "      <td scope='row'>$match->date</td>";
                 createDenyButton($match->id, "Deny");
                 createViewProfileButton('jobseeker', $match->jobseeker, 'Profile', 'user_view_other.php');
                 echo "  </tr>";

@@ -1,17 +1,6 @@
 <?php
 class JobPost{
-    public function __construct($id, $employer, $position, $salary, $location, $type) {
-        $this->id = $id;
-        $this->employer = $employer;
-        $this->position = $position;
-        $this->salary = $salary;
-        $this->location = $location;
-        $this->type = $type;
-    }
-}
-
-class EmpJobPost{
-    public function __construct($id, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $matches, $date) {
+    public function __construct($id, $position, $field, $salary, $type, $description, $requirements, $location, $employer, $contact, $matches, $date) {
         $this->id = $id;
         $this->position = $position;
         $this->field = $field;
@@ -20,6 +9,7 @@ class EmpJobPost{
         $this->description = $description;
         $this->requirements = $requirements;
         $this->location = $location;
+        $this->employer = $employer;
         $this->contact = $contact;
         $this->matches = $matches;
         $this->date = $date;
@@ -27,11 +17,10 @@ class EmpJobPost{
 }
 
 class JobMatch{
-    public function __construct($id, $employer, $jobseeker, $rating, $contact, $position, $field, $salary, $type, $description, $requirements, $location, $percentage) {
+    public function __construct($id, $employer, $jobseeker, $contact, $position, $field, $salary, $type, $description, $requirements, $location, $percentage, $rating, $feedback, $date) {
         $this->id = $id;
         $this->employer = $employer;
         $this->jobseeker = $jobseeker;
-        $this->rating = $rating;
         $this->contact = $contact;
         $this->position = $position;
         $this->field = $field;
@@ -41,6 +30,9 @@ class JobMatch{
         $this->requirements = $requirements;
         $this->location = $location;
         $this->percentage = $percentage;
+        $this->rating = $rating;
+        $this->feedback = $feedback;
+        $this->date = $date;
     }
 }
 

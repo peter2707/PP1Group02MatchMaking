@@ -394,27 +394,30 @@
                 </div>
                 <!-- end of col -->
                 <div class="col-lg-6 mt-5">
-                    <!-- Contact Form -->
-                     <form>
+                    <form method="POST">
                         <div class="form-group">
-                            <input type="text" class="form-control-input" placeholder="Name" required>
+                            <input type="text" class="form-control-input" placeholder="Name" name="name" required>
                         </div>
                         <div class="form-group">
-                            <input type="email" class="form-control-input" placeholder="Email" required>
+                            <input type="text" class="form-control-input" placeholder="Subject" name="subject" required>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control-input" placeholder="Title" required>
+                            <textarea class="form-control-input" rows="4" placeholder="Message" name="message" required></textarea>
                         </div>
                         <div class="form-group">
-                            <input type="text" class="form-control-input" placeholder="Message" required>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="form-control-submit-button">Submit</button>
+                            <button class='form-control-submit-button' type="submit" name="submitEmail">Submit</button>
                         </div>
                     </form>
-                    <!-- end of contact form -->
+                    <?php
+                    if (isset($_POST['submitEmail'])) {
+                        $name = $_POST['name'];
+                        $subject = $_POST['subject'];
+                        $message = $_POST['message'];
+                        $script = "<script>window.location = 'mailto:jobmatchdemo@gmail.com?subject=Name: $name, Subject: $subject&body=$message'</script>";
+			            echo $script;
+                    }
+                    ?>
                 </div>
-                <!-- end of col -->
             </div>
             <!-- end of row -->
         </div>
