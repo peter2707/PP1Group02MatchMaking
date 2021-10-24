@@ -64,7 +64,7 @@
 
     <?php
     if ($validSession) {
-        $user = $userController->getUserData($userType);
+        $user = $userController->getUser($userType, $sessionController->getUserName());
         if ($userType == "jobseeker") {
             echo <<<END
             <!-- User Profile section start -->

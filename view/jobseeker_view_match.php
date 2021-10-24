@@ -52,6 +52,8 @@ function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPag
                 <div class="row">
                     <div class="col mb-5 text-start">
                         <h6 class="text-muted"><?php echo "$jobmatch->field"; ?></h6>
+                        <p><?php echo "$jobmatch->type"; ?></p>
+                        <p><?php echo "$jobmatch->date"; ?></p>
                     </div>
                     <div class="col row text-end">
                         <p class="text-muted">

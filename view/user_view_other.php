@@ -14,7 +14,7 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 // call controllers
 $uc = new UserController();
-$viewUser = $uc->getUserByName($usertype, $username);
+$viewUser = $uc->getUser($usertype, $username);
 $social = $uc->getSocialLink($viewUser->username);
 $userImage = $viewUser->image;
 if ($viewUser->image == NULL) {

@@ -1,36 +1,9 @@
 <?php
 class UserModel {
 
-	public function getUser($db, $userType) {
+	public function getUser($db, $userType, $username) {
 		include '../model/user_object.php';
-		$sessionController = new SessionController();
-		$username = $sessionController->getUserName();
-
 		$query = "SELECT * FROM $userType WHERE username = ?";
-		$stmt = $db->prepare($query);
-		$stmt->bind_param("s", $username);
-
-		$stmt->execute();
-		$result = $stmt->get_result();
-		$row = $result->fetch_assoc();
-		$stmt->close();
-		$db->close();
-
-		if($userType == "jobseeker"){
-			$jobseeker = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['location'], $row['image']);
-			return $jobseeker;
-		}elseif($userType == "employer"){
-			$employer = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['location'], $row['rating'], $row['image']);
-			return $employer;
-		}elseif($userType == "admin"){
-			$admin = new Admin($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position']);
-			return $admin;
-		}
-	}
-
-	public function getUserByName($db, $usertype, $username) {
-		include '../model/user_object.php';
-		$query = "SELECT * FROM $usertype WHERE username = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("s", $username);
 
@@ -43,13 +16,13 @@ class UserModel {
 			echo "<h3>User not Found.</h3> <small>This user might have been deleted or has invalid details.</small>";
 			exit();
 		}else{
-			if($usertype == "jobseeker"){
+			if($userType == "jobseeker"){
 				$jobseeker = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['location'], $row['image']);
 				return $jobseeker;
-			}elseif($usertype == "employer"){
+			}elseif($userType == "employer"){
 				$employer = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['location'], $row['rating'], $row['image']);
 				return $employer;
-			}elseif($usertype == "admin"){
+			}elseif($userType == "admin"){
 				$admin = new Admin($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position']);
 				return $admin;
 			}
@@ -296,6 +269,8 @@ class UserModel {
 	}
 
 	public function deleteAccount($db, $username, $type) {
+		require_once '../model/session_model.php';
+		$sm = new SessionModel();
 		$query = "DELETE FROM $type WHERE username = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("s", $username);
@@ -307,10 +282,12 @@ class UserModel {
 			$this->deleteAllEducations($db, $username);
 			$this->deleteAllSkills($db, $username);
 			$this->deleteAllSocials($db, $username);
-			session_start();
-			unset($_SESSION["username"]);
-			unset($_SESSION["password"]);
-			session_destroy();
+			if($sm->getUserName() == $username){
+				session_start();
+				unset($_SESSION["username"]);
+				unset($_SESSION["password"]);
+				session_destroy();
+			}
 			header("location: ../view/login.php?success=accountdeleted");
 		} else {
 			header("location: ../view/user_settings.php?error=deletefailed");

@@ -20,7 +20,7 @@ if (isset($_GET['jobseeker'])) {
     $username = $_GET['admin'];
 }
 
-$user = $uc->getUserByName($usertype, $username);
+$user = $uc->getUser($usertype, $username);
 $social = $uc->getSocialLink($user->username);
 
 if (isset($_POST['update'])) {
