@@ -389,6 +389,7 @@
                                 <div class="flex-grow-1">Submit your enquiry & we'll make sure to get back to you within 1-3 business days.</div>
                             </li>
                         </ul>
+                        <a class="btn-solid-lg" href="helpcentre.php">Help Centre</a>
                     </div>
                     <!-- end of text-container -->
                 </div>
