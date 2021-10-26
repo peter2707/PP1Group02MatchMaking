@@ -30,7 +30,6 @@ class MatchmakingModel{
 	public function getJobPostsByEmployer($db, $username){
 		require_once '../model/job_object.php';
 		$jobposts = array();
-
 		$query = "SELECT * FROM jobpost WHERE employer='$username'";
 		$result = $db->query($query) or die(mysqli_error($db));
 		$numResults = $result->num_rows;
@@ -265,14 +264,18 @@ class MatchmakingModel{
 		if ($affectedRows == 1) {
 			if($usertype == 'jobseeker'){
 				header("location: ../view/jobseeker_match.php?success=successdeny");
-			}else{
+			}elseif($usertype == 'employer'){
 				header("location: ../view/employer_post.php?success=successdeny");
+			}else{
+				header("location: ../view/admin_index.php?success=deleted");
 			}
 		} else {
 			if($usertype == 'jobseeker'){
 				header("location: ../view/jobseeker_match.php?error=errordeny");
-			}else{
+			}elseif($usertype == 'employer'){
 				header("location: ../view/employer_post.php?error=errordeny");
+			}else{
+				header("location: ../view/admin_index.php?error=deletefailed");
 			}
 		}
 	}

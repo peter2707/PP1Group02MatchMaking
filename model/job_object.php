@@ -36,43 +36,25 @@ class JobMatch{
     }
 }
 
-class Social{
-    public function __construct($username, $linkedin, $github, $twitter, $instagram, $facebook) {
+class Report{
+    public function __construct($id, $username, $type, $matchID, $reason, $comment, $date) {
+        $this->id = $id;
         $this->username = $username;
-        $this->linkedin = $linkedin;
-        $this->github = $github;
-        $this->twitter = $twitter;
-        $this->instagram = $instagram;
-        $this->facebook = $facebook;
+        $this->type = $type;
+        $this->matchID = $matchID;
+        $this->reason = $reason;
+        $this->comment = $comment;
+        $this->date = $date;
     }
 }
 
-class Skill{
-    public function __construct($id, $username, $skill, $experience) {
+class Feedback{
+    public function __construct($id, $username, $rating, $comment, $date) {
         $this->id = $id;
         $this->username = $username;
-        $this->skill = $skill;
-        $this->experience = $experience;
-    }
-}
-
-class Education{
-    public function __construct($id, $username, $institution, $degree, $graduation) {
-        $this->id = $id;
-        $this->username = $username;
-        $this->institution = $institution;
-        $this->degree = $degree;
-        $this->graduation = $graduation;
-    }
-}
-
-class Career{
-    public function __construct($id, $username, $position, $company, $experience) {
-        $this->id = $id;
-        $this->username = $username;
-        $this->position = $position;
-        $this->company = $company;
-        $this->experience = $experience;
+        $this->rating = $rating;
+        $this->comment = $comment;
+        $this->date = $date;
     }
 }
 

@@ -77,8 +77,8 @@ if (isset($_POST['delete'])) {
                             echo "          <td scope=\"row\">$admin->phone</td>";
                             echo "          <td scope=\"row\">$admin->email</td>";
                             echo "          <td scope=\"row\">$admin->position</td>";
-                            createEditButton("admin", $admin->username, "Edit", "admin_edit_user.php");
-                            createDeleteButton("username", $admin->username, "Delete");
+                            createEditButton("admin", $admin->username, "<i class='fa fa-wrench' aria-hidden='true'>", "admin_edit_user.php");
+                            createDeleteButton("username", $admin->username, "<i class='fa fa-trash' aria-hidden='true'>");
                             echo "        </tr>";
                         }
                             echo "      </tbody>";
@@ -89,7 +89,7 @@ if (isset($_POST['delete'])) {
                         echo "<td>";
                         echo "<form action=$actionPage method=\"GET\">";
                         echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-                        echo "<button type=\"submit\" class=\"btn btn-solid-sm\">$buttonText</button>";
+                        echo "<button type=\"submit\" class=\"btn btn-primary btn-sm\">$buttonText</button>";
                         echo "</form>";
                         echo "</td>";
                     }
@@ -97,7 +97,7 @@ if (isset($_POST['delete'])) {
                         echo "<td>";
                         echo "<form method=\"POST\">";
                         echo "<input type=\"hidden\" name=$hiddenName value=$admin>";
-                        echo "<button name=\"delete\" type=\"submit\" class=\"btn btn-danger-sm\" onclick=\"return confirm('Are you sure you want to delete $admin ?')\" >$buttonText</button>";
+                        echo "<button name=\"delete\" type=\"submit\" class=\"btn btn-danger btn-sm\" onclick=\"return confirm('Are you sure you want to delete $admin ?')\" >$buttonText</button>";
                         echo "</form>";
                         echo "</td>";
                     }

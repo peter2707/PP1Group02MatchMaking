@@ -99,6 +99,48 @@ class AdminController {
         $adminModel->updateAdmin($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id);
 	}
 
+    public function getAllFeedback(){
+        require_once '../model/admin_model.php';
+        include '../model/db_connection.php';
+        $adminModel = new AdminModel();
+        return $adminModel->getAllFeedback($db);
+	}
+    
+    public function getAllReport(){
+        require_once '../model/admin_model.php';
+        include '../model/db_connection.php';
+        $adminModel = new AdminModel();
+        return $adminModel->getAllReport($db);
+	}
+
+    public function getAllJobMatch(){
+        require_once '../model/admin_model.php';
+        include '../model/db_connection.php';
+        $adminModel = new AdminModel();
+        return $adminModel->getAllJobMatch($db);
+    }
+
+    public function getAllJobPost(){
+        require_once '../model/admin_model.php';
+        include '../model/db_connection.php';
+        $adminModel = new AdminModel();
+        return $adminModel->getAllJobPost($db);
+    }
+
+    public function deleteReport($id){
+        require_once '../model/db_connection.php';
+        require_once '../model/admin_model.php';
+        $adminModel = new AdminModel();
+        $adminModel->deleteReport($db, $id);
+    }
+
+    public function deleteFeedback($id){
+        require_once '../model/db_connection.php';
+        require_once '../model/admin_model.php';
+        $adminModel = new AdminModel();
+        $adminModel->deleteFeedback($db, $id);
+    }
+
     public function generateReport($table){
         require_once '../model/admin_model.php';
         include '../model/db_connection.php';

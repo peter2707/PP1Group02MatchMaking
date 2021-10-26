@@ -64,7 +64,7 @@
 
     <!-- Header -->
     <header class="ex-header">
-        <div class="container mb-5">
+        <div class="container">
             <div class="row">
                 <div class="col-xl-10 offset-xl-1 text-center">
                     <h1>Settings</h1>
@@ -80,7 +80,7 @@
         if ($userType == "jobseeker") {
             echo <<<END
             <!-- User Profile section start -->
-            <div class="col-xl-10 offset-xl-1 mt-5 mb-5">
+            <div class="col-xl-10 offset-xl-1 mb-5 text-center">
                 <div class="container">
 END;
                     if (isset($_GET["error"])) {
@@ -215,7 +215,7 @@ END;
         } elseif ($userType == "employer") {
             echo <<<END
             <!-- User Profile section start -->
-            <div class="col-xl-10 offset-xl-1 mt-5 mb-5">
+            <div class="col-xl-10 offset-xl-1 mb-5">
                 <div class="container">
 END;
             if (isset($_GET["error"])) {

@@ -2,7 +2,7 @@
 class UserModel {
 
 	public function getUser($db, $userType, $username) {
-		include '../model/user_object.php';
+		require_once '../model/user_object.php';
 		$query = "SELECT * FROM $userType WHERE username = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("s", $username);
@@ -30,7 +30,7 @@ class UserModel {
 	}
 
 	public function getSkills($db, $username) {
-		require_once '../model/job_object.php';
+		require_once '../model/user_object.php';
 		$skills = array();
 		$query = "SELECT * FROM skill WHERE username='$username'";
 		$result = $db->query($query) or die(mysqli_error($db));
@@ -76,7 +76,7 @@ class UserModel {
 	}
 
 	public function getEducations($db, $username) {
-		require_once '../model/job_object.php';
+		require_once '../model/user_object.php';
 		$educations = array();
 		$query = "SELECT * FROM education WHERE username='$username'";
 		$result = $db->query($query) or die(mysqli_error($db));
@@ -122,7 +122,7 @@ class UserModel {
 	}
 
 	public function getCareers($db, $username) {
-		require_once '../model/job_object.php';
+		require_once '../model/user_object.php';
 		$careers = array();
 		$query = "SELECT * FROM career WHERE username='$username'";
 		$result = $db->query($query) or die(mysqli_error($db));
@@ -168,7 +168,7 @@ class UserModel {
 	}
 	
 	public function getSocialLink($db, $username){
-		include '../model/job_object.php';
+		require_once '../model/user_object.php';
 		$query = "SELECT * FROM social WHERE username = '$username'";
 		$stmt = $db->prepare($query);
 		$stmt->execute();

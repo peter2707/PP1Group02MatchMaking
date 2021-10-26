@@ -47,4 +47,44 @@ class Admin {
     }
 }
 
+class Social{
+    public function __construct($username, $linkedin, $github, $twitter, $instagram, $facebook) {
+        $this->username = $username;
+        $this->linkedin = $linkedin;
+        $this->github = $github;
+        $this->twitter = $twitter;
+        $this->instagram = $instagram;
+        $this->facebook = $facebook;
+    }
+}
+
+class Skill{
+    public function __construct($id, $username, $skill, $experience) {
+        $this->id = $id;
+        $this->username = $username;
+        $this->skill = $skill;
+        $this->experience = $experience;
+    }
+}
+
+class Education{
+    public function __construct($id, $username, $institution, $degree, $graduation) {
+        $this->id = $id;
+        $this->username = $username;
+        $this->institution = $institution;
+        $this->degree = $degree;
+        $this->graduation = $graduation;
+    }
+}
+
+class Career{
+    public function __construct($id, $username, $position, $company, $experience) {
+        $this->id = $id;
+        $this->username = $username;
+        $this->position = $position;
+        $this->company = $company;
+        $this->experience = $experience;
+    }
+}
+
 ?> 
