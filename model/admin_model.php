@@ -75,8 +75,8 @@ class AdminModel {
 		require_once '../model/matchmaking_model.php';
 		$mm = new MatchmakingModel();
 		$alljobMatches = array();
-		$query = "SELECT *, jobpost.id as jid, jobmatch.id as mid FROM jobpost 
-				  INNER JOIN jobmatch ON jobpost.employer = jobmatch.employer";
+		$query = "SELECT *, jobpost.id as jid, jobmatch.id as mid FROM jobmatch 
+				  INNER JOIN jobpost ON jobpost.id = jobmatch.jobPostID";
 		$result = $db->query($query);
 		$numResults = $result->num_rows;
 		for ($i = 0; $i < $numResults; $i++) {
