@@ -39,7 +39,7 @@ if (isset($_POST['match'])) {
     ?>
 </head>
 
-<body class="text-center">
+<body class="text-center" style="background-color:#fcfafb">
 
     <!-- Navigation Start  -->
     <?php
@@ -100,7 +100,7 @@ if (isset($_POST['match'])) {
 
 
 
-    <div class="col-md-6 offset-md-3 mt-5 mb-5" style="min-height: 200px;">
+    <div class="col-md-6 offset-md-3 mt-5 mb-5" style="min-height: 400px;">
         <?php
         if (isset($_GET["warning"])) {
             echo "<h5><span class='mb-5 badge bg-secondary'>";
@@ -133,41 +133,44 @@ if (isset($_POST['match'])) {
         if(count($jobmatches) < 1){
             echo "<h3>You don't have any match yet.</h3> <small>To find match, click on the <i class='fa fa-search' aria-hidden='true'></i> button</small>";
         }else{
-            function createOpenButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
-                echo "<td>";
-                echo "  <form action=$actionPage method=\"GET\">";
-                echo "      <input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-                echo "      <button type=\"submit\" class=\"btn btn-solid-sm\">$buttonText</button>";
-                echo "  </form>";
-                echo "</td>";
-            }
-                echo "<table class='table table-striped'>";
-                echo "            <thead style='height: 50px;' class='table-dark'>";
-                echo "                <tr>";
-                echo "                    <th scope='col'>Position</th>";
-                echo "                    <th scope='col'>Salary</th>";
-                echo "                    <th scope='col'>Since</th>";
-                echo "                    <th scope='col'>Location</th>";
-                echo "                    <th scope='col'>Match Percentage</th>";
-                echo "                    <th scope='col'>Action</th>";
-                echo "                </tr>";
-                echo "            </thead>";
-                echo "            <tbody>";
             foreach ($jobmatches as $match) {
-                echo "                <tr>";
-                echo "                    <td scope='row'>$match->position</td>";
-                echo "                    <td scope='row'>$match->salary</td>";
-                echo "                    <td scope='row'>$match->date</td>";
-                echo "                    <td scope='row'>$match->location</td>";
-                echo "                    <td scope='row'>$match->percentage %</td>";
-                createOpenButton('id', $match->id, 'View', 'jobseeker_view_match.php');
-                echo "                </tr>";
+                $badge = "badge bg-primary";
+                if($match->type == "Full Time"){
+                    $badge = "badge bg-success";
+                }elseif($match->type == "Part Time"){
+                    $badge = "badge bg-primary";
+                }elseif($match->type == "Casual"){
+                    $badge = "badge bg-warning";
+                }elseif($match->type == "Contract"){
+                    $badge = "badge bg-danger";
+                }
+                echo <<< END
+                    <div class="job-card">
+                        <div class="card border-0 mb-5">
+                            <div class="card-body">
+                                <div class="row d-flex align-items-center">
+                                    <div class="col text-start">
+                                        <small class="ms-1"><span class="$badge">$match->type</span></small>
+                                        <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$match->position</h4>
+                                        <p class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp; $match->location &nbsp;&nbsp; <i style="font-size: 20px" class="bi bi-cash"></i>&nbsp; $match->salary</p>
+                                        <small class="card-text text-success"><i class="fa fa-check" aria-hidden="true"></i>&nbsp; $match->percentage% Match</small>
+                                        <br>
+                                        <small class="card-text"><i class="fa fa-clock" aria-hidden="true"></i>&nbsp; $match->date</small>
+                                    </div>
+                                    <div class="col text-end">
+                                        <form action="jobseeker_view_match.php" method="GET">
+                                            <input type="hidden" name="id" value=$match->id>
+                                            <button type="submit" class="btn btn-solid-lg">View</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                END;
             }
-                echo "            </tbody>";
-                echo "            </table>";
-                unset($jobmatches);
+            unset($jobmatches);
         }
-
         ?>
         
     </div>
@@ -179,5 +182,4 @@ if (isset($_POST['match'])) {
     <!-- end of footer -->
 
 </body>
-
 </html>

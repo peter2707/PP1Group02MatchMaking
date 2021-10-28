@@ -137,29 +137,29 @@ if (isset($_POST['post'])) {
             echo "<h5><span class='mb-5 badge bg-danger'>";
             if ($_GET["error"] == "emptyinput") {
                 echo "Please complete all required columns!";
-            }else if ($_GET["error"] == "fieldnotfound") {
+            } else if ($_GET["error"] == "fieldnotfound") {
                 echo "You have to choose a field of expertise";
-            }else if ($_GET["error"] == "positionnumeric") {
+            } else if ($_GET["error"] == "positionnumeric") {
                 echo "Position cannot be a number!";
-            }else if ($_GET["error"] == "updatefailed") {
+            } else if ($_GET["error"] == "updatefailed") {
                 echo "There was a problem while trying to update.";
-            }else if ($_GET["error"] == "deletefailed") {
+            } else if ($_GET["error"] == "deletefailed") {
                 echo "There was a problem while trying to delete.";
-            }else if ($_GET["error"] == "errordeny") {
+            } else if ($_GET["error"] == "errordeny") {
                 echo "There was a problem while trying to deny the match.";
-            }else if ($_GET["error"] == "samevalue") {
+            } else if ($_GET["error"] == "samevalue") {
                 echo "You didn't make any changes.";
             }
             echo "</span></h5>";
-        }elseif (isset($_GET["success"])) {
+        } elseif (isset($_GET["success"])) {
             echo "<h5><span class='mb-5 badge bg-success'>";
             if ($_GET["success"] == "posted") {
                 echo "You have posted a new job! You can view it in the table below.";
-            }elseif ($_GET["success"] == "updated") {
+            } elseif ($_GET["success"] == "updated") {
                 echo "Your post have been updated successfully.";
-            }elseif ($_GET["success"] == "deleted") {
+            } elseif ($_GET["success"] == "deleted") {
                 echo "Your post have been deleted successfully.";
-            }elseif ($_GET["success"] == "successdeny") {
+            } elseif ($_GET["success"] == "successdeny") {
                 echo "Match denied successfully";
             }
             echo "</span></h5>";
@@ -169,42 +169,44 @@ if (isset($_POST['post'])) {
         if (count($jobposts) < 1) {
             echo "<h3>You don't have any post yet.</h3> <small>To make a new post, click on the <i class='fa fa-paper-plane' aria-hidden='true'></i> button and fill in the job details</small>";
         } else {
-            function createOpenButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
-                echo "<td>";
-                echo "  <form action=$actionPage method=\"GET\">";
-                echo "      <input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-                echo "      <button type=\"submit\" class=\"btn btn-solid-sm\">$buttonText</button>";
-                echo "  </form>";
-                echo "</td>";
-            }
-            echo "<table class='table table-striped'>";
-            echo "            <thead style='height: 50px;' class='table-dark'>";
-            echo "                <tr>";
-            echo "                    <th scope='col'>Position</th>";
-            echo "                    <th scope='col'>Salary</th>";
-            echo "                    <th scope='col'>Type</th>";
-            echo "                    <th scope='col'>Location</th>";
-            echo "                    <th scope='col'>Matches</th>";
-            echo "                    <th scope='col'>Date</th>";
-            echo "                    <th scope='col'></th>";
-            echo "                </tr>";
-            echo "            </thead>";
-            echo "            <tbody>";
             foreach ($jobposts as $post) {
-                echo "                <tr>";
-                echo "                    <td scope='row'>$post->position</td>";
-                echo "                    <td scope='row'>$post->salary</td>";
-                echo "                    <td scope='row'>$post->type</td>";
-                echo "                    <td scope='row'>$post->location</td>";
-                echo "                    <td scope='row'>$post->matches time(s)</td>";
-                echo "                    <td scope='row'>$post->date</td>";
-                createOpenButton('id', $post->id, 'Open', 'employer_view_post.php');
-                echo "                </tr>";
+                $badge = "badge bg-primary";
+                if ($post->type == "Full Time") {
+                    $badge = "badge bg-success";
+                } elseif ($post->type == "Part Time") {
+                    $badge = "badge bg-primary";
+                } elseif ($post->type == "Casual") {
+                    $badge = "badge bg-warning";
+                } elseif ($post->type == "Contract") {
+                    $badge = "badge bg-danger";
+                }
+                echo <<< END
+                    <div class="job-card">
+                        <div class="card border-0 mb-5">
+                            <div class="card-body">
+                                <div class="row d-flex align-items-center">
+                                    <div class="col text-start">
+                                        <small class="ms-1"><span class="$badge">$post->type</span></small>
+                                        <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$post->position</h4>
+                                        <p class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp; $post->location &nbsp;&nbsp; <i style="font-size: 20px" class="bi bi-cash"></i>&nbsp; $post->salary</p>
+                                        <small class="card-text text-success"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Match: $post->matches time(s)</small>
+                                        <br>
+                                        <small class="card-text"><i class="fa fa-clock" aria-hidden="true"></i>&nbsp; $post->date</small>
+                                    </div>
+                                    <div class="col text-end">
+                                        <form action="employer_view_post.php" method="GET">
+                                            <input type="hidden" name="id" value=$post->id>
+                                            <button type="submit" class="btn btn-solid-lg">View</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                END;
             }
-            echo "            </tbody>";
-            echo "            </table>";
+            unset($jobposts);
         }
-
         ?>
     </div>
 

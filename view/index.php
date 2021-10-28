@@ -1,3 +1,18 @@
+<?php
+require_once '../controller/admin_controller.php';
+require_once '../controller/session_controller.php';
+// call controllers
+$sc = new SessionController();
+$ac = new AdminController();
+
+// check if the session has not started yet
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$allFeedbacks = array();
+$allFeedbacks = $ac->getAllFeedback();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -212,77 +227,39 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                    <!-- Card -->
-                    <div class="card">
-                        <img class="quotes" src="../images/quotes.svg" alt="alternative">
-                        <div class="card-body">
-                            <p class="testimonial-text">It fits our needs perfectly. I couldn't have asked for more than this. You guys rock!</p>
-                            <div class="testimonial-author">Roe Smith</div>
-                            <div class="occupation">General Manager, Presentop</div>
-                        </div>
-                        <div class="gradient-floor red-to-blue"></div>
-                    </div>
-                    <!-- end of card -->
-
-                    <!-- Card -->
-                    <div class="card">
-                        <img class="quotes" src="../images/quotes.svg" alt="alternative">
-                        <div class="card-body">
-                            <p class="testimonial-text">It really saves me time and effort. JobMatch is exactly what our business has been lacking.</p>
-                            <div class="testimonial-author">Sam Bloom</div>
-                            <div class="occupation">CEO, G-Tech</div>
-                        </div>
-                        <div class="gradient-floor blue-to-purple"></div>
-                    </div>
-                    <!-- end of card -->
-
-                    <!-- Card -->
-                    <div class="card">
-                        <img class="quotes" src="../images/quotes.svg" alt="alternative">
-                        <div class="card-body">
-                            <p class="testimonial-text">Your company is truly upstanding and is behind its product 100%. JobMatch should be nominated for service of the year.</p>
-                            <div class="testimonial-author">Bill McKenzie</div>
-                            <div class="occupation">Assistant Manager, Bloomingdale</div>
-                        </div>
-                        <div class="gradient-floor purple-to-green"></div>
-                    </div>
-                    <!-- end of card -->
-
-                    <!-- Card -->
-                    <div class="card">
-                        <img class="quotes" src="../images/quotes.svg" alt="alternative">
-                        <div class="card-body">
-                            <p class="testimonial-text">Job Match has got everything I need. Thank you so much for your help.</p>
-                            <div class="testimonial-author">Vanya Dropper</div>
-                            <div class="occupation">Junior Associate, Nexus Law Firm</div>
-                        </div>
-                        <div class="gradient-floor red-to-blue"></div>
-                    </div>
-                    <!-- end of card -->
-
-                    <!-- Card -->
-                    <div class="card">
-                        <img class="quotes" src="../images/quotes.svg" alt="alternative">
-                        <div class="card-body">
-                            <p class="testimonial-text">Been struggling looking for a job but finally got my first job with these guys, they're absolutely amazing.</p>
-                            <div class="testimonial-author">Lefty Brown</div>
-                            <div class="occupation">General Nurse, Eastern Hospital</div>
-                        </div>
-                        <div class="gradient-floor blue-to-purple"></div>
-                    </div>
-                    <!-- end of card -->
-
-                    <!-- Card -->
-                    <div class="card">
-                        <img class="quotes" src="../images/quotes.svg" alt="alternative">
-                        <div class="card-body">
-                            <p class="testimonial-text">Seek is always very handy and helpful . Lot of genuine applicants for job. The website is easy to use and well designed.</p>
-                            <div class="testimonial-author">Susane Blake</div>
-                            <div class="occupation">Chief Financial Officer, Blue Mountain Trading</div>
-                        </div>
-                        <div class="gradient-floor purple-to-green"></div>
-                    </div>
-                    <!-- end of card -->
+                    <?php
+                    if (count($allFeedbacks) < 1) {
+                        echo "<h6 class='mt-5'>No result found yet.</h6> <small>All feedback made by user will be appeared here.</small>";
+                    } else {
+                        $feedback = array_slice($allFeedbacks, -6);
+                        for ($i = 0; $i < count($feedback); $i++) {
+                            $comment = $feedback[$i]->comment;
+                            $username = $feedback[$i]->username;
+                            $date = $feedback[$i]->date;
+                            echo <<< END
+                                <!-- Card -->
+                                <div class="card">
+                                    <img class="quotes" src="../images/quotes.svg" alt="alternative">
+                                    <div class="card-body">
+                                        <p class="testimonial-text">$comment</p>
+                                        <div class="testimonial-author">$username</div>
+                                        <div class="occupation">$date</div>
+                                    </div>
+                            END;
+                            if($i == 0 || $i == 3){
+                                echo "<div class='gradient-floor red-to-blue'></div>";
+                            }elseif($i == 1 || $i == 4){
+                                echo "<div class='gradient-floor blue-to-purple'></div>";
+                            }elseif($i == 2 || $i == 5){
+                                echo "<div class='gradient-floor purple-to-green'></div>";
+                            }
+                            echo <<< END
+                                </div>
+                                <!-- end of card -->
+                            END;
+                        }
+                    }
+                    ?>
 
                 </div>
                 <!-- end of col -->
