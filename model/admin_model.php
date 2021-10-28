@@ -84,7 +84,7 @@ class AdminModel {
 			$rating = $mm->getEmployerRating($db, $row['employer']);
 			$date = $mm->getDate($db, 'jobmatch', $row['mid']);
 			$timeElapsed = $mm->getTimeElapsed($date);
-			$alljobMatches[$i] = new JobMatch($row['id'], $row['employer'], $row['jobSeeker'], $row['contact'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage'], $rating, $row['feedback'], $timeElapsed);
+			$alljobMatches[$i] = new JobMatch($row['mid'], $row['employer'], $row['jobSeeker'], $row['contact'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage'], $rating, $row['feedback'], $timeElapsed);
 		}
 		$result->free();
 		$db->close();

@@ -10,19 +10,11 @@ if (session_status() === PHP_SESSION_NONE) {
 $mmc = new MatchmakingController();
 $sc = new SessionController();
 $jobmatch = $mmc->getJobMatchByID($id);
+$userType = $sc->getUserType();
 
 if (isset($_POST['deny'])) {
     $mmc->denyMatch($id, $sc->getUserType());
 }
-
-function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPage, $rating)
-{
-    echo "<form action=$actionPage method=\"GET\">";
-    echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-    echo "<button type='submit' class='btn btn-secondary-sm'>$buttonText &nbsp;|&nbsp; $rating <i class='fa fa-star' style='color:#FFD700' aria-hidden='true'></i></button>";
-    echo "</form>";
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,23 +54,44 @@ function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPag
                 </div>
                 <hr>
                 <div class="text-start">
-                    <div class="row">
-                        <div class="col-md-2">
-                            <button class="btn btn-solid-lg" data-bs-toggle="modal" data-bs-target="#acceptModal">Accept</button>
-                            
-                        </div>
-                        <div class="col-md-2">
-                            <form method="POST">
-                                <button class="btn btn-danger-lg" onclick="return confirm('Are you sure you want to deny this match ?')" name="deny" type="submit">Deny</button>
-                            </form>
-                        </div>
-                        <div class="col text-end">
-                        <?php
-                            createUserLinkButton('employer', $jobmatch->employer, $jobmatch->employer, 'user_view_other.php', $jobmatch->rating);
-                        ?>
-                        </div>
-                    </div>
-
+                    <?php
+                    if ($userType == "admin") {
+                        echo <<< END
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <form method="POST">
+                                        <button class="btn btn-danger-lg" onclick="return confirm('Are you sure you want to deny this match ?')" name="deny" type="submit">Delete</button>
+                                    </form>
+                                </div>
+                                <div class="col text-end">
+                                    <form action="user_view_other.php" method="GET">
+                                        <input type="hidden" name="employer" value="$jobmatch->employer">
+                                        <button type='submit' class='btn btn-secondary-sm'>$jobmatch->employer &nbsp;|&nbsp; $jobmatch->rating <i class='fa fa-star' style='color:#FFD700' aria-hidden='true'></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        END;
+                    } else {
+                        echo <<< END
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <button class="btn btn-solid-lg" data-bs-toggle="modal" data-bs-target="#acceptModal">Accept</button>
+                                </div>
+                                <div class="col-md-2">
+                                    <form method="POST">
+                                        <button class="btn btn-danger-lg" onclick="return confirm('Are you sure you want to deny this match ?')" name="deny" type="submit">Deny</button>
+                                    </form>
+                                </div>
+                                <div class="col text-end">
+                                    <form action="user_view_other.php" method="GET">
+                                        <input type="hidden" name="employer" value="$jobmatch->employer">
+                                        <button type='submit' class='btn btn-secondary-sm'>$jobmatch->employer &nbsp;|&nbsp; $jobmatch->rating <i class='fa fa-star' style='color:#FFD700' aria-hidden='true'></i></button>
+                                    </form>
+                                </div>
+                            </div>
+                        END;
+                    }
+                    ?>
 
                     <!-- Modal -->
                     <div class="modal fade" id="acceptModal" tabindex="-1" aria-labelledby="acceptModalLabel" aria-hidden="true">
@@ -135,20 +148,27 @@ function createUserLinkButton($hiddenName, $hiddenValue, $buttonText, $actionPag
                     </p>
                     <h6>Looking Suspicious?</h6>
                     <p>If you found a job that is suspicious, please report it to <b>JobMatch</b> so that we can review it.</p>
-                    <div class="row">
-                        <div class="col text-start">
-                            <form action="report.php" method="GET">
-                                <input type="hidden" name="id" value=<?php echo "$id" ?>>
-                                <button type="submit" class="btn btn-secondary-sm"><i class="fa fa-info-circle" aria-hidden="true"></i> Report</button>
-                            </form>
-                        </div>
-                        <div class="col text-end">
-                            <form action="feedback.php" method="GET">
-                                <input type="hidden" name="id" value=<?php echo "$id" ?>>
-                                <button type="submit" class="btn btn-secondary-sm"><i class="fa fa-comments" aria-hidden="true"></i> Feedback</button>
-                            </form>
-                        </div>
-                    </div>
+                    <?php
+                    if ($userType == "employer" || $userType == "jobseeker") {
+                        echo <<< END
+                            <div class="row">
+                                <div class="col text-start">
+                                    <form action="report.php" method="GET">
+                                        <input type="hidden" name="id" value=$id>
+                                        <button type="submit" class="btn btn-secondary-sm"><i class="fa fa-info-circle" aria-hidden="true"></i> Report</button>
+                                    </form>
+                                </div>
+                                <div class="col text-end">
+                                    <form action="feedback.php" method="GET">
+                                        <input type="hidden" name="id" value=$id>
+                                        <button type="submit" class="btn btn-secondary-sm"><i class="fa fa-comments" aria-hidden="true"></i> Feedback</button>
+                                    </form>
+                                </div>
+                            </div>
+                        END;
+                    }
+                    ?>
+                    
                 </div>
                 <!-- end of col -->
             </div>

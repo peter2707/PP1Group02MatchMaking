@@ -89,7 +89,7 @@ class MatchmakingModel{
 		}
 	}
 
-	public function deletePost($db, $id) {
+	public function deletePost($db, $id, $usertype) {
 		$this->deleteMatchByPostID($db, $id);
 		$query = "DELETE FROM jobpost WHERE id = ?";
 		$stmt = $db->prepare($query);
@@ -101,9 +101,17 @@ class MatchmakingModel{
 		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/employer_post.php?success=deleted");
+			if($usertype == "admin"){
+				header("location: ../view/admin_index.php?success=deleted");
+			}else{
+				header("location: ../view/employer_post.php?success=deleted");
+			}
 		} else {
-			header("location: ../view/employer_post.php?error=deletefailed");
+			if($usertype == "admin"){
+				header("location: ../view/admin_index.php?error=deletefailed");
+			}else{
+				header("location: ../view/employer_post.php?error=deletefailed");	
+			}
 		}
 	}
 

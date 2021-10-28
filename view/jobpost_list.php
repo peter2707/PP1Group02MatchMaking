@@ -16,11 +16,8 @@ if (isset($_POST['delete'])) {
     $username = $_POST['username'];
     $adminController->deleteAccount($username, "admin");
 } else {
-    $allFeedbacks = array();
-    $allFeedbacks = $ac->getAllFeedback();
-
-    $allReports = array();
-    $allReports = $ac->getAllReport();
+    $allJobPosts = array();
+    $allJobPosts = $ac->getAllJobPost();
 }
 ?>
 <!DOCTYPE html>
@@ -47,7 +44,7 @@ if (isset($_POST['delete'])) {
         <div class="container">
             <div class="row justify-content-md-center">
                 <div class="col-xl-11 mb-2">
-                    <h1>All Feedbacks</h1>
+                    <h1>Job Posts</h1>
                 </div>
             </div>
             <!-- end of row -->
@@ -57,45 +54,48 @@ if (isset($_POST['delete'])) {
     <!-- end of header -->
 
     <div class="container mt-5">
-        <div class="mb-5" style="min-height: 200px;">
+        <div class="mb-5" style="min-height: 400px;">
             <?php
-            if (count($allFeedbacks) < 1) {
-                echo "<h3>No result found yet.</h3> <small>All feedback made by user will be appeared here.</small>";
+            if (count($allJobPosts) < 1) {
+                echo "<h3>No data available yet.</h3> <small>All job posts will be displayed here once available.</small>";
             } else {
-                echo "<table class='table'>";
-                echo "      <thead>";
-                echo "        <tr>";
-                echo "            <th scope='col'>ID</th>";
-                echo "            <th scope='col'>User</th>";
-                echo "            <th scope='col'>Rating</th>";
-                echo "            <th scope='col'>Comment</th>";
-                echo "            <th scope='col'>Date</th>";
-                echo "            <th scope='col'></th>";
-                echo "        </tr>";
-                echo "      </thead>";
-                echo "      <tbody>";
-                foreach ($allFeedbacks as $feedback) {
-                    echo "        <tr>";
-                    echo "          <td scope=\"row\">$admin->id</td>";
-                    echo "          <td scope=\"row\">$admin->username</td>";
-                    echo "          <td scope=\"row\">$admin->rating</td>";
-                    echo "          <td scope=\"row\">$admin->comment</td>";
-                    echo "          <td scope=\"row\">$admin->date</td>";
-                    createDeleteButton("username", $admin->username, "Delete");
-                    echo "        </tr>";
+                foreach ($allJobPosts as $post) {
+                    $badge = "badge bg-primary";
+                    if ($post->type == "Full Time") {
+                        $badge = "badge bg-success";
+                    } elseif ($post->type == "Part Time") {
+                        $badge = "badge bg-primary";
+                    } elseif ($post->type == "Casual") {
+                        $badge = "badge bg-warning";
+                    } elseif ($post->type == "Contract") {
+                        $badge = "badge bg-danger";
+                    }
+                    echo <<< END
+                        <div class="job-card">
+                            <div class="card border-0 mb-5">
+                                <div class="card-body">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col text-start">
+                                            <small class="ms-1"><span class="$badge">$post->type</span></small>
+                                            <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$post->position</h4>
+                                            <p class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp; $post->location &nbsp;&nbsp; <i style="font-size: 20px" class="bi bi-cash"></i>&nbsp; $post->salary</p>
+                                            <small class="card-text text-success"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Match: $post->matches time(s)</small>
+                                            <br>
+                                            <small class="card-text"><i class="fa fa-clock" aria-hidden="true"></i>&nbsp; $post->date</small>
+                                        </div>
+                                        <div class="col text-end">
+                                            <form action="employer_view_post.php" method="GET">
+                                                <input type="hidden" name="id" value=$post->id>
+                                                <button type="submit" class="btn btn-solid-lg">View</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    END;
                 }
-                echo "      </tbody>";
-                echo "</table>";
-                unset($allFeedbacks);
-            }
-            function createDeleteButton($hiddenName, $admin, $buttonText)
-            {
-                echo "<td>";
-                echo "<form method=\"POST\">";
-                echo "<input type=\"hidden\" name=$hiddenName value=$admin>";
-                echo "<button name=\"delete\" type=\"submit\" class=\"btn btn-danger-sm\" onclick=\"return confirm('Are you sure you want to delete $admin ?')\" >$buttonText</button>";
-                echo "</form>";
-                echo "</td>";
+                unset($allJobPosts);
             }
             ?>
         </div>

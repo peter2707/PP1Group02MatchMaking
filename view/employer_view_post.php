@@ -33,7 +33,7 @@ if (isset($_POST['update'])) {
         $mmc->updatePost($position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
     }
 } elseif (isset($_POST['delete'])) {
-    $mmc->deletePost($id);
+    $mmc->deletePost($id, $sc->getUserType());
 }
 
 

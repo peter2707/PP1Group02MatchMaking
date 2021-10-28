@@ -1,9 +1,21 @@
 <?php
+require_once '../controller/admin_controller.php';
+require_once '../controller/session_controller.php';
+// call controllers
+$sc = new SessionController();
+$ac = new AdminController();
+
+// check if the session has not started yet
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$allJobSeekers = array();
+$allJobSeekers = $ac->getAllJobSeeker();
+
 if (isset($_POST['delete'])) {
-    require_once "../controller/admin_controller.php";
-    $adminController = new AdminController();
     $username = $_POST['username'];
-    $adminController->deleteAccount($username, "jobseeker");
+    $ac->deleteAccount($username, "jobseeker");
 }
 ?>
 <!DOCTYPE html>
@@ -28,28 +40,16 @@ if (isset($_POST['delete'])) {
     <!-- Header -->
     <header id="ex-header" class="ex-header">
         <div class="container">
-            <h1>All JobSeekers</h1>
+            <h1>JobSeekers</h1>
         </div>
         <!-- end of container -->
     </header>
     <!-- end of header -->
 
     <div class="container mt-5">
-        <div class="mb-5" style="min-height: 200px;">
+        <div class="mb-5" style="min-height: 400px;">
             <?php
-            require_once '../controller/admin_controller.php';
-            require_once '../controller/session_controller.php';
-            // call controllers
-            $sc = new SessionController();
-            $ac = new AdminController();
-
-            // check if the session has not started yet
-            if (session_status() === PHP_SESSION_NONE) {
-                session_start();
-            }
-
-            $allJobSeekers = array();
-            $allJobSeekers = $ac->getAllJobSeeker();
+            
             if (count($allJobSeekers) < 1) {
                 echo "<h3>No result found yet.</h3> <small>To add a user, click on the Add New User button</small>";
             } else {

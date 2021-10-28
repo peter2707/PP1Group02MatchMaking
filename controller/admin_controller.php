@@ -51,8 +51,8 @@ class AdminController {
     }
 
     public function deleteAccount($username, $usertype){
-        require_once '../model/db_connection.php';
         require_once '../model/admin_model.php';
+        include '../model/db_connection.php';
         $adminModel = new AdminModel();
         $adminModel->deleteAccount($db, $username, $usertype);
     }

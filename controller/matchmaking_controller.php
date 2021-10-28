@@ -82,11 +82,11 @@ class MatchmakingController {
         return $mmm->updatePost($db, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
     }
 
-    public function deletePost($id) {
+    public function deletePost($id, $usertype) {
         require_once '../model/matchmaking_model.php';
         include '../model/db_connection.php';
         $mmm = new MatchmakingModel();
-        $mmm->deletePost($db, $id);
+        $mmm->deletePost($db, $id, $usertype);
     }
 
     public function denyMatch($id, $usertype){

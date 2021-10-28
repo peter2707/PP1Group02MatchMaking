@@ -1,13 +1,13 @@
 <?php
-if (isset($_POST['post'])) {
-    require_once '../controller/matchmaking_controller.php';
-    require_once '../controller/session_controller.php';
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
-    }
-    $mmc = new MatchmakingController();
-    $sc = new SessionController();
+require_once '../controller/matchmaking_controller.php';
+require_once '../controller/session_controller.php';
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+$mmc = new MatchmakingController();
+$sc = new SessionController();
 
+if (isset($_POST['post'])) {
     $position = $_POST['position'];
     $field = $_POST['field'];
     $salary = $_POST['salary'];
@@ -18,7 +18,11 @@ if (isset($_POST['post'])) {
     $contact = $_POST['contact'];
 
     $mmc->postJob(ucfirst($position), $field, $salary, $type, $description, $requirements, $location, $sc->getUserName(), $contact);
+}else{
+    $jobposts = array();
+    $jobposts = $mmc->getJobPostsByEmployer($sc->getUserName());
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -120,18 +124,8 @@ if (isset($_POST['post'])) {
 
 
 
-    <div class="col-md-6 offset-md-3 mt-5 mb-5" style="min-height: 200px;">
+    <div class="col-md-6 offset-md-3 mt-5 mb-5" style="min-height: 400px;">
         <?php
-        require_once '../controller/matchmaking_controller.php';
-        require_once '../controller/session_controller.php';
-        // check if the session has not started yet
-        if (session_status() === PHP_SESSION_NONE) {
-            session_start();
-        }
-
-        // call controllers
-        $sc = new SessionController();
-        $mmc = new MatchmakingController();
         // Error messages
         if (isset($_GET["error"])) {
             echo "<h5><span class='mb-5 badge bg-danger'>";
@@ -164,8 +158,7 @@ if (isset($_POST['post'])) {
             }
             echo "</span></h5>";
         }
-        $jobposts = array();
-        $jobposts = $mmc->getJobPostsByEmployer($sc->getUserName());
+        
         if (count($jobposts) < 1) {
             echo "<h3>You don't have any post yet.</h3> <small>To make a new post, click on the <i class='fa fa-paper-plane' aria-hidden='true'></i> button and fill in the job details</small>";
         } else {
