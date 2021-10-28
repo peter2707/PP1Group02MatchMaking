@@ -78,10 +78,9 @@ if (isset($_POST['delete'])) {
                                         <div class="col text-start">
                                             <small class="ms-1"><span class="$badge">$match->type</span></small>
                                             <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$match->position</h4>
-                                            <p class="card-text"><i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp; $match->location &nbsp;&nbsp; <i style="font-size: 20px" class="bi bi-cash"></i>&nbsp; $match->salary</p>
-                                            <small class="card-text text-success"><i class="fa fa-check" aria-hidden="true"></i>&nbsp; $match->percentage% Match</small>
-                                            <br>
                                             <small class="card-text"><i class="fa fa-clock" aria-hidden="true"></i>&nbsp; $match->date</small>
+                                            <br><br>
+                                            <p class="card-text"><b>ID:</b> $match->id &nbsp;&nbsp;&nbsp; <b>Employer:</b> $match->employer &nbsp;&nbsp;&nbsp; <b>JobSeeker:</b> $match->jobseeker</p>
                                         </div>
                                         <div class="col text-end">
                                             <form action="jobseeker_view_match.php" method="GET">

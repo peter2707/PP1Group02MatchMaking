@@ -68,40 +68,35 @@ if (isset($_POST['deleteFeedback'])) {
             if (count($allFeedbacks) < 1) {
                 echo "<h6 class='mt-5'>No result found yet.</h6> <small>All feedback made by user will be appeared here.</small>";
             } else {
-                echo "<table class='table'>";
-                echo "      <thead>";
-                echo "        <tr>";
-                echo "            <th scope='col'>ID</th>";
-                echo "            <th scope='col'>User</th>";
-                echo "            <th scope='col'>Rating</th>";
-                echo "            <th scope='col'>Comment</th>";
-                echo "            <th scope='col'>Date</th>";
-                echo "            <th scope='col'>Action</th>";
-                echo "        </tr>";
-                echo "      </thead>";
-                echo "      <tbody>";
                 foreach ($allFeedbacks as $feedback) {
-                    echo "        <tr>";
-                    echo "          <td scope=\"row\">$feedback->id</td>";
-                    echo "          <td scope=\"row\">$feedback->username</td>";
-                    echo "          <td scope=\"row\">$feedback->rating</td>";
-                    echo "          <td scope=\"row\">$feedback->comment</td>";
-                    echo "          <td scope=\"row\">$feedback->date</td>";
-                    createDeleteFeedbackButton("feedbackID", $feedback->id, "<i class='fa fa-trash' aria-hidden='true'></i>");
-                    echo "        </tr>";
+                    $rating = str_repeat("⭐", $feedback->rating);
+                    echo <<< END
+                        <div class="job-card">
+                            <div class="card border-0 mb-5">
+                                <div class="card-body">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col text-start">
+                                            <p class="ms-1"><span class="badge bg-secondary">ID: &nbsp;$feedback->id</span></p>
+                                            <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$rating</h4>
+                                            <p class="card-text"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp; $feedback->comment</p>
+                                            <small class="card-text text-success"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; $feedback->username</small>
+                                            <br>
+                                            <small class="card-text"><i class="fa fa-clock" aria-hidden="true"></i>&nbsp; $feedback->date</small>
+                                            <br><br>
+                                        </div>
+                                        <div class="col-2 text-end">
+                                            <form method="POST">
+                                                <input type="hidden" name="feedbackID" value=$feedback->id>
+                                                <button name="deleteFeedback" type="submit" class="btn btn-danger-sm" onclick="return confirm('Are you sure you want to delete this feedback?')"><i class='fa fa-trash' aria-hidden='true'></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    END;
                 }
-                echo "      </tbody>";
-                echo "</table>";
                 unset($allFeedbacks);
-            }
-            function createDeleteFeedbackButton($hiddenName, $id, $buttonText)
-            {
-                echo "<td>";
-                echo "<form method=\"POST\">";
-                echo "<input type=\"hidden\" name=$hiddenName value=$id>";
-                echo "<button name=\"deleteFeedback\" type=\"submit\" class=\"btn btn-danger btn-sm\" onclick=\"return confirm('Are you sure you want to delete this feedback?')\" >$buttonText</button>";
-                echo "</form>";
-                echo "</td>";
             }
             ?>
         </div>
@@ -113,44 +108,34 @@ if (isset($_POST['deleteFeedback'])) {
             if (count($allReports) < 1) {
                 echo "<h6 class='mt-5'>No result found yet.</h6> <small>All report made by user will be appeared here.</small>";
             } else {
-                echo "<table class='table'>";
-                echo "      <thead>";
-                echo "        <tr>";
-                echo "            <th scope='col'>ID</th>";
-                echo "            <th scope='col'>User</th>";
-                echo "            <th scope='col'>Type</th>";
-                echo "            <th scope='col'>MatchID</th>";
-                echo "            <th scope='col'>Reason</th>";
-                echo "            <th scope='col'>Comment</th>";
-                echo "            <th scope='col'>Date</th>";
-                echo "            <th scope='col'>Action</th>";
-                echo "        </tr>";
-                echo "      </thead>";
-                echo "      <tbody>";
                 foreach ($allReports as $report) {
-                    echo "        <tr>";
-                    echo "          <td scope=\"row\">$report->id</td>";
-                    echo "          <td scope=\"row\">$report->username</td>";
-                    echo "          <td scope=\"row\">$report->type</td>";
-                    echo "          <td scope=\"row\">$report->matchID</td>";
-                    echo "          <td scope=\"row\">$report->reason</td>";
-                    echo "          <td scope=\"row\">$report->comment</td>";
-                    echo "          <td scope=\"row\">$report->date</td>";
-                    createDeleteReportButton("reportID", $report->id, "<i class='fa fa-trash' aria-hidden='true'></i>");
-                    echo "        </tr>";
+                    echo <<< END
+                        <div class="job-card">
+                            <div class="card border-0 mb-5">
+                                <div class="card-body">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col text-start">
+                                            <p class="ms-1"><span class="badge bg-secondary">ID: &nbsp;$report->id</span></p>
+                                            <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$report->reason</h4>
+                                            <p class="card-text"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp; $report->comment</p>
+                                            <small class="card-text text-success"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; $report->username</small>
+                                            <br>
+                                            <small class="card-text"><i class="fa fa-clock" aria-hidden="true"></i>&nbsp; $report->date</small>
+                                            <br><br>
+                                        </div>
+                                        <div class="col-2 text-end">
+                                            <form method="POST">
+                                                <input type="hidden" name="reportID" value=$report->id>
+                                                <button name="deleteReport" type="submit" class="btn btn-danger-sm" onclick="return confirm('Are you sure you want to delete this report?')"><i class='fa fa-trash' aria-hidden='true'></i></button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    END;
                 }
-                echo "      </tbody>";
-                echo "</table>";
                 unset($allReports);
-            }
-            function createDeleteReportButton($hiddenName, $id, $buttonText)
-            {
-                echo "<td>";
-                echo "<form method=\"POST\">";
-                echo "<input type=\"hidden\" name=$hiddenName value=$id>";
-                echo "<button name=\"deleteReport\" type=\"submit\" class=\"btn btn-danger btn-sm\" onclick=\"return confirm('Are you sure you want to delete this report?')\" >$buttonText</button>";
-                echo "</form>";
-                echo "</td>";
             }
             ?>
         </div>

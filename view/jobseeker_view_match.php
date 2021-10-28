@@ -39,7 +39,13 @@ if (isset($_POST['deny'])) {
     <header id="ex-header" class="ex-header">
         <div class="container">
             <div class="col-xl-10 offset-xl-1">
+                
                 <div class="text-start">
+                    <?php
+                    if ($userType == "admin") {
+                        echo "<p class='card-text'><b>ID:</b> $jobmatch->id &nbsp;&nbsp;&nbsp; <b>Employer:</b> $jobmatch->employer &nbsp;&nbsp;&nbsp; <b>JobSeeker:</b> $jobmatch->jobseeker</p>";
+                    }
+                    ?>
                     <h1><?php echo "$jobmatch->position"; ?></h1>
                 </div>
                 <div class="row d-flex align-items-center">

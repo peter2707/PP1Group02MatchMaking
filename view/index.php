@@ -233,6 +233,7 @@ $allFeedbacks = $ac->getAllFeedback();
                     } else {
                         $feedback = array_slice($allFeedbacks, -6);
                         for ($i = 0; $i < count($feedback); $i++) {
+                            $rating = str_repeat("⭐", $feedback[$i]->rating);
                             $comment = $feedback[$i]->comment;
                             $username = $feedback[$i]->username;
                             $date = $feedback[$i]->date;
@@ -241,6 +242,7 @@ $allFeedbacks = $ac->getAllFeedback();
                                 <div class="card">
                                     <img class="quotes" src="../images/quotes.svg" alt="alternative">
                                     <div class="card-body">
+                                        <small>$rating</small>
                                         <p class="testimonial-text">$comment</p>
                                         <div class="testimonial-author">$username</div>
                                         <div class="occupation">$date</div>

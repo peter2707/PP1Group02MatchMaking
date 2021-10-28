@@ -82,6 +82,8 @@ if (isset($_POST['delete'])) {
                                             <small class="card-text text-success"><i class="fa fa-users" aria-hidden="true"></i>&nbsp; Match: $post->matches time(s)</small>
                                             <br>
                                             <small class="card-text"><i class="fa fa-clock" aria-hidden="true"></i>&nbsp; $post->date</small>
+                                            <br><br>
+                                            <p class="card-text"><b>ID:</b> $post->id &nbsp;&nbsp;&nbsp; <b>Employer:</b> $post->employer</p>
                                         </div>
                                         <div class="col text-end">
                                             <form action="employer_view_post.php" method="GET">

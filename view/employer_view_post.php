@@ -10,7 +10,7 @@ if (session_status() === PHP_SESSION_NONE) {
 $mmc = new MatchmakingController();
 $sc = new SessionController();
 $jobpost = $mmc->getJobPostByID($id);
-
+$userType = $sc->getUserType();
 
 if (isset($_POST['update'])) {
     $position = $_POST['position'];
@@ -62,6 +62,11 @@ if (isset($_POST['update'])) {
         <div class="container">
             <div class="col-xl-10 offset-xl-1">
                 <div class="text-start">
+                    <?php
+                    if ($userType == "admin") {
+                        echo "<p class='card-text'><b>ID:</b> $jobpost->id &nbsp;&nbsp;&nbsp; <b>Employer:</b> $jobpost->employer</p>";
+                    }
+                    ?>
                     <h1><?php echo "$jobpost->position"; ?></h1>
                 </div>
                 <div class="row">
