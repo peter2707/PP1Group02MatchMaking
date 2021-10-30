@@ -1278,6 +1278,12 @@ a:hover {
         text-decoration: none;
         transition: all 0.2s ease;
     }
+    #content-desktop {
+        display: none;
+    }
+    #content-mobile {
+        display: block;
+    }
 }
 
 
@@ -1307,6 +1313,12 @@ a:hover {
         padding: 1.75rem 2rem 0.875rem 2rem;
     }
     /* end of extra pages */
+    #content-desktop {
+        display: block;
+    }
+    #content-mobile {
+        display: none;
+    }
 }
 
 

@@ -233,7 +233,9 @@ class AdminModel {
 
 	public function deleteAccount($db, $username, $type) {
 		require_once '../model/user_model.php';
+		require_once '../model/matchmaking_model.php';
 		$um = new UserModel();
+		$mm = new MatchmakingModel();
 		$query = "DELETE FROM $type WHERE username = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("s", $username);
@@ -242,10 +244,12 @@ class AdminModel {
 		$affectedRows = $stmt->affected_rows;
 		$stmt->close();
 		if ($affectedRows == 1) {
-			$um->deleteAllCareers($db, $username);
-			$um->deleteAllEducations($db, $username);
-			$um->deleteAllSkills($db, $username);
-			$um->deleteAllSocials($db, $username);
+			if($type == "jobseeker"){
+				$um->deleteAllCareers($db, $username);
+				$um->deleteAllEducations($db, $username);
+				$um->deleteAllSkills($db, $username);
+				$um->deleteAllSocials($db, $username);
+			}//to do
 			header("location: ../view/admin_index.php?success=deleted");
 		} else {
 			header("location: ../view/admin_index.php?error=deletefailed");

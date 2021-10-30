@@ -57,55 +57,41 @@ if (isset($_POST['delete'])) {
             if (count($allAdmins) < 1) {
                 echo "<h3>No result found yet.</h3> <small>To add a user, click on the Add New User button</small>";
             } else {
-                echo "<table class='table'>";
-                echo "      <thead>";
-                echo "        <tr>";
-                echo "            <th scope='col'>ID</th>";
-                echo "            <th scope='col'>FirstName</th>";
-                echo "            <th scope='col'>LastName</th>";
-                echo "            <th scope='col'>Username</th>";
-                echo "            <th scope='col'>DateOfBirth</th>";
-                echo "            <th scope='col'>Phone</th>";
-                echo "            <th scope='col'>Email</th>";
-                echo "            <th scope='col'>Position</th>";
-                echo "            <th scope='col'>Action</th>";
-                echo "            <th scope='col'></th>";
-                echo "        </tr>";
-                echo "      </thead>";
-                echo "      <tbody>";
                 foreach ($allAdmins as $admin) {
-                    echo "        <tr>";
-                    echo "          <td scope=\"row\">$admin->id</td>";
-                    echo "          <td scope=\"row\">$admin->firstName</td>";
-                    echo "          <td scope=\"row\">$admin->lastName</td>";
-                    echo "          <td scope=\"row\">$admin->username</td>";
-                    echo "          <td scope=\"row\">$admin->dob</td>";
-                    echo "          <td scope=\"row\">$admin->phone</td>";
-                    echo "          <td scope=\"row\">$admin->email</td>";
-                    echo "          <td scope=\"row\">$admin->position</td>";
-                    createEditButton("admin", $admin->username, "<i class='fa fa-wrench' aria-hidden='true'>", "admin_edit_user.php");
-                    createDeleteButton("username", $admin->username, "<i class='fa fa-trash' aria-hidden='true'>");
-                    echo "        </tr>";
+                    echo <<< END
+                        <div class="job-card">
+                            <div class="card border-0 mb-5">
+                                <div class="card-body">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-md-1 text-center" id="content-desktop"><img src='../images/user.png' alt='User' class='rounded-circle' width='50' height='50'></div>
+                                        <div class="col text-start">
+                                            <small class="ms-1"><span class="badge bg-secondary">ID: $admin->id</span></small>
+                                            <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$admin->firstName $admin->lastName</h4>
+                                            <p class="card-text"><i class="fa fa-address-card" aria-hidden="true"></i>&nbsp; $admin->position</p>
+                                            <small class="card-text text-success"><i class="fa fa-phone" aria-hidden="true"></i>&nbsp; $admin->phone</small>
+                                        </div>
+                                        
+                                        <div class="col row text-end">
+                                            <div class="col text-end">
+                                                <form action="admin_edit_user.php" method="GET">
+                                                    <input type="hidden" name="admin" value=$admin->username>
+                                                    <button type="submit" class="btn btn-solid-sm"><i class="fa fa-wrench" aria-hidden="true"></i></button>
+                                                </form>
+                                            </div>
+                                            <div class="col text-start">
+                                                <form method="POST">
+                                                    <input type="hidden" name="username" value=$admin->username>
+                                                    <button name="delete" type="submit" class="btn btn-danger-sm" onclick="return confirm('Are you sure you want to delete $admin->username ?')" ><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    END;
                 }
-                echo "      </tbody>";
-                echo "</table>";
                 unset($allAdmins);
-            }
-            function createEditButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
-                echo "<td>";
-                echo "<form action=$actionPage method=\"GET\">";
-                echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-                echo "<button type=\"submit\" class=\"btn btn-primary btn-sm\">$buttonText</button>";
-                echo "</form>";
-                echo "</td>";
-            }
-            function createDeleteButton($hiddenName, $admin, $buttonText){
-                echo "<td>";
-                echo "<form method=\"POST\">";
-                echo "<input type=\"hidden\" name=$hiddenName value=$admin>";
-                echo "<button name=\"delete\" type=\"submit\" class=\"btn btn-danger btn-sm\" onclick=\"return confirm('Are you sure you want to delete $admin ?')\" >$buttonText</button>";
-                echo "</form>";
-                echo "</td>";
             }
             ?>
         </div>

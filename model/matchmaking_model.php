@@ -187,9 +187,12 @@ class MatchmakingModel{
 	}
 
 	public function getEmployerRating($db, $employer){
+		$rating = 0.0;
 		$result = $db->query("SELECT rating FROM employer WHERE username='$employer'");
 		$row = $result->fetch_assoc();
-		$rating = $row['rating'];
+		if(isset($row['rating'])){
+			$rating = $row['rating'];
+		}
 		return $rating;
 	}
 

@@ -53,59 +53,44 @@ if (isset($_POST['delete'])) {
             if (count($allJobSeekers) < 1) {
                 echo "<h3>No result found yet.</h3> <small>To add a user, click on the Add New User button</small>";
             } else {
-                echo "<table class='table'>";
-                echo "    <thead>";
-                echo "        <tr>";
-                echo "            <th scope='col'>ID</th>";
-                echo "            <th scope='col'>FirstName</th>";
-                echo "            <th scope='col'>LastName</th>";
-                echo "            <th scope='col'>Username</th>";
-                echo "            <th scope='col'>DateOfBirth</th>";
-                echo "            <th scope='col'>Phone</th>";
-                echo "            <th scope='col'>Email</th>";
-                echo "            <th scope='col'>Field</th>";
-                echo "            <th scope='col'>Location</th>";
-                echo "            <th scope='col'>Action</th>";
-                echo "            <th scope='col'></th>";
-                echo "        </tr>";
-                echo "    </thead>";
-                echo "<tbody>";
                 foreach ($allJobSeekers as $jobSeeker) {
-                    echo "    <tr>";
-                    echo "        <td scope=\"row\">$jobSeeker->id</td>";
-                    echo "        <td scope=\"row\">$jobSeeker->firstName</td>";
-                    echo "        <td scope=\"row\">$jobSeeker->lastName</td>";
-                    echo "        <td scope=\"row\">$jobSeeker->username</td>";
-                    echo "        <td scope=\"row\">$jobSeeker->dob</td>";
-                    echo "        <td scope=\"row\">$jobSeeker->phone</td>";
-                    echo "        <td scope=\"row\">$jobSeeker->email</td>";
-                    echo "        <td scope=\"row\">$jobSeeker->field</td>";
-                    echo "        <td scope=\"row\">$jobSeeker->location</td>";
-                    createEditButton("jobseeker", $jobSeeker->username, "<i class='fa fa-wrench' aria-hidden='true'>", "admin_edit_user.php");
-                    createDeleteButton("username", $jobSeeker->username, "<i class='fa fa-trash' aria-hidden='true'>");
-                    echo "    </tr>";
+                    $userImage = $jobSeeker->image;
+                    if ($jobSeeker->image == NULL) {
+                        $defaultImage = file_get_contents("../images/user.png");
+                        $userImage = base64_encode($defaultImage);
+                    }
+                    echo <<< END
+                        <div class="job-card">
+                            <div class="card border-0 mb-5">
+                                <div class="card-body">
+                                    <div class="row d-flex align-items-center">
+                                        <div class="col-1 text-center" id="content-desktop"><img src="data:image/png;base64, $userImage" alt='User' class='rounded-circle' width='50' height='50'></div>
+                                        <div class="col text-start">
+                                            <small class="ms-1"><span class="badge bg-secondary">ID: $jobSeeker->id</span></small>
+                                            <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$jobSeeker->firstName $jobSeeker->lastName</h4>
+                                            <p class="card-text"><i class="fa fa-certificate" aria-hidden="true"></i>&nbsp; $jobSeeker->field</p>
+                                        </div>
+                                        <div class="col row text-end">
+                                            <div class="col text-end">
+                                                <form action="admin_edit_user.php" method="GET">
+                                                    <input type="hidden" name="jobseeker" value=$jobSeeker->username>
+                                                    <button type="submit" class="btn btn-solid-sm"><i class="fa fa-wrench" aria-hidden="true"></i></button>
+                                                </form>
+                                            </div>
+                                            <div class="col text-start">
+                                                <form method="POST">
+                                                    <input type="hidden" name="username" value=$jobSeeker->username>
+                                                    <button name="delete" type="submit" class="btn btn-danger-sm" onclick="return confirm('Are you sure you want to delete $jobSeeker->username ?')" ><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    END;
                 }
-                echo "</tbody>";
-                echo "</table>";
                 unset($allJobSeekers);
-            }
-            function createEditButton($hiddenName, $hiddenValue, $buttonText, $actionPage)
-            {
-                echo "<td>";
-                echo "<form action=$actionPage method=\"GET\">";
-                echo "<input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-                echo "<button type=\"submit\" class=\"btn btn-primary btn-sm\">$buttonText</button>";
-                echo "</form>";
-                echo "</td>";
-            }
-            function createDeleteButton($hiddenName, $jobseeker, $buttonText)
-            {
-                echo "<td>";
-                echo "<form method=\"POST\">";
-                echo "<input type=\"hidden\" name=$hiddenName value=$jobseeker>";
-                echo "<button name=\"delete\" type=\"submit\" class=\"btn btn-danger btn-sm\" onclick=\"return confirm('Are you sure you want to delete $jobseeker ?')\" >$buttonText</button>";
-                echo "</form>";
-                echo "</td>";
             }
             ?>
 
