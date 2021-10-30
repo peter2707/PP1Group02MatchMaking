@@ -94,12 +94,14 @@ if (isset($_POST["exportJobSeeker"])) {
                             echo "Something went wrong. Please try again!";
                         } else if ($_GET["error"] == "deletefailed") {
                             echo "There was a problem while trying to delete.";
+                        } else if ($_GET["error"] == "updatefailed") {
+                            echo "There was a problem while trying to update.";
                         } else if ($_GET["error"] == "dbnull") {
                             echo "There are no data to generate.";
                         } else if ($_GET["error"] == "fieldnotfound") {
                             echo "You have to choose a field of expertise";
                         } else if ($_GET["error"] == "positionnotfound") {
-                            echo "You have to enter your position";
+                            echo "You have to enter a position";
                         }
                         echo "</span></h5>";
                     } elseif (isset($_GET["success"])) {
@@ -107,9 +109,9 @@ if (isset($_POST["exportJobSeeker"])) {
                         if ($_GET["success"] == "created") {
                             echo "Account has been successfully created.";
                         } elseif ($_GET["success"] == "deleted") {
-                            echo "Account has been successfully deleted.";
+                            echo "Successfully deleted.";
                         } elseif ($_GET["success"] == "updated") {
-                            echo "Account has been successfully updated.";
+                            echo "Successfully updated.";
                         }
                         echo "</span></h5>";
                     }

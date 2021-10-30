@@ -17,6 +17,7 @@
 
     if (isset($_POST['update'])) {
         if ($userType == "jobseeker") {
+            $id = $_POST['id'];
             $firstName = $_POST['firstName'];
             $lastName = $_POST['lastName'];
             $dob = $_POST['dob'];
@@ -26,8 +27,9 @@
             $location = $_POST['location'];
             $password = $_POST['password'];
 
-            $userController->updateJobSeeker(ucfirst($firstName), ucfirst($lastName), $password, $dob, $phone, $email, $field, $location, $sessionController->getUserName());
+            $userController->updateJobSeeker(ucfirst($firstName), ucfirst($lastName), $sessionController->getUserName(), $password, $dob, $phone, strtolower($email), $field, $location, $id);
         } elseif ($userType == "employer") {
+            $id = $_POST['id'];
             $firstName = $_POST['firstName'];
             $lastName = $_POST['lastName'];
             $dob = $_POST['dob'];
@@ -37,7 +39,7 @@
             $location = $_POST['location'];
             $password = $_POST['password'];
 
-            $userController->updateEmployer(ucfirst($firstName), ucfirst($lastName), $password, $dob, $phone, $email, $position, $location, $sessionController->getUserName());
+            $userController->updateEmployer(ucfirst($firstName), ucfirst($lastName), $sessionController->getUserName(), $password, $dob, $phone, strtolower($email), $position, $location, $id);
         }
     } elseif (isset($_POST['delete'])) {
         $userController->deleteAccount($sessionController->getUserName(), $userType);
@@ -80,8 +82,8 @@
         if ($userType == "jobseeker") {
             echo <<<END
             <!-- User Profile section start -->
-            <div class="col-xl-10 offset-xl-1 mb-5 text-center">
-                <div class="container">
+            <div class="container">
+                <div class="mb-5 text-center">
 END;
                     if (isset($_GET["error"])) {
                         echo "<h5><span class='mb-2 badge bg-danger'>";
@@ -107,7 +109,7 @@ END;
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <form method="POST">
-                                            
+                                            <input type="hidden" name="id" value=$user->id>
                                             <div class="row">
                                                 <div class="col-sm-4 text-start">
                                                     <h6 class="mt-2 ms-5">First Name</h6>
@@ -215,8 +217,8 @@ END;
         } elseif ($userType == "employer") {
             echo <<<END
             <!-- User Profile section start -->
-            <div class="col-xl-10 offset-xl-1 mb-5">
-                <div class="container">
+            <div class="container">
+                <div class="mb-5 text-center">
 END;
             if (isset($_GET["error"])) {
                 echo "<h5><span class='mb-2 badge bg-danger'>";
@@ -242,7 +244,7 @@ END;
                                 <div class="card mb-3">
                                     <div class="card-body">
                                         <form method="POST">
-
+                                            <input type="hidden" name="id" value=$user->id>
                                             <div class="row">
                                                 <div class="col-sm-4 text-start">
                                                     <h6 class="mt-2 ms-5">First Name</h6>

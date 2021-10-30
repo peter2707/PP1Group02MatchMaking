@@ -56,6 +56,8 @@ if (isset($_POST['submit'])) {
             echo "<h5><span class='mb-2 badge bg-danger'>";
             if ($_GET["error"] == "emptyinput") {
                 echo "Please complete all required columns!";
+            }elseif ($_GET["error"] == "failedReport") {
+                echo "There was a problem while trying to report.";
             }
             echo "</span></h5>";
         }elseif (isset($_GET["success"])) {

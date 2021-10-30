@@ -2,18 +2,24 @@
 $id = $_GET['id'];
 require_once '../controller/session_controller.php';
 require_once '../controller/matchmaking_controller.php';
+require_once '../controller/admin_controller.php';
 // check if the session has not started yet
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 // call controllers
 $mmc = new MatchmakingController();
+$ac = new AdminController();
 $sc = new SessionController();
 $jobmatch = $mmc->getJobMatchByID($id);
 $userType = $sc->getUserType();
 
 if (isset($_POST['deny'])) {
-    $mmc->denyMatch($id, $sc->getUserType());
+    if($sc->getUserType() == "admin"){
+        $ac->denyMatch($id);
+    }else{
+        $mmc->denyMatch($id, $sc->getUserType());
+    }
 }
 ?>
 <!DOCTYPE html>

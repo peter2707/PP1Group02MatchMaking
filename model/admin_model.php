@@ -1,28 +1,29 @@
 <?php
 class AdminModel {
-	
-	public function registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position, $location) {
-		$query = "INSERT INTO employer (firstName, lastName, username, password, dateOfBirth, phone, email, position, location) 
-				VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$position', '$location')";
-		mysqli_query($db, $query) or die(mysqli_error($db));
-		$db->close();
-		header("location: ../view/admin_index.php?success=created");
-	}
-
-	public function registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $field, $location) {
-		$query = "INSERT INTO jobseeker (firstName, lastName, username, password, dateOfBirth, phone, email, field, location) 
-				VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$field', '$location')";
-		mysqli_query($db, $query) or die(mysqli_error($db));
-		$db->close();
-		header("location: ../view/admin_index.php?success=created");
-	}
 
 	public function registerAdmin($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position) {
 		$query = "INSERT INTO admin (firstName, lastName, username, password, dateOfBirth, phone, email, position) 
 				VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$position')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
 		$db->close();
-		header("location: ../view/admin_index.php?success=created");
+		return true;
+	}
+
+	public function updateAdmin($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id) {
+		$success = false;
+		$query = "UPDATE admin SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, position=? WHERE id=?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("ssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id);
+		$stmt->execute();
+
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			$success = true;
+		} 
+		return $success;
 	}
 
 	public function getAllJobSeeker($db) {
@@ -149,6 +150,7 @@ class AdminModel {
 	}
 
 	public function deleteFeedback($db, $id) {
+		$success = false;
 		$query = "UPDATE jobmatch SET feedback = NULL, rating = NULL WHERE id = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("i", $id);
@@ -157,11 +159,10 @@ class AdminModel {
 		$affectedRows = $stmt->affected_rows;
 		$stmt->close();
 		if ($affectedRows == 1) {
-			header("location: ../view/admin_index.php?success=deleted");
-		} else {
-			header("location: ../view/admin_index.php?error=deletefailed");
-		}
+			$success = true;	
+		} 
 		$db->close();
+		return $success;
 	}
 
 	public function deleteReport($db, $id) {
@@ -173,83 +174,6 @@ class AdminModel {
 		$affectedRows = $stmt->affected_rows;
 		$stmt->close();
 		if ($affectedRows == 1) {
-			header("location: ../view/admin_index.php?success=deleted");
-		} else {
-			header("location: ../view/admin_index.php?error=deletefailed");
-		}
-		$db->close();
-	}
-
-	public function updateAdmin($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id) {
-		$query = "UPDATE admin SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, position=? WHERE id=?";
-		$stmt = $db->prepare($query);
-		$stmt->bind_param("ssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id);
-		$stmt->execute();
-
-		$affectedRows = $stmt->affected_rows;
-		$stmt->close();
-		$db->close();
-
-		if ($affectedRows == 1) {
-			header("location: ../view/admin_index.php?success=updated");
-		} else {
-			header("location: ../view/admin_index.php?error=failed");
-		}
-	}
-
-	public function updateJobSeeker($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $id) {
-		$query = "UPDATE jobseeker SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, field=?, location=? WHERE id=?";
-		$stmt = $db->prepare($query);
-		$stmt->bind_param("sssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $id);
-		$stmt->execute();
-
-		$affectedRows = $stmt->affected_rows;
-		$stmt->close();
-		$db->close();
-
-		if ($affectedRows == 1) {
-			header("location: ../view/admin_index.php?success=updated");
-		} else {
-			header("location: ../view/admin_index.php?error=failed");
-		}
-	}
-
-	public function updateEmployer($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $id) {
-		$query = "UPDATE employer SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, position=?, location=? WHERE id=?";
-		$stmt = $db->prepare($query);
-		$stmt->bind_param("sssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $id);
-		$stmt->execute();
-
-		$affectedRows = $stmt->affected_rows;
-		$stmt->close();
-		$db->close();
-
-		if ($affectedRows == 1) {
-			header("location: ../view/admin_index.php?success=updated");
-		} else {
-			header("location: ../view/admin_index.php?error=failed");
-		}
-	}
-
-	public function deleteAccount($db, $username, $type) {
-		require_once '../model/user_model.php';
-		require_once '../model/matchmaking_model.php';
-		$um = new UserModel();
-		$mm = new MatchmakingModel();
-		$query = "DELETE FROM $type WHERE username = ?";
-		$stmt = $db->prepare($query);
-		$stmt->bind_param("s", $username);
-		$stmt->execute();
-
-		$affectedRows = $stmt->affected_rows;
-		$stmt->close();
-		if ($affectedRows == 1) {
-			if($type == "jobseeker"){
-				$um->deleteAllCareers($db, $username);
-				$um->deleteAllEducations($db, $username);
-				$um->deleteAllSkills($db, $username);
-				$um->deleteAllSocials($db, $username);
-			}//to do
 			header("location: ../view/admin_index.php?success=deleted");
 		} else {
 			header("location: ../view/admin_index.php?error=deletefailed");

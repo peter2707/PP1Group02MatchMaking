@@ -10,12 +10,12 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$allJobSeekers = array();
-$allJobSeekers = $ac->getAllJobSeeker();
-
 if (isset($_POST['delete'])) {
     $username = $_POST['username'];
     $ac->deleteAccount($username, "jobseeker");
+} else {
+    $allJobSeekers = array();
+    $allJobSeekers = $ac->getAllJobSeeker();
 }
 ?>
 <!DOCTYPE html>
@@ -49,7 +49,7 @@ if (isset($_POST['delete'])) {
     <div class="container mt-5">
         <div class="mb-5" style="min-height: 400px;">
             <?php
-            
+
             if (count($allJobSeekers) < 1) {
                 echo "<h3>No result found yet.</h3> <small>To add a user, click on the Add New User button</small>";
             } else {

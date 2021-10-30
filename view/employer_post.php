@@ -153,7 +153,7 @@ if (isset($_POST['post'])) {
                 echo "Your post have been updated successfully.";
             } elseif ($_GET["success"] == "deleted") {
                 echo "Your post have been deleted successfully.";
-            } elseif ($_GET["success"] == "successdeny") {
+            } elseif ($_GET["success"] == "denied") {
                 echo "Match denied successfully";
             }
             echo "</span></h5>";

@@ -10,14 +10,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if (isset($_POST['delete'])) {
-    require_once "../controller/admin_controller.php";
-    $adminController = new AdminController();
-    $username = $_POST['username'];
-    $adminController->deleteAccount($username, "admin");
-} else {
+try {
     $allJobPosts = array();
     $allJobPosts = $ac->getAllJobPost();
+} catch (Exception $e) {
+    echo $e->getMessage();
 }
 ?>
 <!DOCTYPE html>

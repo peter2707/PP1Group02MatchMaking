@@ -5,7 +5,7 @@ class MatchmakingModel{
 		$query = "INSERT INTO jobpost (position, field, salary, type, description, requirements, location, employer, contact) VALUES ('$position', '$field', '$salary', '$type', '$description', '$requirements', '$location', '$username', '$contact')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
 		$db->close();
-		header("location: ../view/employer_post.php?success=posted");
+		return true;
 	}
 	
 	public function getJobPostsByField($db, $field){
@@ -73,6 +73,7 @@ class MatchmakingModel{
 	}
 
 	public function updatePost($db, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id){
+		$success = false;
 		$query = "UPDATE jobpost SET position=?, field=?, salary=?, type=?, description=?, requirements=?, location=?, contact=? WHERE id=?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("ssssssssi", $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
@@ -83,36 +84,42 @@ class MatchmakingModel{
 		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/employer_post.php?success=updated");
-		} else {
-			header("location: ../view/employer_post.php?error=updatefailed");
+			$success = true;
 		}
+		return $success;
 	}
 
-	public function deletePost($db, $id, $usertype) {
-		$this->deleteMatchByPostID($db, $id);
+	public function deletePost($db, $id) {
+		$success = false;
 		$query = "DELETE FROM jobpost WHERE id = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("i", $id);
 		$stmt->execute();
-
 		$affectedRows = $stmt->affected_rows;
 		$stmt->close();
-		$db->close();
 
 		if ($affectedRows == 1) {
-			if($usertype == "admin"){
-				header("location: ../view/admin_index.php?success=deleted");
-			}else{
-				header("location: ../view/employer_post.php?success=deleted");
-			}
-		} else {
-			if($usertype == "admin"){
-				header("location: ../view/admin_index.php?error=deletefailed");
-			}else{
-				header("location: ../view/employer_post.php?error=deletefailed");	
-			}
+			$this->deleteMatchByPostID($db, $id);
+			$success = true;
 		}
+		$db->close();
+		return $success;
+	}
+
+	public function deletePostByEmployer($db, $employer) {
+		$success = false;
+		$query = "DELETE FROM jobpost WHERE employer = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("s", $employer);
+		$stmt->execute();
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+
+		if ($affectedRows == 1) {
+			$this->deleteMatchByUsername($db, $employer, "employer");
+			$success = true;
+		}
+		return $success;
 	}
 
 	public function getJobMatch($db, $user){
@@ -205,7 +212,6 @@ class MatchmakingModel{
 
 		if (!$result) {
 			return false;
-			$db->close();
 		}
 		$row = $result->fetch_row();
 		if ($row[0] > 0) {
@@ -256,6 +262,14 @@ class MatchmakingModel{
 		return $found;
 	}
 
+	public function deleteMatchByUsername($db, $username, $userType) {
+		$query = "DELETE FROM jobmatch WHERE '$userType' = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("s", $username);
+		$stmt->execute();
+		$stmt->close();
+	}
+
 	public function deleteMatchByPostID($db, $id) {
 		$query = "DELETE FROM jobmatch WHERE jobPostID = ?";
 		$stmt = $db->prepare($query);
@@ -264,7 +278,8 @@ class MatchmakingModel{
 		$stmt->close();
 	}
 
-	public function denyMatch($db, $id, $usertype) {
+	public function denyMatch($db, $id) {
+		$success = false;
 		$query = "DELETE FROM jobmatch WHERE id = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("i", $id);
@@ -273,25 +288,13 @@ class MatchmakingModel{
 		$stmt->close();
 
 		if ($affectedRows == 1) {
-			if($usertype == 'jobseeker'){
-				header("location: ../view/jobseeker_match.php?success=successdeny");
-			}elseif($usertype == 'employer'){
-				header("location: ../view/employer_post.php?success=successdeny");
-			}else{
-				header("location: ../view/admin_index.php?success=deleted");
-			}
-		} else {
-			if($usertype == 'jobseeker'){
-				header("location: ../view/jobseeker_match.php?error=errordeny");
-			}elseif($usertype == 'employer'){
-				header("location: ../view/employer_post.php?error=errordeny");
-			}else{
-				header("location: ../view/admin_index.php?error=deletefailed");
-			}
+			$success = true;
 		}
+		return $success;
 	}
 
 	public function addFeedback($db, $rating, $feedback, $id){
+		$success = false;
 		$query = "UPDATE jobmatch SET rating=?, feedback=? WHERE id=?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("isi", $rating, $feedback, $id);
@@ -301,17 +304,16 @@ class MatchmakingModel{
 		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/jobseeker_match.php?success=donefeedback");
-		} else {
-			header("location: ../view/jobseeker_match.php?error=errorfeedback");
+			$success = true;
 		}
+		return $success;
 	}
 
 	public function reportMatch($db, $username, $type, $id, $reason, $comment){
 		$query = "INSERT INTO report (username, type, matchID, reason, comment) VALUES ('$username', '$type', '$id', '$reason', '$comment')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
 		$db->close();
-		header("location: ../view/report.php?success=reported");
+		return true;
 	}
 
 	function getTimeElapsed($date, $tense = 'ago') {

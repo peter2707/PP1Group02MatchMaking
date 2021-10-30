@@ -10,14 +10,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-if (isset($_POST['delete'])) {
-    require_once "../controller/admin_controller.php";
-    $adminController = new AdminController();
-    $username = $_POST['username'];
-    $adminController->deleteAccount($username, "admin");
-} else {
+try {
     $allJobMatches = array();
     $allJobMatches = $ac->getAllJobMatch();
+} catch (Exception $e) {
+    echo $e->getMessage();
 }
 ?>
 <!DOCTYPE html>
@@ -56,18 +53,18 @@ if (isset($_POST['delete'])) {
     <div class="container mt-5">
         <div class="mb-5" style="min-height: 400px;">
             <?php
-            if(count($allJobMatches) < 1){
+            if (count($allJobMatches) < 1) {
                 echo "<h3>No data available yet.</h3> <small>All job matches will be displayed here once available.</small>";
-            }else{
+            } else {
                 foreach ($allJobMatches as $match) {
                     $badge = "badge bg-primary";
-                    if($match->type == "Full Time"){
+                    if ($match->type == "Full Time") {
                         $badge = "badge bg-success";
-                    }elseif($match->type == "Part Time"){
+                    } elseif ($match->type == "Part Time") {
                         $badge = "badge bg-primary";
-                    }elseif($match->type == "Casual"){
+                    } elseif ($match->type == "Casual") {
                         $badge = "badge bg-warning";
-                    }elseif($match->type == "Contract"){
+                    } elseif ($match->type == "Contract") {
                         $badge = "badge bg-danger";
                     }
                     echo <<< END

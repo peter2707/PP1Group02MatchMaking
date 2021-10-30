@@ -114,7 +114,7 @@ if (isset($_POST['match'])) {
                 echo "Please complete all required columns!";
             }else if ($_GET["error"] == "positionnumeric") {
                 echo "Position cannot be a number!";
-            }elseif($_GET["error"] == "errorfeedback"){
+            }elseif($_GET["error"] == "failedfeedback"){
                 echo "There was a problem trying to post the feedback.";
             }
             echo "</span></h5>";
@@ -122,9 +122,9 @@ if (isset($_POST['match'])) {
             echo "<h5><span class='mb-5 badge bg-success'>";
             if ($_GET["success"] == "matchfound") {
                 echo "You have a new match! You can view it in the table below.";
-            }elseif ($_GET["success"] == "successdeny") {
+            }elseif ($_GET["success"] == "denied") {
                 echo "Match denied successfully";
-            }elseif ($_GET["success"] == "donefeedback") {
+            }elseif ($_GET["success"] == "addedfeedback") {
                 echo "Feedback posted successfully";
             }
             echo "</span></h5>";

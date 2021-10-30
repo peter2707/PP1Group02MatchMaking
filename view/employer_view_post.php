@@ -1,14 +1,17 @@
 <?php
 $id = $_GET['id'];
 require_once '../controller/matchmaking_controller.php';
+require_once '../controller/admin_controller.php';
 require_once '../controller/session_controller.php';
 // check if the session has not started yet
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 // call controllers
+
 $mmc = new MatchmakingController();
 $sc = new SessionController();
+$ac = new AdminController();
 $jobpost = $mmc->getJobPostByID($id);
 $userType = $sc->getUserType();
 
@@ -27,13 +30,20 @@ if (isset($_POST['update'])) {
         && $location == $jobpost->location && $location == $jobpost->location
         && $type == $jobpost->type && $contact == $jobpost->contact
     ) {
-        $script = "<script>window.location = '../view/employer_post.php?error=samevalue';</script>";
-        echo $script;
+        header("location: ../view/employer_post.php?error=samevalue");
     } else {
-        $mmc->updatePost($position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
+        if($sc->getUserType() == "admin"){
+            $ac->updatePost($position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
+        }else{
+            $mmc->updatePost($position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
+        }
     }
 } elseif (isset($_POST['delete'])) {
-    $mmc->deletePost($id, $sc->getUserType());
+    if($sc->getUserType() == "admin"){
+        $ac->deletePost($id);
+    }else{
+        $mmc->deletePost($id, $sc->getUserType());
+    }
 }
 
 

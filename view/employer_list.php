@@ -10,12 +10,12 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$allEmployers = array();
-$allEmployers = $ac->getAllEmployer();
-
 if (isset($_POST['delete'])) {
     $username = $_POST['username'];
     $ac->deleteAccount($username, "employer");
+} else {
+    $allEmployers = array();
+    $allEmployers = $ac->getAllEmployer();
 }
 ?>
 <!DOCTYPE html>
@@ -42,13 +42,13 @@ if (isset($_POST['delete'])) {
         <div class="container">
             <h1>Employers</h1>
         </div>
-            <!-- end of container -->
+        <!-- end of container -->
     </header>
     <!-- end of header -->
     <div class="container mt-5">
         <div class="mb-5" style="min-height: 400px;">
             <?php
-            
+
             if (count($allEmployers) < 1) {
                 echo "<h3>No result found yet.</h3> <small>To add a user, click on the Add New User button</small>";
             } else {
@@ -67,7 +67,7 @@ if (isset($_POST['delete'])) {
                                         <div class="col text-start">
                                             <small class="ms-1"><span class="badge bg-secondary">ID: $employer->id</span></small>
                                             <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$employer->firstName $employer->lastName</h4>
-                                            <p class="card-text"><i class="fa fa-certificate" aria-hidden="true"></i>&nbsp; $employer->position</p>
+                                            <p class="card-text"><i class="fa fa-address-card" aria-hidden="true"></i>&nbsp; $employer->position</p>
                                         </div>
                                         <div class="col row text-end">
                                             <div class="col text-end">
