@@ -103,17 +103,19 @@ if (isset($_POST['match'])) {
     <div class="col-md-6 offset-md-3 mt-5 mb-5" style="min-height: 400px;">
         <?php
         if (isset($_GET["warning"])) {
-            echo "<h5><span class='mb-5 badge bg-secondary'>";
+            echo "<div class='mb-5'><h5><span class='badge bg-secondary'>";
             if($_GET["warning"] == "nomatch"){
-                echo "There are no match found at the moment...<br>Try searching for a different position or change your career field to a similar one.";
+                echo "There are no match found at the moment...";
             }
-            echo "</span></h5>";
+            echo "</span></h5><small class='text-secondary'>Try searching for a different position or change your career field to a similar one.</small></div>";
         }elseif (isset($_GET["error"])) {
             echo "<h5><span class='mb-5 badge bg-danger'>";
             if ($_GET["error"] == "emptyinput") {
                 echo "Please complete all required columns!";
             }else if ($_GET["error"] == "positionnumeric") {
                 echo "Position cannot be a number!";
+            }else if ($_GET["error"] == "specialcharacter") {
+                echo "Position cannot contain special character!";
             }elseif($_GET["error"] == "failedfeedback"){
                 echo "There was a problem trying to post the feedback.";
             }

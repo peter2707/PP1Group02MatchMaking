@@ -5,7 +5,7 @@ if (isset($_POST['send'])) {
     $type = $_POST['type'];
     $email = $_POST['email'];
     $loginController = new LoginController();
-    $loginController->resetPassword($type, $email);
+    $loginController->forgetPassword($type, $email);
 }
 ?>
 <!DOCTYPE html>

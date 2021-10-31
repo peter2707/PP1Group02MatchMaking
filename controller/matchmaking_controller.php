@@ -12,9 +12,9 @@ class MatchmakingController {
             require_once '../model/matchmaking_model.php';
             include '../model/db_connection.php';
             $mmm = new MatchmakingModel();
-            if($mmm->postNewJob($db, $position, $field, $salary, $type, $description, $requirements, $location, $username, $contact)){
+            if ($mmm->postNewJob($db, $position, $field, $salary, $type, $description, $requirements, $location, $username, $contact)) {
                 header("location: ../view/employer_post.php?success=posted");
-            }else{
+            } else {
                 header("location: ../view/employer_post.php?success=postfailed");
             }
         }
@@ -46,10 +46,10 @@ class MatchmakingController {
         include '../model/db_connection.php';
         $mmm = new MatchmakingModel();
         if ($mmm->updatePost($db, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id)) {
-			header("location: ../view/employer_post.php?success=updated");
-		} else {
-			header("location: ../view/employer_post.php?error=updatefailed");
-		}
+            header("location: ../view/employer_post.php?success=updated");
+        } else {
+            header("location: ../view/employer_post.php?error=updatefailed");
+        }
     }
 
     public function deletePost($id) {
@@ -57,10 +57,10 @@ class MatchmakingController {
         include '../model/db_connection.php';
         $mmm = new MatchmakingModel();
         if ($mmm->deletePost($db, $id)) {
-			header("location: ../view/employer_post.php?success=deleted");
-		} else {
-			header("location: ../view/employer_post.php?error=deletefailed");	
-		}
+            header("location: ../view/employer_post.php?success=deleted");
+        } else {
+            header("location: ../view/employer_post.php?error=deletefailed");
+        }
     }
 
     public function getAllMatches($user) {
@@ -89,6 +89,8 @@ class MatchmakingController {
             header("location: ../view/jobseeker_match.php?error=emptyinput");
         } elseif (is_numeric($position)) {
             header("location: ../view/jobseeker_match.php?error=positionnumeric");
+        } elseif (preg_match('/[\'^£$%&*()}{@#~?><>,|=_+¬-]/', $position)) {
+            header("location: ../view/jobseeker_match.php?error=specialcharacter");
         } else {
             require_once '../model/matchmaking_model.php';
             include '../model/db_connection.php';
@@ -106,18 +108,18 @@ class MatchmakingController {
         include '../model/db_connection.php';
         $mmm = new MatchmakingModel();
         if ($mmm->denyMatch($db, $id, $usertype)) {
-			if($usertype == 'jobseeker'){
-				header("location: ../view/jobseeker_match.php?success=denied");
-			}elseif($usertype == 'employer'){
-				header("location: ../view/employer_post.php?success=denied");
-			}
-		} else {
-			if($usertype == 'jobseeker'){
-				header("location: ../view/jobseeker_match.php?error=errordeny");
-			}elseif($usertype == 'employer'){
-				header("location: ../view/employer_post.php?error=errordeny");
-			}
-		}
+            if ($usertype == 'jobseeker') {
+                header("location: ../view/jobseeker_match.php?success=denied");
+            } elseif ($usertype == 'employer') {
+                header("location: ../view/employer_post.php?success=denied");
+            }
+        } else {
+            if ($usertype == 'jobseeker') {
+                header("location: ../view/jobseeker_match.php?error=errordeny");
+            } elseif ($usertype == 'employer') {
+                header("location: ../view/employer_post.php?error=errordeny");
+            }
+        }
     }
 
     public function addFeedback($rating, $feedback, $id) {
@@ -142,9 +144,9 @@ class MatchmakingController {
             require_once '../model/matchmaking_model.php';
             include '../model/db_connection.php';
             $mmm = new MatchmakingModel();
-            if($mmm->reportMatch($db, $username, $type, $id, $reason, $comment)){
+            if ($mmm->reportMatch($db, $username, $type, $id, $reason, $comment)) {
                 header("location: ../view/report.php?success=reported");
-            }else{
+            } else {
                 header("location: ../view/report.php?error=failedReport");
             }
         }

@@ -228,30 +228,31 @@ class MatchmakingModel{
 		$found = false;
 		$jobposts = array();
         $jobposts = $this->getJobPostsByField($db, $field);
+		$position = strtolower($position);
 		foreach($jobposts as $post => $val){
-			if(strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->location == $location && $val->type == $type){
+			if(preg_match('/\b'.$position.'\b/',strtolower($val->position)) && $val->salary == $salary && $val->location == $location && $val->type == $type){
 				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
 					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 100);
 					unset($jobposts[$post]);
 					$found = true;
 				}
-			}elseif(strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->location == $location
-					|| strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->type == $type
-					|| strtolower($val->position) == strtolower($position) && $val->location == $location && $val->type == $type){
+			}elseif(preg_match('/\b'.$position.'\b/',strtolower($val->position)) && $val->salary == $salary && $val->location == $location
+					|| preg_match('/\b'.$position.'\b/',strtolower($val->position)) && $val->salary == $salary && $val->type == $type
+					|| preg_match('/\b'.$position.'\b/',strtolower($val->position)) && $val->location == $location && $val->type == $type){
 				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
 					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 75);
 					unset($jobposts[$post]);
 					$found = true;
 				}
-			}elseif(strtolower($val->position) == strtolower($position) && $val->salary == $salary
-					|| strtolower($val->position) == strtolower($position) && $val->location == $location
-					|| strtolower($val->position) == strtolower($position) && $location && $val->type == $type){
+			}elseif(preg_match('/\b'.$position.'\b/',strtolower($val->position)) && $val->salary == $salary
+					|| preg_match('/\b'.$position.'\b/',strtolower($val->position)) && $val->location == $location
+					|| preg_match('/\b'.$position.'\b/',strtolower($val->position)) && $location && $val->type == $type){
 				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
 					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 50);
 					unset($jobposts[$post]);
 					$found = true;
 				}
-			}elseif(strtolower($val->position) == strtolower($position)){
+			}elseif(preg_match('/\b'.$position.'\b/',strtolower($val->position))){
 				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
 					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 25);
 					unset($jobposts[$post]);

@@ -329,10 +329,7 @@ class UserModel {
 		$stmt->execute();
 		$result = $stmt->get_result();
 		$row = $result->fetch_assoc();
-		if (mysqli_num_rows($result)==0) {
-			header("location: ../view/reset_password.php?error=notfound");
-			exit();
-		}else{
+		if (mysqli_num_rows($result) > 0) {
 			$nowFormat = mktime(date("H"), date("i"), date("s"), date("m") ,date("d"), date("Y"));
 			$now = date("Y-m-d H:i:s", $nowFormat);
 			$exp = $row['expDate'];
@@ -341,6 +338,9 @@ class UserModel {
 			}else{
 				header("location: ../view/reset_password.php?error=expired");
 			}
+		}else{
+			header("location: ../view/reset_password.php?error=notfound");
+			exit();
 		}
 		$stmt->close();
 		return $success;

@@ -21,14 +21,14 @@ class LoginController{
 		$loginModel->logOut();
 	}
 
-	public function resetPassword($type, $email){
+	public function forgetPassword($type, $email){
 		if(!isset($type) || !isset($email)){
 			header("location: ../view/forget_password.php?error=emptyinput");
 		}else{
 			require_once '../model/db_connection.php';
 			require_once '../model/login_model.php';
 			$loginModel = new LoginModel();
-			$loginModel->resetPassword($db, $type, $email);
+			$loginModel->forgetPassword($db, $type, $email);
 		}
 	}
 	
