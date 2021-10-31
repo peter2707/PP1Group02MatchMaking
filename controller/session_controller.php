@@ -7,6 +7,11 @@ class SessionController {
         return $sessionModel->sessionExists();
     }
 
+    public function setNewSession($username, $password, $type) {
+        $sessionModel = new SessionModel();
+        $sessionModel->setNewSession($username, $password, $type);
+    }
+
     public function getUserType() {
         $sessionModel = new SessionModel();
         return $sessionModel->getUserType();
@@ -15,6 +20,11 @@ class SessionController {
     public function getUserName() {
         $sessionModel = new SessionModel();
         return $sessionModel->getUserName();
+    }
+    
+    public function destroySession() {
+        $sessionModel = new SessionModel();
+        $sessionModel->destroySession();
     }
 }
 ?> 

@@ -2,31 +2,29 @@
 	class LoginModel {
 
 		public function login($username, $password) {
-			session_start();
 			require_once 'db_connection.php';
+			require_once '../controller/session_controller.php';
+			$sessionController = new SessionController();
+			if (session_status() === PHP_SESSION_NONE) {
+				session_start();
+			}
 
 			if($this->checkAdmin($db, $username, $password)) {
-				$_SESSION['valid_user'] = $username;
-				$_SESSION['valid_pass'] = $password;
-				$_SESSION['user_type'] = "admin";
+				$sessionController->setNewSession($username, $password, "admin");
 				$db->close();
-				if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
+				if($sessionController->checkSession()) {
 					header("Location: ../view/admin_index.php");
 				}
 			}elseif($this->checkEmployer($db, $username, $password)) {
-				$_SESSION['valid_user'] = $username;
-				$_SESSION['valid_pass'] = $password;
-				$_SESSION['user_type'] = "employer";
+				$sessionController->setNewSession($username, $password, "employer");
 				$db->close();
-				if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
+				if($sessionController->checkSession()) {
 					header("Location: ../view/index.php");
 				}
 			}elseif($this->checkJobSeeker($db, $username, $password)) {
-				$_SESSION['valid_user'] = $username;
-				$_SESSION['valid_pass'] = $password;
-				$_SESSION['user_type'] = "jobseeker";
+				$sessionController->setNewSession($username, $password, "jobseeker");
 				$db->close();
-				if(isset($_SESSION['valid_user']) && $_SESSION['valid_pass']) {
+				if($sessionController->checkSession()) {
 					header("Location: ../view/index.php");
 				}
 			}else {
@@ -37,10 +35,9 @@
 		}
 
 		public function logOut() {
-			session_start();
-			unset($_SESSION["username"]);
-			unset($_SESSION["password"]);
-			session_destroy();
+			require_once '../controller/session_controller.php';
+			$sessionController = new SessionController();
+			$sessionController->destroySession();
 			header('location: ../view/login.php?success=logout');
 		}
 	
@@ -61,7 +58,6 @@
 			}
 			
 			$row = $result->fetch_row();
-			
 			if ($row[0] > 0) {
 				$admin = true;
 			}
@@ -85,7 +81,6 @@
 			}
 			
 			$row = $result->fetch_row();
-			
 			if ($row[0] > 0) {
 				$employer = true;
 			}
@@ -109,7 +104,6 @@
 			}
 			
 			$row = $result->fetch_row();
-			
 			if ($row[0] > 0) {
 				$jobseeker = true;
 			}
