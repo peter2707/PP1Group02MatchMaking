@@ -15,9 +15,9 @@ $jobmatch = $mmc->getJobMatchByID($id);
 $userType = $sc->getUserType();
 
 if (isset($_POST['deny'])) {
-    if($sc->getUserType() == "admin"){
+    if ($sc->getUserType() == "admin") {
         $ac->denyMatch($id);
-    }else{
+    } else {
         $mmc->denyMatch($id, $sc->getUserType());
     }
 }
@@ -45,7 +45,7 @@ if (isset($_POST['deny'])) {
     <header id="ex-header" class="ex-header">
         <div class="container">
             <div class="col-xl-10 offset-xl-1">
-                
+
                 <div class="text-start">
                     <?php
                     if ($userType == "admin") {
@@ -67,6 +67,7 @@ if (isset($_POST['deny'])) {
                 <hr>
                 <div class="text-start">
                     <?php
+                    $rating = number_format((float)$jobmatch->rating, 1, '.', '');
                     if ($userType == "admin") {
                         echo <<< END
                             <div class="row">
@@ -78,7 +79,7 @@ if (isset($_POST['deny'])) {
                                 <div class="col text-end">
                                     <form action="user_view_other.php" method="GET">
                                         <input type="hidden" name="employer" value="$jobmatch->employer">
-                                        <button type='submit' class='btn btn-secondary-sm'>$jobmatch->employer &nbsp;|&nbsp; $jobmatch->rating <i class='fa fa-star' style='color:#FFD700' aria-hidden='true'></i></button>
+                                        <button type='submit' class='btn btn-secondary-sm'>$jobmatch->employer &nbsp;|&nbsp; $rating <i class='fa fa-star' style='color:#FFD700' aria-hidden='true'></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -97,7 +98,7 @@ if (isset($_POST['deny'])) {
                                 <div class="col text-end">
                                     <form action="user_view_other.php" method="GET">
                                         <input type="hidden" name="employer" value="$jobmatch->employer">
-                                        <button type='submit' class='btn btn-secondary-sm'>$jobmatch->employer &nbsp;|&nbsp; $jobmatch->rating <i class='fa fa-star' style='color:#FFD700' aria-hidden='true'></i></button>
+                                        <button type='submit' class='btn btn-secondary-sm'>$jobmatch->employer &nbsp;|&nbsp; $rating <i class='fa fa-star' style='color:#FFD700' aria-hidden='true'></i></button>
                                     </form>
                                 </div>
                             </div>
@@ -180,7 +181,7 @@ if (isset($_POST['deny'])) {
                         END;
                     }
                     ?>
-                    
+
                 </div>
                 <!-- end of col -->
             </div>

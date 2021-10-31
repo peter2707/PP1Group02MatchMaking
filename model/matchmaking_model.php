@@ -181,7 +181,6 @@ class MatchmakingModel {
 		$timeElapsed = $this->getTimeElapsed($date);
 		$jobMatch = new JobMatch($row['id'], $row['employer'], $row['jobSeeker'], $row['contact'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage'], $rating, $row['feedback'], $timeElapsed);
 		$result->free();
-		$db->close();
 
 		return $jobMatch;
 	}
@@ -308,12 +307,59 @@ class MatchmakingModel {
 		$stmt->execute();
 		$affectedRows = $stmt->affected_rows;
 		$stmt->close();
+
+		if ($affectedRows == 1) {
+			$newRating = $this->calculateRating($db);
+			$jobmatch = $this->getJobMatchByID($db, $id);
+			if ($this->updateEmployerRating($db, $jobmatch->employer, $newRating)) {
+				$success = true;
+			}
+		}
+		return $success;
+	}
+
+	public function updateEmployerRating($db, $employer, $rating) {
+		$success = false;
+		$query = "UPDATE employer SET rating=? WHERE username=?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("is", $rating, $employer);
+		$stmt->execute();
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
 		$db->close();
 
 		if ($affectedRows == 1) {
 			$success = true;
 		}
 		return $success;
+	}
+
+	public function calculateRating($db) {
+		$onestar = 0;
+		$twostar = 0;
+		$threestar = 0;
+		$fourstar = 0;
+		$fivestar = 0;
+		$query = "SELECT * FROM jobmatch";
+		$result = $db->query($query);
+		$numResults = $result->num_rows;
+
+		for ($i = 0; $i < $numResults; $i++) {
+			$row = $result->fetch_assoc();
+			if ($row['rating'] == "1") {
+				$onestar++;
+			} elseif ($row['rating'] == "2") {
+				$twostar++;
+			} elseif ($row['rating'] == "3") {
+				$threestar++;
+			} elseif ($row['rating'] == "4") {
+				$fourstar++;
+			} elseif ($row['rating'] == "5") {
+				$fivestar++;
+			}
+		}
+		$result->free();
+		return ($fivestar * 5 + $fourstar * 4 + $threestar * 3 + $twostar * 2 + $onestar * 1) / ($fivestar + $fourstar + $threestar + $twostar + $onestar);
 	}
 
 	public function reportMatch($db, $username, $type, $id, $reason, $comment) {
@@ -335,15 +381,17 @@ class MatchmakingModel {
 
 		if ($row) {
 			try {
-				$email = filter_var($row['email'], FILTER_SANITIZE_EMAIL);	
+				$email = filter_var($row['email'], FILTER_SANITIZE_EMAIL);
 				$mail = new \SendGrid\Mail\Mail();
 				$mail->setFrom("jobmatchdemo@gmail.com", "JobMatch");
 				$mail->addTo(
 					$email,
-					$row['firstName'] . ' ' . $row['lastName'], [
+					$row['firstName'] . ' ' . $row['lastName'],
+					[
 						'username' => $row['username'],
 						'support' => 'https://jobmatchdemo.herokuapp.com/view/index.php#contact',
-						'link' => 'https://jobmatchdemo.herokuapp.com/view/login.php'],
+						'link' => 'https://jobmatchdemo.herokuapp.com/view/login.php'
+					],
 				);
 				$mail->setTemplateId("d-2098ec8ca08741b295d46f8e404c8baa");
 				// $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));

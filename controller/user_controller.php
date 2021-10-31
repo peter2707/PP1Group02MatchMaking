@@ -57,6 +57,17 @@ class UserController {
 		}
     }
 
+    public function addResume($file, $username){
+        include '../model/db_connection.php';
+        require_once '../model/user_model.php';
+        $userModel = new UserModel();
+        if ($userModel->addResume($db, $file, $username)) {
+			header("location: ../view/user_profile.php?success=accountupdated");
+		} else {
+			header("location: ../view/user_profile.php?error=failed");
+		}
+    }
+
     public function editSocialLink($username, $linkedin, $github, $twitter, $instagram, $facebook){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
@@ -244,4 +255,3 @@ class UserController {
         return $map;
     }
 }
-?> 

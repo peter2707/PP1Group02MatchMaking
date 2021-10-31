@@ -57,5 +57,3 @@ class Feedback{
         $this->date = $date;
     }
 }
-
-?>
