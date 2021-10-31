@@ -81,9 +81,10 @@ class UserModel {
 				$this->deleteAllCareers($db, $username);
 				$this->deleteAllEducations($db, $username);
 				$this->deleteAllSkills($db, $username);
-				$mm->deleteMatchByUsername($db, $username, "jobseeker");
+				$mm->deleteMatchByUsername($db, $username, "jobSeeker");
 			}elseif($type == "employer"){
 				$mm->deletePostByEmployer($db, $username);
+				$mm->deleteMatchByUsername($db, $username, "employer");
 			}
 			if($sm->getUserName() == $username){
 				session_start();

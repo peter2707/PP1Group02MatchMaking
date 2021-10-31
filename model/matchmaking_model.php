@@ -263,10 +263,10 @@ class MatchmakingModel{
 		return $found;
 	}
 
-	public function deleteMatchByUsername($db, $username, $userType) {
-		$query = "DELETE FROM jobmatch WHERE '$userType' = ?";
+	public function deleteMatchByUsername($db, $username) {
+		$query = "DELETE FROM jobmatch WHERE employer = ? OR jobSeeker = ?";
 		$stmt = $db->prepare($query);
-		$stmt->bind_param("s", $username);
+		$stmt->bind_param("ss", $username, $username);
 		$stmt->execute();
 		$stmt->close();
 	}
