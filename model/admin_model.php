@@ -1,28 +1,29 @@
 <?php
 class AdminModel {
-	
-	public function registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position, $location) {
-		$query = "INSERT INTO employer (firstName, lastName, username, password, dateOfBirth, phone, email, position, location) 
-				VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$position', '$location')";
-		mysqli_query($db, $query) or die(mysqli_error($db));
-		$db->close();
-		header("location: ../view/admin_index.php?success=created");
-	}
-
-	public function registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $field, $location) {
-		$query = "INSERT INTO jobseeker (firstName, lastName, username, password, dateOfBirth, phone, email, field, location) 
-				VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$field', '$location')";
-		mysqli_query($db, $query) or die(mysqli_error($db));
-		$db->close();
-		header("location: ../view/admin_index.php?success=created");
-	}
 
 	public function registerAdmin($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position) {
 		$query = "INSERT INTO admin (firstName, lastName, username, password, dateOfBirth, phone, email, position) 
 				VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$position')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
 		$db->close();
-		header("location: ../view/admin_index.php?success=created");
+		return true;
+	}
+
+	public function updateAdmin($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id) {
+		$success = false;
+		$query = "UPDATE admin SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, position=? WHERE id=?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("ssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id);
+		$stmt->execute();
+
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			$success = true;
+		} 
+		return $success;
 	}
 
 	public function getAllJobSeeker($db) {
@@ -70,78 +71,114 @@ class AdminModel {
 		return $allAdmins;
 	}
 
-	public function updateAdmin($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id) {
-		$query = "UPDATE admin SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, position=? WHERE id=?";
-		$stmt = $db->prepare($query);
-		$stmt->bind_param("ssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id);
-		$stmt->execute();
-
-		$affectedRows = $stmt->affected_rows;
-		$stmt->close();
-		$db->close();
-
-		if ($affectedRows == 1) {
-			header("location: ../view/admin_index.php?success=updated");
-		} else {
-			header("location: ../view/admin_index.php?error=failed");
+	public function getAllJobMatch($db) {
+		require_once '../model/job_object.php';
+		require_once '../model/matchmaking_model.php';
+		$mm = new MatchmakingModel();
+		$alljobMatches = array();
+		$query = "SELECT *, jobpost.id as jid, jobmatch.id as mid FROM jobmatch 
+				  INNER JOIN jobpost ON jobpost.id = jobmatch.jobPostID";
+		$result = $db->query($query);
+		$numResults = $result->num_rows;
+		for ($i = 0; $i < $numResults; $i++) {
+			$row = $result->fetch_assoc();
+			$rating = $mm->getEmployerRating($db, $row['employer']);
+			$date = $mm->getDate($db, 'jobmatch', $row['mid']);
+			$timeElapsed = $mm->getTimeElapsed($date);
+			$alljobMatches[$i] = new JobMatch($row['mid'], $row['employer'], $row['jobSeeker'], $row['contact'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage'], $rating, $row['feedback'], $timeElapsed);
 		}
+		$result->free();
+		$db->close();
+		return $alljobMatches;
 	}
 
-	public function updateJobSeeker($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $id) {
-		$query = "UPDATE jobseeker SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, field=?, location=? WHERE id=?";
-		$stmt = $db->prepare($query);
-		$stmt->bind_param("sssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $id);
-		$stmt->execute();
-
-		$affectedRows = $stmt->affected_rows;
-		$stmt->close();
-		$db->close();
-
-		if ($affectedRows == 1) {
-			header("location: ../view/admin_index.php?success=updated");
-		} else {
-			header("location: ../view/admin_index.php?error=failed");
+	public function getAllJobPost($db){
+		require_once '../model/job_object.php';
+		require_once '../model/matchmaking_model.php';
+		$mm = new MatchmakingModel();
+		$jobposts = array();
+		$query = "SELECT * FROM jobpost ORDER BY id";
+		$result = $db->query($query) or die(mysqli_error($db));
+		$numResults = $result->num_rows;
+		for ($i = 0; $i < $numResults; $i++) {
+			$row = $result->fetch_assoc();
+			$totalMatches = $mm->countJobMatches($db, $row['id']);
+			$timeElapsed = $mm->getTimeElapsed($row['date']);
+			$jobposts[$i] = new JobPost($row['id'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['employer'], $row['contact'], $totalMatches, $timeElapsed);
 		}
+
+		$result->free();
+		return $jobposts;
 	}
 
-	public function updateEmployer($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $id) {
-		$query = "UPDATE employer SET firstName=?, lastName=?, username=?, password=?, dateOfBirth=?, phone=?, email=?, position=?, location=? WHERE id=?";
-		$stmt = $db->prepare($query);
-		$stmt->bind_param("sssssssssi", $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $id);
-		$stmt->execute();
-
-		$affectedRows = $stmt->affected_rows;
-		$stmt->close();
-		$db->close();
-
-		if ($affectedRows == 1) {
-			header("location: ../view/admin_index.php?success=updated");
-		} else {
-			header("location: ../view/admin_index.php?error=failed");
+	public function getAllFeedback($db) {
+		require_once '../model/job_object.php';
+		require_once '../model/matchmaking_model.php';
+		$mm = new MatchmakingModel();
+		$allFeedbacks = array();
+		$query = "SELECT * FROM jobmatch ORDER BY id";
+		$result = $db->query($query);
+		$numResults = $result->num_rows;
+		for ($i = 0; $i < $numResults; $i++) {
+			$row = $result->fetch_assoc();
+			if($row['rating'] != NULL || $row['rating'] > 1){
+				$timeElapsed = $mm->getTimeElapsed($row['date']);
+				$allFeedbacks[$i] = new Feedback($row['id'], $row['jobSeeker'], intval($row['rating']), $row['feedback'], $timeElapsed);
+			}
 		}
+		$result->free();
+		$db->close();
+		return $allFeedbacks;
 	}
 
-	public function deleteAccount($db, $username, $type) {
-		require_once '../model/user_model.php';
-		$um = new UserModel();
-		$query = "DELETE FROM $type WHERE username = ?";
+	public function getAllReport($db) {
+		require_once '../model/job_object.php';
+		require_once '../model/matchmaking_model.php';
+		$mm = new MatchmakingModel();
+		$allReports = array();
+		$query = "SELECT * FROM report ORDER BY id";
+		$result = $db->query($query);
+		$numResults = $result->num_rows;
+		for ($i = 0; $i < $numResults; $i++) {
+			$row = $result->fetch_assoc();
+			$timeElapsed = $mm->getTimeElapsed($row['date']);
+			$allReports[$i] = new Report($row['id'], $row['username'], $row['type'], $row['matchID'], $row['reason'], $row['comment'], $timeElapsed);
+		}
+		$result->free();
+		$db->close();
+		return $allReports;
+	}
+
+	public function deleteFeedback($db, $id) {
+		$success = false;
+		$query = "UPDATE jobmatch SET feedback = NULL, rating = NULL WHERE id = ?";
 		$stmt = $db->prepare($query);
-		$stmt->bind_param("s", $username);
+		$stmt->bind_param("i", $id);
 		$stmt->execute();
 
 		$affectedRows = $stmt->affected_rows;
 		$stmt->close();
-		$db->close();
-
 		if ($affectedRows == 1) {
-			$um->deleteAllCareers($db, $username);
-			$um->deleteAllEducations($db, $username);
-			$um->deleteAllSkills($db, $username);
-			$um->deleteAllSocials($db, $username);
+			$success = true;	
+		} 
+		$db->close();
+		return $success;
+	}
+
+	public function deleteReport($db, $id) {
+		$query = "DELETE FROM report WHERE id = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("i", $id);
+		$stmt->execute();
+
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		if ($affectedRows == 1) {
 			header("location: ../view/admin_index.php?success=deleted");
 		} else {
 			header("location: ../view/admin_index.php?error=deletefailed");
 		}
+		$db->close();
 	}
 
 	public function generateReport($db, $table){
@@ -162,6 +199,12 @@ class AdminModel {
 				$fields = array('ID', 'FIRSTNAME', 'LASTNAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'POSITION', 'LOCATION', 'RATING');
 			}elseif($table == "admin"){
 				$fields = array('ID', 'FIRSTNAME', 'LASTNAME', 'USERNAME', 'DATEOFBIRTH', 'PHONE', 'EMAIL', 'POSITION');
+			}elseif($table == "jobpost"){
+				$fields = array('ID', 'POSITION', 'FIELD', 'SALARY', 'TYPE', 'DESCRIPTION', 'REQUIREMENTS', 'LOCATION', 'EMPLOYER', 'CONTACT', 'DATE');
+			}elseif($table == "jobmatch"){
+				$fields = array('ID', 'EMPLOYER', 'JOBSEEKER', 'POSTID', 'PERCENTAGE', 'RATING', 'FEEDBACK', 'DATE');
+			}elseif($table == "report"){
+				$fields = array('ID', 'USERNAME', 'TYPE', 'MATCHID', 'REASON', 'COMMENT', 'DATE');
 			}
 			fputcsv($f, $fields, $delimiter);
 			
@@ -173,6 +216,12 @@ class AdminModel {
 					$lineData = array($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['location'], $row['rating']); 
 				}elseif($table == "admin"){
 					$lineData = array($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position']); 
+				}elseif($table == "jobpost"){
+					$lineData = array($row['id'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['contact'], $row['date']); 
+				}elseif($table == "jobmatch"){
+					$lineData = array($row['id'], $row['employer'], $row['jobSeeker'], $row['jobPostID'], $row['percentage'], $row['rating'], $row['feedback'], $row['date']); 
+				}elseif($table == "report"){
+					$lineData = array($row['id'], $row['username'], $row['type'], $row['matchID'], $row['reason'], $row['comment'], $row['date']); 
 				}
 				fputcsv($f, $lineData, $delimiter); 
 			} 

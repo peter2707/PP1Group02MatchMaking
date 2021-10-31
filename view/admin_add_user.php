@@ -17,7 +17,7 @@ if(isset($_POST['register'])){
     $positionAdmin = $_POST['positionAdmin'];
     $field = $_POST['field'];
     
-    $adminController->register(ucfirst($firstName), ucfirst($lastName), $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type, $positionEmployer, $positionAdmin, $field);
+    $adminController->register(ucfirst($firstName), ucfirst($lastName), $username, $password, $confirmPassword, $dateOfBirth, $phone, strtolower($email), $location, $type, $positionEmployer, $positionAdmin, $field);
 }
 ?>
 <!DOCTYPE html>
@@ -99,11 +99,11 @@ if(isset($_POST['register'])){
                                 <label for="floatingInput">Date of Birth</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="tel" class="form-control" id="floatingInput" placeholder="Phone" name="phone" required>
+                                <input type="tel" class="form-control" id="floatingInput" placeholder="Phone" name="phone" pattern="^(\+?\(61\)|\(\+?61\)|\+?61|\(0[1-9]\)|0[1-9])?( ?-?[0-9]){7,9}$" title="Must have phone number format and at least 7 characters long" required>
                                 <label for="floatingInput">Phone</label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email" required>
+                                <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" title="Must contain email format E.g. johndoe@mail.com" required>
                                 <label for="floatingInput">Email</label>
                             </div>
                             <div class="form-floating mb-3">

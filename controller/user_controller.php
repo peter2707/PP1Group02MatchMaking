@@ -7,42 +7,65 @@ class UserController {
         return $userModel->getUser($db, $userType, $username);
     }
 
-    public function updateJobSeeker($firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $username) {
-        if(!isset($firstName)||!isset($lastName)||!isset($password)||!isset($dob)||!isset($phone)||!isset($email)||!isset($field)||!isset($location)||!isset($username)){
+    public function updateJobSeeker($firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $id) {
+        if(!isset($firstName)||!isset($lastName)||!isset($username)||!isset($password)||!isset($dob)||!isset($phone)||!isset($email)||!isset($field)||!isset($location)||!isset($id)){
             header("location: ../view/user_settings.php?error=emptyInput");
         }
         require_once '../model/user_model.php';
         require_once '../model/db_connection.php';
         $userModel = new UserModel();
-        $userModel->updateJobSeeker($db, $firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $username);
+        if($userModel->updateJobSeeker($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $id)){
+            header("location: ../view/user_settings.php?success=accountupdated");
+		} else {
+			header("location: ../view/user_settings.php?error=failed");
+		}
     }
 
-    public function updateEmployer($firstName, $lastName, $password, $dob, $phone, $email, $position, $location, $username) {
+    public function updateEmployer($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $id) {
+        if(!isset($firstName)||!isset($lastName)||!isset($username)||!isset($password)||!isset($dob)||!isset($phone)||!isset($email)||!isset($position)||!isset($location)||!isset($id)){
+            header("location: ../view/user_settings.php?error=emptyInput");
+        }
         require_once '../model/user_model.php';
         require_once '../model/db_connection.php';
         $userModel = new UserModel();
-        $userModel->updateEmployer($db, $firstName, $lastName, $password, $dob, $phone, $email, $position, $location, $username);
+        if ($userModel->updateEmployer($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $id)) {
+			header("location: ../view/user_settings.php?success=accountupdated");
+		} else {
+			header("location: ../view/user_settings.php?error=failed");
+		}
     }
 
     public function deleteAccount($username, $type){
         require_once '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
-        $userModel->deleteAccount($db, $username, $type);
+        if($userModel->deleteAccount($db, $username, $type)){
+            header("location: ../view/login.php?success=accountdeleted");
+		} else {
+			header("location: ../view/user_settings.php?error=deletefailed");
+		}
     }
 
     public function changeProfilePicture($file, $username, $userType){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
-        $userModel->changeProfilePicture($db, $file, $username, $userType);
+        if ($userModel->changeProfilePicture($db, $file, $username, $userType)) {
+			header("location: ../view/user_profile.php?success=accountupdated");
+		} else {
+			header("location: ../view/user_profile.php?error=failed");
+		}
     }
 
     public function editSocialLink($username, $linkedin, $github, $twitter, $instagram, $facebook){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
-        $userModel->editSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook);
+        if ($userModel->editSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook)) {
+            header("location: ../view/user_profile.php?success=accountupdated");
+        } else {
+            header("location: ../view/user_profile.php?error=failed");
+        }
     }
 
     public function getSocialLink($username) {
@@ -63,14 +86,22 @@ class UserController {
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
-        $userModel->addSkill($db, $username, $skill, $experience);
+        if($userModel->addSkill($db, $username, $skill, $experience)){
+            header("location: ../view/user_profile.php?success=accountupdated");
+        } else {
+            header("location: ../view/user_profile.php?error=failed");
+        }
     }
 
     public function deleteSkill($id, $username){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
-        $userModel->deleteSkill($db, $id, $username);
+        if ($userModel->deleteSkill($db, $id, $username)) {
+			header("location: ../view/user_profile.php?success=accountupdated");
+		} else {
+			header("location: ../view/user_profile.php?error=failed");
+		}
     }
 
     public function getEducations($username){
@@ -84,14 +115,22 @@ class UserController {
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
-        $userModel->addEducation($db, $username, $institution, $degree, $graduation);
+        if ($userModel->addEducation($db, $username, $institution, $degree, $graduation)) {
+			header("location: ../view/user_profile.php?success=accountupdated");
+		} else {
+			header("location: ../view/user_profile.php?error=failed");
+		}
     }
 
     public function deleteEducation($id, $username){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
-        $userModel->deleteEducation($db, $id, $username);
+        if ($userModel->deleteEducation($db, $id, $username)) {
+			header("location: ../view/user_profile.php?success=accountupdated");
+		} else {
+			header("location: ../view/user_profile.php?error=failed");
+		}
     }
 
     public function getCareers($username){
@@ -105,14 +144,22 @@ class UserController {
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
-        $userModel->addCareer($db, $username, $position, $company, $experience);
+        if ($userModel->addCareer($db, $username, $position, $company, $experience)) {
+			header("location: ../view/user_profile.php?success=accountupdated");
+		} else {
+			header("location: ../view/user_profile.php?error=failed");
+		}
     }
 
     public function deleteCareer($id, $username){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
-        $userModel->deleteCareer($db, $id, $username);
+        if ($userModel->deleteCareer($db, $id, $username)) {
+			header("location: ../view/user_profile.php?success=accountupdated");
+		} else {
+			header("location: ../view/user_profile.php?error=failed");
+		}
     }
 
     public function resetPassword($type, $password, $confirmPassword, $email, $token) {
@@ -127,7 +174,11 @@ class UserController {
             require_once '../model/user_model.php';
             include '../model/db_connection.php';
             $userModel = new UserModel();
-            return $userModel->resetPassword($db, $type, $password, $email, $token);
+            if ($userModel->resetPassword($db, $type, $password, $email, $token)) {
+				header("location: ../view/login.php?success=reset");
+			} else {
+				header("location: ../view/reset_password.php?error=resetfailed");
+			}
         }
     }
 

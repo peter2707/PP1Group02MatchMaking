@@ -16,7 +16,7 @@ if(isset($_POST['register'])){
     $position = $_POST['position'];
     $location = $_POST['location'];
     
-    $registerController->register(ucfirst($firstName), ucfirst($lastName), $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type, $field, $position);
+    $registerController->register(ucfirst($firstName), ucfirst($lastName), $username, $password, $confirmPassword, $dateOfBirth, $phone, strtolower($email), $location, $type, $field, $position);
   }
 ?>
 <!DOCTYPE html>

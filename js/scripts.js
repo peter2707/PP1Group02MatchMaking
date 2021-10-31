@@ -418,7 +418,6 @@ function cancelCareer() {
 }
 
 
-
 //active link detect
 
 // $(document).ready(function() {

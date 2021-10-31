@@ -116,7 +116,14 @@
 			return $jobseeker;
 		}
 
-		public function resetPassword($db, $type, $email){
+		function is_localhost() {
+			$whitelist = array( '127.0.0.1', '::1' );
+			if ( in_array( $_SERVER['REMOTE_ADDR'], $whitelist ) ) {	// check if the server is in the array
+				return true;	// this is a local environment
+			}
+		}
+
+		public function forgetPassword($db, $type, $email){
 			require_once('../vendor/autoload.php');
 			$email = filter_var($email, FILTER_SANITIZE_EMAIL);			
 			$query = "SELECT * FROM $type WHERE email = ?";
@@ -137,13 +144,17 @@
 					mysqli_query($db, $query) or die(mysqli_error($db));
 					$db->close();
 
+					$link = "https://jobmatchdemo.herokuapp.com/view/reset_password.php";
+					if($this->is_localhost()){
+						$link = "http://localhost/jobmatch/view/reset_password.php";
+					}
 					$mail = new \SendGrid\Mail\Mail();
 					$mail->setFrom("jobmatchdemo@gmail.com", "JobMatch");
 					$mail->addTo($email, $row['firstName'].' '.$row['lastName'], 
 					[
 						'username' => $row['username'],
 						'support' => 'https://jobmatchdemo.herokuapp.com/view/index.php#contact',
-						'token' => 'https://jobmatchdemo.herokuapp.com/view/reset_password.php?token='. $token.'&email='.$email.'&type='.$type,
+						'token' => $link . '?token=' . $token . '&email=' . $email . '&type=' . $type,
 					]);
 					$mail->setTemplateId("d-08d93e23cbf74354b1dc54986e61e303");
 					// $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));

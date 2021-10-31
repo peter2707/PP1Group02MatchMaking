@@ -53,13 +53,15 @@ if (isset($_POST['submit'])) {
         <?php
         // Error messages
         if (isset($_GET["error"])) {
-            echo "<h5><span class='mb-2 badge bg-danger'>";
+            echo "<h5><span class='mb-4 badge bg-danger'>";
             if ($_GET["error"] == "emptyinput") {
                 echo "Please complete all required columns!";
+            }elseif ($_GET["error"] == "failedReport") {
+                echo "There was a problem while trying to report.";
             }
             echo "</span></h5>";
         }elseif (isset($_GET["success"])) {
-            echo "<h5><span class='mb-2 badge bg-success'>";
+            echo "<h5><span class='mb-4 badge bg-success'>";
             if ($_GET["success"] == "reported") {
                 echo "Your report has been submitted, our team will review it soon.";
             }

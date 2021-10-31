@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 14, 2021 at 10:59 AM
+-- Generation Time: Oct 26, 2021 at 02:08 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.10
 
@@ -37,16 +37,15 @@ CREATE TABLE `admin` (
   `dateOfBirth` date NOT NULL,
   `phone` int(11) NOT NULL,
   `email` text NOT NULL,
-  `position` text NOT NULL,
-  `image` mediumblob DEFAULT NULL
+  `position` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `admin`
 --
 
-INSERT INTO `admin` (`id`, `firstName`, `lastName`, `username`, `password`, `dateOfBirth`, `phone`, `email`, `position`, `image`) VALUES
-(1, 'Zak', 'Brown', 'admin', 'admin', '2021-09-14', 1231231, 'admin@gmail.com', 'Admin', NULL);
+INSERT INTO `admin` (`id`, `firstName`, `lastName`, `username`, `password`, `dateOfBirth`, `phone`, `email`, `position`) VALUES
+(1, 'Zak', 'Brown', 'admin', 'admin', '2021-09-14', 1231231, 'admin@gmail.com', 'Admin');
 
 -- --------------------------------------------------------
 
@@ -62,13 +61,6 @@ CREATE TABLE `career` (
   `experience` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `career`
---
-
-INSERT INTO `career` (`id`, `username`, `position`, `company`, `experience`) VALUES
-(4, 'JohnDoe123', 'Software Engineer', 'Goodman Fielder', '1 - 3 Years');
-
 -- --------------------------------------------------------
 
 --
@@ -82,14 +74,6 @@ CREATE TABLE `education` (
   `degree` text NOT NULL,
   `graduation` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `education`
---
-
-INSERT INTO `education` (`id`, `username`, `institution`, `degree`, `graduation`) VALUES
-(5, 'JohnDoe123', 'RMIT University', 'Bachelor of IT', '2021-11'),
-(6, 'JohnDoe123', 'CQ University', 'Diploma of ICT', '2019-11');
 
 -- --------------------------------------------------------
 
@@ -112,13 +96,6 @@ CREATE TABLE `employer` (
   `image` mediumblob DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
---
--- Dumping data for table `employer`
---
-
-INSERT INTO `employer` (`id`, `firstName`, `lastName`, `username`, `password`, `dateOfBirth`, `phone`, `email`, `position`, `location`, `rating`, `image`) VALUES
-(16, 'Jane', 'Doe', 'JaneDoe123', 'JaneDoe123', '2021-10-22', '123123123', 'JaneDoe123123@gmail.com', 'Manager', 'Australian Capital Territory', 5.0, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -132,15 +109,9 @@ CREATE TABLE `jobmatch` (
   `jobPostID` int(11) NOT NULL,
   `percentage` int(11) NOT NULL,
   `rating` int(11) DEFAULT NULL,
-  `feedback` text DEFAULT NULL
+  `feedback` text DEFAULT NULL,
+  `date` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `jobmatch`
---
-
-INSERT INTO `jobmatch` (`id`, `employer`, `jobSeeker`, `jobPostID`, `percentage`, `rating`, `feedback`) VALUES
-(26, 'JaneDoe123', 'JohnDoe123', 14, 75, 4, 'BAD');
 
 -- --------------------------------------------------------
 
@@ -161,15 +132,6 @@ CREATE TABLE `jobpost` (
   `contact` text NOT NULL,
   `date` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `jobpost`
---
-
-INSERT INTO `jobpost` (`id`, `position`, `field`, `salary`, `type`, `description`, `requirements`, `location`, `employer`, `contact`, `date`) VALUES
-(14, 'Test', 'Administration', '$25-$30/hr', 'Full Time', '<p>JaneDoe123JaneDoe123JaneDoe123JaneDoe123</p>', '<p>JaneDoe123JaneDoe123JaneDoe123</p>', 'Victoria', 'JaneDoe123', 'JaneDoe123@gmail.com', '2021-10-12 06:04:55'),
-(15, 'Test1', 'Accounting', '$25-$30/hr', 'Full Time', '<p>JaneDoe123</p>', '<p>JaneDoe123</p>', 'Victoria', 'JaneDoe123', 'JaneDoe123@gmail.com', '2021-10-12 06:07:22'),
-(16, 'Software Engineer', 'Information Technology', '$30-$35/hr', 'Full Time', '<p>sfseresfs</p>', '<p>fsefsef</p>', 'Australian Capital Territory', 'JaneDoe123', 'JaneDoe123123@gmail.com', '2021-10-14 08:46:23');
 
 -- --------------------------------------------------------
 
@@ -197,7 +159,7 @@ CREATE TABLE `jobseeker` (
 --
 
 INSERT INTO `jobseeker` (`id`, `firstName`, `lastName`, `username`, `password`, `dateOfBirth`, `phone`, `email`, `field`, `location`, `image`, `resume`) VALUES
-(39, 'John', 'Doe', 'JohnDoe123', 'JohnDoe123', '2021-10-28', '123123123', 'prummonkolsophearith@gmail.com', 'Information Technology', 'Victoria', NULL, NULL);
+(52, 'John', 'Doe', 'JohnDoe123', 'JohnDoe123', '2021-10-12', '403595999', 'JohnDoe1234@gmail.com', 'Engineering', 'South Australia', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -211,13 +173,6 @@ CREATE TABLE `password_reset` (
   `token` text NOT NULL,
   `expDate` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `password_reset`
---
-
-INSERT INTO `password_reset` (`id`, `email`, `token`, `expDate`) VALUES
-(3, 'prummonkolsophearith@gmail.com', '570acbbb63ecfa08904629506f1488d2', '2021-10-14 03:20:34');
 
 -- --------------------------------------------------------
 
@@ -234,15 +189,6 @@ CREATE TABLE `report` (
   `comment` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `report`
---
-
-INSERT INTO `report` (`id`, `username`, `type`, `matchID`, `reason`, `comment`) VALUES
-(1, 'JohnDoe123', 'jobseeker', 26, 'Fraudulent', 'AWD'),
-(2, 'JohnDoe123', 'jobseeker', 26, 'Poorly Classified', 'awd'),
-(3, 'JohnDoe123', 'jobseeker', 26, 'Poorly Classified', 'awd');
-
 -- --------------------------------------------------------
 
 --
@@ -255,14 +201,6 @@ CREATE TABLE `skill` (
   `skill` text NOT NULL,
   `experience` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `skill`
---
-
-INSERT INTO `skill` (`id`, `username`, `skill`, `experience`) VALUES
-(21, 'JohnDoe123', 'Java Developer', '3 - 5 Years'),
-(22, 'JohnDoe123', 'Project Manager', '7 - 9 Years');
 
 -- --------------------------------------------------------
 
@@ -364,61 +302,61 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `career`
 --
 ALTER TABLE `career`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `education`
 --
 ALTER TABLE `education`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `employer`
 --
 ALTER TABLE `employer`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `jobmatch`
 --
 ALTER TABLE `jobmatch`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `jobpost`
 --
 ALTER TABLE `jobpost`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `jobseeker`
 --
 ALTER TABLE `jobseeker`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT for table `password_reset`
 --
 ALTER TABLE `password_reset`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `report`
 --
 ALTER TABLE `report`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `skill`
 --
 ALTER TABLE `skill`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `social`
 --
 ALTER TABLE `social`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -1,16 +1,19 @@
 <?php
 $id = $_GET['id'];
 require_once '../controller/matchmaking_controller.php';
+require_once '../controller/admin_controller.php';
 require_once '../controller/session_controller.php';
 // check if the session has not started yet
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 // call controllers
+
 $mmc = new MatchmakingController();
 $sc = new SessionController();
+$ac = new AdminController();
 $jobpost = $mmc->getJobPostByID($id);
-
+$userType = $sc->getUserType();
 
 if (isset($_POST['update'])) {
     $position = $_POST['position'];
@@ -21,17 +24,26 @@ if (isset($_POST['update'])) {
     $location = $_POST['location'];
     $type = $_POST['type'];
     $contact = $_POST['contact'];
-    if($position == $jobpost->position && $field == $jobpost->field && $salary == $jobpost->salary 
-    && $description == $jobpost->description && $requirements == $jobpost->requirements 
-    && $location == $jobpost->location && $location == $jobpost->location 
-    && $type == $jobpost->type && $contact == $jobpost->contact){
-        $script = "<script>window.location = '../view/employer_post.php?error=samevalue';</script>";
-		echo $script;
-    }else{
-        $mmc->updatePost($position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
+    if (
+        $position == $jobpost->position && $field == $jobpost->field && $salary == $jobpost->salary
+        && $description == $jobpost->description && $requirements == $jobpost->requirements
+        && $location == $jobpost->location && $location == $jobpost->location
+        && $type == $jobpost->type && $contact == $jobpost->contact
+    ) {
+        header("location: ../view/employer_post.php?error=samevalue");
+    } else {
+        if($sc->getUserType() == "admin"){
+            $ac->updatePost($position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
+        }else{
+            $mmc->updatePost($position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
+        }
     }
-}elseif(isset($_POST['delete'])){
-    $mmc->deletePost($id);
+} elseif (isset($_POST['delete'])) {
+    if($sc->getUserType() == "admin"){
+        $ac->deletePost($id);
+    }else{
+        $mmc->deletePost($id, $sc->getUserType());
+    }
 }
 
 
@@ -60,22 +72,31 @@ if (isset($_POST['update'])) {
         <div class="container">
             <div class="col-xl-10 offset-xl-1">
                 <div class="text-start">
+                    <?php
+                    if ($userType == "admin") {
+                        echo "<p class='card-text'><b>ID:</b> $jobpost->id &nbsp;&nbsp;&nbsp; <b>Employer:</b> $jobpost->employer</p>";
+                    }
+                    ?>
                     <h1><?php echo "$jobpost->position"; ?></h1>
                 </div>
-                <div class="row mb-5">
+                <div class="row">
                     <div class="col text-start">
-                        <h6 class="text-muted"><?php echo "$jobpost->field"; ?></h6>
+                        <h6 class="text-muted"><?php echo "<i class='fa fa-certificate' aria-hidden='true'></i>&nbsp; $jobpost->field"; ?></h6>
+                        <p class="text-muted"><?php echo "<i class='fa fa-briefcase' aria-hidden='true'></i>&nbsp; $jobpost->type"; ?></p>
                     </div>
+                    <div class="col text-end mt-4">
+                        <small><?php echo "<i class='fa fa-clock' aria-hidden='true'></i>&nbsp; $jobpost->date"; ?></small>
+                    </div>
+                    <hr>
+                </div>
+                <div class="row">
+                    <div class="col text-start"><small>Match: <?php echo "$jobpost->matches"; ?> times</small></div>
                     <div class="col text-end">
                         <form action='employer_view_matches.php' method='GET'>
                             <?php echo "<input type='hidden' name='id' value='$id'>"; ?>
                             <button type='submit' class='btn btn-solid-lg'>Matches</button>
                         </form>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col text-start"><small>Match: <?php echo "$jobpost->matches"; ?> times</small></div>
-                    <div class="col text-end"><small><?php echo "$jobpost->date"; ?></small></div>
                 </div>
             </div>
             <!-- end of row -->
@@ -114,7 +135,7 @@ if (isset($_POST['update'])) {
                             <div class="col">
                                 <div class="form-floating mb-3">
                                     <select class="form-select mb-3" aria-label=".form-select-lg example" id="fieldOfExpertise-form" name="field" required>
-                                    <?php echo "<option readonly selected value='$jobpost->field'>$jobpost->field</option>"; ?>
+                                        <?php echo "<option readonly selected value='$jobpost->field'>$jobpost->field</option>"; ?>
                                     </select>
                                     <label for="fieldOfExpertise-form">Job Field</label>
                                 </div>

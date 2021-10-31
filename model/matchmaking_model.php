@@ -5,7 +5,7 @@ class MatchmakingModel{
 		$query = "INSERT INTO jobpost (position, field, salary, type, description, requirements, location, employer, contact) VALUES ('$position', '$field', '$salary', '$type', '$description', '$requirements', '$location', '$username', '$contact')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
 		$db->close();
-		header("location: ../view/employer_post.php?success=posted");
+		return true;
 	}
 	
 	public function getJobPostsByField($db, $field){
@@ -30,7 +30,6 @@ class MatchmakingModel{
 	public function getJobPostsByEmployer($db, $username){
 		require_once '../model/job_object.php';
 		$jobposts = array();
-
 		$query = "SELECT * FROM jobpost WHERE employer='$username'";
 		$result = $db->query($query) or die(mysqli_error($db));
 		$numResults = $result->num_rows;
@@ -74,6 +73,7 @@ class MatchmakingModel{
 	}
 
 	public function updatePost($db, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id){
+		$success = false;
 		$query = "UPDATE jobpost SET position=?, field=?, salary=?, type=?, description=?, requirements=?, location=?, contact=? WHERE id=?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("ssssssssi", $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
@@ -84,28 +84,42 @@ class MatchmakingModel{
 		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/employer_post.php?success=updated");
-		} else {
-			header("location: ../view/employer_post.php?error=updatefailed");
+			$success = true;
 		}
+		return $success;
 	}
 
 	public function deletePost($db, $id) {
-		$this->deleteMatchByPostID($db, $id);
+		$success = false;
 		$query = "DELETE FROM jobpost WHERE id = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("i", $id);
 		$stmt->execute();
-
 		$affectedRows = $stmt->affected_rows;
 		$stmt->close();
-		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/employer_post.php?success=deleted");
-		} else {
-			header("location: ../view/employer_post.php?error=deletefailed");
+			$this->deleteMatchByPostID($db, $id);
+			$success = true;
 		}
+		$db->close();
+		return $success;
+	}
+
+	public function deletePostByEmployer($db, $employer) {
+		$success = false;
+		$query = "DELETE FROM jobpost WHERE employer = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("s", $employer);
+		$stmt->execute();
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+
+		if ($affectedRows == 1) {
+			$this->deleteMatchByUsername($db, $employer, "employer");
+			$success = true;
+		}
+		return $success;
 	}
 
 	public function getJobMatch($db, $user){
@@ -180,9 +194,12 @@ class MatchmakingModel{
 	}
 
 	public function getEmployerRating($db, $employer){
+		$rating = 0.0;
 		$result = $db->query("SELECT rating FROM employer WHERE username='$employer'");
 		$row = $result->fetch_assoc();
-		$rating = $row['rating'];
+		if(isset($row['rating'])){
+			$rating = $row['rating'];
+		}
 		return $rating;
 	}
 
@@ -195,7 +212,6 @@ class MatchmakingModel{
 
 		if (!$result) {
 			return false;
-			$db->close();
 		}
 		$row = $result->fetch_row();
 		if ($row[0] > 0) {
@@ -212,30 +228,31 @@ class MatchmakingModel{
 		$found = false;
 		$jobposts = array();
         $jobposts = $this->getJobPostsByField($db, $field);
+		$position = strtolower($position);
 		foreach($jobposts as $post => $val){
-			if(strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->location == $location && $val->type == $type){
+			if(preg_match('/\b'.$position.'\b/',strtolower($val->position)) && $val->salary == $salary && $val->location == $location && $val->type == $type){
 				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
 					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 100);
 					unset($jobposts[$post]);
 					$found = true;
 				}
-			}elseif(strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->location == $location
-					|| strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->type == $type
-					|| strtolower($val->position) == strtolower($position) && $val->location == $location && $val->type == $type){
+			}elseif(preg_match('/\b'.$position.'\b/',strtolower($val->position)) && $val->salary == $salary && $val->location == $location
+					|| preg_match('/\b'.$position.'\b/',strtolower($val->position)) && $val->salary == $salary && $val->type == $type
+					|| preg_match('/\b'.$position.'\b/',strtolower($val->position)) && $val->location == $location && $val->type == $type){
 				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
 					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 75);
 					unset($jobposts[$post]);
 					$found = true;
 				}
-			}elseif(strtolower($val->position) == strtolower($position) && $val->salary == $salary
-					|| strtolower($val->position) == strtolower($position) && $val->location == $location
-					|| strtolower($val->position) == strtolower($position) && $location && $val->type == $type){
+			}elseif(preg_match('/\b'.$position.'\b/',strtolower($val->position)) && $val->salary == $salary
+					|| preg_match('/\b'.$position.'\b/',strtolower($val->position)) && $val->location == $location
+					|| preg_match('/\b'.$position.'\b/',strtolower($val->position)) && $location && $val->type == $type){
 				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
 					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 50);
 					unset($jobposts[$post]);
 					$found = true;
 				}
-			}elseif(strtolower($val->position) == strtolower($position)){
+			}elseif(preg_match('/\b'.$position.'\b/',strtolower($val->position))){
 				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
 					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 25);
 					unset($jobposts[$post]);
@@ -246,6 +263,14 @@ class MatchmakingModel{
 		return $found;
 	}
 
+	public function deleteMatchByUsername($db, $username) {
+		$query = "DELETE FROM jobmatch WHERE employer = ? OR jobSeeker = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("ss", $username, $username);
+		$stmt->execute();
+		$stmt->close();
+	}
+
 	public function deleteMatchByPostID($db, $id) {
 		$query = "DELETE FROM jobmatch WHERE jobPostID = ?";
 		$stmt = $db->prepare($query);
@@ -254,7 +279,8 @@ class MatchmakingModel{
 		$stmt->close();
 	}
 
-	public function denyMatch($db, $id, $usertype) {
+	public function denyMatch($db, $id) {
+		$success = false;
 		$query = "DELETE FROM jobmatch WHERE id = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("i", $id);
@@ -263,21 +289,13 @@ class MatchmakingModel{
 		$stmt->close();
 
 		if ($affectedRows == 1) {
-			if($usertype == 'jobseeker'){
-				header("location: ../view/jobseeker_match.php?success=successdeny");
-			}else{
-				header("location: ../view/employer_post.php?success=successdeny");
-			}
-		} else {
-			if($usertype == 'jobseeker'){
-				header("location: ../view/jobseeker_match.php?error=errordeny");
-			}else{
-				header("location: ../view/employer_post.php?error=errordeny");
-			}
+			$success = true;
 		}
+		return $success;
 	}
 
 	public function addFeedback($db, $rating, $feedback, $id){
+		$success = false;
 		$query = "UPDATE jobmatch SET rating=?, feedback=? WHERE id=?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("isi", $rating, $feedback, $id);
@@ -287,17 +305,16 @@ class MatchmakingModel{
 		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/jobseeker_match.php?success=donefeedback");
-		} else {
-			header("location: ../view/jobseeker_match.php?error=errorfeedback");
+			$success = true;
 		}
+		return $success;
 	}
 
 	public function reportMatch($db, $username, $type, $id, $reason, $comment){
 		$query = "INSERT INTO report (username, type, matchID, reason, comment) VALUES ('$username', '$type', '$id', '$reason', '$comment')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
 		$db->close();
-		header("location: ../view/report.php?success=reported");
+		return true;
 	}
 
 	function getTimeElapsed($date, $tense = 'ago') {

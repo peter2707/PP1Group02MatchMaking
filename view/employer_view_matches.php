@@ -51,52 +51,45 @@ if (isset($_POST['deny'])) {
     </header>
     <!-- end of header -->
 
-    <div class="col-md-6 offset-md-3 mt-5 mb-5" style="min-height: 200px;">
+    <div class="col-md-6 offset-md-3 mt-5 mb-5" style="min-height: 400px;">
         <?php
         if(count($jobmatches) < 1){
             echo "<h3>This post doesn't have any match yet.</h3>";
         }else{
-            function createViewProfileButton($hiddenName, $hiddenValue, $buttonText, $actionPage){
-                echo "<td>";
-                echo "  <form action=$actionPage method=\"GET\">";
-                echo "      <input type=\"hidden\" name=$hiddenName value=$hiddenValue>";
-                echo "      <button type=\"submit\" class=\"btn btn-solid-sm\"><i class='fa fa-user' aria-hidden='true'></i> $buttonText</button>";
-                echo "  </form>";
-                echo "</td>";
-            }
-            function createDenyButton($matchID, $buttonText){
-                echo "<td>";
-                echo "  <form method=\"POST\">";
-                echo "      <input type=\"hidden\" name='matchID' value=$matchID>";
-                echo "      <button name=\"deny\" type=\"submit\" class=\"btn btn-danger-sm\" onclick=\"return confirm('Are you sure you want to deny this match ?')\" ><i class='fa fa-times' aria-hidden='true'></i> $buttonText</button>";
-                echo "  </form>";
-                echo "</td>";
-            }
-                echo "<table class='table table-striped'>";
-                echo "  <thead style='height: 50px;' class='table-dark'>";
-                echo "  <tr>";
-                echo "      <th scope='col'>Job Seeker</th>";
-                echo "      <th scope='col' style='width: 20%;'>Match Percentage</th>";
-                echo "      <th scope='col'>Since</th>";
-                echo "      <th scope='col' style='width: 13%;'>Action</th>";
-                echo "      <th scope='col' style='width: 14%;'></th>";
-                echo "  </tr>";
-                echo "  </thead>";
-                echo "  <tbody>";
             foreach ($jobmatches as $match) {
-                echo "  <tr>";
-                echo "      <td scope='row'>$match->jobseeker</td>";
-                echo "      <td scope='row'>$match->percentage %</td>";
-                echo "      <td scope='row'>$match->date</td>";
-                createDenyButton($match->id, "Deny");
-                createViewProfileButton('jobseeker', $match->jobseeker, 'Profile', 'user_view_other.php');
-                echo "  </tr>";
+                echo <<< END
+                    <div class="job-card">
+                        <div class="card border-0 mb-5">
+                            <div class="card-body">
+                                <div class="row d-flex align-items-center">
+                                    <div class="col text-start">
+                                        <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$match->jobseeker</h4>
+                                        <p class="card-text text-success"><i class="fa fa-check" aria-hidden="true"></i>&nbsp; $match->percentage% Match</p>
+                                        <br>
+                                        <small class="card-text"><i class="fa fa-clock" aria-hidden="true"></i>&nbsp; $match->date</small>
+                                    </div>
+                                    <div class="col row text-end">
+                                        <div class="col text-end">
+                                            <form method="POST">
+                                                <input type="hidden" name="matchID" value=$match->id>
+                                                <button name="deny" type="submit" class="btn btn-danger-sm" onclick="return confirm('Are you sure you want to deny this match ?')" ><i class='fa fa-times' aria-hidden='true'></i> Deny</button>
+                                            </form>
+                                        </div>
+                                        <div class="col text-start">
+                                            <form action="user_view_other.php" method="GET">
+                                                <input type="hidden" name="jobseeker" value=$match->jobseeker>
+                                                <button type="submit" class="btn btn-solid-sm"><i class='fa fa-user' aria-hidden='true'></i> Profile</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                END;
             }
-                echo "  </tbody>";
-                echo "</table>";
-                unset($jobmatches);
+            unset($jobmatches);
         }
-
         ?>
         
     </div>

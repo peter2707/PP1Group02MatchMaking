@@ -58,12 +58,6 @@ if (isset($_POST['reset'])) {
                                             echo "This link has already expired.";
                                         }
                                         echo "</span></h5>";
-                                    }elseif (isset($_GET["success"])) {
-                                        echo "<h5><span class='mb-2 badge bg-success'>";
-                                        if ($_GET["success"] == "tokengenerated") {
-                                            echo "A link has been sent to your email, please check your inbox or spam folder.";
-                                        }
-                                        echo "</span></h5>";
                                     }
                                 ?>
                                 <p>Enter your new password here.</p>
