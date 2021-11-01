@@ -34,7 +34,7 @@ class MatchmakingModel{
 	}
 
 	public function getJobPostsByEmployer($db, $username, $path){
-		include $path;
+		include_once $path;
 		$jobposts = array();
 
 		$query = "SELECT * FROM jobpost WHERE employer='$username'";
@@ -105,8 +105,6 @@ class MatchmakingModel{
 
 		$affectedRows = $stmt->affected_rows;
 		$stmt->close();
-		$db->close();
-
 		if ($affectedRows == 1) {
 			return true;
 		} else {

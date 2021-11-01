@@ -28,7 +28,11 @@ class UserController {
         require_once '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
-        $userModel->deleteAccount($db, $username, $type);
+        if($userModel->deleteAccount($db, $username, $type, '../model/session_model.php')){
+            header("location: ../view/login.php?success=accountdeleted");
+        } else {
+            header("location: ../view/user_settings.php?error=deletefailed");
+        }
     }
 
     public function changeProfilePicture($file, $username, $userType){

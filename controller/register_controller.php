@@ -27,7 +27,11 @@ class RegisterController {
                 header("location: ../view/register.php?error=usernametaken");
                 exit();
               }else{
-                $registerModel->registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position, $location);
+                if($registerModel->registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $position, $location)){
+                  header("location: ../view/login.php?success=created");
+                } else {
+                  header("location: ../view/login.php?error=failed");
+                }
               }
             }else{
               if (!$field){
@@ -36,7 +40,12 @@ class RegisterController {
                 header("location: ../view/register.php?error=usernametaken");
                 exit();
               }else{
-                $registerModel->registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $field, $location);
+                if($registerModel->registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $field, $location)){
+                  header("location: ../view/login.php?success=created");
+                } else {
+                  header("location: ../view/login.php?error=failed");
+                }
+
               }
             }
         }

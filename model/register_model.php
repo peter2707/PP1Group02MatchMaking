@@ -6,11 +6,10 @@ class RegisterModel {
       $query = "INSERT INTO employer (firstName, lastName, username, password, dateOfBirth, phone, email, position, location) 
             VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$position', '$location')";
       mysqli_query($db, $query) or die(mysqli_error($db));
-      $db->close();
-      header("location: ../view/login.php?success=created");
+      return true;
     }catch(Exception $e){
       $e->getMessage();
-      header("location: ../view/login.php?error=failed");
+      return false;
     }
   }
 
@@ -19,11 +18,10 @@ class RegisterModel {
       $query = "INSERT INTO jobseeker (firstName, lastName, username, password, dateOfBirth, phone, email, field, location) 
             VALUES ('$firstName', '$lastName', '$username', '$password', '$dateOfBirth', '$phone', '$email', '$field', '$location')";
       mysqli_query($db, $query) or die(mysqli_error($db));
-      $db->close();
-      header("location: ../view/login.php?success=created");
+      return true;
     }catch(Exception $e){
       $e->getMessage();
-      header("location: ../view/login.php?error=failed");
+      return false;
     }
   }
 }

@@ -268,8 +268,8 @@ class UserModel {
 		}
 	}
 
-	public function deleteAccount($db, $username, $type) {
-		require_once '../model/session_model.php';
+	public function deleteAccount($db, $username, $type, $path) {
+		include_once $path;
 		$sm = new SessionModel();
 		$query = "DELETE FROM $type WHERE username = ?";
 		$stmt = $db->prepare($query);
@@ -288,9 +288,9 @@ class UserModel {
 				unset($_SESSION["password"]);
 				session_destroy();
 			}
-			header("location: ../view/login.php?success=accountdeleted");
+			return true;
 		} else {
-			header("location: ../view/user_settings.php?error=deletefailed");
+			return false;
 		}
 		$db->close();
 	}
