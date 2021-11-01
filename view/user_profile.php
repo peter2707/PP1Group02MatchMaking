@@ -25,6 +25,7 @@ if (isset($_POST['done'])) {
     $instagram = $_POST['instagram'];
     $facebook = $_POST['facebook'];
     $userController->editSocialLink($sessionController->getUserName(), $linkedin, $github, $twitter, $instagram, $facebook);
+
 } elseif (isset($_POST['changeImage'])) {
     $input = $_FILES["image"]["tmp_name"];
     if (file_exists($input)) {
@@ -34,35 +35,52 @@ if (isset($_POST['done'])) {
     } else {
         header("location: ../view/user_profile.php?error=imagenotfound");
     }
+
 } elseif (isset($_POST['addResume'])) {
     $filename = $_FILES['resume']['name'];
     $file = $_FILES['resume']['tmp_name'];
-    $destination = '../images/pdf/'.$sessionController->getUserName().'.pdf';
+    $destination = '../images/pdf/' . $sessionController->getUserName() . '.pdf';
     if (move_uploaded_file($file, $destination)) {
         $userController->addResume($destination, $sessionController->getUserName());
-    }else{
+    } else {
         header("location: ../view/user_profile.php?error=filenotfound");
     }
+
+} elseif (isset($_POST['removeResume'])) {
+    $resumeName = $_POST['resumeName'];
+    $filepath = $_POST['filepath'];
+    $userController->removeResume($resumeName, $filepath);
+
+} elseif (isset($_POST['downloadResume'])) {
+    $filepath = $_POST['filepath'];
+    $filename = $_POST['filename'];
+    $userController->downloadResume($filepath, $filename);
+
 } elseif (isset($_POST['addSkill'])) {
     $skill = $_POST['skill'];
     $skillExp = $_POST['skillExp'];
     $userController->addSkill($sessionController->getUserName(), $skill, $skillExp);
+
 } elseif (isset($_POST['deleteSkill'])) {
     $skillId = $_POST['deleteSkill'];
     $userController->deleteSkill($skillId, $sessionController->getUserName());
+
 } elseif (isset($_POST['addEducation'])) {
     $institution = $_POST['institution'];
     $degree = $_POST['degree'];
     $graduation = $_POST['graduation'];
     $userController->addEducation($sessionController->getUserName(), $institution, $degree, $graduation);
+
 } elseif (isset($_POST['deleteEducation'])) {
     $educationId = $_POST['deleteEducation'];
     $userController->deleteEducation($educationId, $sessionController->getUserName());
+
 } elseif (isset($_POST['addCareer'])) {
     $position = $_POST['position'];
     $company = $_POST['company'];
     $experience = $_POST['experience'];
     $userController->addCareer($sessionController->getUserName(), $position, $company, $experience);
+
 } elseif (isset($_POST['deleteCareer'])) {
     $careerId = $_POST['deleteCareer'];
     $userController->deleteCareer($careerId, $sessionController->getUserName());
@@ -89,14 +107,17 @@ if (isset($_POST['done'])) {
 
     <?php
     if ($validSession) {
-        $user = $userController->getUser($userType, $username);
-        $social = $userController->getSocialLink($user->username);
         $skills = array();
         $educations = array();
         $careers = array();
+
+        $user = $userController->getUser($userType, $username);
+        $social = $userController->getSocialLink($user->username);
+        $resume = $userController->getResume($user->username);
         $skills = $userController->getSkills($user->username);
         $educations = $userController->getEducations($user->username);
         $careers = $userController->getCareers($user->username);
+
         $userImage = $user->image;
         if ($user->image == NULL) {
             $defaultImage = file_get_contents("../images/user.png");
@@ -251,6 +272,32 @@ END;
                                     <div class="card-body">
                                         <div class="row text-start ms-2 mx-2">
                                             <h2>Resume</h2>
+                END;
+            if ($resume) {
+                $resumeName = $resume;
+                while(str_contains($resumeName, "/")){
+                    $resumeName = substr($resumeName, strpos($resumeName, "/") + 1);
+                }
+                echo <<< END
+                                            <div class="row mt-3">
+                                                <div class="col text-start">
+                                                    <form method="POST">
+                                                        <input type="hidden" name="filepath" value="$resume">
+                                                        <input type="hidden" name="filename" value="$resumeName">
+                                                        <button type="submit" name="downloadResume" onclick="javascript:return confirm('Download Resume?');" class="btn-secondary-lg">$resumeName</button>
+                                                    </form>
+                                                </div>
+                                                <div class="col text-start mt-1">
+                                                    <form method="POST">
+                                                        <input type="hidden" name="resumeName" value="$user->username">
+                                                        <input type="hidden" name="filepath" value="$resume">
+                                                        <button type="submit" name="removeResume" onclick="javascript:return confirm('Remove Skill?');" class="btn-danger-sm"><i class="bi bi-trash"></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                END;
+            } else {
+                echo <<< END
                                             <form method="POST" enctype="multipart/form-data">
                                                 <div class="row mt-3">
                                                     <div class="col text-start mt-1">
@@ -261,11 +308,14 @@ END;
                                                     </div>
                                                 </div>
                                             </form>
+                END;
+            }
+            echo <<<END
                                         </div>
                                         <hr>
                                         <div class="row text-start ms-2 mx-2">
                                             <h2>Skills</h2>
-                    END;
+                END;
             if (count($skills) < 1) {
                 echo <<<END
                             <form method="POST">
@@ -297,7 +347,7 @@ END;
                                     </form>
                                 </div>
                             </div>
-                            END;
+                    END;
                 }
                 echo <<<END
                                 <div class="row mb-3 mt-3">
@@ -318,7 +368,7 @@ END;
                                     <button type="submit" name="addSkill" class="btn-success-sm mt-1">Add</button>
                                 </form>
                                 
-                        END;
+                END;
             }
             echo <<<END
                             </div>
@@ -326,7 +376,7 @@ END;
                             <div class="row text-start ms-2 mx-2">
                                 <h2>Education</h2>
 
-                        END;
+                END;
             if (count($educations) < 1) {
                 echo <<<END
                                 <form method="POST">
@@ -341,7 +391,7 @@ END;
                                     </div>
                                     <button type="submit" name="addEducation" class="btn-success-sm mt-1">Add</button>
                                 </form>
-                            END;
+                END;
             } else {
                 foreach ($educations as $education) {
                     echo <<<END
@@ -361,7 +411,7 @@ END;
                                         </form>
                                     </div>
                                 </div>
-                                END;
+                    END;
                 }
                 echo <<<END
                                     <div class="row mb-3 mt-3">
@@ -383,16 +433,16 @@ END;
                                         <button type="submit" name="addEducation" class="btn-success-sm mt-1">Add</button>
                                     </form>
                                     
-                            END;
+                END;
             }
-            echo <<<END
+                echo <<<END
                                     </div>
                                     <hr>
                                     <div class="row text-start ms-2 mx-2">
                                         <h2>Career History</h2>
 
 
-                        END;
+                END;
             if (count($careers) < 1) {
                 echo <<<END
                                 <form method="POST">
@@ -409,7 +459,7 @@ END;
                                     </div>
                                     <button type="submit" name="addCareer" class="btn-success-sm mt-2">Add</button>
                                 </form>
-                            END;
+                END;
             } else {
                 foreach ($careers as $career) {
                     echo <<<END
@@ -428,7 +478,7 @@ END;
                                         </form>
                                     </div>
                                 </div>
-                                END;
+                    END;
                 }
                 echo <<<END
                                 <div class="row mt-3">
@@ -451,7 +501,7 @@ END;
                                     </div>
                                     <button type="submit" name="addCareer" class="btn-success-sm mt-2">Add</button>
                                 </form>
-                            END;
+                END;
             }
             echo <<<END
 
@@ -465,7 +515,7 @@ END;
                 <!-- end of container -->
             </header>
             <!-- User Profile section End -->
-END;
+            END;
         } elseif ($userType == "employer") {
             $totalPosts = $matchmakingController->countJobPosts($sessionController->getUserName());
             $rating = number_format((float)$user->rating, 1, '.', '');
@@ -475,7 +525,7 @@ END;
             <!-- User Profile section start -->
             <header class="ex-header">
                 <div class="container">
-END;
+            END;
             if (isset($_GET["error"])) {
                 echo "<h5><span class='mb-2 badge bg-danger'>";
                 if ($_GET["error"] == "failed") {

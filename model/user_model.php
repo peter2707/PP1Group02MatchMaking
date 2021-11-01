@@ -132,6 +132,41 @@ class UserModel {
 		return $success;
 	}
 
+	public function removeResume($db, $username) {
+		$success = false;
+		$query = "UPDATE jobseeker SET resume=NULL WHERE username=?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("s", $username);
+		$stmt->execute();
+
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			$success = true;
+		}
+		return $success;
+	}
+
+	public function getResume($db, $username) {
+		$query = "SELECT * FROM jobseeker WHERE username = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("s", $username);
+
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$row = $result->fetch_assoc();
+		$stmt->close();
+		$db->close();
+		if (mysqli_num_rows($result) == 0) {
+			echo "<h3>Resume not Found.</h3> <small>Data might have been deleted or has invalid details.</small>";
+			exit();
+		} else {
+			return $row['resume'];
+		}
+	}
+
 	public function getSkills($db, $username) {
 		require_once '../model/user_object.php';
 		$skills = array();
