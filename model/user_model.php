@@ -1,8 +1,8 @@
 <?php
 class UserModel {
 
-	public function getUser($db, $userType, $username) {
-		include '../model/user_object.php';
+	public function getUser($db, $userType, $username, $path) {
+		include_once $path;
 		$query = "SELECT * FROM $userType WHERE username = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("s", $username);
@@ -11,7 +11,6 @@ class UserModel {
 		$result = $stmt->get_result();
 		$row = $result->fetch_assoc();
 		$stmt->close();
-		$db->close();
 		if(mysqli_num_rows($result)==0){
 			echo "<h3>User not Found.</h3> <small>This user might have been deleted or has invalid details.</small>";
 			exit();
@@ -242,12 +241,11 @@ class UserModel {
 
 		$affectedRows = $stmt->affected_rows;
 		$stmt->close();
-		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/user_settings.php?success=accountupdated");
+			return true;
 		} else {
-			header("location: ../view/user_settings.php?error=failed");
+			return false;
 		}
 	}
 
@@ -259,12 +257,11 @@ class UserModel {
 
 		$affectedRows = $stmt->affected_rows;
 		$stmt->close();
-		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/user_settings.php?success=accountupdated");
+			return true;
 		} else {
-			header("location: ../view/user_settings.php?error=failed");
+			return false;
 		}
 	}
 

@@ -4,7 +4,7 @@ class UserController {
         require_once '../model/user_model.php';
         require_once '../model/db_connection.php';
         $userModel = new UserModel();
-        return $userModel->getUser($db, $userType, $username);
+        return $userModel->getUser($db, $userType, $username, '../model/user_object.php');
     }
 
     public function updateJobSeeker($firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $username) {
@@ -14,14 +14,22 @@ class UserController {
         require_once '../model/user_model.php';
         require_once '../model/db_connection.php';
         $userModel = new UserModel();
-        $userModel->updateJobSeeker($db, $firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $username);
+        if($userModel->updateJobSeeker($db, $firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $username)){
+            header("location: ../view/user_settings.php?success=accountupdated");
+        } else {
+            header("location: ../view/user_settings.php?error=failed");
+        }
     }
 
     public function updateEmployer($firstName, $lastName, $password, $dob, $phone, $email, $position, $location, $username) {
         require_once '../model/user_model.php';
         require_once '../model/db_connection.php';
         $userModel = new UserModel();
-        $userModel->updateEmployer($db, $firstName, $lastName, $password, $dob, $phone, $email, $position, $location, $username);
+        if($userModel->updateEmployer($db, $firstName, $lastName, $password, $dob, $phone, $email, $position, $location, $username)){
+            header("location: ../view/user_settings.php?success=accountupdated");
+        } else {
+            header("location: ../view/user_settings.php?error=failed");
+        }
     }
 
     public function deleteAccount($username, $type){

@@ -7,7 +7,7 @@ class UnitTest extends TestCase
     public function testGetPost()
     {
         include '../job-match/model/db_connection.php';
-        include '../job-match/model/matchmaking_model.php';
+        include_once '../job-match/model/matchmaking_model.php';
 
         $mmm = new MatchmakingModel();
 
@@ -48,9 +48,11 @@ class UnitTest extends TestCase
     public function testRegister()
     {
         include '../job-match/model/db_connection.php';
-        include '../job-match/model/register_model.php';
-        include '../job-match/model/user_model.php';
-        include '../job-match/model/login_model.php';
+        include_once '../job-match/model/register_model.php';
+        include_once '../job-match/model/user_model.php';
+        include_once '../job-match/model/login_model.php';
+
+
 
         // Register
         $rm = new RegisterModel();
@@ -65,6 +67,12 @@ class UnitTest extends TestCase
         $checkLoginJS = $lm->checkJobSeeker($db, $username, $password);
         $this->assertTrue($checkLoginJS);
 
+        // update as Job seeker
+        $um->updateJobSeeker($db, 'newFirstname', 'lastname', $password, 'dateOfBirth', 'phone', 'email', 'field', 'location', 'username');
+        $jobseeker = $um->getUser($db, 'jobseeker', $username, '../job-match/model/user_object.php');
+        $newFirstname = $jobseeker->firstName;
+        $this->assertEquals('newFirstname', $newFirstname);
+
         // check delete the registered account successfully as job seeker
         $checkDeleteJS = $um->deleteAccount($db, $username, 'jobseeker', '../job-match/model/session_model.php');
         $this->assertTrue($checkDeleteJS);
@@ -76,9 +84,14 @@ class UnitTest extends TestCase
         // check login successfully as employer
         $this->assertTrue($checkLoginEmp);
 
+        // update as Employer
+        $um->updateEmployer($db, 'newFirstname', 'lastname', $password, 'dateOfBirth', 'phone', 'email', 'field', 'location', 'username');
+        $jobseeker = $um->getUser($db, 'employer', $username, '../job-match/model/user_object.php');
+        $newFirstname = $jobseeker->firstName;
+        $this->assertEquals('newFirstname', $newFirstname);
+
         // check delete the registered account successfully as employer
         $checkDeleteEmp = $um->deleteAccount($db, $username, 'employer', '../job-match/model/session_model.php');
         $this->assertTrue($checkDeleteEmp);
     }
-
 }
