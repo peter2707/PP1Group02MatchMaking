@@ -116,10 +116,10 @@ if (isset($_POST['done'])) {
             $careers = $userController->getCareers($user->username);
 
             echo <<<END
-            <!-- User Profile section start -->
-            <header class="ex-header">
-                <div class="container">
-END;
+                <!-- User Profile section start -->
+                <header class="ex-header">
+                    <div class="container">
+            END;
             if (isset($_GET["error"])) {
                 echo "<h5><span class='mb-2 badge bg-danger'>";
                 if ($_GET["error"] == "failed") {
@@ -263,251 +263,230 @@ END;
                                     <div class="card-body">
                                         <div class="row text-start ms-2 mx-2">
                                             <h2>Resume</h2>
-                END;
+            END;
             if ($resume) {
                 $resumeName = $resume;
                 while (str_contains($resumeName, "/")) {
                     $resumeName = substr($resumeName, strpos($resumeName, "/") + 1);
                 }
                 echo <<< END
-                                            <div class="row mt-3">
-                                                <div class="col text-start">
-                                                    <form method="POST">
-                                                        <input type="hidden" name="filepath" value="$resume">
-                                                        <input type="hidden" name="filename" value="$resumeName">
-                                                        <button type="submit" name="downloadResume" onclick="javascript:return confirm('Download Resume?');" class="btn-secondary-lg">$resumeName</button>
-                                                    </form>
-                                                </div>
-                                                <div class="col text-start mt-1">
-                                                    <form method="POST">
-                                                        <input type="hidden" name="resumeName" value="$user->username">
-                                                        <input type="hidden" name="filepath" value="$resume">
-                                                        <button type="submit" name="removeResume" onclick="javascript:return confirm('Remove Skill?');" class="btn-danger-sm"><i class="bi bi-trash"></i></button>
-                                                    </form>
-                                                </div>
-                                            </div>
+                    <div class="col text-start mt-3 ms-3">
+                        <form method="POST">
+                            <input type="hidden" name="filepath" value="$resume">
+                            <input type="hidden" name="filename" value="$resumeName">
+                            <input type="hidden" name="resumeName" value="$user->username">
+                            <button type="submit" name="downloadResume" onclick="javascript:return confirm('Download Resume?');" class="btn btn-secondary">$resumeName</button>
+                            <button type="submit" name="removeResume" onclick="javascript:return confirm('Remove Skill?');" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                        </form>
+                    </div>
                 END;
             } else {
                 echo <<< END
-                                            <form method="POST" enctype="multipart/form-data">
-                                                <div class="row mt-3">
-                                                    <div class="col text-start mt-1">
-                                                        <input type="file" class="form-control" name="resume" accept=".pdf" required/>
-                                                    </div>
-                                                    <div class="col">
-                                                        <button type="submit" name="addResume" class="btn btn-solid-sm mt-2">Submit</button>
-                                                    </div>
-                                                </div>
-                                            </form>
+                    <form method="POST" enctype="multipart/form-data">
+                        <div class="row mt-3">
+                            <div class="col text-start mt-1">
+                                <input type="file" class="form-control" name="resume" accept=".pdf" required/>
+                            </div>
+                            <div class="col">
+                                <button type="submit" name="addResume" class="btn btn-solid-sm mt-2">Submit</button>
+                            </div>
+                        </div>
+                    </form>
                 END;
             }
-            echo <<<END
+                echo <<<END
+                </div>
+                <hr>
+                <div class="row text-start ms-2 mx-2 mb-5">
+                    <div class="row mb-3 mt-3">
+                        <div class="col text-start">
+                            <h2>Skill</h2>
+                        </div>
+                        <div class="col text-end">
+                            <button class="btn btn-solid-sm" data-bs-toggle="modal" data-bs-target="#skillModal"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="skillModal" tabindex="-1" aria-labelledby="skillModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="skillModalLabel">Add Skill</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <form method="POST">
+                                    <div class="modal-body">
+                                        <div class="col-8 mb-2 offset-2"><input type="text" class="form-control" name="skill" placeholder="Skill" required/></div>
+                                        <div class="col-8 mb-2 offset-2">
+                                            <select class="form-select" aria-label=".form-select-lg example" id="skill-year-field" name="skillExp" required>
+                                                <option selected disabled value="">Experience</option>
+                                            </select>
                                         </div>
-                                        <hr>
-                                        <div class="row text-start ms-2 mx-2">
-                                            <h2>Skills</h2>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn-secondary-sm" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" name="addSkill" class="btn-success-sm mt-1">Add</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 END;
             if (count($skills) < 1) {
-                echo <<<END
-                            <form method="POST">
-                                <div class="col-sm-6 mt-2 mb-2">
-                                    <input type="text" class="form-control" name="skill" placeholder="Skill" required/>
-                                </div>
-                                <div class="col-sm-3 mt-2 mb-2">
-                                    <select class="form-select" aria-label=".form-select-lg example" id="skill-year-field" name="skillExp" required>
-                                        <option selected disabled value="">Experience</option>
-                                    </select>
-                                </div>
-                                <button type="submit" name="addSkill" class="btn-success-sm mt-1">Add</button>
-                            </form>
-                        END;
+                echo "<small class='text-center'>To add a skill, click on the <i class='fa fa-plus' aria-hidden='true'></i> button</small>";
             } else {
                 foreach ($skills as $skill) {
                     echo <<<END
-                            <div class="row mt-3">
-                                <div class="col-sm-5">
-                                    <h5>$skill->skill</h5>
-                                </div>
-                                <div class="col-sm-4 text-end">
-                                    <p><i class="fa fa-clock" aria-hidden="true"></i> $skill->experience</p>
-                                </div>
-                                <div class="col text-end">
+                        <div class="col-4 text-center mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 style="font-weight: lighter;">$skill->skill</h5>
+                                    <small><i class="fa fa-clock" aria-hidden="true"></i> $skill->experience</small>
                                     <form method="POST">
                                         <input type="hidden" name="deleteSkill" value="$skill->id">
-                                        <button type="submit" onclick="javascript:return confirm('Remove Skill?');" class="btn-danger-sm mt-1">Remove</button>
+                                        <button type="submit" onclick="javascript:return confirm('Remove Skill?');" class="btn btn-danger btn-sm mt-3"><i class="bi bi-trash"></i></button>
                                     </form>
                                 </div>
                             </div>
+                        </div>
                     END;
                 }
-                echo <<<END
-                                <div class="row mb-3 mt-3">
-                                    <div class="col text-end">
-                                        <button type="button" id="addSkillBtn" class="btn-solid-sm" onclick="addSkill()">Add Skill</button>
-                                        <button type="button" style="display:none" id="cancelSkillBtn" class="btn-secondary-sm" onclick="cancelSkill()">Cancel</button>
-                                    </div>
-                                </div>
-                                <form method="POST" id="skillForm" style="display:none">
-                                    <div class="col-sm-6 mt-2 mb-2">
-                                        <input type="text" class="form-control" name="skill" placeholder="Skill" required/>
-                                    </div>
-                                    <div class="col-sm-3 mt-2 mb-2">
-                                        <select class="form-select" aria-label=".form-select-lg example" id="skill-year-field" name="skillExp" required>
-                                            <option selected disabled value="">Experience</option>
-                                        </select>
-                                    </div>
-                                    <button type="submit" name="addSkill" class="btn-success-sm mt-1">Add</button>
-                                </form>
-                                
-                END;
             }
             echo <<<END
-                            </div>
-                            <hr>
-                            <div class="row text-start ms-2 mx-2">
-                                <h2>Education</h2>
+                </div>
+                <hr>
+                <div class="row text-start ms-2 mx-2 mb-5">
+                    <div class="row mb-3 mt-3">
+                        <div class="col text-start">
+                            <h2>Education</h2>
+                        </div>
+                        <div class="col text-end">
+                            <button class="btn btn-solid-sm" data-bs-toggle="modal" data-bs-target="#educationModal"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
 
-                END;
-            if (count($educations) < 1) {
-                echo <<<END
+                    <!-- Modal -->
+                    <div class="modal fade" id="educationModal" tabindex="-1" aria-labelledby="educationModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="educationModalLabel">Add Education</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
                                 <form method="POST">
-                                    <div class="col-sm-7 mt-2 mb-2">
-                                        <input type="text" class="form-control" name="institution" placeholder="Institution" required/>
+                                    <div class="modal-body">
+                                        <div class="col-8 mb-2 offset-2"><input type="text" class="form-control" name="institution" placeholder="Institution" required/></div>
+                                        <div class="col-8 mb-2 offset-2"><input type="text" class="form-control" name="degree" placeholder="Degree" required/></div>
+                                        <div class="col-8 mb-2 offset-2"><input id="calendar" class="form-control" name="graduation" required/></div>
                                     </div>
-                                    <div class="col-sm-7 mt-2 mb-2">
-                                        <input type="text" class="form-control" name="degree" placeholder="Degree" required/>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn-secondary-sm" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" name="addEducation" class="btn-success-sm mt-1">Add</button>
                                     </div>
-                                    <div class="col-sm-4 mt-2 mb-2">
-                                        <input id="calendar" class="form-control" name="graduation" />
-                                    </div>
-                                    <button type="submit" name="addEducation" class="btn-success-sm mt-1">Add</button>
                                 </form>
-                END;
+                            </div>
+                        </div>
+                    </div>
+            END;
+            if (count($educations) < 1) {
+                echo "<small class='text-center'>To add an education, click on the <i class='fa fa-plus' aria-hidden='true'></i> button</small>";
             } else {
                 foreach ($educations as $education) {
                     echo <<<END
-                                <div class="row mt-3">
-                                    <div class="col-sm-5">
-                                        <h5>$education->degree</h5>
-                                        <p><i class="fa fa-graduation-cap" aria-hidden="true"></i> $education->graduation</p>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <h5><i class="fa fa-building" aria-hidden="true"></i> $education->institution</h5>
-                                    </div>
-                                    
-                                    <div class="col text-end">
-                                        <form method="POST">
-                                            <input type="hidden" name="deleteEducation" value="$education->id">
-                                            <button type="submit" onclick="javascript:return confirm('Remove Education?');" class="btn-danger-sm mt-1">Remove</button>
-                                        </form>
-                                    </div>
+                        <div class="col-4 text-center mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 style="font-weight: lighter;">$education->degree</h5>
+                                    <small><i class="fa fa-graduation-cap" aria-hidden="true"></i> $education->graduation</small>
+                                    <p class="testimonial-text"><i class="fa fa-building" aria-hidden="true"></i> $education->institution</p>
+                                    <form method="POST">
+                                        <input type="hidden" name="deleteEducation" value="$education->id">
+                                        <button type="submit" onclick="javascript:return confirm('Remove Education?');" class="btn btn-danger btn-sm mt-1"><i class="bi bi-trash"></i></button>
+                                    </form>
                                 </div>
+                            </div>
+                        </div>
                     END;
                 }
-                echo <<<END
-                                    <div class="row mb-3 mt-3">
-                                        <div class="col text-end">
-                                            <button type="button" id="addEducationBtn" class="btn-solid-sm" onclick="addEducation()">Add Education</button>
-                                            <button type="button" style="display:none" id="cancelEducationBtn" class="btn-secondary-sm" onclick="cancelEducation()">Cancel</button>
-                                        </div>
-                                    </div>
-                                    <form method="POST" id="educationForm" style="display:none">
-                                        <div class="col-sm-7 mt-2 mb-2">
-                                            <input type="text" class="form-control" name="institution" placeholder="Institution" required/>
-                                        </div>
-                                        <div class="col-sm-7 mt-2 mb-2">
-                                            <input type="text" class="form-control" name="degree" placeholder="Degree" required/>
-                                        </div>
-                                        <div class="col-sm-4 mt-2 mb-2">
-                                            <input id="calendar" class="form-control" name="graduation" />
-                                        </div>
-                                        <button type="submit" name="addEducation" class="btn-success-sm mt-1">Add</button>
-                                    </form>
-                                    
-                END;
             }
             echo <<<END
-                                    </div>
-                                    <hr>
-                                    <div class="row text-start ms-2 mx-2">
-                                        <h2>Career History</h2>
+                </div>
+                <hr>
+                <div class="row text-start ms-2 mx-2 mb-5">
+                    <div class="row mb-3 mt-3">
+                        <div class="col text-start">
+                            <h2>Career History</h2>
+                        </div>
+                        <div class="col text-end">
+                            <button class="btn btn-solid-sm" data-bs-toggle="modal" data-bs-target="#careerModal"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
 
-
-                END;
-            if (count($careers) < 1) {
-                echo <<<END
+                    <!-- Modal -->
+                    <div class="modal fade" id="careerModal" tabindex="-1" aria-labelledby="careerModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="careerModalLabel">Add Career</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
                                 <form method="POST">
-                                    <div class="col-sm-7 mt-2 mb-2">
-                                        <input type="text" class="form-control" name="company" placeholder="Company" required/>
+                                    <div class="modal-body">
+                                        <div class="col-8 mb-2 offset-2"><input type="text" class="form-control" name="position" placeholder="Position" required/></div>
+                                        <div class="col-8 mb-2 offset-2"><input type="text" class="form-control" name="company" placeholder="Company" required/></div>
+                                        <div class="col-8 mb-2 offset-2">
+                                            <select class="form-select" aria-label=".form-select-lg example" id="career-year-field" name="experience" required>
+                                                <option selected disabled value="">Experience</option>
+                                            </select>
+                                        </div>
                                     </div>
-                                    <div class="col-sm-7 mt-2 mb-2">
-                                        <input type="text" class="form-control" name="position" placeholder="Position" required/>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn-secondary-sm" data-bs-dismiss="modal">Cancel</button>
+                                        <button type="submit" name="addCareer" class="btn-success-sm mt-1">Add</button>
                                     </div>
-                                    <div class="col-sm-4 mt-2 mb-2">
-                                        <select class="form-select" aria-label=".form-select-lg example" id="career-year-field" name="experience" required>
-                                            <option selected disabled value="">Experience</option>
-                                        </select>
-                                    </div>
-                                    <button type="submit" name="addCareer" class="btn-success-sm mt-2">Add</button>
                                 </form>
-                END;
+                            </div>
+                        </div>
+                    </div>
+            END;
+
+            if (count($careers) < 1) {
+                echo "<small class='text-center'>To add a career, click on the <i class='fa fa-plus' aria-hidden='true'></i> button</small>";
             } else {
                 foreach ($careers as $career) {
                     echo <<<END
-                                <div class="row mt-3">
-                                    <div class="col-sm-5">
-                                        <h5>$career->position</h5>
-                                        <p><i class="fa fa-clock" aria-hidden="true"></i> $career->experience</p>
-                                    </div>
-                                    <div class="col-sm-4">
-                                        <h5><i class="fa fa-building" aria-hidden="true"></i> $career->company</h5>
-                                    </div>
-                                    <div class="col text-end">
-                                        <form method="POST">
-                                            <input type="hidden" name="deleteCareer" value="$career->id">
-                                            <button type="submit" onclick="javascript:return confirm('Remove Career?');" class="btn-danger-sm mt-1">Remove</button>
-                                        </form>
-                                    </div>
+                        <div class="col-4 text-center mb-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 style="font-weight: lighter;">$career->position</h5>
+                                    <small><i class="fa fa-clock" aria-hidden="true"></i> $career->experience</small>
+                                    <p class="testimonial-text"><i class="fa fa-building" aria-hidden="true"></i> $career->company</p>
+                                    <form method="POST">
+                                        <input type="hidden" name="deleteCareer" value="$career->id">
+                                        <button type="submit" onclick="javascript:return confirm('Remove Career?');" class="btn btn-danger btn-sm mt-1"><i class="bi bi-trash"></i></button>
+                                    </form>
                                 </div>
+                            </div>
+                        </div>
                     END;
                 }
-                echo <<<END
-                                <div class="row mt-3">
-                                    <div class="col text-end">
-                                        <button type="button" id="addCareerBtn" class="btn-solid-sm" onclick="addCareer()">Add Career</button>
-                                        <button type="button" style="display:none" id="cancelCareerBtn" class="btn-secondary-sm" onclick="cancelCareer()">Cancel</button>
-                                    </div>
-                                </div>
-                                <form method="POST" id="careerForm" style="display:none">
-                                    <div class="col-sm-7 mt-2 mb-2">
-                                        <input type="text" class="form-control" name="company" placeholder="Company" required/>
-                                    </div>
-                                    <div class="col-sm-7 mt-2 mb-2">
-                                        <input type="text" class="form-control" name="position" placeholder="Position" required/>
-                                    </div>
-                                    <div class="col-sm-4 mt-2 mb-2">
-                                        <select class="form-select" aria-label=".form-select-lg example" id="career-year-field" name="experience" required>
-                                            <option selected disabled value="">Experience</option>
-                                        </select>
-                                    </div>
-                                    <button type="submit" name="addCareer" class="btn-success-sm mt-2">Add</button>
-                                </form>
-            END;
             }
-            echo <<<END
 
-                                            </div>
+        echo <<<END
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- end of container -->
-                </header>
-                <!-- User Profile section End -->
+                </div>
+                <!-- end of container -->
+            </header>
+            <!-- User Profile section End -->
 
-            END;
+        END;
         } elseif ($userType == "employer") {
             $feedbacks = array();
             $feedbacks = $userController->getAllFeedback($user->username);
@@ -705,19 +684,19 @@ END;
                     $jobseeker = $feedback[$i]->jobseeker;
                     $date = $feedback[$i]->date;
                     echo <<< END
-                                                <!-- Card -->
-                                                <div class="col-3 text-center">
-                                                    <div class="card">
-                                                        <div class="card-body">
-                                                            <h5 style="font-weight: lighter;">$jobseeker</h5>
-                                                            <small>$rating</small>
-                                                            <p class="testimonial-text">$comment</p>
-                                                            <small style="line-height: 0.5;" class="text-secondary">$date</small>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- end of card -->
-                                            END;
+                        <!-- Card -->
+                        <div class="col-3 text-center">
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 style="font-weight: lighter;">$jobseeker</h5>
+                                    <small>$rating</small>
+                                    <p class="testimonial-text">$comment</p>
+                                    <small style="line-height: 0.5;" class="text-secondary">$date</small>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- end of card -->
+                    END;
                 }
             }
 

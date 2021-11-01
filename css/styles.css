@@ -89,6 +89,7 @@ h5 {
     font-weight: 700;
     font-size: 1.25rem;
     line-height: 1.625rem;
+    text-overflow: ellipsis;
 }
 
 h6 {
@@ -1630,14 +1631,6 @@ a:hover {
         display: block;
         opacity: 1;
         overflow: hidden;
-    }
-    td:first-child,
-    th:first-child {
-        border-radius: 10px 0 0 10px;
-    }
-    td:last-child,
-    th:last-child {
-        border-radius: 0 10px 10px 0;
     }
 }
 

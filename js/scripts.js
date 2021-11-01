@@ -381,42 +381,6 @@ function cancel() {
     document.getElementById("doneInputLink").style.display = 'none';
 }
 
-function addSkill() {
-    document.getElementById("skillForm").style.display = '';
-    document.getElementById("cancelSkillBtn").style.display = '';
-    document.getElementById("addSkillBtn").style.display = 'none';
-}
-
-function cancelSkill() {
-    document.getElementById("skillForm").style.display = 'none';
-    document.getElementById("cancelSkillBtn").style.display = 'none';
-    document.getElementById("addSkillBtn").style.display = '';
-}
-
-function addEducation() {
-    document.getElementById("educationForm").style.display = '';
-    document.getElementById("cancelEducationBtn").style.display = '';
-    document.getElementById("addEducationBtn").style.display = 'none';
-}
-
-function cancelEducation() {
-    document.getElementById("educationForm").style.display = 'none';
-    document.getElementById("cancelEducationBtn").style.display = 'none';
-    document.getElementById("addEducationBtn").style.display = '';
-}
-
-function addCareer() {
-    document.getElementById("careerForm").style.display = '';
-    document.getElementById("cancelCareerBtn").style.display = '';
-    document.getElementById("addCareerBtn").style.display = 'none';
-}
-
-function cancelCareer() {
-    document.getElementById("careerForm").style.display = 'none';
-    document.getElementById("cancelCareerBtn").style.display = 'none';
-    document.getElementById("addCareerBtn").style.display = '';
-}
-
 
 //active link detect
 
