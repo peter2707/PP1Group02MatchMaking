@@ -123,7 +123,7 @@ class AdminModel {
 			$row = $result->fetch_assoc();
 			if($row['rating'] != NULL || $row['rating'] > 1){
 				$timeElapsed = $mm->getTimeElapsed($row['date']);
-				$allFeedbacks[$i] = new Feedback($row['id'], $row['jobSeeker'], intval($row['rating']), $row['feedback'], $timeElapsed);
+				$allFeedbacks[$i] = new Feedback($row['id'], $row['jobSeeker'], $row['employer'], intval($row['rating']), $row['feedback'], $timeElapsed);
 			}
 		}
 		$result->free();

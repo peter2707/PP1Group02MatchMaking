@@ -60,7 +60,7 @@ if (isset($_POST['post'])) {
                         <div class="row">
                             <div class="col">
                                 <div class="form-floating mb-3">
-                                    <input disabled type="text" class="form-control" id="positionInput" placeholder="Position" name="position" required>
+                                    <input disabled type="text" class="form-control" id="positionInput" placeholder="Position" name="position" pattern='^[a-zA-Z, ]+$' title='Must contain only letters' required>
                                     <label for="positionInput">Position</label>
                                 </div>
                             </div>

@@ -5,6 +5,11 @@
 - Prerequisites & Notes:
     - Ensure that you have XAMPP installed on your system
     - Works both on Mac and Window OS
+<p>&nbsp;</p>
+
+- Admin Credentials:
+    - Username: admin
+    - Password: admin
 
 <p>&nbsp;</p>
 

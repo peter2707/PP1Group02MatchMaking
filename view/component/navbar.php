@@ -220,10 +220,10 @@ if ($validSession && $userType == "jobseeker") {                       //jobseek
                     <li class="nav-item">
                         <a class="nav-link" href="index.php#contact">Help & Support</a>
                     </li>
+                    <li class="nav-item">
+                        <a class='btn-solid-sm' href='login.php'>Log In</a>
+                    </li>
                 </ul>
-                <span class="nav-item">
-                    <a class="btn-solid-sm" href="login.php">Log In</a>
-                </span>
             </div>
             <!-- end of navbar-collapse -->
         </div>

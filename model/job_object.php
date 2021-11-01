@@ -49,13 +49,12 @@ class Report{
 }
 
 class Feedback{
-    public function __construct($id, $username, $rating, $comment, $date) {
+    public function __construct($id, $jobseeker, $employer, $rating, $comment, $date) {
         $this->id = $id;
-        $this->username = $username;
+        $this->jobseeker = $jobseeker;
+        $this->employer = $employer;
         $this->rating = $rating;
         $this->comment = $comment;
         $this->date = $date;
     }
 }
-
-?>

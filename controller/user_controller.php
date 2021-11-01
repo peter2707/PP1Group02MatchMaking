@@ -57,6 +57,42 @@ class UserController {
 		}
     }
 
+    public function addResume($file, $username){
+        include '../model/db_connection.php';
+        require_once '../model/user_model.php';
+        $userModel = new UserModel();
+        if ($userModel->addResume($db, $file, $username)) {
+			header("location: ../view/user_profile.php?success=accountupdated");
+		} else {
+			header("location: ../view/user_profile.php?error=failed");
+		}
+    }
+
+    public function removeResume($username, $filepath){
+        include '../model/db_connection.php';
+        require_once '../model/user_model.php';
+        $userModel = new UserModel();
+        if ($userModel->removeResume($db,$username)) {
+			header("location: ../view/user_profile.php?success=accountupdated");
+            unlink($filepath);
+		} else {
+			header("location: ../view/user_profile.php?error=failed");
+		}
+    }
+
+    public function getResume($username){
+        include '../model/db_connection.php';
+        require_once '../model/user_model.php';
+        $userModel = new UserModel();
+        return $userModel->getResume($db, $username);
+    }
+
+    public function downloadResume($filepath, $filename){
+        header("Content-type: application/pdf");
+        header("Content-Disposition: inline; filename={$filename}");
+        @readfile($filepath);
+    }
+
     public function editSocialLink($username, $linkedin, $github, $twitter, $instagram, $facebook){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
@@ -162,6 +198,13 @@ class UserController {
 		}
     }
 
+    public function getAllFeedback($username) {
+        require_once '../model/user_model.php';
+        include '../model/db_connection.php';
+        $userModel = new UserModel();
+        return $userModel->getAllFeedback($db, $username);
+    }
+
     public function resetPassword($type, $password, $confirmPassword, $email, $token) {
         require_once '../model/utility.php';
         if(!isset($type) || !isset($password) || !isset($confirmPassword) || !isset($email) || !isset($token)){
@@ -244,4 +287,3 @@ class UserController {
         return $map;
     }
 }
-?> 

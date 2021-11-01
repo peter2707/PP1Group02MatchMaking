@@ -12,17 +12,17 @@ class UserModel {
 		$row = $result->fetch_assoc();
 		$stmt->close();
 		$db->close();
-		if(mysqli_num_rows($result) == 0){
+		if (mysqli_num_rows($result) == 0) {
 			echo "<h3>User not Found.</h3> <small>This user might have been deleted or has invalid details.</small>";
 			exit();
-		}else{
-			if($userType == "jobseeker"){
+		} else {
+			if ($userType == "jobseeker") {
 				$jobseeker = new JobSeeker($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['field'], $row['location'], $row['image']);
 				return $jobseeker;
-			}elseif($userType == "employer"){
+			} elseif ($userType == "employer") {
 				$employer = new Employer($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position'], $row['location'], $row['rating'], $row['image']);
 				return $employer;
-			}elseif($userType == "admin"){
+			} elseif ($userType == "admin") {
 				$admin = new Admin($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['password'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position']);
 				return $admin;
 			}
@@ -77,16 +77,16 @@ class UserModel {
 		$stmt->close();
 		if ($affectedRows == 1) {
 			$this->deleteAllSocials($db, $username);
-			if($type == "jobseeker"){
+			if ($type == "jobseeker") {
 				$this->deleteAllCareers($db, $username);
 				$this->deleteAllEducations($db, $username);
 				$this->deleteAllSkills($db, $username);
 				$mm->deleteMatchByUsername($db, $username, "jobSeeker");
-			}elseif($type == "employer"){
+			} elseif ($type == "employer") {
 				$mm->deletePostByEmployer($db, $username);
 				$mm->deleteMatchByUsername($db, $username, "employer");
 			}
-			if($sm->getUserName() == $username){
+			if ($sm->getUserName() == $username) {
 				session_start();
 				unset($_SESSION["username"]);
 				unset($_SESSION["password"]);
@@ -98,9 +98,9 @@ class UserModel {
 		return $success;
 	}
 
-	public function changeProfilePicture($db, $file, $username, $userType){
+	public function changeProfilePicture($db, $file, $username, $userType) {
 		$success = false;
-		$query = "UPDATE $userType SET image=? WHERE username = ?";
+		$query = "UPDATE $userType SET image=? WHERE username=?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("ss", $file, $username);
 		$stmt->execute();
@@ -113,6 +113,58 @@ class UserModel {
 			$success = true;
 		}
 		return $success;
+	}
+
+	public function addResume($db, $filepath, $username) {
+		$success = false;
+		$query = "UPDATE jobseeker SET resume=? WHERE username=?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("ss", $filepath, $username);
+		$stmt->execute();
+
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			$success = true;
+		}
+		return $success;
+	}
+
+	public function removeResume($db, $username) {
+		$success = false;
+		$query = "UPDATE jobseeker SET resume=NULL WHERE username=?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("s", $username);
+		$stmt->execute();
+
+		$affectedRows = $stmt->affected_rows;
+		$stmt->close();
+		$db->close();
+
+		if ($affectedRows == 1) {
+			$success = true;
+		}
+		return $success;
+	}
+
+	public function getResume($db, $username) {
+		$query = "SELECT * FROM jobseeker WHERE username = ?";
+		$stmt = $db->prepare($query);
+		$stmt->bind_param("s", $username);
+
+		$stmt->execute();
+		$result = $stmt->get_result();
+		$row = $result->fetch_assoc();
+		$stmt->close();
+		$db->close();
+		if (mysqli_num_rows($result) == 0) {
+			echo "<h3>Resume not Found.</h3> <small>Data might have been deleted or has invalid details.</small>";
+			exit();
+		} else {
+			return $row['resume'];
+		}
 	}
 
 	public function getSkills($db, $username) {
@@ -129,7 +181,7 @@ class UserModel {
 		return $skills;
 	}
 
-	public function addSkill($db, $username, $skill, $experience){
+	public function addSkill($db, $username, $skill, $experience) {
 		$query = "INSERT INTO skill (username, skill, experience) 
             VALUES ('$username', '$skill', '$experience')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
@@ -175,7 +227,7 @@ class UserModel {
 		return $educations;
 	}
 
-	public function addEducation($db, $username, $institution, $degree, $graduation){
+	public function addEducation($db, $username, $institution, $degree, $graduation) {
 		$query = "INSERT INTO education (username, institution, degree, graduation) 
             VALUES ('$username', '$institution', '$degree', '$graduation')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
@@ -221,7 +273,7 @@ class UserModel {
 		return $careers;
 	}
 
-	public function addCareer($db, $username, $position, $company, $experience){
+	public function addCareer($db, $username, $position, $company, $experience) {
 		$query = "INSERT INTO career (username, position, company, experience) 
             VALUES ('$username', '$position', '$company', '$experience')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
@@ -252,25 +304,25 @@ class UserModel {
 		$stmt->execute();
 		$stmt->close();
 	}
-	
-	public function getSocialLink($db, $username){
+
+	public function getSocialLink($db, $username) {
 		require_once '../model/user_object.php';
 		$query = "SELECT * FROM social WHERE username = '$username'";
 		$stmt = $db->prepare($query);
 		$stmt->execute();
 		$result = $stmt->get_result();
 		$row = $result->fetch_assoc();
-		if(mysqli_num_rows($result)==0){
+		if (mysqli_num_rows($result) == 0) {
 			$social = new Social('Not added', 'Not added', 'Not added', 'Not added', 'Not added', 'Not added');
-		}else{
+		} else {
 			$social = new Social($row['username'], $row['linkedin'], $row['github'], $row['twitter'], $row['instagram'], $row['facebook']);
 		}
 		$stmt->close();
 		$db->close();
 		return $social;
 	}
-	
-	public function addSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook){
+
+	public function addSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook) {
 		$query = "INSERT INTO social (username, linkedin, github, twitter, instagram, facebook) 
             VALUES ('$username', '$linkedin', '$github', '$twitter', '$instagram', '$facebook')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
@@ -278,13 +330,13 @@ class UserModel {
 		return true;
 	}
 
-	public function editSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook){
+	public function editSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook) {
 		$success = false;
 		$queryCheck = "SELECT count(*) FROM social WHERE username=?";
 		$stmt = $db->prepare($queryCheck);
 		$stmt->bind_param("s", $username);
 		$stmt->execute();
-		
+
 		$result = $stmt->get_result();
 		$stmt->close();
 
@@ -306,8 +358,8 @@ class UserModel {
 			if ($affectedRows == 1) {
 				$success = true;
 			}
-		}else {
-			if($this->addSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook)){
+		} else {
+			if ($this->addSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook)) {
 				$success = true;
 			}
 			return $success;
@@ -322,6 +374,26 @@ class UserModel {
 		$stmt->close();
 	}
 
+	public function getAllFeedback($db, $username) {
+		require_once '../model/job_object.php';
+		require_once '../model/matchmaking_model.php';
+		$mm = new MatchmakingModel();
+		$allFeedbacks = array();
+		$query = "SELECT * FROM jobmatch WHERE employer='$username'";
+		$result = $db->query($query);
+		$numResults = $result->num_rows;
+		for ($i = 0; $i < $numResults; $i++) {
+			$row = $result->fetch_assoc();
+			if($row['rating'] != NULL || $row['rating'] > 1){
+				$timeElapsed = $mm->getTimeElapsed($row['date']);
+				$allFeedbacks[$i] = new Feedback($row['id'], $row['jobSeeker'], $row['employer'], intval($row['rating']), $row['feedback'], $timeElapsed);
+			}
+		}
+		$result->free();
+		$db->close();
+		return $allFeedbacks;
+	}
+
 	public function checkToken($db, $email, $token) {
 		$success = false;
 		$query = "SELECT * FROM password_reset WHERE email=? AND token =?";
@@ -331,15 +403,15 @@ class UserModel {
 		$result = $stmt->get_result();
 		$row = $result->fetch_assoc();
 		if (mysqli_num_rows($result) > 0) {
-			$nowFormat = mktime(date("H"), date("i"), date("s"), date("m") ,date("d"), date("Y"));
+			$nowFormat = mktime(date("H"), date("i"), date("s"), date("m"), date("d"), date("Y"));
 			$now = date("Y-m-d H:i:s", $nowFormat);
 			$exp = $row['expDate'];
-			if($exp >= $now){
+			if ($exp >= $now) {
 				$success = true;
-			}else{
+			} else {
 				header("location: ../view/reset_password.php?error=expired");
 			}
-		}else{
+		} else {
 			header("location: ../view/reset_password.php?error=notfound");
 			exit();
 		}
@@ -347,9 +419,9 @@ class UserModel {
 		return $success;
 	}
 
-	public function resetPassword($db, $type, $password, $email, $token){
+	public function resetPassword($db, $type, $password, $email, $token) {
 		$success = false;
-		if($this->checkToken($db, $email, $token)){
+		if ($this->checkToken($db, $email, $token)) {
 			$query = "UPDATE $type SET password=? WHERE email = ?";
 			$stmt = $db->prepare($query);
 			$stmt->bind_param("ss", $password, $email);
@@ -363,5 +435,4 @@ class UserModel {
 			return $success;
 		}
 	}
-
 }
