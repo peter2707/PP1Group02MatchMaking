@@ -2,10 +2,16 @@
 class MatchmakingModel{
 
 	public function postNewJob($db, $position, $field, $salary, $type, $description, $requirements, $location, $username, $contact){
-		$query = "INSERT INTO jobpost (position, field, salary, type, description, requirements, location, employer, contact) VALUES ('$position', '$field', '$salary', '$type', '$description', '$requirements', '$location', '$username', '$contact')";
-		mysqli_query($db, $query) or die(mysqli_error($db));
+		$sql = "INSERT INTO jobpost (position, field, salary, type, description, requirements, location, employer, contact) VALUES('$position', '$field', '$salary', '$type', '$description', '$requirements', '$location', '$username', '$contact')";
+
+		if ($stmt = $db->prepare($sql)) {
+			if ($stmt->execute()) {
+				return true;   
+			} else {
+				return false;
+			}
+		}
 		$db->close();
-		header("location: ../view/employer_post.php?success=posted");
 	}
 	
 	public function getJobPostsByField($db, $field){
@@ -27,8 +33,8 @@ class MatchmakingModel{
 		return $jobposts;
 	}
 
-	public function getJobPostsByEmployer($db, $username){
-		require_once '../model/job_object.php';
+	public function getJobPostsByEmployer($db, $username, $path){
+		include $path;
 		$jobposts = array();
 
 		$query = "SELECT * FROM jobpost WHERE employer='$username'";
@@ -102,9 +108,9 @@ class MatchmakingModel{
 		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/employer_post.php?success=deleted");
+			return true;
 		} else {
-			header("location: ../view/employer_post.php?error=deletefailed");
+			return false;
 		}
 	}
 
@@ -211,7 +217,7 @@ class MatchmakingModel{
 	public function findMatch($db, $position, $salary, $location, $type, $field, $jobseeker){
 		$found = false;
 		$jobposts = array();
-        $jobposts = $this->getJobPostsByField($db, $field);
+        $jobposts = $this->getJobPostsByField($db, $field, '../model/job_object.php');
 		foreach($jobposts as $post => $val){
 			if(strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->location == $location && $val->type == $type){
 				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){

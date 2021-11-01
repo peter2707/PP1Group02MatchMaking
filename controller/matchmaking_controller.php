@@ -50,7 +50,9 @@ class MatchmakingController {
             require_once '../model/matchmaking_model.php';
             include '../model/db_connection.php';
             $mmm = new MatchmakingModel();
-            $mmm->postNewJob($db, $position, $field, $salary, $type, $description, $requirements, $location, $username, $contact);
+            if($mmm->postNewJob($db, $position, $field, $salary, $type, $description, $requirements, $location, $username, $contact)){
+                header("location: ../view/employer_post.php?success=posted");
+            }
         }
     }
 
@@ -58,7 +60,7 @@ class MatchmakingController {
         require_once '../model/matchmaking_model.php';
         include '../model/db_connection.php';
         $mmm = new MatchmakingModel();
-        return $mmm->getJobPostsByEmployer($db, $username);
+        return $mmm->getJobPostsByEmployer($db, $username, '../model/job_object.php');
     }
 
     public function getJobPostByID($jobID){
@@ -86,7 +88,11 @@ class MatchmakingController {
         require_once '../model/matchmaking_model.php';
         include '../model/db_connection.php';
         $mmm = new MatchmakingModel();
-        $mmm->deletePost($db, $id);
+        if($mmm->deletePost($db, $id)){
+            header("location: ../view/employer_post.php?success=deleted");
+        } else {
+            header("location: ../view/employer_post.php?error=deletefailed");
+        }
     }
 
     public function denyMatch($id, $usertype){
