@@ -128,7 +128,7 @@ if (isset($_POST['update'])) {
                         <div class="row">
                             <div class="col">
                                 <div class="form-floating mb-3">
-                                    <?php echo "<input type='text' class='form-control' id='positionInput' placeholder='Position' name='position' value='$jobpost->position' required>"; ?>
+                                    <?php echo "<input type='text' class='form-control' id='positionInput' placeholder='Position' name=' position' pattern='^[a-zA-Z, ]+$' title='Must contain only letters' value='$jobpost->position' required>"; ?>
                                     <label for="positionInput">Position</label>
                                 </div>
                             </div>
