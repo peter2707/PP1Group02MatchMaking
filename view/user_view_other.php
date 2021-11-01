@@ -8,6 +8,11 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
+// call controllers
+$uc = new UserController();
+$sc = new SessionController();
+$mc = new MatchmakingController();
+
 if(isset($_GET['jobseeker'])){
     $usertype = "jobseeker";
     $username = $_GET['jobseeker'];
@@ -15,11 +20,11 @@ if(isset($_GET['jobseeker'])){
     $usertype = "employer";
     $username = $_GET['employer'];
 }
-
-// call controllers
-$uc = new UserController();
-$sc = new SessionController();
-$mc = new MatchmakingController();
+if (isset($_POST['downloadResume'])) {
+    $filepath = $_POST['filepath'];
+    $filename = $_POST['filename'];
+    $uc->downloadResume($filepath, $filename);
+}
 
 $viewUser = $uc->getUser($usertype, $username);
 ?>
@@ -153,7 +158,7 @@ $viewUser = $uc->getUser($usertype, $username);
                             <div class="col-md-8">
                                 <div class="card mb-3">
                                     <div class="card-body">
-                                        <div class="row text-start ms-2 mx-2">
+                                        <div class="row text-start ms-2 mx-2 mb-5">
                                             <h2>Resume</h2>
         END;
         if ($resume) {
@@ -166,14 +171,12 @@ $viewUser = $uc->getUser($usertype, $username);
                     <form method="POST">
                         <input type="hidden" name="filepath" value="$resume">
                         <input type="hidden" name="filename" value="$resumeName">
-                        <button type="submit" name="downloadResume" onclick="javascript:return confirm('Download Resume?');" class="btn btn-secondary">$resumeName</button>
+                        <button type="submit" name="downloadResume" onclick="javascript:return confirm('Download Resume?');" class="btn btn-secondary">View</button>
                     </form>
                 </div>
             END;
         } else {
-            echo <<< END
-                echo "<small class='text-center'>This user has not added a resume yet.</small>";
-            END;
+            echo "<small class='text-center'>This user has not added a resume yet.</small>";
         }
             echo <<<END
             </div>
