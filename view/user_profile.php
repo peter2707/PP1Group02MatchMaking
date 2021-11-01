@@ -25,7 +25,6 @@ if (isset($_POST['done'])) {
     $instagram = $_POST['instagram'];
     $facebook = $_POST['facebook'];
     $userController->editSocialLink($sessionController->getUserName(), $linkedin, $github, $twitter, $instagram, $facebook);
-
 } elseif (isset($_POST['changeImage'])) {
     $input = $_FILES["image"]["tmp_name"];
     if (file_exists($input)) {
@@ -35,7 +34,6 @@ if (isset($_POST['done'])) {
     } else {
         header("location: ../view/user_profile.php?error=imagenotfound");
     }
-
 } elseif (isset($_POST['addResume'])) {
     $filename = $_FILES['resume']['name'];
     $file = $_FILES['resume']['tmp_name'];
@@ -45,42 +43,34 @@ if (isset($_POST['done'])) {
     } else {
         header("location: ../view/user_profile.php?error=filenotfound");
     }
-
 } elseif (isset($_POST['removeResume'])) {
     $resumeName = $_POST['resumeName'];
     $filepath = $_POST['filepath'];
     $userController->removeResume($resumeName, $filepath);
-
 } elseif (isset($_POST['downloadResume'])) {
     $filepath = $_POST['filepath'];
     $filename = $_POST['filename'];
     $userController->downloadResume($filepath, $filename);
-
 } elseif (isset($_POST['addSkill'])) {
     $skill = $_POST['skill'];
     $skillExp = $_POST['skillExp'];
     $userController->addSkill($sessionController->getUserName(), $skill, $skillExp);
-
 } elseif (isset($_POST['deleteSkill'])) {
     $skillId = $_POST['deleteSkill'];
     $userController->deleteSkill($skillId, $sessionController->getUserName());
-
 } elseif (isset($_POST['addEducation'])) {
     $institution = $_POST['institution'];
     $degree = $_POST['degree'];
     $graduation = $_POST['graduation'];
     $userController->addEducation($sessionController->getUserName(), $institution, $degree, $graduation);
-
 } elseif (isset($_POST['deleteEducation'])) {
     $educationId = $_POST['deleteEducation'];
     $userController->deleteEducation($educationId, $sessionController->getUserName());
-
 } elseif (isset($_POST['addCareer'])) {
     $position = $_POST['position'];
     $company = $_POST['company'];
     $experience = $_POST['experience'];
     $userController->addCareer($sessionController->getUserName(), $position, $company, $experience);
-
 } elseif (isset($_POST['deleteCareer'])) {
     $careerId = $_POST['deleteCareer'];
     $userController->deleteCareer($careerId, $sessionController->getUserName());
@@ -107,16 +97,8 @@ if (isset($_POST['done'])) {
 
     <?php
     if ($validSession) {
-        $skills = array();
-        $educations = array();
-        $careers = array();
-
         $user = $userController->getUser($userType, $username);
         $social = $userController->getSocialLink($user->username);
-        $resume = $userController->getResume($user->username);
-        $skills = $userController->getSkills($user->username);
-        $educations = $userController->getEducations($user->username);
-        $careers = $userController->getCareers($user->username);
 
         $userImage = $user->image;
         if ($user->image == NULL) {
@@ -124,6 +106,15 @@ if (isset($_POST['done'])) {
             $userImage = base64_encode($defaultImage);
         }
         if ($userType == "jobseeker") {
+            $skills = array();
+            $educations = array();
+            $careers = array();
+
+            $resume = $userController->getResume($user->username);
+            $skills = $userController->getSkills($user->username);
+            $educations = $userController->getEducations($user->username);
+            $careers = $userController->getCareers($user->username);
+
             echo <<<END
             <!-- User Profile section start -->
             <header class="ex-header">
@@ -275,7 +266,7 @@ END;
                 END;
             if ($resume) {
                 $resumeName = $resume;
-                while(str_contains($resumeName, "/")){
+                while (str_contains($resumeName, "/")) {
                     $resumeName = substr($resumeName, strpos($resumeName, "/") + 1);
                 }
                 echo <<< END
@@ -435,7 +426,7 @@ END;
                                     
                 END;
             }
-                echo <<<END
+            echo <<<END
                                     </div>
                                     <hr>
                                     <div class="row text-start ms-2 mx-2">
@@ -501,31 +492,35 @@ END;
                                     </div>
                                     <button type="submit" name="addCareer" class="btn-success-sm mt-2">Add</button>
                                 </form>
-                END;
+            END;
             }
             echo <<<END
 
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- end of container -->
-            </header>
-            <!-- User Profile section End -->
+                    <!-- end of container -->
+                </header>
+                <!-- User Profile section End -->
+
             END;
         } elseif ($userType == "employer") {
+            $feedbacks = array();
+            $feedbacks = $userController->getAllFeedback($user->username);
             $totalPosts = $matchmakingController->countJobPosts($sessionController->getUserName());
             $rating = number_format((float)$user->rating, 1, '.', '');
             $map = $userController->getMap($user->location);
 
             echo <<<END
-            <!-- User Profile section start -->
-            <header class="ex-header">
-                <div class="container">
+                <!-- User Profile section start -->
+                <header class="ex-header">
+                    <div class="container">
             END;
+
             if (isset($_GET["error"])) {
                 echo "<h5><span class='mb-2 badge bg-danger'>";
                 if ($_GET["error"] == "failed") {
@@ -541,6 +536,7 @@ END;
                 }
                 echo "</span></h5>";
             }
+
             echo <<<END
                     <div class="main-body">
                         <div class="row gutters-sm">
@@ -671,13 +667,13 @@ END;
                                             <h2 class="mb-5">Overview</h2>
                                             <div class="row ms-2 mx-2">
                                                 <div class="col text-center">
-                                                    <p><b>Job Posts:</b> $totalPosts</p>
+                                                    <h5 class="text-secondary" style="font-weight: lighter;">Total Posts:&nbsp; $totalPosts</h5>
                                                 </div>
                                                 <div class="col text-center">
-                                                    <p><b>Position:</b> $user->position</p>
+                                                    <h5 class="text-secondary" style="font-weight: lighter;">Position:&nbsp; $user->position</h5>
                                                 </div>
                                                 <div class="col text-center">
-                                                    <p><b>Rating:</b> $rating <i class="fa fa-star mb-1" style="color:gold" aria-hidden="true"></i></p>
+                                                    <h5 class="text-secondary" style="font-weight: lighter;">Rating:&nbsp; $rating <i class="fa fa-star mb-1" style="color:gold" aria-hidden="true"></i></h5>
                                                 </div>
                                             </div>
                                             <hr>
@@ -686,18 +682,47 @@ END;
                                             <h2 class="mb-5">Contact</h2>
                                             <div class="row ms-2 mx-2">
                                                 <div class="col text-center">
-                                                    <p><b>Email:</b> $user->email</p>
+                                                    <h5 class="text-secondary" style="font-weight: lighter;"><b><i class="fa fa-envelope" aria-hidden="true"></i></b>&nbsp; $user->email</h5>
                                                 </div>
                                                 <div class="col text-center">
-                                                    <p><b>Phone:</b> $user->phone</p>
+                                                    <h5 class="text-secondary" style="font-weight: lighter;"><b><i class="fa fa-phone" aria-hidden="true"></i></b>&nbsp; $user->phone</h5>
                                                 </div>
                                             </div>
                                             <hr>
                                         </div>
                                         <div class="text-start ms-2 mx-2">
                                             <h2 class="mb-5">Reviews</h2>
-                    
-                                            
+                                            <div class="row">
+            END;
+
+            if (count($feedbacks) < 1) {
+                echo "<h6 class='mt-5'>No result found yet.</h6> <small>All feedback made by user will be appeared here.</small>";
+            } else {
+                $feedback = array_slice($feedbacks, -4);
+                for ($i = 0; $i < count($feedback); $i++) {
+                    $rating = str_repeat("⭐", $feedback[$i]->rating);
+                    $comment = $feedback[$i]->comment;
+                    $jobseeker = $feedback[$i]->jobseeker;
+                    $date = $feedback[$i]->date;
+                    echo <<< END
+                                                <!-- Card -->
+                                                <div class="col-3 text-center">
+                                                    <div class="card">
+                                                        <div class="card-body">
+                                                            <h5 style="font-weight: lighter;">$jobseeker</h5>
+                                                            <small>$rating</small>
+                                                            <p class="testimonial-text">$comment</p>
+                                                            <small style="line-height: 0.5;" class="text-secondary">$date</small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <!-- end of card -->
+                                            END;
+                }
+            }
+
+            echo <<< END
+                                                </div>
                                             <hr>
                                         </div>
                                         <div class="text-start ms-2 mx-2">
@@ -719,7 +744,7 @@ END;
             </header>
             <!-- User Profile section End -->
                             
-END;
+            END;
         }
     } else {
         echo "<header class='ex-header'>

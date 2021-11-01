@@ -235,7 +235,7 @@ $allFeedbacks = $ac->getAllFeedback();
                         for ($i = 0; $i < count($feedback); $i++) {
                             $rating = str_repeat("⭐", $feedback[$i]->rating);
                             $comment = $feedback[$i]->comment;
-                            $username = $feedback[$i]->username;
+                            $jobseeker = $feedback[$i]->jobseeker;
                             $date = $feedback[$i]->date;
                             echo <<< END
                                 <!-- Card -->
@@ -244,7 +244,7 @@ $allFeedbacks = $ac->getAllFeedback();
                                     <div class="card-body">
                                         <small>$rating</small>
                                         <p class="testimonial-text">$comment</p>
-                                        <div class="testimonial-author">$username</div>
+                                        <div class="testimonial-author">$jobseeker</div>
                                         <div class="occupation">$date</div>
                                     </div>
                             END;

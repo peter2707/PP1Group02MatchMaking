@@ -198,6 +198,13 @@ class UserController {
 		}
     }
 
+    public function getAllFeedback($username) {
+        require_once '../model/user_model.php';
+        include '../model/db_connection.php';
+        $userModel = new UserModel();
+        return $userModel->getAllFeedback($db, $username);
+    }
+
     public function resetPassword($type, $password, $confirmPassword, $email, $token) {
         require_once '../model/utility.php';
         if(!isset($type) || !isset($password) || !isset($confirmPassword) || !isset($email) || !isset($token)){

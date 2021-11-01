@@ -374,6 +374,26 @@ class UserModel {
 		$stmt->close();
 	}
 
+	public function getAllFeedback($db, $username) {
+		require_once '../model/job_object.php';
+		require_once '../model/matchmaking_model.php';
+		$mm = new MatchmakingModel();
+		$allFeedbacks = array();
+		$query = "SELECT * FROM jobmatch WHERE employer='$username'";
+		$result = $db->query($query);
+		$numResults = $result->num_rows;
+		for ($i = 0; $i < $numResults; $i++) {
+			$row = $result->fetch_assoc();
+			if($row['rating'] != NULL || $row['rating'] > 1){
+				$timeElapsed = $mm->getTimeElapsed($row['date']);
+				$allFeedbacks[$i] = new Feedback($row['id'], $row['jobSeeker'], $row['employer'], intval($row['rating']), $row['feedback'], $timeElapsed);
+			}
+		}
+		$result->free();
+		$db->close();
+		return $allFeedbacks;
+	}
+
 	public function checkToken($db, $email, $token) {
 		$success = false;
 		$query = "SELECT * FROM password_reset WHERE email=? AND token =?";
