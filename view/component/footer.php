@@ -54,7 +54,7 @@
             <div class="row">
                 <div class="col-lg-6 col-md-12 col-sm-12">
                     <ul class="list-unstyled li-space-lg p-small">
-                        <li><a href="article.php" style="color: white;">Article Details</a></li>
+                        <li><a href="aboutus.php" style="color: white;">About</a></li>
                         <li><a href="terms.php" style="color: white;">Terms & Conditions</a></li>
                         <li><a href="privacy.php" style="color: white;">Privacy Policy</a></li>
                     </ul>

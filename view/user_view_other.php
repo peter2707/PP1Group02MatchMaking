@@ -80,6 +80,14 @@ $viewUser = $uc->getUser($usertype, $username);
                                             <div class="mt-3">
                                                 <h4>$viewUser->firstName $viewUser->lastName</h4>
                                                 <p class="text-secondary">$viewUser->field </p>
+                                                <div class="row ms-2 mx-2">
+                                                    <div class="col text-center">
+                                                        <a style="text-decoration: none;" href="mailto:$viewUser->email"><b><i class="fa fa-envelope" aria-hidden="true"></i></b></a>
+                                                    </div>
+                                                    <div class="col text-center">
+                                                        <a style="text-decoration: none;" href="tel:$viewUser->phone"><b><i class="fa fa-phone" aria-hidden="true"></i></b></a>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
@@ -303,6 +311,14 @@ $viewUser = $uc->getUser($usertype, $username);
                                                 <div class="mt-3">
                                                     <h4>$viewUser->firstName $viewUser->lastName</h4>
                                                     <p class="text-secondary">$viewUser->position</p>
+                                                    <div class="row">
+                                                        <div class="col text-center">
+                                                            <a style="text-decoration: none;" href="mailto:$viewUser->email"><b><i class="fa fa-envelope" aria-hidden="true"></i></b></a>
+                                                        </div>
+                                                        <div class="col text-center">
+                                                            <a style="text-decoration: none;" href="tel:$viewUser->phone"><b><i class="fa fa-phone" aria-hidden="true"></i></b></a>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -400,10 +416,10 @@ $viewUser = $uc->getUser($usertype, $username);
                                                 <h2 class="mb-5">Contact</h2>
                                                 <div class="row ms-2 mx-2">
                                                     <div class="col text-center">
-                                                        <h5 class="text-secondary" style="font-weight: lighter;"><b><i class="fa fa-envelope" aria-hidden="true"></i></b>&nbsp; $viewUser->email</h5>
+                                                        <a style="text-decoration: none;" href="mailto:$viewUser->email"><h5 class="text-secondary" style="font-weight: lighter;"><b><i class="fa fa-envelope" aria-hidden="true"></i></b>&nbsp; $viewUser->email</h5></a>
                                                     </div>
                                                     <div class="col text-center">
-                                                        <h5 class="text-secondary" style="font-weight: lighter;"><b><i class="fa fa-phone" aria-hidden="true"></i></b>&nbsp; $viewUser->phone</h5>
+                                                        <a style="text-decoration: none;" href="tel:$viewUser->phone"><h5 class="text-secondary" style="font-weight: lighter;"><b><i class="fa fa-phone" aria-hidden="true"></i></b>&nbsp; $viewUser->phone</h5></a>
                                                     </div>
                                                 </div>
                                                 <hr>
