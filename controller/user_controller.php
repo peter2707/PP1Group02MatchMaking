@@ -116,7 +116,7 @@ class UserController {
         require_once '../model/user_model.php';
         include '../model/db_connection.php';
         $userModel = new UserModel();
-        return $userModel->getCareers($db, $username);
+        return $userModel->getCareers($db, $username, '../model/job_object.php');
     }
 
     public function addCareer($username, $position, $company, $experience){
@@ -124,6 +124,7 @@ class UserController {
         require_once '../model/user_model.php';
         $userModel = new UserModel();
         $userModel->addCareer($db, $username, $position, $company, $experience);
+        header("location: ../view/user_profile.php?success=accountupdated");
     }
 
     public function deleteCareer($id, $username){

@@ -116,8 +116,8 @@ class UserModel {
 		$stmt->close();
 	}
 
-	public function getCareers($db, $username) {
-		require_once '../model/job_object.php';
+	public function getCareers($db, $username, $path) {
+		include_once $path;
 		$careers = array();
 		$query = "SELECT * FROM career WHERE username='$username'";
 		$result = $db->query($query) or die(mysqli_error($db));
@@ -134,8 +134,6 @@ class UserModel {
 		$query = "INSERT INTO career (username, position, company, experience) 
             VALUES ('$username', '$position', '$company', '$experience')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
-		$db->close();
-		header("location: ../view/user_profile.php?success=accountupdated");
 	}
 
 	public function deleteCareer($db, $id, $username) {

@@ -4,7 +4,7 @@ use \PHPUnit\Framework\TestCase;
 
 class UnitTest extends TestCase
 {
-    public function testGetPost()
+    public function testMatchMakingModel()
     {
         include '../job-match/model/db_connection.php';
         include_once '../job-match/model/matchmaking_model.php';
@@ -45,7 +45,7 @@ class UnitTest extends TestCase
         }
     }
 
-    public function testRegister()
+    public function testRegisterandUserModel()
     {
         include '../job-match/model/db_connection.php';
         include_once '../job-match/model/register_model.php';
@@ -112,10 +112,35 @@ class UnitTest extends TestCase
         $this->assertTrue(empty($edu));
 
 
+        // test add career
+        $um->addCareer($db, $username, 'Software Developer', 'JobMatch', '1 - 3 Years');
+        $career = $um->getCareers($db, $username, '../job-match/model/job_object.php');
+
+        foreach ($career as $c) {
+            if ($c->position == 'Software Developer' &&  $c->company == 'JobMatch' && $c->experience == '1 - 3 Years') {
+                // check if the career was added
+                $this->assertEquals('Software Developer', $c->position);
+                $this->assertEquals('JobMatch',  $c->company);
+                $this->assertEquals('1 - 3 Years', $c->experience);
+            }
+        }
+        
+        // test delete career
+        $um->deleteAllCareers($db, $username);
+        $career = $um->getEducations($db, $username, '../job-match/model/job_object.php');
+        $this->assertTrue(empty($career));
+
+
 
         // check delete the registered account successfully as job seeker
         $checkDeleteJS = $um->deleteAccount($db, $username, 'jobseeker', '../job-match/model/session_model.php');
         $this->assertTrue($checkDeleteJS);
+
+
+
+
+
+        
 
 
 
