@@ -93,7 +93,23 @@ class UnitTest extends TestCase
 
 
 
+        // test add education
+        $um->addEducation($db, $username, 'RMIT', 'Bachelor of IT', 'Dec-2021');
+        $edu = $um->getEducations($db, $username, '../job-match/model/job_object.php');
 
+        foreach ($edu as $ed) {
+            if ($ed->institution == 'RMIT' &&  $ed->graduation == 'Dec-2021' && $ed->degree == 'Bachelor of IT') {
+                // check if the edu was added
+                $this->assertEquals('RMIT', $ed->institution);
+                $this->assertEquals('Bachelor of IT',  $ed->degree);
+                $this->assertEquals('Dec-2021', $ed->graduation);
+            }
+        }
+        
+        // test delete education
+        $um->deleteAllEducations($db, $username);
+        $edu = $um->getEducations($db, $username, '../job-match/model/job_object.php');
+        $this->assertTrue(empty($edu));
 
 
 
