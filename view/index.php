@@ -96,7 +96,7 @@ $allFeedbacks = $ac->getAllFeedback();
                         <div class="card-body">
                             <h5 class="card-title">Get matches</h5>
                             <p>We will pair you up with your corresponding Employer/Job Seeker. Keep an eye out on your email!</p>
-                            <a class="read-more no-line" href="article.php">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
+                            <a class="read-more no-line" href="aboutus.php">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
                         </div>
                     </div>
                     <!-- end of card -->
@@ -109,7 +109,7 @@ $allFeedbacks = $ac->getAllFeedback();
                         <div class="card-body">
                             <h5 class="card-title">Make contact</h5>
                             <p>Choose to continue with the next employment steps by contacting one another!</p>
-                            <a class="read-more no-line" href="article.php">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
+                            <a class="read-more no-line" href="aboutus.php">Learn more <span class="fas fa-long-arrow-alt-right"></span></a>
                         </div>
                     </div>
                     <!-- end of card -->

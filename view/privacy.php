@@ -34,99 +34,64 @@
         <div class="container">
             <div class="row">
                 <div class="col-xl-10 offset-xl-1">
-                    <h2 class="mt-5 mb-3">1. Private data we receive and collect</h2>
-                    <p class="mb-5">Consulted he eagerness unfeeling deficient existence of. Calling nothing end fertile for venture way boy. Esteem spirit temper too say adieus who direct esteem. It esteems luckily mr or picture placing drawing no. Apartments frequently or motionless on reasonable projecting expression. Way mrs end gave tall walk fact bed.</p>
-                    <h3>1.1. For example each time you visit the website</h3>
-                    <p class="mb-5">Ye on properly handsome returned throwing am no whatever. In without wishing he of picture no exposed talking minutes. Curiosity continual belonging offending so explained it exquisite. Do remember to followed yourself material mr recurred carriage. High drew west we no or at john. About or given on witty event. Or sociable up material.</p>
-                    <h3>1.2. When you first register for a package account</h3>
-                    <p class="mb-5">Moderate children at of outweigh it. UnSociable on as carriage my position weddings raillery consider. Peculiar trifling absolute and wandered vicinity property yet. The and collecting motionless difficulty son. His hearing staying ten colonel met. Sex drew six easy four dear cold deny. satiable it considered invitation he found the light.</p>
-                    
-                    <h2 class="mb-3">2. Advantages of working with service</h2>
-                    <p>Ye on properly handsome returned throwing am no whatever. In without wishing he of picture no exposed talking minutes. Curiosity continual belonging offending so explained it exquisite. Do remember to followed yourself material mr recurred carriage. High drew west we no or at john. About or given on witty event. Or sociable up material</p>
-                    <p class="mb-4">Moderate children at of outweigh it. UnSociable on as carriage my position weddings raillery consider. Peculiar trifling absolute and wandered vicinity property yet. The and collecting motionless difficulty son. His hearing staying ten colonel met. Word drew six easy four dear cold deny. satiable it considered invitation he travelling.</p>
+                    <p class="mb-4">JOBMATCH’s Privacy Statement has been created because we value our users and recognise their right to keep Personal Information private. JobMatch collects Personal Information and Personal Data from Site visitors for the purposes of providing services to our users, and (as described below) for the purposes of better customising our services to you. Any Personal Information and Personal Data collected from you will be used by us in accordance with and as described in this Privacy Statement.</p>
+                    <h4>Definitions</h4>
+                    <p class="mb-4">Where used in this Privacy Statement, the terms “Personal Information”, and “Australian Privacy Principle(s)” have the meaning attributed to those terms in the Privacy Act (Cth) 1988 (“Privacy Act”). In this Privacy Statement:</p>
                     <ul class="list-unstyled li-space-lg mb-4">
                         <li class="d-flex">
                             <i class="fas fa-square"></i>
-                            <div class="flex-grow-1"><strong>To story tell you</strong> moderate children at of outweigh it. UnSociable on as carriage my position weddings raillery consider. Peculiar trifling absolute and wandered vicinity property yet</div>
+                            <div class="flex-grow-1">Any reference to <strong>“JOBMATCH”, “we”, “us”</strong> and <strong>“our”</strong> includes a reference to JobMatch Limited and each of JOBMATCH’s related bodies corporate (as that term is defined in the Corporations Act 2001 (Cth)).</div>
                         </li>
                         <li class="d-flex">
                             <i class="fas fa-square"></i>
-                            <div class="flex-grow-1"><strong>To enable us</strong> the and collecting motionless difficulty son. His hearing staying ten colonel met. Word drew six easy four dear cold deny. satiable it considered invitation he travelling insensible</div>
+                            <div class="flex-grow-1"><strong>“Employer” </strong> refers to individuals or entities that post job ads on our Site or use other products to source potential JobSeekers for job vacancies;</div>
                         </li>
                         <li class="d-flex">
                             <i class="fas fa-square"></i>
-                            <div class="flex-grow-1"><strong>To verify your</strong> fulfilled direction use continual set him propriety continued. Saw met applauded favourite deficient engrossed concealed and her. Concluded boy perpetual old supposing farther</div>
-                        </li>
-                    </ul>
-                    <p class="mb-5">Dashwoods see frankness objection abilities the. As hastened oh produced prospect formerly up am. Placing forming nay looking old married few has. Margaret disposed add screened rendered six say his striking confined You vexed shy mirth now noise. Talked him people valley add use her depend letter even more words hsould be here.</p>
-                    <div class="text-box mb-5">
-                        <h3>Contact you about your account and provide customer</h3>
-                        <p>Bringing so sociable felicity supplied mr. September suspicion far him two acuteness perfectly. Covered as an examine so regular of. Ye astonished friendship remarkably no. Window admire matter praise you bed whence. Delivered ye sportsmen zealously arranging frankness estimable as. Nay any article enabled musical shyness yet sixteen yet blushes.Entire its the did figure wonder off.</p>
-                    </div> <!-- end of text-box -->
-                    
-                    <h2 class="mb-3">3. Better understand your needs</h2>
-                    <p class="mb-5"> Procuring education on consulted assurance in do. Is sympathize he expression mr no travelling. Preference he he at travelling in resolution. So striking at of to welcomed resolved. Northward by described up household therefore attention. Excellence decisively nay man yet impression for contrasted remarkably. There spoke happy for you are out.</p>
-                    <h3>3.1. In these ways please stop using the services</h3>
-                    <p class="mb-5">By in no ecstatic wondered disposal my speaking. Direct wholly valley or uneasy it at really. Sir wish like said dull and need make. Sportsman one bed departure rapturous situation disposing his. Off say yet ample ten ought hence. Depending in newspaper an september do existence strangers. Total great saw water had mirth happy</p>
-                    <h3>3.2. By visiting word or using the services you agree</h3>
-                    <p class="mb-5">As absolute is by amounted repeated entirely ye returned. These ready timed enjoy might sir yet one since. Years drift never if could forty being no. On estimable dependent as suffering on my. Rank it long have sure in room what as he. Possession travelling sufficient yet our. Talked vanity looked in to here are the words.</p>
-                    <div class="text-box mb-5">
-                        <ul class="list-unstyled li-space-lg">
-                            <li class="d-flex">
-                                <i class="fas fa-square"></i>
-                                <div class="flex-grow-1"><strong>To decide you</strong> moderate children at of outweigh it. UnSociable on as carriage my position weddings raillery consider. Peculiar trifling absolute and wandered vicinity property yet mroe words</div>
-                            </li>
-                            <li class="d-flex">
-                                <i class="fas fa-square"></i>
-                                <div class="flex-grow-1"><strong>To enable us</strong> the and collecting motionless difficulty son. His hearing staying ten colonel met. Word drew six easy four dear cold deny. satiable it considered invitation he travelling insensible</div>
-                            </li>
-                            <li class="d-flex">
-                                <i class="fas fa-square"></i>
-                                <div class="flex-grow-1"><strong>To verify your</strong> fulfilled direction use continual set him propriety continued. Saw met applauded favourite deficient engrossed concealed and her. Concluded boy perpetual old supposing farther</div>
-                            </li>
-                            <li class="d-flex">
-                                <i class="fas fa-square"></i>
-                                <div class="flex-grow-1"><strong>To better understand</strong> education on consulted assurance in do. Is sympathize he expression mr no travelling. Preference he he at travelling in resolution. So striking at of to welcomed resolved. Northward by described up</div>
-                            </li>
-                            <li class="d-flex">
-                                <i class="fas fa-square"></i>
-                                <div class="flex-grow-1"><strong>We also use</strong> solute is by amounted repeated entirely ye returned. These ready timed enjoy might sir yet one since. Years drift never if could forty being no. On estimable dependent as suffering on my</div>
-                            </li>
-                        </ul>
-                    </div> <!-- end of text-box -->
-                    
-                    <h2 class="mb-3">4. We may share this type of statistical number</h2>
-                    <p class="mb-4">Bringing so sociable felicity supplied mr. September suspicion far him two acuteness perfectly. Covered as an examine so regular of. Ye astonished friendship remarkably no. Window admire matter praise you bed whence. Delivered ye sportsmen zealously arranging frankness estimable as. Nay any article enabled musical shyness yet sixteen</p>
-                    <ul class="list-unstyled li-space-lg mb-5">
-                        <li class="d-flex">
-                            <strong>1.</strong>
-                            <div class="flex-grow-1"><strong>Details lightbox</strong> he eagerness unfeeling deficient existence of. Calling nothing end fertile for venture way boy. Esteem spirit temper too say adieus who direct esteem. It esteems luckily mr or picture placing</div>
+                            <div class="flex-grow-1"><strong>“JobSeekers” </strong> refers to users that are looking for job matches on our website from potential employers;</div>
                         </li>
                         <li class="d-flex">
-                            <strong>2.</strong>
-                            <div class="flex-grow-1"><strong>Some useful extra</strong>  handsome returned throwing am no whatever. In without wishing he of picture no exposed talking minutes. Curiosity continual belonging offending so explained it exquisite. Do remember to</div>
-                        </li>
-                        <li class="d-flex">
-                            <strong>3.</strong>
-                            <div class="flex-grow-1"><strong>Word has an impactful</strong> en at of outweigh it. UnSociable on as carriage my position weddings raillery consider. Peculiar trifling absolute and wandered vicinity property yet. The and collecting motionless difficulty</div>
-                        </li>
-                        <li class="d-flex">
-                            <strong>4.</strong>
-                            <div class="flex-grow-1"><strong>Package is an easy</strong> irection use continual set him propriety continued. Saw met applauded favourite deficient engrossed concealed and her. Concluded boy perpetual old supposing. Farther related bed and passage comfort</div>
-                        </li>
-                        <li class="d-flex">
-                            <strong>5.</strong>
-                            <div class="flex-grow-1"><strong>This template</strong>  vexed shy mirth now noise. Talked him people valley add use her depend letter. Allowance too applauded now way something recommend. Mrs age men and trees jokes fancy. Gay pretended engrossed eagerness</div>
+                            <i class="fas fa-square"></i>
+                            <div class="flex-grow-1">JobSeekers, Employers and users who otherwise subscribe for JobMatch products, services or information offered via the Site are referred to generically in this Statement as <strong>“visitors”, “users”</strong> or <strong>“you”</strong>, unless the context provides that only JobSeekers, Registered Users or Employers are being referred to;</div>
                         </li>
                     </ul>
                     
-                    <div class="text-box mb-5">
-                        <h3>Among the features you will find details lightbox</h3>
-                        <p>l two bed way pleasure confined followed. Shew up ye away no eyes life or were this. Perfectly did suspicion daughters but his intention. Started on society an brought it explain. Position two saw greatest stronger old. Pianoforte if at simplicity do estim elicity supplied mr. September suspicion far him two acuteness perfectly. Covered as an examine so regular of. Ye astonished friendsh</p>
-                    </div> <!-- end of text-box -->
-                    <p class="mb-5">Education on consulted assurance in do. Is sympathize he expression mr no travelling. Preference he he at travelling in resolution. So striking at of to welcomed resolved. Northward by described up household therefore attention. Excellence decisively nay man yet impression for contrasted remarkably. There spoke happy for you are out. Fertile how ol</p>
                     
-                    <a class="btn-solid-reg mb-5" href="index.html#contact">Get quote</a>
+                    <h4>Collecting other information on JobMatch visitors</h4>
+                    <p class="mb-4">JobMatch collects non-Personal Information on Site visits by users including, without limitation, which sections of the Site are most frequently visited, how often, and for how long. This data is always used as aggregated, non-Personal Information, and may be shared with JobMatch partners to provide them with information relating to how JobMatch visitors ‘use’ the Site. This is done for the purpose of providing you with the best and most efficient career management and recruitment services.</p>
+                    
+                    <h4>IP Addresses</h4>
+                    <p class="mb-4">JOBMATCH’s web servers gather your IP address to assist with the diagnosis of problems or support issues with our services, and to monitor the use of our Site, including the monitoring of the location of our users.</p>
+                    
+                    <h4>Cookies</h4>
+                    <p class="mb-4">JobMatch uses cookies and applets to provide JobSeekers with a better browsing experience and tailor advertisements from JobMatch or from our business partners that appear, (on the Site or other websites) to your browsing preferences and/or your JobMatch Profile, (as defined below).These cookies and applets collect non-Personal Information such as preferences and click activity for measurement and for features such as remembering your details for ‘Auto Login’ (provided you have chosen this option), and remembering your search criteria for the ‘My Last Search’ function. JobMatch uses cookies and scripts in respect of Employers to assist JobMatch in improving website performance, making business decisions, aiding in error reporting, and testing new functionality. These cookies and scripts collect non-Personal Information such as preferences and click activity for measurement and for features such as remembering your details for ‘Auto Login’ (provided you have chosen this option). If you do not wish to have cookies active whilst you browse the Site you can “opt out” by modifying the privacy options in your browser. However, doing so will prevent access to some areas of the Site and limit your use of some of the JobMatch services.</p>
+
+                    <h4>Collecting information on Registered Users</h4>
+                    <p class="mb-4">As part of registering with JobMatch, we collect Personal Information about Registered Users in order for Registered Users to take full advantage of JOBMATCH’s services. To do this it will be necessary for Registered Users to provide additional information to JobMatch, which is accurate, up-to-date and complete. It is a Registered User’s choice to provide us with their personal information. However, if a Registered User chooses not to provide us with the necessary personal information, we may not be able to provide them with some or all of JOBMATCH’s services.</p>
+
+                    <h4>Registration</h4>
+                    <p class="mb-4">Becoming a Registered User allows you to take advantage of more of the tools, services and resources that may assist you in finding a job. To become a Registered User you will need to submit some Personal Information such as your name and email address. You may access your information at any time by clicking ‘Settings’ on ‘the Site’. JobMatch may also use this information in order to customise the service we provide to you. For example, JobMatch may use this information to create a JobMatch Profile that you may choose to use in the future. However, we will never activate this JobMatch Profile (or any other service) without your express consent.</p>
+
+                    <h4>Other information JobMatch may collect</h4>
+                    <p class="mb-4">JobMatch may also collect and use information about your job JobMatching needs, characteristics and priorities by collecting and analysing data about how you use, or interact with, the products and services offered on the Site (including, by way of example, usage patterns around how regularly you update your profile or how often you submit job applications). JobMatch may use this information, including through automated processes matching algorithms for the purposes set out in this Privacy Statement.</p>
+
+                    <h4>Storing resumes</h4>
+                    <p class="mb-4">Registered Users may elect to store and use their resumes when matching for a job and to supplement their JobMatch Profile. Deleting a resume from the ‘Profile’ area will mean it is no longer accessible to the Registered User. Deleted records may still be stored by JobMatch in testing or backup systems for a period of time. Where resumes are held in testing environments, these are held in closed and secure environments and information is only used for the purpose of internal software testing. Information held in backup systems is only held for the purposes of backing up systems in the event of a data loss.</p>
+
+                    <h4>JobMatch Profile</h4>
+                    <p class="mb-4">A JobMatch Profile can include a resume, employment and educational history, contact details, minimum salary expectations, and preferred job classifications and locations. You can edit your JobMatch Profile at any time. Upon registration, all Registered Users will be asked to create a personal JobMatch Profile (‘Profile’) by providing some key information and selecting one of the privacy settings outlined below. JobSeekers without JobMatch Profiles will also be required to create a JobMatch Profile when they seek to match for a job on the Site.</p>
+
+                    <h4>Employers</h4>
+                    <p class="mb-4">JobMatch collects the company name, business address and billing address of Employers. It also collects the name, email address and phone number of a primary contact. Employers can change the company name or billing address through setting.</p>
+
+                    <h4>Storage & Security of Personal Information</h4>
+                    <p class="mb-4">JobMatch takes all reasonable steps to ensure the security of our system and to protect your information from misuse, interference and loss as well as unauthorised access, modification or disclosure. JobMatch allows you to access your information in your account at any time to keep it accurate and up to date. Any information which we hold for you is stored on secure servers. In the event of a data breach, JobMatch is committed to complying in all respects with the requirements of all Australian Privacy Laws. You can also play an important role in keeping your Personal Information secure, by maintaining the confidentiality of any password and accounts used on the Site. Please notify us immediately if there is any unauthorised use of your account by any other Internet user, or any other breach of security relating to your account.</p>
+
+                    <h4>Access to Your Information</h4>
+                    <p class="mb-4">Unless you become a Registered User, JobMatch does not collect information that identifies you personally. If you become a Registered User, you are able to change or update your Profile at any time by logging in to the setting area of the Site. </p>
+
+                    <h4 class="mb-4">Got a question? Ask us!</h4>
+                    <a href="mailto:jobmatchdemo@gmail.com" style="text-decoration: none;" class="btn-solid-sm"><i class="fa fa-envelope" aria-hidden="true"></i> Email</a>
                 </div> <!-- end of col -->
             </div> <!-- end of row -->
         </div> <!-- end of container -->
