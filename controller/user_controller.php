@@ -68,7 +68,7 @@ class UserController {
         require_once '../model/user_model.php';
         include '../model/db_connection.php';
         $userModel = new UserModel();
-        return $userModel->getSkills($db, $username);
+        return $userModel->getSkills($db, $username, '../model/job_object.php');
     }
 
     public function addSkill($username, $skill, $experience){
@@ -76,20 +76,25 @@ class UserController {
         require_once '../model/user_model.php';
         $userModel = new UserModel();
         $userModel->addSkill($db, $username, $skill, $experience);
+        header("location: ../view/user_profile.php?success=accountupdated");
     }
 
     public function deleteSkill($id, $username){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
-        $userModel->deleteSkill($db, $id, $username);
+        if($userModel->deleteSkill($db, $id, $username)){
+            header("location: ../view/user_profile.php?success=accountupdated");
+        } else {
+            header("location: ../view/user_profile.php?error=failed");
+        }
     }
 
     public function getEducations($username){
         require_once '../model/user_model.php';
         include '../model/db_connection.php';
         $userModel = new UserModel();
-        return $userModel->getEducations($db, $username);
+        return $userModel->getEducations($db, $username, '../model/job_object.php');
     }
 
     public function addEducation($username, $institution, $degree, $graduation){
@@ -97,6 +102,7 @@ class UserController {
         require_once '../model/user_model.php';
         $userModel = new UserModel();
         $userModel->addEducation($db, $username, $institution, $degree, $graduation);
+        header("location: ../view/user_profile.php?success=accountupdated");
     }
 
     public function deleteEducation($id, $username){

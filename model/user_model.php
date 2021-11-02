@@ -28,8 +28,8 @@ class UserModel {
 		}
 	}
 
-	public function getSkills($db, $username) {
-		require_once '../model/job_object.php';
+	public function getSkills($db, $username, $path) {
+		include_once $path;
 		$skills = array();
 		$query = "SELECT * FROM skill WHERE username='$username'";
 		$result = $db->query($query) or die(mysqli_error($db));
@@ -46,8 +46,6 @@ class UserModel {
 		$query = "INSERT INTO skill (username, skill, experience) 
             VALUES ('$username', '$skill', '$experience')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
-		$db->close();
-		header("location: ../view/user_profile.php?success=accountupdated");
 	}
 
 	public function deleteSkill($db, $id, $username) {
@@ -60,9 +58,9 @@ class UserModel {
 		$db->close();
 
 		if ($affectedRows == 1) {
-			header("location: ../view/user_profile.php?success=accountupdated");
+			return true;
 		} else {
-			header("location: ../view/user_profile.php?error=failed");
+			return false;
 		}
 	}
 
@@ -74,8 +72,8 @@ class UserModel {
 		$stmt->close();
 	}
 
-	public function getEducations($db, $username) {
-		require_once '../model/job_object.php';
+	public function getEducations($db, $username, $path) {
+		include_once $path;
 		$educations = array();
 		$query = "SELECT * FROM education WHERE username='$username'";
 		$result = $db->query($query) or die(mysqli_error($db));
@@ -92,8 +90,6 @@ class UserModel {
 		$query = "INSERT INTO education (username, institution, degree, graduation) 
             VALUES ('$username', '$institution', '$degree', '$graduation')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
-		$db->close();
-		header("location: ../view/user_profile.php?success=accountupdated");
 	}
 
 	public function deleteEducation($db, $id, $username) {

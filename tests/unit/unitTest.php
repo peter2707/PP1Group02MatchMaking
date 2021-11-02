@@ -67,15 +67,50 @@ class UnitTest extends TestCase
         $checkLoginJS = $lm->checkJobSeeker($db, $username, $password);
         $this->assertTrue($checkLoginJS);
 
-        // update as Job seeker
+        // test update as Job seeker
         $um->updateJobSeeker($db, 'newFirstname', 'lastname', $password, 'dateOfBirth', 'phone', 'email', 'field', 'location', 'username');
         $jobseeker = $um->getUser($db, 'jobseeker', $username, '../job-match/model/user_object.php');
         $newFirstname = $jobseeker->firstName;
         $this->assertEquals('newFirstname', $newFirstname);
 
+
+        // test add skill to job seeker
+        $um->addSkill($db, $username, "Software Engineer", "10 years or more");
+        $skill = $um->getSkills($db, $username, '../job-match/model/job_object.php');
+        foreach ($skill as $s) {
+            if ($s->skill == 'Software Engineer' && $s->experience == '10 years or more') {
+                // check if the skill was added
+                $this->assertEquals('Software Engineer', $s->skill);
+                $this->assertEquals('10 years or more', $s->experience);
+            }
+        }
+
+    
+        // test delete skill
+        $um->deleteAllSkills($db, $username);
+        $skill = $um->getSkills($db, $username, '../job-match/model/job_object.php');
+        $this->assertTrue(empty($skill));
+
+
+
+
+
+
+
         // check delete the registered account successfully as job seeker
         $checkDeleteJS = $um->deleteAccount($db, $username, 'jobseeker', '../job-match/model/session_model.php');
         $this->assertTrue($checkDeleteJS);
+
+
+
+
+
+
+
+
+
+
+
 
         // Register as Employer
         $rm->registerEmployer($db, 'firstName', 'lastName', $username, $password, 'dateOfBirth', 'phone', 'email', 'position', 'location');
@@ -93,5 +128,6 @@ class UnitTest extends TestCase
         // check delete the registered account successfully as employer
         $checkDeleteEmp = $um->deleteAccount($db, $username, 'employer', '../job-match/model/session_model.php');
         $this->assertTrue($checkDeleteEmp);
+
     }
 }
