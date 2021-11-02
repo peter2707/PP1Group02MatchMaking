@@ -85,7 +85,7 @@ class UnitTest extends TestCase
             }
         }
 
-    
+
         // test delete skill
         $um->deleteAllSkills($db, $username);
         $skill = $um->getSkills($db, $username, '../job-match/model/job_object.php');
@@ -105,7 +105,7 @@ class UnitTest extends TestCase
                 $this->assertEquals('Dec-2021', $ed->graduation);
             }
         }
-        
+
         // test delete education
         $um->deleteAllEducations($db, $username);
         $edu = $um->getEducations($db, $username, '../job-match/model/job_object.php');
@@ -124,32 +124,47 @@ class UnitTest extends TestCase
                 $this->assertEquals('1 - 3 Years', $c->experience);
             }
         }
-        
+
         // test delete career
         $um->deleteAllCareers($db, $username);
         $career = $um->getEducations($db, $username, '../job-match/model/job_object.php');
         $this->assertTrue(empty($career));
 
+        // test add social media
+        $um->addSocialLink($db, $username, 'linkedin', 'github', 'twitter', 'instagram', 'facebook');
+        $social = $um->getSocialLink($db, $username, '../job-match/model/job_object.php');
+
+        // check social media
+        $this->assertEquals('linkedin', $social->linkedin);
+        $this->assertEquals('github', $social->github);
+        $this->assertEquals('twitter', $social->twitter);
+        $this->assertEquals('instagram', $social->instagram);
+        $this->assertEquals('facebook', $social->facebook);
+
+        // test edit social media
+        if ($um->editSocialLink($db, $username, 'newlinkedin', 'newgithub', 'newtwitter', 'newinstagram', 'newfacebook')) {
+            $social = $um->getSocialLink($db, $username, '../job-match/model/job_object.php');
+
+            // check if the information has changed
+            $this->assertEquals('newlinkedin', $social->linkedin);
+            $this->assertEquals('newgithub', $social->github);
+            $this->assertEquals('newtwitter', $social->twitter);
+            $this->assertEquals('newinstagram', $social->instagram);
+            $this->assertEquals('newfacebook', $social->facebook);
+        } else {
+            // let the test fail if edit is false
+            $this->assertTrue(false);
+        }
+
+        // test delete social media
+        $um->deleteAllSocials($db, $username);
+        $social = $um->getSocialLink($db, $username, '../job-match/model/job_object.php');
+        $this->assertTrue(is_object($social));
 
 
         // check delete the registered account successfully as job seeker
         $checkDeleteJS = $um->deleteAccount($db, $username, 'jobseeker', '../job-match/model/session_model.php');
         $this->assertTrue($checkDeleteJS);
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
 
 
 
@@ -169,6 +184,5 @@ class UnitTest extends TestCase
         // check delete the registered account successfully as employer
         $checkDeleteEmp = $um->deleteAccount($db, $username, 'employer', '../job-match/model/session_model.php');
         $this->assertTrue($checkDeleteEmp);
-
     }
 }

@@ -160,8 +160,8 @@ class UserModel {
 		$stmt->close();
 	}
 	
-	public function getSocialLink($db, $username){
-		include '../model/job_object.php';
+	public function getSocialLink($db, $username, $path){
+		include_once $path;
 		$query = "SELECT * FROM social WHERE username = '$username'";
 		$stmt = $db->prepare($query);
 		$stmt->execute();
@@ -173,7 +173,6 @@ class UserModel {
 			$social = new Social($row['username'], $row['linkedin'], $row['github'], $row['twitter'], $row['instagram'], $row['facebook']);
 		}
 		$stmt->close();
-		$db->close();
 		return $social;
 	}
 	
@@ -181,8 +180,6 @@ class UserModel {
 		$query = "INSERT INTO social (username, linkedin, github, twitter, instagram, facebook) 
             VALUES ('$username', '$linkedin', '$github', '$twitter', '$instagram', '$facebook')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
-		$db->close();
-		header("location: ../view/user_profile.php?success=accountupdated");
 	}
 
 	public function editSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook){
@@ -207,15 +204,15 @@ class UserModel {
 
 			$affectedRows = $stmt->affected_rows;
 			$stmt->close();
-			$db->close();
 
 			if ($affectedRows == 1) {
-				header("location: ../view/user_profile.php?success=accountupdated");
+				return true;
 			} else {
-				header("location: ../view/user_profile.php?error=failed");
+				return false;
 			}
 		}else {
 			$this->addSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook);
+			return true;
 		}
 	}
 

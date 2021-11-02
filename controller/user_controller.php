@@ -54,14 +54,18 @@ class UserController {
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
-        $userModel->editSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook);
+        if($userModel->editSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook)){
+            header("location: ../view/user_profile.php?success=accountupdated");
+        } else {
+            header("location: ../view/user_profile.php?error=failed");
+        }
     }
 
     public function getSocialLink($username) {
         require_once '../model/user_model.php';
         include '../model/db_connection.php';
         $userModel = new UserModel();
-        return $userModel->getSocialLink($db, $username);
+        return $userModel->getSocialLink($db, $username, '../model/job_object.php');
     }
 
     public function getSkills($username){
