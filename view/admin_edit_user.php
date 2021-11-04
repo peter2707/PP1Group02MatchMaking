@@ -62,24 +62,8 @@ if (isset($_POST['update'])) {
     }
 } elseif (isset($_POST['cancel'])){
     header("location: ../view/admin_index.php");
-} elseif (isset($_POST['done'])) {
-    $linkedin = $_POST['linkedin'];
-    $github = $_POST['github'];
-    $twitter = $_POST['twitter'];
-    $instagram = $_POST['instagram'];
-    $facebook = $_POST['facebook'];
-    $uc->editSocialLink($username, $linkedin, $github, $twitter, $instagram, $facebook);
 } elseif (isset($_POST['delete'])) {
     $uc->deleteAccount($username, $usertype);
-} elseif (isset($_POST['changeImage'])) {
-    $input = $_FILES["image"]["tmp_name"];
-    if (file_exists($input)) {
-        $file = file_get_contents($input);
-        $base64 = base64_encode($file);
-        $uc->changeProfilePicture($base64, $username, $usertype);
-    } else {
-        header("location: ../view/user_profile.php?error=imagenotfound");
-    }
 }
 ?>
 <!DOCTYPE html>
@@ -121,30 +105,14 @@ if (isset($_POST['update'])) {
                                     <div class="mt-3">
                                         <h4>$user->firstName $user->lastName</h4>
                                         <p class="text-secondary">$user->field </p>
-                                        <button class="btn btn-solid-sm" data-bs-toggle="modal" data-bs-target="#profileModal">Change Picture</button>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="profileModalLabel">Change profile picture</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <form method="POST" enctype="multipart/form-data">
-                                                        <div class="modal-body">
-                                                            <small id="message">Choose an image</small>
-                                                            <input type="file" class="form-control" id="image" name="image" />
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary-sm" data-bs-dismiss="modal">Cancel</button>
-                                                            <button type="submit" name="changeImage" class="btn btn-solid-sm">Save changes</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
+                                        <div class="row ms-2 mx-2">
+                                            <div class="col text-center">
+                                                <a style="text-decoration: none;" href="mailto:$user->email"><b><i class="fa fa-envelope" aria-hidden="true"></i></b></a>
+                                            </div>
+                                            <div class="col text-center">
+                                                <a style="text-decoration: none;" href="tel:$user->phone"><b><i class="fa fa-phone" aria-hidden="true"></i></b></a>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -279,30 +247,14 @@ END;
                                     <div class="mt-3">
                                         <h4>$user->firstName $user->lastName</h4>
                                         <p class="text-secondary">$user->position</p>
-                                        <button class="btn btn-solid-sm" data-bs-toggle="modal" data-bs-target="#profileModal">Change Picture</button>
-
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="profileModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title" id="profileModalLabel">Change profile picture</h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                    </div>
-                                                    <form method="POST" enctype="multipart/form-data">
-                                                        <div class="modal-body">
-                                                            <small id="message">Choose an image</small>
-                                                            <input type="file" class="form-control" id="image" name="image" />
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary-sm" data-bs-dismiss="modal">Cancel</button>
-                                                            <button type="submit" name="changeImage" class="btn btn-solid-sm">Save changes</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
+                                        <div class="row ms-2 mx-2">
+                                            <div class="col text-center">
+                                                <a style="text-decoration: none;" href="mailto:$user->email"><b><i class="fa fa-envelope" aria-hidden="true"></i></b></a>
+                                            </div>
+                                            <div class="col text-center">
+                                                <a style="text-decoration: none;" href="tel:$user->phone"><b><i class="fa fa-phone" aria-hidden="true"></i></b></a>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>

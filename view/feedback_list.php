@@ -79,7 +79,7 @@ if (isset($_POST['deleteFeedback'])) {
                                             <p class="ms-1"><span class="badge bg-secondary">ID: &nbsp;$feedback->id</span></p>
                                             <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$rating</h4>
                                             <p class="card-text"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp; $feedback->comment</p>
-                                            <small class="card-text text-success"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; $feedback->username</small>
+                                            <small class="card-text text-success"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; $feedback->jobseeker</small>
                                             <br>
                                             <small class="card-text"><i class="fa fa-clock" aria-hidden="true"></i>&nbsp; $feedback->date</small>
                                             <br><br>
