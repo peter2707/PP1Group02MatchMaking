@@ -1,4 +1,6 @@
 <?php
+	//------------Config for Heroku only, will not work for local environment------------
+
 	$cleardb_url = parse_url(getenv("CLEARDB_DATABASE_URL"));
 	$cleardb_server = $cleardb_url["host"];
 	$cleardb_username = $cleardb_url["user"];
@@ -16,6 +18,8 @@
 
 
 <?php
+	//------------Use below part when running on local environment------------
+
 	// try {
 	// 	$dbAddress = 'localhost';
 	// 	$dbUser = 'root';

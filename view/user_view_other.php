@@ -179,7 +179,7 @@ $viewUser = $uc->getUser($usertype, $username);
                     <form method="POST">
                         <input type="hidden" name="filepath" value="$resume">
                         <input type="hidden" name="filename" value="$resumeName">
-                        <button type="submit" name="downloadResume" onclick="javascript:return confirm('Download Resume?');" class="btn btn-secondary">View</button>
+                        <button type="submit" name="downloadResume" onclick="javascript:return confirm('Download Resume?');" class="btn btn-secondary">Download</button>
                     </form>
                 </div>
             END;

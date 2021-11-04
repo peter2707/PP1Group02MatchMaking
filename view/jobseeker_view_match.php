@@ -124,7 +124,7 @@ if (isset($_POST['deny'])) {
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary-sm" data-bs-dismiss="modal">Cancel</button>
                                     <?php echo "
-                                        <a href='mailto:$jobmatch->contact?subject=Subject...&body=Message...'>
+                                        <a href='mailto:$jobmatch->contact?subject=Accept Match ($jobmatch->position)&body=Message...'>
                                             <button class='btn btn-solid-sm'>Send Email</button>
                                         </a>
                                     "; ?>

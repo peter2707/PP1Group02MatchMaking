@@ -276,7 +276,7 @@ if (isset($_POST['done'])) {
                             <input type="hidden" name="filename" value="$resumeName">
                             <input type="hidden" name="resumeName" value="$user->username">
                             <button type="submit" name="downloadResume" onclick="javascript:return confirm('Download Resume?');" class="btn btn-secondary">$resumeName</button>
-                            <button type="submit" name="removeResume" onclick="javascript:return confirm('Remove Skill?');" class="btn btn-danger"><i class="bi bi-trash"></i></button>
+                            <button type="submit" name="removeResume" onclick="javascript:return confirm('Remove Resume?');" class="btn btn-danger"><i class="bi bi-trash"></i></button>
                         </form>
                     </div>
                 END;
@@ -334,7 +334,7 @@ if (isset($_POST['done'])) {
                     </div>
                 END;
             if (count($skills) < 1) {
-                echo "<small class='text-center'>To add a skill, click on the <i class='fa fa-plus' aria-hidden='true'></i> button</small>";
+                echo "<small class='text-center'><b>To add a skill</b>, click on the <i class='fa fa-plus' aria-hidden='true'></i> button</small>";
             } else {
                 foreach ($skills as $skill) {
                     echo <<<END
@@ -390,7 +390,7 @@ if (isset($_POST['done'])) {
                     </div>
             END;
             if (count($educations) < 1) {
-                echo "<small class='text-center'>To add an education, click on the <i class='fa fa-plus' aria-hidden='true'></i> button</small>";
+                echo "<small class='text-center'><b>To add an education</b>, click on the <i class='fa fa-plus' aria-hidden='true'></i> button</small>";
             } else {
                 foreach ($educations as $education) {
                     echo <<<END
@@ -452,7 +452,7 @@ if (isset($_POST['done'])) {
             END;
 
             if (count($careers) < 1) {
-                echo "<small class='text-center'>To add a career, click on the <i class='fa fa-plus' aria-hidden='true'></i> button</small>";
+                echo "<small class='text-center'><b>To add a career</b>, click on the <i class='fa fa-plus' aria-hidden='true'></i> button</small>";
             } else {
                 foreach ($careers as $career) {
                     echo <<<END
