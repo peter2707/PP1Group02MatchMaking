@@ -65,38 +65,44 @@ if (isset($_POST['deleteFeedback'])) {
         <h3><i class="fa fa-comment" aria-hidden="true"></i> Feedbacks</h3>
         <div class="mb-5 mt-4" style="min-height: 300px;">
             <?php
-            if (count($allFeedbacks) < 1) {
-                echo "<h6 class='mt-5'>No result found yet.</h6> <small>All feedback made by user will be appeared here.</small>";
-            } else {
-                foreach ($allFeedbacks as $feedback) {
-                    $rating = str_repeat("⭐", $feedback->rating);
-                    echo <<< END
-                        <div class="job-card">
-                            <div class="card border-0 mb-5">
-                                <div class="card-body">
-                                    <div class="row d-flex align-items-center">
-                                        <div class="col text-start">
-                                            <p class="ms-1"><span class="badge bg-secondary">ID: &nbsp;$feedback->id</span></p>
-                                            <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$rating</h4>
-                                            <p class="card-text"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp; $feedback->comment</p>
-                                            <small class="card-text text-success"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; $feedback->jobseeker</small>
-                                            <br>
-                                            <small class="card-text"><i class="fa fa-clock" aria-hidden="true"></i>&nbsp; $feedback->date</small>
-                                            <br><br>
-                                        </div>
-                                        <div class="col-2 text-end">
-                                            <form method="POST">
-                                                <input type="hidden" name="feedbackID" value=$feedback->id>
-                                                <button name="deleteFeedback" type="submit" class="btn btn-danger-sm" onclick="return confirm('Are you sure you want to delete this feedback?')"><i class='fa fa-trash' aria-hidden='true'></i></button>
-                                            </form>
+            if($sc->getUserType() == "admin"){
+                if (count($allFeedbacks) < 1) {
+                    echo "<h6 class='mt-5'>No result found yet.</h6> <small>All feedback made by user will be appeared here.</small>";
+                } else {
+                    foreach ($allFeedbacks as $feedback) {
+                        $rating = str_repeat("⭐", $feedback->rating);
+                        echo <<< END
+                            <div class="job-card">
+                                <div class="card border-0 mb-5">
+                                    <div class="card-body">
+                                        <div class="row d-flex align-items-center">
+                                            <div class="col text-start">
+                                                <p class="ms-1"><span class="badge bg-secondary">ID: &nbsp;$feedback->id</span></p>
+                                                <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$rating</h4>
+                                                <p class="card-text"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp; $feedback->comment</p>
+                                                <small class="card-text text-success"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; $feedback->jobseeker</small>
+                                                <br>
+                                                <small class="card-text"><i class="fa fa-clock" aria-hidden="true"></i>&nbsp; $feedback->date</small>
+                                                <br><br>
+                                            </div>
+                                            <div class="col-2 text-end">
+                                                <form method="POST">
+                                                    <input type="hidden" name="feedbackID" value=$feedback->id>
+                                                    <button name="deleteFeedback" type="submit" class="btn btn-danger-sm" onclick="return confirm('Are you sure you want to delete this feedback?')"><i class='fa fa-trash' aria-hidden='true'></i></button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    END;
+                        END;
+                    }
+                    unset($allFeedbacks);
                 }
-                unset($allFeedbacks);
+            } else {
+                echo "<div class='col-xl-10 offset-xl-1' style='height: 300px;'>
+                            <h4>You don't have access to this page. Please <a href='login.php'>log in</a></h4>
+                        </div>";
             }
             ?>
         </div>
@@ -105,37 +111,39 @@ if (isset($_POST['deleteFeedback'])) {
         <h3><i class="fa fa-info-circle" aria-hidden="true"></i> Reports</h3>
         <div class="mb-5 mt-4" style="min-height: 300px;">
             <?php
-            if (count($allReports) < 1) {
-                echo "<h6 class='mt-5'>No result found yet.</h6> <small>All report made by user will be appeared here.</small>";
-            } else {
-                foreach ($allReports as $report) {
-                    echo <<< END
-                        <div class="job-card">
-                            <div class="card border-0 mb-5">
-                                <div class="card-body">
-                                    <div class="row d-flex align-items-center">
-                                        <div class="col text-start">
-                                            <p class="ms-1"><span class="badge bg-secondary">ID: &nbsp;$report->id</span></p>
-                                            <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$report->reason</h4>
-                                            <p class="card-text"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp; $report->comment</p>
-                                            <small class="card-text text-success"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; $report->username</small>
-                                            <br>
-                                            <small class="card-text"><i class="fa fa-clock" aria-hidden="true"></i>&nbsp; $report->date</small>
-                                            <br><br>
-                                        </div>
-                                        <div class="col-2 text-end">
-                                            <form method="POST">
-                                                <input type="hidden" name="reportID" value=$report->id>
-                                                <button name="deleteReport" type="submit" class="btn btn-danger-sm" onclick="return confirm('Are you sure you want to delete this report?')"><i class='fa fa-trash' aria-hidden='true'></i></button>
-                                            </form>
+            if($sc->getUserType() == "admin"){
+                if (count($allReports) < 1) {
+                    echo "<h6 class='mt-5'>No result found yet.</h6> <small>All report made by user will be appeared here.</small>";
+                } else {
+                    foreach ($allReports as $report) {
+                        echo <<< END
+                            <div class="job-card">
+                                <div class="card border-0 mb-5">
+                                    <div class="card-body">
+                                        <div class="row d-flex align-items-center">
+                                            <div class="col text-start">
+                                                <p class="ms-1"><span class="badge bg-secondary">ID: &nbsp;$report->id</span></p>
+                                                <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$report->reason</h4>
+                                                <p class="card-text"><i class="fa fa-comment" aria-hidden="true"></i>&nbsp; $report->comment</p>
+                                                <small class="card-text text-success"><i class="fa fa-user" aria-hidden="true"></i>&nbsp; $report->username</small>
+                                                <br>
+                                                <small class="card-text"><i class="fa fa-clock" aria-hidden="true"></i>&nbsp; $report->date</small>
+                                                <br><br>
+                                            </div>
+                                            <div class="col-2 text-end">
+                                                <form method="POST">
+                                                    <input type="hidden" name="reportID" value=$report->id>
+                                                    <button name="deleteReport" type="submit" class="btn btn-danger-sm" onclick="return confirm('Are you sure you want to delete this report?')"><i class='fa fa-trash' aria-hidden='true'></i></button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    END;
+                        END;
+                    }
+                    unset($allReports);
                 }
-                unset($allReports);
             }
             ?>
         </div>

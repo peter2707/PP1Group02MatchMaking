@@ -729,7 +729,7 @@ if (isset($_POST['done'])) {
         echo "<header class='ex-header'>
                 <div class='container'>
                     <div class='row'>
-                        <div class='col-xl-10 offset-xl-1'>
+                        <div class='col-xl-10 offset-xl-1' style='height: 300px;'>
                             <h4>You don't have access to this page. Please <a href='login.php'>log in</a></h4>
                         </div>
                     </div>
