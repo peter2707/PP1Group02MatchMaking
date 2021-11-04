@@ -1,11 +1,13 @@
 <?php
 class AdminController {
+    // Register function for admin to create new user
     public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type, $positionEmployer, $positionAdmin, $field){
         require_once '../model/utility.php';
         require_once '../model/db_connection.php';
         require_once '../model/admin_model.php';
         $adminModel = new AdminModel();
 
+        // check input if empty
         if (emptyInputRegister($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type) !== false) {
             header("location: ../view/admin_add_user.php?error=emptyinput");
             exit();
@@ -26,6 +28,7 @@ class AdminController {
                     header("location: ../view/admin_add_user.php?error=usernametaken");
                     exit();
                 }else{
+                    // On success validation, trigger register employer function
                     $adminModel->registerEmployer($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $positionEmployer, $location);
                 }
             }elseif($type == "admin"){
@@ -44,12 +47,14 @@ class AdminController {
                     header("location: ../view/admin_add_user.php?error=usernametaken");
                     exit();
                 }else{
+                    // On success validation, trigger register job seeker function
                     $adminModel->registerJobSeeker($db, $firstName, $lastName, $username, $password, $dateOfBirth, $phone, $email, $field, $location);
                 }
             }
         }
     }
 
+    // Delete function for admin to remove account by username
     public function deleteAccount($username, $usertype){
         require_once '../model/db_connection.php';
         require_once '../model/admin_model.php';
@@ -57,6 +62,7 @@ class AdminController {
         $adminModel->deleteAccount($db, $username, $usertype);
     }
 
+    // retreive all job seeker accounts
     public function getAllJobSeeker(){
         require_once '../model/admin_model.php';
         include '../model/db_connection.php';
@@ -64,6 +70,7 @@ class AdminController {
         return $adminModel->getAllJobSeeker($db);
 	}
 
+    // retreive all employers account
 	public function getAllEmployer(){
         require_once '../model/admin_model.php';
         include '../model/db_connection.php';
@@ -71,6 +78,7 @@ class AdminController {
         return $adminModel->getAllEmployer($db);
 	}
 
+    // retreive all admin accounts
     public function getAllAdmin(){
         require_once '../model/admin_model.php';
         include '../model/db_connection.php';
@@ -78,6 +86,7 @@ class AdminController {
         return $adminModel->getAllAdmin($db);
 	}
 
+    // update job seeker accounts
 	public function updateJobSeeker($firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $id){
         require_once '../model/admin_model.php';
         include '../model/db_connection.php';
@@ -85,6 +94,7 @@ class AdminController {
         $adminModel->updateJobSeeker($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $id);
 	}
 
+    // update employer account
 	public function updateEmployer($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $id){
         require_once '../model/admin_model.php';
         include '../model/db_connection.php';
@@ -92,6 +102,7 @@ class AdminController {
         $adminModel->updateEmployer($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $id);
 	}
 
+    // update admin account
     public function updateAdmin($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id){
         require_once '../model/admin_model.php';
         include '../model/db_connection.php';
@@ -99,6 +110,7 @@ class AdminController {
         $adminModel->updateAdmin($db, $firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $id);
 	}
 
+    // generate report
     public function generateReport($table){
         require_once '../model/admin_model.php';
         include '../model/db_connection.php';

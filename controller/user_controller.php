@@ -7,16 +7,20 @@ class UserController {
         return $userModel->getUser($db, $userType, $username);
     }
 
+    // Function to update a job seeker account
     public function updateJobSeeker($firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $username) {
+        // check if all the variable is null
         if(!isset($firstName)||!isset($lastName)||!isset($password)||!isset($dob)||!isset($phone)||!isset($email)||!isset($field)||!isset($location)||!isset($username)){
             header("location: ../view/user_settings.php?error=emptyInput");
         }
         require_once '../model/user_model.php';
         require_once '../model/db_connection.php';
         $userModel = new UserModel();
+        // update job seeker
         $userModel->updateJobSeeker($db, $firstName, $lastName, $password, $dob, $phone, $email, $field, $location, $username);
     }
 
+    // update employer
     public function updateEmployer($firstName, $lastName, $password, $dob, $phone, $email, $position, $location, $username) {
         require_once '../model/user_model.php';
         require_once '../model/db_connection.php';
@@ -24,6 +28,7 @@ class UserController {
         $userModel->updateEmployer($db, $firstName, $lastName, $password, $dob, $phone, $email, $position, $location, $username);
     }
 
+    // remove user account
     public function deleteAccount($username, $type){
         require_once '../model/db_connection.php';
         require_once '../model/user_model.php';
@@ -31,6 +36,7 @@ class UserController {
         $userModel->deleteAccount($db, $username, $type);
     }
 
+    // enable user to add profile picture
     public function changeProfilePicture($file, $username, $userType){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
@@ -38,6 +44,7 @@ class UserController {
         $userModel->changeProfilePicture($db, $file, $username, $userType);
     }
 
+    // edit user social media link
     public function editSocialLink($username, $linkedin, $github, $twitter, $instagram, $facebook){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
@@ -45,6 +52,7 @@ class UserController {
         $userModel->editSocialLink($db, $username, $linkedin, $github, $twitter, $instagram, $facebook);
     }
 
+    // get logged in user social media link
     public function getSocialLink($username) {
         require_once '../model/user_model.php';
         include '../model/db_connection.php';
@@ -52,6 +60,7 @@ class UserController {
         return $userModel->getSocialLink($db, $username);
     }
 
+    // get logged in user skills
     public function getSkills($username){
         require_once '../model/user_model.php';
         include '../model/db_connection.php';
@@ -59,6 +68,7 @@ class UserController {
         return $userModel->getSkills($db, $username);
     }
 
+    // function for user to add their skills
     public function addSkill($username, $skill, $experience){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
@@ -66,6 +76,7 @@ class UserController {
         $userModel->addSkill($db, $username, $skill, $experience);
     }
 
+    // function to delete user skills
     public function deleteSkill($id, $username){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
@@ -73,6 +84,7 @@ class UserController {
         $userModel->deleteSkill($db, $id, $username);
     }
 
+    // function to get all user educations
     public function getEducations($username){
         require_once '../model/user_model.php';
         include '../model/db_connection.php';
@@ -80,6 +92,7 @@ class UserController {
         return $userModel->getEducations($db, $username);
     }
 
+    // function to add educations
     public function addEducation($username, $institution, $degree, $graduation){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
@@ -87,6 +100,7 @@ class UserController {
         $userModel->addEducation($db, $username, $institution, $degree, $graduation);
     }
 
+    // function to delete education
     public function deleteEducation($id, $username){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
@@ -94,6 +108,7 @@ class UserController {
         $userModel->deleteEducation($db, $id, $username);
     }
 
+    // function to get user careers
     public function getCareers($username){
         require_once '../model/user_model.php';
         include '../model/db_connection.php';
@@ -101,6 +116,7 @@ class UserController {
         return $userModel->getCareers($db, $username);
     }
 
+    // function to add user career
     public function addCareer($username, $position, $company, $experience){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
@@ -108,6 +124,7 @@ class UserController {
         $userModel->addCareer($db, $username, $position, $company, $experience);
     }
 
+    // function to delete user career
     public function deleteCareer($id, $username){
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
@@ -115,9 +132,10 @@ class UserController {
         $userModel->deleteCareer($db, $id, $username);
     }
 
+    // function to reset password
     public function resetPassword($type, $password, $confirmPassword, $email, $token) {
         require_once '../model/utility.php';
-        if(!isset($type) || !isset($password) || !isset($confirmPassword) || !isset($email) || !isset($token)){
+        if(!isset($type) || !isset($password) || !isset($confirmPassword) || !isset($email) || !isset($token)){ // check if all inputs are null
             header("location: ../view/reset_password.php?error=emptyinput");
             exit();
         }elseif (passwordMatch($password, $confirmPassword) !== false) {               // Do the two passwords match?
@@ -131,7 +149,9 @@ class UserController {
         }
     }
 
+    // function to get map location
     public function getMap($location){
+        // check user location and use google map to display using iframe
         $map = "";
         if($location == "South Australia"){
             $map = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4635080.582955133!2d128.3802399115305!3d-31.79767083721273!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6aa7589e5be8c7f3%3A0xdb7e79993dfad0d8!2sSouth%20Australia!5e0!3m2!1sen!2sau!4v1634199832752!5m2!1sen!2sau"
