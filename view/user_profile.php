@@ -671,7 +671,7 @@ if (isset($_POST['done'])) {
                                         </div>
                                         <div class="text-start ms-2 mx-2">
                                             <h2 class="mb-5">Reviews</h2>
-                                            <div class="row">
+                                            <div class="row text-center">
             END;
 
             if (count($feedbacks) < 1) {
