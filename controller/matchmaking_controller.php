@@ -2,7 +2,7 @@
 class MatchmakingController {
 
     public function postJob($position, $field, $salary, $type, $description, $requirements, $location, $username, $contact) {
-        if (!isset($position) || !isset($salary) || !isset($type) || !isset($description) || !isset($requirements) || !isset($location) || !isset($username) || !isset($contact)) {
+        if (!isset($position) || empty(trim($position, " ")) || !isset($salary) || !isset($type) || !isset($description) || !isset($requirements) || !isset($location) || !isset($username) || !isset($contact)) {
             header("location: ../view/employer_post.php?error=emptyinput");
         } elseif (is_numeric($position)) {
             header("location: ../view/employer_post.php?error=positionnumeric");
@@ -45,11 +45,20 @@ class MatchmakingController {
         require_once '../model/matchmaking_model.php';
         include '../model/db_connection.php';
         $mmm = new MatchmakingModel();
-        if ($mmm->updatePost($db, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id)) {
-            header("location: ../view/employer_post.php?success=updated");
+        if (!isset($position) || empty(trim($position, " ")) || !isset($salary) || !isset($type) || !isset($description) || !isset($requirements) || !isset($location) || !isset($username) || !isset($contact)) {
+            header("location: ../view/employer_post.php?error=emptyinput");
+        } elseif (is_numeric($position)) {
+            header("location: ../view/employer_post.php?error=positionnumeric");
+        } elseif (!$field) {
+            header("location: ../view/employer_post.php?error=fieldnotfound");
         } else {
-            header("location: ../view/employer_post.php?error=updatefailed");
+            if ($mmm->updatePost($db, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id)) {
+                header("location: ../view/employer_post.php?success=updated");
+            } else {
+                header("location: ../view/employer_post.php?error=updatefailed");
+            }
         }
+        
     }
 
     public function deletePost($id) {
@@ -85,7 +94,7 @@ class MatchmakingController {
     }
 
     public function findMatch($position, $salary, $location, $type, $field, $jobseeker) {
-        if (!isset($position) || !isset($salary) || !isset($type) || !isset($location) || !isset($jobseeker)) {
+        if (!isset($position) || empty(trim($position, " ")) || !isset($salary) || !isset($type) || !isset($location) || !isset($jobseeker) ) {
             header("location: ../view/jobseeker_match.php?error=emptyinput");
         } elseif (is_numeric($position)) {
             header("location: ../view/jobseeker_match.php?error=positionnumeric");
