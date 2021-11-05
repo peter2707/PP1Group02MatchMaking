@@ -129,6 +129,7 @@
 			$row = $result->fetch_assoc();
 
 			if ($row) {
+				date_default_timezone_set('Australia/Melbourne');
 				$expFormat = mktime(date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y"));
 				$expDate = date("Y-m-d H:i:s", $expFormat);
 				$token = md5($row['email'].$expDate);
@@ -151,8 +152,9 @@
 						'token' => $link . '?token=' . $token . '&email=' . $email . '&type=' . $type,
 					]);
 					$mail->setTemplateId("d-08d93e23cbf74354b1dc54986e61e303");
-					// $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
-					$sendgrid = new \SendGrid('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');
+					$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/environment');
+					$dotenv->load();
+					$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 					try {
 						$sendgrid->send($mail);
 						header("location: ../view/forget_password.php?success=tokengenerated");

@@ -25,24 +25,31 @@ if (isset($_POST["exportJobSeeker"])) {
 } else {
     $allAdmins = array();
     $allAdmins = $ac->getAllAdmin();
+    $totalAdmins = count($allAdmins);
 
     $allJobSeekers = array();
     $allJobSeekers = $ac->getAllJobSeeker();
+    $totalJobSeekers = count($allJobSeekers);
 
     $allEmployers = array();
     $allEmployers = $ac->getAllEmployer();
+    $totalEmployers = count($allEmployers);
 
     $allJobMatches = array();
     $allJobMatches = $ac->getAllJobMatch();
+    $totalJobMatches = count($allJobMatches);
 
     $allJobPosts = array();
     $allJobPosts = $ac->getAllJobPost();
+    $totalJobPosts = count($allJobPosts);
 
     $allReports = array();
     $allReports = $ac->getAllReport();
+    $totalReports = count($allReports);
 
     $allFeedbacks = array();
     $allFeedbacks = $ac->getAllFeedback();
+    $totalFeedbacks = count($allFeedbacks);
 
     $good = 0;
     $bad = 0;
@@ -118,109 +125,119 @@ if (isset($_POST["exportJobSeeker"])) {
                     ?>
                 </div>
 
-                <div class="row col-md-6 offset-md-3 mb-5">
-                    <div class="col">
-                        <a style="text-decoration : none" href="admin_add_user.php" class="mb-4 w-100 btn btn-success-lg"><i class="fa fa-user-plus" aria-hidden="true"></i> &nbsp;Add User</a>
-                    </div>
-                    <div class="col">
-                        <button data-bs-toggle="modal" data-bs-target="#generateReportModal" class="mb-4 w-100 btn btn-solid-lg"><i class="fa fa-file" aria-hidden="true"></i> &nbsp;Generate Report</button>
-
-                        <!-- Modal -->
-                        <div class="modal fade" id="generateReportModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="profileModalLabel">Generate Report</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <form method="POST" enctype="multipart/form-data">
-                                        <div class="modal-body">
-                                            <div class="mb-3"><small id="message">Choose a table to generate to CSV File</small></div>
-                                            <form method="POST">
-                                                <div class="row">
-                                                    <div class="col"><button type="submit" name="exportJobSeeker" class="btn btn-success-sm">JobSeeker</button></div>
-                                                    <div class="col"><button type="submit" name="exportEmployer" class="btn btn-success-sm">Employer</button></div>
-                                                    <div class="col"><button type="submit" name="exportAdmin" class="btn btn-success-sm">Admin</button></div>
+                <?php
+                if ($sc->getUserType() == "admin") {
+                    echo <<< END
+                            <div class="row col-md-6 offset-md-3 mb-5">
+                                <div class="col">
+                                    <a style="text-decoration : none" href="admin_add_user.php" class="mb-4 w-100 btn btn-success-lg"><i class="fa fa-user-plus" aria-hidden="true"></i> &nbsp;Add User</a>
+                                </div>
+                                <div class="col">
+                                    <button data-bs-toggle="modal" data-bs-target="#generateReportModal" class="mb-4 w-100 btn btn-solid-lg"><i class="fa fa-file" aria-hidden="true"></i> &nbsp;Generate Report</button>
+            
+                                    <!-- Modal -->
+                                    <div class="modal fade" id="generateReportModal" tabindex="-1" aria-labelledby="profileModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="profileModalLabel">Generate Report</h5>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <div class="row mt-3">
-                                                    <div class="col"><button type="submit" name="exportJobPost" class="btn btn-solid-sm">JobPost</button></div>
-                                                    <div class="col"><button type="submit" name="exportJobMatch" class="btn btn-solid-sm">JobMatch</button></div>
-                                                    <div class="col"><button type="submit" name="exportReport" class="btn btn-solid-sm">Report</button></div>
+                                                <form method="POST" enctype="multipart/form-data">
+                                                    <div class="modal-body">
+                                                        <div class="mb-3"><small id="message">Choose a table to generate to CSV File</small></div>
+                                                        <form method="POST">
+                                                            <div class="row">
+                                                                <div class="col"><button type="submit" name="exportJobSeeker" class="btn btn-success-sm">JobSeeker</button></div>
+                                                                <div class="col"><button type="submit" name="exportEmployer" class="btn btn-success-sm">Employer</button></div>
+                                                                <div class="col"><button type="submit" name="exportAdmin" class="btn btn-success-sm">Admin</button></div>
+                                                            </div>
+                                                            <div class="row mt-3">
+                                                                <div class="col"><button type="submit" name="exportJobPost" class="btn btn-solid-sm">JobPost</button></div>
+                                                                <div class="col"><button type="submit" name="exportJobMatch" class="btn btn-solid-sm">JobMatch</button></div>
+                                                                <div class="col"><button type="submit" name="exportReport" class="btn btn-solid-sm">Report</button></div>
+                                                            </div>
+                                                        </form>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary-sm" data-bs-dismiss="modal">Done</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+            
+                                </div>
+                            </div>
+                            <div class="row mb-5">
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="row">
+                                                <div class="col-8 text-start">
+                                                    <h4 class="text-primary ms-4 mt-2">$totalJobSeekers</h4>
+                                                    <h6 class="text-muted m-b-0 ms-4">JobSeekers</h6>
                                                 </div>
-                                            </form>
+                                                <div class="col-4 text-end">
+                                                    <i class="fa fa-user fa-2x mx-4 mt-4" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary-sm" data-bs-dismiss="modal">Done</button>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="row">
+                                                <div class="col-8 text-start">
+                                                    <h4 class="text-warning ms-4 mt-2">$totalEmployers</h4>
+                                                    <h6 class="text-muted m-b-0 ms-4">Employers</h6>
+                                                </div>
+                                                <div class="col-4 text-end">
+                                                    <i class="fa fa-address-card fa-2x mx-4 mt-4" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
                                         </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="row mb-5">
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-block">
-                                <div class="row">
-                                    <div class="col-8 text-start">
-                                        <h4 class="text-primary ms-4 mt-2"><?php echo count($allJobSeekers); ?></h4>
-                                        <h6 class="text-muted m-b-0 ms-4">JobSeekers</h6>
-                                    </div>
-                                    <div class="col-4 text-end">
-                                        <i class="fa fa-user fa-2x mx-4 mt-4" aria-hidden="true"></i>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-block">
-                                <div class="row">
-                                    <div class="col-8 text-start">
-                                        <h4 class="text-warning ms-4 mt-2"><?php echo count($allEmployers); ?></h4>
-                                        <h6 class="text-muted m-b-0 ms-4">Employers</h6>
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="row">
+                                                <div class="col-8 text-start">
+                                                    <h4 style="color:#8E44AD" class="ms-4 mt-2">$totalJobPosts</h4>
+                                                    <h6 class="text-muted m-b-0 ms-4">JobPosts</h6>
+                                                </div>
+                                                <div class="col-4 text-end">
+                                                    <i class="fa fa-paper-plane fa-2x mx-4 mt-4" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div class="col-4 text-end">
-                                        <i class="fa fa-address-card fa-2x mx-4 mt-4" aria-hidden="true"></i>
+                                </div>
+                                <div class="col">
+                                    <div class="card">
+                                        <div class="card-block">
+                                            <div class="row">
+                                                <div class="col-8 text-start">
+                                                    <h4 class="text-success ms-4 mt-2">$totalJobMatches</h4>
+                                                    <h6 class="text-muted m-b-0 ms-4">JobMatches</h6>
+                                                </div>
+                                                <div class="col-4 text-end">
+                                                    <i class="fa fa-lightbulb fa-2x mx-4 mt-4" aria-hidden="true"></i>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-block">
-                                <div class="row">
-                                    <div class="col-8 text-start">
-                                        <h4 style="color:#8E44AD" class="ms-4 mt-2"><?php echo count($allJobPosts); ?></h4>
-                                        <h6 class="text-muted m-b-0 ms-4">JobPosts</h6>
-                                    </div>
-                                    <div class="col-4 text-end">
-                                        <i class="fa fa-paper-plane fa-2x mx-4 mt-4" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-block">
-                                <div class="row">
-                                    <div class="col-8 text-start">
-                                        <h4 class="text-success ms-4 mt-2"><?php echo count($allJobMatches); ?></h4>
-                                        <h6 class="text-muted m-b-0 ms-4">JobMatches</h6>
-                                    </div>
-                                    <div class="col-4 text-end">
-                                        <i class="fa fa-lightbulb fa-2x mx-4 mt-4" aria-hidden="true"></i>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        END;
+                } else {
+                    echo "<div class='col-xl-10 offset-xl-1' style='height: 300px;'>
+                                    <h4>You don't have access to this page. Please <a href='login.php'>log in</a></h4>
+                                </div>";
+                }
+                ?>
             </div>
             <!-- end of row -->
             <div class="main-body">
@@ -232,16 +249,18 @@ if (isset($_POST["exportJobSeeker"])) {
                             </div>
                             <div class="card-body">
                                 <?php
-                                if (
-                                    count($allJobSeekers) < 1 &&
-                                    count($allEmployers) < 1 &&
-                                    count($allJobPosts) < 1 &&
-                                    count($allJobMatches) < 1 &&
-                                    count($allReports) < 1
-                                ) {
-                                    echo "<small>There are no info to display yet.</small>";
-                                } else {
-                                    echo "<canvas id='barChart'></canvas>";
+                                if ($sc->getUserType() == "admin") {
+                                    if (
+                                        $totalJobSeekers < 1 &&
+                                        $totalEmployers < 1 &&
+                                        $totalJobPosts < 1 &&
+                                        $totalJobMatches < 1 &&
+                                        $totalReports < 1
+                                    ) {
+                                        echo "<small>There are no info to display yet.</small>";
+                                    } else {
+                                        echo "<canvas id='barChart'></canvas>";
+                                    }
                                 }
                                 ?>
                             </div>
@@ -253,17 +272,19 @@ if (isset($_POST["exportJobSeeker"])) {
                             <div class="card-body">
                                 <div class="row">
                                     <?php
-                                    if (
-                                        count($allJobSeekers) < 1 &&
-                                        count($allEmployers) < 1 &&
-                                        count($allJobPosts) < 1 &&
-                                        count($allJobMatches) < 1 &&
-                                        count($allReports) < 1
-                                    ) {
-                                        echo "<small>There are no info to display yet.</small>";
-                                    } else {
-                                        echo "<div class='col'><canvas id='userPieChart'></canvas></div>
-                                            <div class='col'><canvas id='jobPieChart'></canvas></div>";
+                                    if ($sc->getUserType() == "admin") {
+                                        if (
+                                            $totalJobSeekers < 1 &&
+                                            $totalEmployers < 1 &&
+                                            $totalJobPosts < 1 &&
+                                            $totalJobMatches < 1 &&
+                                            $totalReports < 1
+                                        ) {
+                                            echo "<small>There are no info to display yet.</small>";
+                                        } else {
+                                            echo "<div class='col'><canvas id='userPieChart'></canvas></div>
+                                                <div class='col'><canvas id='jobPieChart'></canvas></div>";
+                                        }
                                     }
                                     ?>
                                 </div>
@@ -275,10 +296,12 @@ if (isset($_POST["exportJobSeeker"])) {
                             </div>
                             <div class="card-body">
                                 <?php
-                                if ($good < 1 && $bad < 1) {
-                                    echo "<small>There are no info to display yet.</small>";
-                                } else {
-                                    echo "<canvas id='doughnutChart'></canvas>";
+                                if ($sc->getUserType() == "admin") {
+                                    if ($good < 1 && $bad < 1) {
+                                        echo "<small>There are no info to display yet.</small>";
+                                    } else {
+                                        echo "<canvas id='doughnutChart'></canvas>";
+                                    }
                                 }
                                 ?>
                             </div>
@@ -290,19 +313,21 @@ if (isset($_POST["exportJobSeeker"])) {
                             <ul class='list-group list-group-flush'>
                                 <h5 class="text-center mt-3 mb-3">Team Members</h5>
                                 <?php
-                                if (count($allAdmins) < 1) {
-                                    echo "<small>No result found yet.</small>";
-                                } else {
-                                    foreach ($allAdmins as $admin) {
-                                        echo <<< END
-                                        <li class="list-group-item flex-wrap">
-                                            <div class="row">
-                                                <div class="col-md-2 text-center"><img src='../images/user.png' alt='User' class='rounded-circle' width='25' height='25'></div>
-                                                <div class="col-md-6 text-start">$admin->firstName $admin->lastName</div>
-                                                <div class="col-md-4 text-end text-muted">$admin->position</div>
-                                            </div>   
-                                        </li>
-                                        END;
+                                if ($sc->getUserType() == "admin") {
+                                    if (count($allAdmins) < 1) {
+                                        echo "<small>No result found yet.</small>";
+                                    } else {
+                                        foreach ($allAdmins as $admin) {
+                                            echo <<< END
+                                            <li class="list-group-item flex-wrap">
+                                                <div class="row">
+                                                    <div class="col-md-2 text-center"><img src='../images/user.png' alt='User' class='rounded-circle' width='25' height='25'></div>
+                                                    <div class="col-md-6 text-start">$admin->firstName $admin->lastName</div>
+                                                    <div class="col-md-4 text-end text-muted">$admin->position</div>
+                                                </div>   
+                                            </li>
+                                            END;
+                                        }
                                     }
                                 }
                                 ?>

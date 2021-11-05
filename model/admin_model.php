@@ -166,6 +166,7 @@ class AdminModel {
 	}
 
 	public function deleteReport($db, $id) {
+		$success = false;
 		$query = "DELETE FROM report WHERE id = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("i", $id);
@@ -174,11 +175,10 @@ class AdminModel {
 		$affectedRows = $stmt->affected_rows;
 		$stmt->close();
 		if ($affectedRows == 1) {
-			header("location: ../view/admin_index.php?success=deleted");
-		} else {
-			header("location: ../view/admin_index.php?error=deletefailed");
-		}
+			$success = true;	
+		} 
 		$db->close();
+		return $success;
 	}
 
 	public function generateReport($db, $table){
@@ -217,7 +217,7 @@ class AdminModel {
 				}elseif($table == "admin"){
 					$lineData = array($row['id'], $row['firstName'], $row['lastName'], $row['username'], $row['dateOfBirth'], $row['phone'], $row['email'], $row['position']); 
 				}elseif($table == "jobpost"){
-					$lineData = array($row['id'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['contact'], $row['date']); 
+					$lineData = array($row['id'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['employer'], $row['contact'], $row['date']); 
 				}elseif($table == "jobmatch"){
 					$lineData = array($row['id'], $row['employer'], $row['jobSeeker'], $row['jobPostID'], $row['percentage'], $row['rating'], $row['feedback'], $row['date']); 
 				}elseif($table == "report"){

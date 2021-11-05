@@ -53,45 +53,51 @@ try {
     <div class="container mt-5">
         <div class="mb-5" style="min-height: 400px;">
             <?php
-            if (count($allJobMatches) < 1) {
-                echo "<h3>No data available yet.</h3> <small>All job matches will be displayed here once available.</small>";
-            } else {
-                foreach ($allJobMatches as $match) {
-                    $badge = "badge bg-primary";
-                    if ($match->type == "Full Time") {
-                        $badge = "badge bg-success";
-                    } elseif ($match->type == "Part Time") {
+            if($sc->getUserType() == "admin"){
+                if (count($allJobMatches) < 1) {
+                    echo "<h3>No data available yet.</h3> <small>All job matches will be displayed here once available.</small>";
+                } else {
+                    foreach ($allJobMatches as $match) {
                         $badge = "badge bg-primary";
-                    } elseif ($match->type == "Casual") {
-                        $badge = "badge bg-warning";
-                    } elseif ($match->type == "Contract") {
-                        $badge = "badge bg-danger";
-                    }
-                    echo <<< END
-                        <div class="job-card">
-                            <div class="card border-0 mb-5">
-                                <div class="card-body">
-                                    <div class="row d-flex align-items-center">
-                                        <div class="col text-start">
-                                            <small class="ms-1"><span class="$badge">$match->type</span></small>
-                                            <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$match->position</h4>
-                                            <small class="card-text"><i class="fa fa-clock" aria-hidden="true"></i>&nbsp; $match->date</small>
-                                            <br><br>
-                                            <p class="card-text"><b>ID:</b> $match->id &nbsp;&nbsp;&nbsp; <b>Employer:</b> $match->employer &nbsp;&nbsp;&nbsp; <b>JobSeeker:</b> $match->jobseeker</p>
-                                        </div>
-                                        <div class="col text-end">
-                                            <form action="jobseeker_view_match.php" method="GET">
-                                                <input type="hidden" name="id" value=$match->id>
-                                                <button type="submit" class="btn btn-solid-lg">View</button>
-                                            </form>
+                        if ($match->type == "Full Time") {
+                            $badge = "badge bg-success";
+                        } elseif ($match->type == "Part Time") {
+                            $badge = "badge bg-primary";
+                        } elseif ($match->type == "Casual") {
+                            $badge = "badge bg-warning";
+                        } elseif ($match->type == "Contract") {
+                            $badge = "badge bg-danger";
+                        }
+                        echo <<< END
+                            <div class="job-card">
+                                <div class="card border-0 mb-5">
+                                    <div class="card-body">
+                                        <div class="row d-flex align-items-center">
+                                            <div class="col text-start">
+                                                <small class="ms-1"><span class="$badge">$match->type</span></small>
+                                                <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$match->position</h4>
+                                                <small class="card-text"><i class="fa fa-clock" aria-hidden="true"></i>&nbsp; $match->date</small>
+                                                <br><br>
+                                                <p class="card-text"><b>ID:</b> $match->id &nbsp;&nbsp;&nbsp; <b>Employer:</b> $match->employer &nbsp;&nbsp;&nbsp; <b>JobSeeker:</b> $match->jobseeker</p>
+                                            </div>
+                                            <div class="col text-end">
+                                                <form action="jobseeker_view_match.php" method="GET">
+                                                    <input type="hidden" name="id" value=$match->id>
+                                                    <button type="submit" class="btn btn-solid-lg">View</button>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    END;
+                        END;
+                    }
+                    unset($allJobMatches);
                 }
-                unset($allJobMatches);
+            } else {
+                echo "<div class='col-xl-10 offset-xl-1' style='height: 300px;'>
+                            <h4>You don't have access to this page. Please <a href='login.php'>log in</a></h4>
+                        </div>";
             }
             ?>
         </div>

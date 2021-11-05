@@ -1,12 +1,14 @@
 <?php
-$id = $_GET['id'];
 require_once '../controller/matchmaking_controller.php';
 require_once '../controller/session_controller.php';
-$mmc = new MatchmakingController();
-$sc = new SessionController();
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
+$mmc = new MatchmakingController();
+$sc = new SessionController();
+
+$id = $_GET['id'];
 if (isset($_POST['submit'])) {
     $username = $sc->getUserName();
     $type = $sc->getUserType();
@@ -67,38 +69,47 @@ if (isset($_POST['submit'])) {
             }
             echo "</span></h5>";
         }
-        ?>
-            <div class="col-lg-6">
-                <div class="text-container">
-                    <h2 class="mb-5">Looking Suspicious?</h2>
-                    <p>You can report a match if you think it is suspicious or something is wrong with the post.<br><br>To submit a report, please fill in the details and click submit.</p>
-                    <small>If you are experiencing an issue with the website, please contact the <a href="https://jobmatchdemo.herokuapp.com/view/index.php#contact">support team</a> so we can help you sort it out as soon as possible.</small>
+
+        if($sc->getUserType() == "jobseeker"){
+            echo <<< END
+                <div class="col-lg-6">
+                    <div class="text-container">
+                        <h2 class="mb-5">Looking Suspicious?</h2>
+                        <p>You can report a match if you think it is suspicious or something is wrong with the post.<br><br>To submit a report, please fill in the details and click submit.</p>
+                        <small>If you are experiencing an issue with the website, please contact the <a href="https://jobmatchdemo.herokuapp.com/view/index.php#contact">support team</a> so we can help you sort it out as soon as possible.</small>
+                    </div>
                 </div>
-            </div>
-            <div class="col-lg-6 mt-5">
-                <form method="POST">
-                    <div class="form-group">
-                        <input type="text" class="form-control-input" disabled value='<?php echo "Match ID: $id" ?>'>
-                    </div>
-                    <div class="form-group">
-                        <select class="form-select form-control-input" name="reason" aria-label="Default select example" required>
-                            <option selected disabled value="">Reason for reporting...</option>
-                            <option value="Fraudulent">Fraudulent</option>
-                            <option value="Poorly Classified">Poorly Classified</option>
-                            <option value="Misleading">Misleading</option>
-                            <option value="Offensive">Offensive</option>
-                            <option value="Other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control-input" name="comment" rows="5" placeholder="Comment..." required></textarea>
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" name="submit" class="form-control-submit-button">Submit</button>
-                    </div>
-                </form>
-            </div>
-            <!-- end of col -->
+                <div class="col-lg-6 mt-5">
+                    <form method="POST">
+                        <div class="form-group">
+                            <input type="text" class="form-control-input" disabled value='Match ID: $id'>
+                        </div>
+                        <div class="form-group">
+                            <select class="form-select form-control-input" name="reason" aria-label="Default select example" required>
+                                <option selected disabled value="">Reason for reporting...</option>
+                                <option value="Fraudulent">Fraudulent</option>
+                                <option value="Poorly Classified">Poorly Classified</option>
+                                <option value="Misleading">Misleading</option>
+                                <option value="Offensive">Offensive</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control-input" name="comment" rows="5" placeholder="Comment..." required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="submit" class="form-control-submit-button">Submit</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- end of col -->
+            END;
+        } else {
+            echo "<div class='col-xl-10 offset-xl-1' style='height: 300px;'>
+                    <h4>You don't have access to this page. Please <a href='login.php'>log in</a></h4>
+                </div>";
+        }
+        ?>
         </div>
         <!-- end of row -->
     </div>

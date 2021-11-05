@@ -49,48 +49,53 @@ if (isset($_POST['delete'])) {
     <div class="container mt-5">
         <div class="mb-5" style="min-height: 400px;">
             <?php
-
-            if (count($allJobSeekers) < 1) {
-                echo "<h3>No result found yet.</h3> <small>To add a user, click on the Add New User button</small>";
-            } else {
-                foreach ($allJobSeekers as $jobSeeker) {
-                    $userImage = $jobSeeker->image;
-                    if ($jobSeeker->image == NULL) {
-                        $defaultImage = file_get_contents("../images/user.png");
-                        $userImage = base64_encode($defaultImage);
-                    }
-                    echo <<< END
-                        <div class="job-card">
-                            <div class="card border-0 mb-5">
-                                <div class="card-body">
-                                    <div class="row d-flex align-items-center">
-                                        <div class="col-1 text-center" id="content-desktop"><img src="data:image/png;base64, $userImage" alt='User' class='rounded-circle' width='50' height='50'></div>
-                                        <div class="col text-start">
-                                            <small class="ms-1"><span class="badge bg-secondary">ID: $jobSeeker->id</span></small>
-                                            <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$jobSeeker->firstName $jobSeeker->lastName</h4>
-                                            <p class="card-text"><i class="fa fa-certificate" aria-hidden="true"></i>&nbsp; $jobSeeker->field</p>
-                                        </div>
-                                        <div class="col row text-end">
-                                            <div class="col text-end">
-                                                <form action="admin_edit_user.php" method="GET">
-                                                    <input type="hidden" name="jobseeker" value=$jobSeeker->username>
-                                                    <button type="submit" class="btn btn-solid-sm"><i class="fa fa-wrench" aria-hidden="true"></i></button>
-                                                </form>
-                                            </div>
+            if($sc->getUserType() == "admin"){
+                if (count($allJobSeekers) < 1) {
+                    echo "<h3>No result found yet.</h3> <small><b>To add a user</b>, click on the Add New User button</small>";
+                } else {
+                    foreach ($allJobSeekers as $jobSeeker) {
+                        $userImage = $jobSeeker->image;
+                        if ($jobSeeker->image == NULL) {
+                            $defaultImage = file_get_contents("../images/user.png");
+                            $userImage = base64_encode($defaultImage);
+                        }
+                        echo <<< END
+                            <div class="job-card">
+                                <div class="card border-0 mb-5">
+                                    <div class="card-body">
+                                        <div class="row d-flex align-items-center">
+                                            <div class="col-1 text-center" id="content-desktop"><img src="data:image/png;base64, $userImage" alt='User' class='rounded-circle' width='50' height='50'></div>
                                             <div class="col text-start">
-                                                <form method="POST">
-                                                    <input type="hidden" name="username" value=$jobSeeker->username>
-                                                    <button name="delete" type="submit" class="btn btn-danger-sm" onclick="return confirm('Are you sure you want to delete $jobSeeker->username ?')" ><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                                </form>
+                                                <small class="ms-1"><span class="badge bg-secondary">ID: $jobSeeker->id</span></small>
+                                                <h4 style="font-size: 30px; font-weight: lighter;" class="text-start">$jobSeeker->firstName $jobSeeker->lastName</h4>
+                                                <p class="card-text"><i class="fa fa-certificate" aria-hidden="true"></i>&nbsp; $jobSeeker->field</p>
+                                            </div>
+                                            <div class="col row text-end">
+                                                <div class="col text-end">
+                                                    <form action="admin_edit_user.php" method="GET">
+                                                        <input type="hidden" name="jobseeker" value=$jobSeeker->username>
+                                                        <button type="submit" class="btn btn-solid-sm"><i class="fa fa-wrench" aria-hidden="true"></i></button>
+                                                    </form>
+                                                </div>
+                                                <div class="col text-start">
+                                                    <form method="POST">
+                                                        <input type="hidden" name="username" value=$jobSeeker->username>
+                                                        <button name="delete" type="submit" class="btn btn-danger-sm" onclick="return confirm('Are you sure you want to delete $jobSeeker->username ?')" ><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                    END;
+                        END;
+                    }
+                    unset($allJobSeekers);
                 }
-                unset($allJobSeekers);
+            } else {
+                echo "<div class='col-xl-10 offset-xl-1' style='height: 300px;'>
+                            <h4>You don't have access to this page. Please <a href='login.php'>log in</a></h4>
+                        </div>";
             }
             ?>
 

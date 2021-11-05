@@ -1,7 +1,14 @@
 <?php
-if(isset($_POST['register'])){
+require_once '../controller/session_controller.php';
+// check if the session has not started yet
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+// call controllers
+$sc = new SessionController();
+if (isset($_POST['register'])) {
     require_once "../controller/admin_controller.php";
-    $adminController= new AdminController();
+    $adminController = new AdminController();
 
     $firstName = $_POST['firstName'];
     $lastName = $_POST['lastName'];
@@ -16,7 +23,7 @@ if(isset($_POST['register'])){
     $positionEmployer = $_POST['positionEmp'];
     $positionAdmin = $_POST['positionAdmin'];
     $field = $_POST['field'];
-    
+
     $adminController->register(ucfirst($firstName), ucfirst($lastName), $username, $password, $confirmPassword, $dateOfBirth, $phone, strtolower($email), $location, $type, $positionEmployer, $positionAdmin, $field);
 }
 ?>
@@ -27,7 +34,7 @@ if(isset($_POST['register'])){
     <!-- Webpage Title -->
     <title>JobMatch | Sign Up</title>
     <?php
-        require_once("component/header.php");
+    require_once("component/header.php");
     ?>
 </head>
 
@@ -36,7 +43,7 @@ if(isset($_POST['register'])){
 
     <!-- Navigation Start  -->
     <?php
-        require_once("component/navbar.php");
+    require_once("component/navbar.php");
     ?>
     <!-- Navigation End  -->
 
@@ -44,31 +51,33 @@ if(isset($_POST['register'])){
     <!-- register section start -->
     <header class="ex-header">
         <div class="container">
-            <div class="row">
+            <?php
+            if ($sc->getUserType() == "admin") {
+                echo <<< END
                 <div class="col-xl-10 offset-md-1 mb-3">
                     <h1>Add New User</h1>
-                    <?php
-                    // Error messages
-                    if (isset($_GET["error"])) {
-                        echo "<h5><span class='mt-5 mb-2 badge bg-danger'>";
-                        if ($_GET["error"] == "emptyinput") {
-                            echo "Fill in all fields!";
-                        } else if ($_GET["error"] == "invalidusername") {
-                            echo "Choose a proper username!";
-                        } else if ($_GET["error"] == "invalidemail") {
-                            echo "Choose a proper email!";
-                        } else if ($_GET["error"] == "passwordsdontmatch") {
-                            echo "Passwords doesn't match!";
-                        } else if ($_GET["error"] == "usernametaken") {
-                            echo "Username already taken!";
-                        } else if ($_GET["error"] == "fieldnotfound") {
-                            echo "You have to choose a field of expertise";
-                        } else if ($_GET["error"] == "positionnotfound") {
-                            echo "You have to enter a position";
-                        }
-                        echo "</span></h5>";
+                END;
+                // Error messages
+                if (isset($_GET["error"])) {
+                    echo "<h5><span class='mt-5 mb-2 badge bg-danger'>";
+                    if ($_GET["error"] == "emptyinput") {
+                        echo "Fill in all fields!";
+                    } else if ($_GET["error"] == "invalidusername") {
+                        echo "Choose a proper username!";
+                    } else if ($_GET["error"] == "invalidemail") {
+                        echo "Choose a proper email!";
+                    } else if ($_GET["error"] == "passwordsdontmatch") {
+                        echo "Passwords doesn't match!";
+                    } else if ($_GET["error"] == "usernametaken") {
+                        echo "Username already taken!";
+                    } else if ($_GET["error"] == "fieldnotfound") {
+                        echo "You have to choose a field of expertise";
+                    } else if ($_GET["error"] == "positionnotfound") {
+                        echo "You have to enter a position";
                     }
-                    ?>
+                    echo "</span></h5>";
+                }
+                echo <<< END
                     <p class="mt-5 mb-2 text-muted">Enter your details below:</p>
                 </div>
                 <div class="col-md-4 offset-md-4">
@@ -113,7 +122,6 @@ if(isset($_POST['register'])){
                                 <label for="location-field">Location</label>
                             </div>
 
-
                             <div class="form-check form-check-inline">
                                 <input class="form-check-input" type="radio" name="type" id="job-seeker" value="jobseeker" onclick="toggleAddUser();" checked>
                                 <label class="form-check-label" for="job-seeker">Job Seeker</label>
@@ -126,7 +134,7 @@ if(isset($_POST['register'])){
                                 <input class="form-check-input" type="radio" name="type" id="admin" value="admin" onclick="toggleAddUser();">
                                 <label class="form-check-label" for="admin">Admin</label>
                             </div>
-                            
+
                             <div class="form-floating mb-3" id="job-seeker-form">
                                 <select class="form-select mb-3" aria-label=".form-select-lg example" id="fieldOfExpertise-form" name="field">
                                     <option disabled selected>--- Choose one ---</option>
@@ -150,13 +158,16 @@ if(isset($_POST['register'])){
                                 </div>
                             </div>
                         </form>
-
-                        
                     </main>
                 </div>
                 <!-- end of col -->
-            </div>
-            <!-- end of row -->
+                END;
+            } else {
+                echo "<div class='col-xl-10 offset-xl-1' style='height: 300px;'>
+                        <h4>You don't have access to this page. Please <a href='login.php'>log in</a></h4>
+                    </div>";
+            }
+            ?>
         </div>
         <!-- end of container -->
     </header>
@@ -165,7 +176,7 @@ if(isset($_POST['register'])){
 
     <!-- footer start -->
     <?php
-        require_once("component/footer.php");
+    require_once("component/footer.php");
     ?>
     <!-- end of footer -->
 
