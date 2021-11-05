@@ -51,7 +51,7 @@
     ```
 6. On the `phpmyadmin` page in your browser
     ```
-    Click on 'SQL' tab, paste the script, and click 'Go'
+    Click on 'SQL' tab, create an empty database name "jobmatch", paste the script, and click 'Go'
     ```
 7. Now time to see the application. On your browser, go to 
     ```
@@ -99,7 +99,7 @@
     ```
 6. On the `phpmyadmin` page in your browser
     ```
-    Click on SQL, paste the script, and click 'Go'
+    Click on 'SQL' tab, create an empty database name "jobmatch", paste the script, and click 'Go'
     ```
 7. Now time to see the application. On your browser, go to
     ```
