@@ -1,6 +1,7 @@
 {
     "require": {
         "ext-mysqli": "*",
-        "sendgrid/sendgrid": "~7"
+        "sendgrid/sendgrid": "~7",
+        "vlucas/phpdotenv": "^5.3"
     }
 }

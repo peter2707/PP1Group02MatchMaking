@@ -25,7 +25,7 @@ if (isset($_POST['downloadResume'])) {
     $filename = $_POST['filename'];
     $uc->downloadResume($filepath, $filename);
 }
-
+$validSession = $sc->checkSession();
 $viewUser = $uc->getUser($usertype, $username);
 ?>
 <!DOCTYPE html>
@@ -179,7 +179,7 @@ $viewUser = $uc->getUser($usertype, $username);
                     <form method="POST">
                         <input type="hidden" name="filepath" value="$resume">
                         <input type="hidden" name="filename" value="$resumeName">
-                        <button type="submit" name="downloadResume" onclick="javascript:return confirm('Download Resume?');" class="btn btn-secondary">View</button>
+                        <button type="submit" name="downloadResume" onclick="javascript:return confirm('Download Resume?');" class="btn btn-secondary">Download</button>
                     </form>
                 </div>
             END;
@@ -426,7 +426,7 @@ $viewUser = $uc->getUser($usertype, $username);
                                             </div>
                                             <div class="text-start ms-2 mx-2">
                                                 <h2 class="mb-5">Reviews</h2>
-                                                <div class="row">
+                                                <div class="row text-center">
                 END;
 
             if (count($feedbacks) < 1) {
@@ -483,10 +483,8 @@ $viewUser = $uc->getUser($usertype, $username);
     } else {
         echo "<header class='ex-header'>
                 <div class='container'>
-                    <div class='row'>
-                        <div class='col-xl-10 offset-xl-1'>
-                            <h4>You don't have access to this page. Please <a href='login.php'>log in</a></h4>
-                        </div>
+                    <div class='col-xl-10 offset-xl-1' style='height: 300px;'>
+                        <h4>You don't have access to this page. Please <a href='login.php'>log in</a></h4>
                     </div>
                 </div>
             </header>";
