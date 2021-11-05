@@ -1,5 +1,5 @@
 <?php
-if(isset($_POST['register'])){
+if (isset($_POST['register'])) {
     require_once '../controller/register_controller.php';
     $registerController = new RegisterController();
 
@@ -15,9 +15,9 @@ if(isset($_POST['register'])){
     $field = $_POST['field'];
     $position = $_POST['position'];
     $location = $_POST['location'];
-    
+
     $registerController->register(ucfirst($firstName), ucfirst($lastName), $username, $password, $confirmPassword, $dateOfBirth, $phone, strtolower($email), $location, $type, $field, $position);
-  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,7 +26,7 @@ if(isset($_POST['register'])){
     <!-- Webpage Title -->
     <title>JobMatch | Register</title>
     <?php
-        require_once("component/header.php");
+    require_once("component/header.php");
     ?>
 </head>
 
@@ -34,7 +34,7 @@ if(isset($_POST['register'])){
 
     <!-- Navigation Start  -->
     <?php
-        require_once("component/navbar.php");
+    require_once("component/navbar.php");
     ?>
     <!-- Navigation End  -->
 
@@ -63,11 +63,11 @@ if(isset($_POST['register'])){
                             echo "You have to choose a field of expertise";
                         } else if ($_GET["error"] == "positionnotfound") {
                             echo "You have to enter your position";
-                        }else if ($_GET["error"] == "date") {
+                        } else if ($_GET["error"] == "date") {
                             echo "Your date of birth cannot be in the future!";
-                        }else if ($_GET["error"] == "name") {
+                        } else if ($_GET["error"] == "name") {
                             echo "Your input cannot contain space!";
-                        }else if ($_GET["error"] == "failed") {
+                        } else if ($_GET["error"] == "failed") {
                             echo "Something went wrong. Please try again!";
                         }
                         echo "</span></h5>";
@@ -76,72 +76,72 @@ if(isset($_POST['register'])){
                     <p class="mt-5 mb-2 text-muted">Enter your details below:</p>
                 </div>
                 <div class="col-md-4 offset-md-4">
-                <main class="form-register">
-                    <form action="" method="POST">
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Firstname" name="firstName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required>
-                            <label for="floatingInput">Firstname</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Lastname" name="lastName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required>
-                            <label for="floatingInput">Lastname</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" pattern="(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one uppercase and lowercase letter, and 5 to 20 characters" required>
-                            <label for="floatingInput">Username</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one number and one uppercase and lowercase letter, and 5 to 20 characters" required>
-                            <label for="floatingPassword">Password</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm Password" name="confirmPassword" required>
-                            <label for="floatingPassword">Confirm Password</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="date" class="form-control" id="floatingInput" placeholder="Date of Birth" name="dateOfBirth" required>
-                            <label for="floatingInput">Date of Birth</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="tel" class="form-control" id="floatingInput" placeholder="Phone" name="phone" pattern="^(\+?\(61\)|\(\+?61\)|\+?61|\(0[1-9]\)|0[1-9])?( ?-?[0-9]){7,9}$" title="Must have phone number format and at least 7 characters long" required>
-                            <label for="floatingInput">Phone</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" title="Must contain email format E.g. johndoe@mail.com" required>
-                            <label for="floatingInput">Email</label>
-                        </div>
-                        <div class="form-floating mb-3">
-                            <select class="form-select mb-3" aria-label=".form-select-lg example" id="location-field" name="location" required>
-                                <option disabled selected value="">Choose...</option>"
-                            </select>
-                            <label for="location-field">Location</label>
-                        </div>
+                    <main class="form-register">
+                        <form action="" method="POST">
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Firstname" name="firstName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required>
+                                <label for="floatingInput">Firstname</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Lastname" name="lastName" pattern="^[a-zA-Z, ]+$" title="Must contain only letters" required>
+                                <label for="floatingInput">Lastname</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="text" class="form-control" id="floatingInput" placeholder="Username" name="username" pattern="(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one uppercase and lowercase letter, and 5 to 20 characters" required>
+                                <label for="floatingInput">Username</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{5,20}" title="Must contain at least one number and one uppercase and lowercase letter, and 5 to 20 characters" required>
+                                <label for="floatingPassword">Password</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="password" class="form-control" id="floatingPassword" placeholder="Confirm Password" name="confirmPassword" required>
+                                <label for="floatingPassword">Confirm Password</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="date" class="form-control" id="floatingInput" placeholder="Date of Birth" name="dateOfBirth" required>
+                                <label for="floatingInput">Date of Birth</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="tel" class="form-control" id="floatingInput" placeholder="Phone" name="phone" pattern="^(\+?\(61\)|\(\+?61\)|\+?61|\(0[1-9]\)|0[1-9])?( ?-?[0-9]){7,9}$" title="Must have phone number format and at least 7 characters long" required>
+                                <label for="floatingInput">Phone</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <input type="email" class="form-control" id="floatingInput" placeholder="Email" name="email" pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" title="Must contain email format E.g. johndoe@mail.com" required>
+                                <label for="floatingInput">Email</label>
+                            </div>
+                            <div class="form-floating mb-3">
+                                <select class="form-select mb-3" aria-label=".form-select-lg example" id="location-field" name="location" required>
+                                    <option disabled selected value="">Choose...</option>"
+                                </select>
+                                <label for="location-field">Location</label>
+                            </div>
 
 
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type" id="job-seeker" value="jobseeker" onclick="toggleRegister();" checked>
-                            <label class="form-check-label" for="job-seeker">Job Seeker</label>
-                        </div>
-                        <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="type" id="employer" value="employer" onclick="toggleRegister();">
-                            <label class="form-check-label" for="employer">Employer</label>
-                        </div>
-                        <div class="form-floating mb-3" id="job-seeker-form">
-                            <select class="form-select mb-3" aria-label=".form-select-lg example" id="fieldOfExpertise-form" name="field">
-                                <option disabled selected value="">Choose...</option>
-                            </select>
-                            <label for="fieldOfExpertise-form">Field of Expertise</label>
-                        </div>
-                        <div class="form-floating mb-3" id="employer-form" style="display:none;">
-                            <input type="text" class="form-control" id="employer-form-rating" name="position" placeholder="Position" pattern="^[a-zA-Z, ]+$" title="Must contain only letters">
-                            <label for="employer-form-label">Position</label>
-                        </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type" id="job-seeker" value="jobseeker" onclick="toggleRegister();" checked>
+                                <label class="form-check-label" for="job-seeker">Job Seeker</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="type" id="employer" value="employer" onclick="toggleRegister();">
+                                <label class="form-check-label" for="employer">Employer</label>
+                            </div>
+                            <div class="form-floating mb-3" id="job-seeker-form">
+                                <select class="form-select mb-3" aria-label=".form-select-lg example" id="fieldOfExpertise-form" name="field">
+                                    <option disabled selected value="">Choose...</option>
+                                </select>
+                                <label for="fieldOfExpertise-form">Field of Expertise</label>
+                            </div>
+                            <div class="form-floating mb-3" id="employer-form" style="display:none;">
+                                <input type="text" class="form-control" id="employer-form-rating" name="position" placeholder="Position" pattern="^[a-zA-Z, ]+$" title="Must contain only letters">
+                                <label for="employer-form-label">Position</label>
+                            </div>
 
-                        <button class="w-50 btn btn-success-lg mb-5 mt-2" type="submit" name="register">Register</button>
-                        <p class="mb-3">Already have an account? <a href="login.php">Log In</a></p>
-                    </form>
-                </main>
-            </div>
+                            <button class="w-50 btn btn-success-lg mb-5 mt-2" type="submit" name="register">Register</button>
+                            <p class="mb-3">Already have an account? <a href="login.php">Log In</a></p>
+                        </form>
+                    </main>
+                </div>
                 <!-- end of col -->
             </div>
             <!-- end of row -->
@@ -153,7 +153,7 @@ if(isset($_POST['register'])){
 
     <!-- footer start -->
     <?php
-        require_once("component/footer.php");
+    require_once("component/footer.php");
     ?>
     <!-- end of footer -->
 

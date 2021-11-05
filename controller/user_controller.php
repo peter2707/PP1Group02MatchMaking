@@ -1,16 +1,13 @@
 <?php
-class UserController
-{
-    public function getUser($userType, $username)
-    {
+class UserController {
+    public function getUser($userType, $username) {
         require_once '../model/user_model.php';
         require_once '../model/db_connection.php';
         $userModel = new UserModel();
         return $userModel->getUser($db, $userType, $username);
     }
 
-    public function updateJobSeeker($firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $id)
-    {
+    public function updateJobSeeker($firstName, $lastName, $username, $password, $dob, $phone, $email, $field, $location, $id) {
         require_once '../model/register_model.php';
         require_once '../model/utility.php';
         require_once '../model/db_connection.php';
@@ -37,8 +34,7 @@ class UserController
         }
     }
 
-    public function updateEmployer($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $id)
-    {
+    public function updateEmployer($firstName, $lastName, $username, $password, $dob, $phone, $email, $position, $location, $id) {
         require_once '../model/register_model.php';
         require_once '../model/utility.php';
         require_once '../model/db_connection.php';
@@ -62,11 +58,9 @@ class UserController
                 header("location: ../view/user_settings.php?error=failed");
             }
         }
-
     }
 
-    public function deleteAccount($username, $type)
-    {
+    public function deleteAccount($username, $type) {
         require_once '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
@@ -77,8 +71,7 @@ class UserController
         }
     }
 
-    public function changeProfilePicture($file, $username, $userType)
-    {
+    public function changeProfilePicture($file, $username, $userType) {
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
@@ -89,8 +82,7 @@ class UserController
         }
     }
 
-    public function addResume($file, $username)
-    {
+    public function addResume($file, $username) {
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
@@ -101,8 +93,7 @@ class UserController
         }
     }
 
-    public function removeResume($username, $filepath)
-    {
+    public function removeResume($username, $filepath) {
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
@@ -114,23 +105,20 @@ class UserController
         }
     }
 
-    public function getResume($username)
-    {
+    public function getResume($username) {
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
         return $userModel->getResume($db, $username);
     }
 
-    public function downloadResume($filepath, $filename)
-    {
+    public function downloadResume($filepath, $filename) {
         header("Content-type: application/pdf");
         header("Content-Disposition: inline; filename={$filename}");
         @readfile($filepath);
     }
 
-    public function editSocialLink($username, $linkedin, $github, $twitter, $instagram, $facebook)
-    {
+    public function editSocialLink($username, $linkedin, $github, $twitter, $instagram, $facebook) {
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
@@ -141,24 +129,21 @@ class UserController
         }
     }
 
-    public function getSocialLink($username)
-    {
+    public function getSocialLink($username) {
         require_once '../model/user_model.php';
         include '../model/db_connection.php';
         $userModel = new UserModel();
         return $userModel->getSocialLink($db, $username);
     }
 
-    public function getSkills($username)
-    {
+    public function getSkills($username) {
         require_once '../model/user_model.php';
         include '../model/db_connection.php';
         $userModel = new UserModel();
         return $userModel->getSkills($db, $username);
     }
 
-    public function addSkill($username, $skill, $experience)
-    {
+    public function addSkill($username, $skill, $experience) {
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
@@ -169,8 +154,7 @@ class UserController
         }
     }
 
-    public function deleteSkill($id, $username)
-    {
+    public function deleteSkill($id, $username) {
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
@@ -181,16 +165,14 @@ class UserController
         }
     }
 
-    public function getEducations($username)
-    {
+    public function getEducations($username) {
         require_once '../model/user_model.php';
         include '../model/db_connection.php';
         $userModel = new UserModel();
         return $userModel->getEducations($db, $username);
     }
 
-    public function addEducation($username, $institution, $degree, $graduation)
-    {
+    public function addEducation($username, $institution, $degree, $graduation) {
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
@@ -201,8 +183,7 @@ class UserController
         }
     }
 
-    public function deleteEducation($id, $username)
-    {
+    public function deleteEducation($id, $username) {
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
@@ -213,16 +194,14 @@ class UserController
         }
     }
 
-    public function getCareers($username)
-    {
+    public function getCareers($username) {
         require_once '../model/user_model.php';
         include '../model/db_connection.php';
         $userModel = new UserModel();
         return $userModel->getCareers($db, $username);
     }
 
-    public function addCareer($username, $position, $company, $experience)
-    {
+    public function addCareer($username, $position, $company, $experience) {
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
@@ -233,8 +212,7 @@ class UserController
         }
     }
 
-    public function deleteCareer($id, $username)
-    {
+    public function deleteCareer($id, $username) {
         include '../model/db_connection.php';
         require_once '../model/user_model.php';
         $userModel = new UserModel();
@@ -245,16 +223,14 @@ class UserController
         }
     }
 
-    public function getAllFeedback($username)
-    {
+    public function getAllFeedback($username) {
         require_once '../model/user_model.php';
         include '../model/db_connection.php';
         $userModel = new UserModel();
         return $userModel->getAllFeedback($db, $username);
     }
 
-    public function resetPassword($type, $password, $confirmPassword, $email, $token)
-    {
+    public function resetPassword($type, $password, $confirmPassword, $email, $token) {
         require_once '../model/utility.php';
         if (!isset($type) || !isset($password) || !isset($confirmPassword) || !isset($email) || !isset($token)) {
             header("location: ../view/reset_password.php?error=emptyinput");
@@ -274,8 +250,7 @@ class UserController
         }
     }
 
-    public function getMap($location)
-    {
+    public function getMap($location) {
         $map = "";
         if ($location == "South Australia") {
             $map = '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d4635080.582955133!2d128.3802399115305!3d-31.79767083721273!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x6aa7589e5be8c7f3%3A0xdb7e79993dfad0d8!2sSouth%20Australia!5e0!3m2!1sen!2sau!4v1634199832752!5m2!1sen!2sau"

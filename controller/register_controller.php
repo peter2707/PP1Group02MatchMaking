@@ -1,9 +1,7 @@
 <?php
-class RegisterController
-{
+class RegisterController {
 
-	public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type, $field, $position)
-	{
+	public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type, $field, $position) {
 		require_once '../model/register_model.php';
 		require_once '../model/utility.php';
 		require_once '../model/db_connection.php';
