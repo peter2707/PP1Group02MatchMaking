@@ -409,18 +409,12 @@ class MatchmakingModel {
 	}
 
 	function getTimeElapsed($date, $tense = 'ago') {
-		date_default_timezone_set('Australia/Melbourne');
+		$date = new DateTime($date, new DateTimeZone('Australia/Sydney'));
 		// declaring periods as static function var for future use
 		static $periods = array('year', 'month', 'day', 'hour', 'minute', 'second');
 
-		// checking time format
-		if (!(strtotime($date) > 0)) {
-			return trigger_error("Wrong time format: '$date'", E_USER_ERROR);
-		}
-
 		// getting diff between now and time
 		$now  = new DateTime('now');
-		$date = new DateTime($date);
 		$diff = $now->diff($date)->format('%y %m %d %h %i %s');
 		// combining diff with periods
 		$diff = explode(' ', $diff);
