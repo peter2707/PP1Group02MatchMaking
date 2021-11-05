@@ -361,15 +361,9 @@ END;
         END;
         }
     } else {
-        echo "<header class='ex-header'>
-                <div class='container'>
-                    <div class='row'>
-                        <div class='col-xl-10 offset-xl-1'>
-                            <h4>You don't have access to this page. Please <a href='login.php'>log in</a></h4>
-                        </div>
-                    </div>
-                </div>
-            </header>";
+        echo "<div class='col-xl-10 offset-xl-1 text-center' style='height: 300px;'>
+                <h4>You don't have access to this page. Please <a href='login.php'>log in</a></h4>
+            </div>";
     }
 
     ?>

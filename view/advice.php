@@ -45,7 +45,7 @@
                     <!-- end of image-container -->
                 </div>
                 <!-- end of col -->
-                <div class="col-lg-6">
+                <div class="col-lg-6 mt-5">
                     <!-- Contact Form -->
                     <form method="POST">
                         <div class="form-group">
