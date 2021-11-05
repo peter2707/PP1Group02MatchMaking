@@ -409,7 +409,7 @@ class MatchmakingModel {
 	}
 
 	function getTimeElapsed($date, $tense = 'ago') {
-		$date = new DateTime($date);
+		$date = new DateTime($date, new DateTimeZone('UTC'));
 		$date->setTimezone(new DateTimeZone("Australia/Sydney"));
 		// declaring periods as static function var for future use
 		static $periods = array('year', 'month', 'day', 'hour', 'minute', 'second');
