@@ -2,9 +2,12 @@
 	class LoginModel {
 
 		public function login($username, $password) {
+			// create a session for login
 			session_start();
 			require_once 'db_connection.php';
 
+			// check if the input match any data from admin table, employer or job seeker table
+			// else, display incorrect credential message
 			if($this->checkAdmin($db, $username, $password)) {
 				$_SESSION['valid_user'] = $username;
 				$_SESSION['valid_pass'] = $password;
@@ -37,15 +40,22 @@
 		}
 
 		public function logOut() {
+			// start session
 			session_start();
+
+			// unset session username and password
 			unset($_SESSION["username"]);
 			unset($_SESSION["password"]);
+
+			// destroy session
 			session_destroy();
 			header('location: ../view/login.php?success=logout');
 		}
 	
 		function checkAdmin($db, $username, $password) {
 			$admin = false;
+
+			// query to check if the username and password match any data from admin table
 			$query = "SELECT count(*) FROM admin WHERE username=? AND password =?";  
 			$stmt = $db->prepare($query);
 			$stmt->bind_param("ss", $username, $password);
@@ -54,6 +64,7 @@
 			$result = $stmt->get_result();
 			$stmt->close();
 	
+			// if data does not match, display error message
 			if (!$result) {
 				header("location: ../view/login.php?error=failed");
 				$db->close();
@@ -62,6 +73,7 @@
 			
 			$row = $result->fetch_row();
 			
+			// if data is matched, return true
 			if ($row[0] > 0) {
 				$admin = true;
 			}
@@ -70,6 +82,8 @@
 	
 		function checkEmployer($db, $username, $password) {
 			$employer = false;
+
+			// query to check if the username and password match any data from employer table
 			$query = "SELECT count(*) FROM employer WHERE username=? AND password =?";
 			$stmt = $db->prepare($query);
 			$stmt->bind_param("ss", $username, $password);
@@ -78,6 +92,7 @@
 			$result = $stmt->get_result();
 			$stmt->close();
 	
+			// if data does not match, display error message
 			if (!$result) {
 				header("location: ../view/login.php?error=failed");
 				$db->close();
@@ -86,6 +101,7 @@
 			
 			$row = $result->fetch_row();
 			
+			// if data is matched, return true
 			if ($row[0] > 0) {
 				$employer = true;
 			}
@@ -94,6 +110,8 @@
 	
 		function checkJobSeeker($db, $username, $password) {
 			$jobseeker = false;
+
+			// query to check if the username and password match any data from job seeker table
 			$query = "SELECT count(*) FROM jobseeker WHERE username=? AND password =?"; 
 			$stmt = $db->prepare($query);
 			$stmt->bind_param("ss", $username, $password);
@@ -102,6 +120,7 @@
 			$result = $stmt->get_result();
 			$stmt->close();
 	
+			// if data does not match, display error message
 			if (!$result) {
 				header("location: ../view/login.php?error=failed");
 				$db->close();
@@ -110,6 +129,7 @@
 			
 			$row = $result->fetch_row();
 			
+			// if data is matched, return true
 			if ($row[0] > 0) {
 				$jobseeker = true;
 			}
@@ -118,8 +138,13 @@
 
 		public function resetPassword($db, $type, $email){
 			require_once('../vendor/autoload.php');
-			$email = filter_var($email, FILTER_SANITIZE_EMAIL);			
+
+			// sanitize the input email
+			$email = filter_var($email, FILTER_SANITIZE_EMAIL);		
+
+			// query to select data that matches with the input email
 			$query = "SELECT * FROM $type WHERE email = ?";
+
 			$stmtEmp = $db->prepare($query);
 			$stmtEmp->bind_param("s", $email);
 			$stmtEmp->execute();
@@ -127,16 +152,27 @@
 			$stmtEmp->close();
 			$row = $result->fetch_assoc();
 
+			// check if row is true
 			if ($row) {
+				// create time format for token
 				$expFormat = mktime(date("H"), date("i"), date("s"), date("m") ,date("d")+1, date("Y"));
+
+				// create date for expired token
 				$expDate = date("Y-m-d H:i:s", $expFormat);
+
+				// create token
 				$token = md5($row['email'].$expDate);
+
 				try{
+					// check previous token
 					$this->checkPreviousToken($db, $email);
+
+					// query to insert email, token and expired date into table password_reset
 					$query = "INSERT INTO password_reset (email, token, expDate) VALUES ('$email', '$token', '$expDate')";
 					mysqli_query($db, $query) or die(mysqli_error($db));
 					$db->close();
 
+					// create mail using SendGrid
 					$mail = new \SendGrid\Mail\Mail();
 					$mail->setFrom("jobmatchdemo@gmail.com", "JobMatch");
 					$mail->addTo($email, $row['firstName'].' '.$row['lastName'], 

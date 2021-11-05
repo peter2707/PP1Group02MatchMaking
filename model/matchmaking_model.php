@@ -2,6 +2,7 @@
 class MatchmakingModel{
 
 	public function postNewJob($db, $position, $field, $salary, $type, $description, $requirements, $location, $username, $contact){
+		// create query to insert new post into job post
 		$query = "INSERT INTO jobpost (position, field, salary, type, description, requirements, location, employer, contact) VALUES ('$position', '$field', '$salary', '$type', '$description', '$requirements', '$location', '$username', '$contact')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
 		$db->close();
@@ -12,10 +13,12 @@ class MatchmakingModel{
 		require_once '../model/job_object.php';
 		$jobposts = array();
 
+		// query job post by chosen field
 		$query = "SELECT * FROM jobpost WHERE field = '$field'";
 		$result = $db->query($query);
 		$numResults = $result->num_rows;
 
+		// check if result is existed and add to job post object
 		for ($i = 0; $i < $numResults; $i++) {
 			$row = $result->fetch_assoc();
 			$totalMatches = $this->countJobMatches($db, $row['id']);
@@ -31,9 +34,12 @@ class MatchmakingModel{
 		require_once '../model/job_object.php';
 		$jobposts = array();
 
+		// query job post by chosen emplyer username
 		$query = "SELECT * FROM jobpost WHERE employer='$username'";
 		$result = $db->query($query) or die(mysqli_error($db));
 		$numResults = $result->num_rows;
+
+		// check if result is existed and add to job post object
 		for ($i = 0; $i < $numResults; $i++) {
 			$row = $result->fetch_assoc();
 			$totalMatches = $this->countJobMatches($db, $row['id']);
@@ -47,11 +53,15 @@ class MatchmakingModel{
 
 	public function getJobPostByID($db, $jobID){
 		require_once '../model/job_object.php';
+
+		// query job post by chosen job post id
 		$query = "SELECT * FROM jobpost WHERE id='$jobID'";
 		$result = $db->query($query);
 		$row = $result->fetch_assoc();
 		$totalMatches = $this->countJobMatches($db, $jobID);
 		$timeElapsed = $this->getTimeElapsed($row['date']);
+
+		// add result to job post object
 		$jobPost = new JobPost($row['id'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['employer'], $row['contact'], $totalMatches, $timeElapsed);
 		$result->free();
 		$db->close();
@@ -60,6 +70,7 @@ class MatchmakingModel{
 	}
 
 	public function countJobPosts($db, $employer){
+		// query to count all job post by a chosen employer username
 		$result = $db->query("SELECT COUNT(*) as totalPosts FROM jobpost WHERE employer='$employer'");
 		$row = $result->fetch_assoc();
 		$countJobPosts = $row['totalPosts'];
@@ -67,6 +78,7 @@ class MatchmakingModel{
 	}
 
 	public function countJobMatches($db, $jobID){
+		// query to count all job matches by job post id
 		$result = $db->query("SELECT COUNT(*) as totalmatches FROM jobmatch WHERE jobPostID='$jobID'");
 		$row = $result->fetch_assoc();
 		$countJobMatches = $row['totalmatches'];
@@ -74,6 +86,7 @@ class MatchmakingModel{
 	}
 
 	public function updatePost($db, $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id){
+		// query to update a job post by a job post id
 		$query = "UPDATE jobpost SET position=?, field=?, salary=?, type=?, description=?, requirements=?, location=?, contact=? WHERE id=?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("ssssssssi", $position, $field, $salary, $type, $description, $requirements, $location, $contact, $id);
@@ -83,6 +96,7 @@ class MatchmakingModel{
 		$stmt->close();
 		$db->close();
 
+		// check if updated successfully
 		if ($affectedRows == 1) {
 			header("location: ../view/employer_post.php?success=updated");
 		} else {
@@ -91,7 +105,10 @@ class MatchmakingModel{
 	}
 
 	public function deletePost($db, $id) {
+		// delete any matches that related to the post
 		$this->deleteMatchByPostID($db, $id);
+
+		// query to delete a job post using its id
 		$query = "DELETE FROM jobpost WHERE id = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("i", $id);
@@ -101,6 +118,7 @@ class MatchmakingModel{
 		$stmt->close();
 		$db->close();
 
+		// check if the delete is successful
 		if ($affectedRows == 1) {
 			header("location: ../view/employer_post.php?success=deleted");
 		} else {
@@ -111,6 +129,8 @@ class MatchmakingModel{
 	public function getJobMatch($db, $user){
 		require_once '../model/job_object.php';
 		$jobMatch = array();
+
+		// query to get a job match 
 		$query = "SELECT *, jobpost.id as jid, jobmatch.id as mid FROM jobpost 
 					INNER JOIN jobmatch ON jobpost.employer = jobmatch.employer	
 					WHERE jobmatch.jobSeeker='$user' 
@@ -118,6 +138,7 @@ class MatchmakingModel{
 		$result = $db->query($query);
 		$numResults = $result->num_rows;
 
+		// loop to add each result into job match object
 		for ($i = 0; $i < $numResults; $i++) {
 			$row = $result->fetch_assoc();
 			$rating = $this->getEmployerRating($db, $row['employer']);
@@ -134,6 +155,8 @@ class MatchmakingModel{
 	public function getJobMatchbyPostID($db, $postID, $employer){
 		require_once '../model/job_object.php';
 		$jobMatch = array();
+
+		// query to get job match by post id
 		$query = "SELECT *, jobpost.id as jid, jobmatch.id as mid FROM jobmatch 
 					INNER JOIN jobpost ON jobpost.id = jobmatch.jobPostID	
 					WHERE jobmatch.employer= '$employer' 
@@ -141,6 +164,7 @@ class MatchmakingModel{
 		$result = $db->query($query);
 		$numResults = $result->num_rows;
 
+		// loop to add each result into job match object
 		for ($i = 0; $i < $numResults; $i++) {
 			$row = $result->fetch_assoc();
 			$rating = $this->getEmployerRating($db, $row['employer']);
@@ -156,6 +180,8 @@ class MatchmakingModel{
 
 	public function getJobMatchByID($db, $jobID){
 		require_once '../model/job_object.php';
+
+		// query to get job match by job id
 		$query = "SELECT *, jobpost.id as jid, jobmatch.id as mid FROM jobmatch 
 					INNER JOIN jobpost ON jobpost.employer = jobmatch.employer 
 					WHERE jobmatch.id='$jobID' 
@@ -165,6 +191,8 @@ class MatchmakingModel{
 		$rating = $this->getEmployerRating($db, $row['employer']);
 		$date = $this->getDate($db, 'jobmatch', $row['mid']);
 		$timeElapsed = $this->getTimeElapsed($date);
+
+		// add the query result to job match object
 		$jobMatch = new JobMatch($row['id'], $row['employer'], $row['jobSeeker'], $row['contact'], $row['position'], $row['field'], $row['salary'], $row['type'], $row['description'], $row['requirements'], $row['location'], $row['percentage'], $rating, $row['feedback'], $timeElapsed);
 		$result->free();
 		$db->close();
@@ -173,6 +201,7 @@ class MatchmakingModel{
 	}
 
 	public function getDate($db, $table, $id){
+		// query date
 		$result = $db->query("SELECT date FROM $table WHERE id = '$id'");
 		$row = $result->fetch_assoc();
 		$date = $row['date'];
@@ -180,6 +209,7 @@ class MatchmakingModel{
 	}
 
 	public function getEmployerRating($db, $employer){
+		// query to select rating from employer
 		$result = $db->query("SELECT rating FROM employer WHERE username='$employer'");
 		$row = $result->fetch_assoc();
 		$rating = $row['rating'];
@@ -187,23 +217,30 @@ class MatchmakingModel{
 	}
 
 	public function getPreviousMatch($db, $jobseeker, $jobID){
+		// query to count job match
 		$query = "SELECT count(*) FROM jobmatch WHERE jobSeeker = '$jobseeker' AND jobPostID = '$jobID'";		
 		$stmt = $db->prepare($query);
 		$stmt->execute();
 		$result = $stmt->get_result();
 		$stmt->close();
 
+		// check if return is false,
+		// return false
 		if (!$result) {
 			return false;
 			$db->close();
 		}
 		$row = $result->fetch_row();
+
+		// check if result is true,
+		// return true
 		if ($row[0] > 0) {
 			return true;
 		}
 	}
 
 	public function setJobMatch($db, $employer, $jobseeker, $jobPostID, $percentage){
+		// query to insert into jobmatch
 		$query = "INSERT INTO jobmatch (employer, jobseeker, jobPostID, percentage) VALUES ('$employer', '$jobseeker', '$jobPostID', '$percentage')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
 	}
@@ -211,8 +248,13 @@ class MatchmakingModel{
 	public function findMatch($db, $position, $salary, $location, $type, $field, $jobseeker){
 		$found = false;
 		$jobposts = array();
+
+		// return job posts by feilds
         $jobposts = $this->getJobPostsByField($db, $field);
+
+		// loop to check if there is any matches to the input
 		foreach($jobposts as $post => $val){
+			// check if there is any matches
 			if(strtolower($val->position) == strtolower($position) && $val->salary == $salary && $val->location == $location && $val->type == $type){
 				if(!$this->getPreviousMatch($db, $jobseeker, $val->id)){
 					$this->setJobMatch($db, $val->employer, $jobseeker, $val->id, 100);
@@ -247,6 +289,7 @@ class MatchmakingModel{
 	}
 
 	public function deleteMatchByPostID($db, $id) {
+		// query to delete a job match 
 		$query = "DELETE FROM jobmatch WHERE jobPostID = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("i", $id);
@@ -255,6 +298,7 @@ class MatchmakingModel{
 	}
 
 	public function denyMatch($db, $id, $usertype) {
+		// query to delete match 
 		$query = "DELETE FROM jobmatch WHERE id = ?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("i", $id);
@@ -262,6 +306,7 @@ class MatchmakingModel{
 		$affectedRows = $stmt->affected_rows;
 		$stmt->close();
 
+		// check if the delete is success
 		if ($affectedRows == 1) {
 			if($usertype == 'jobseeker'){
 				header("location: ../view/jobseeker_match.php?success=successdeny");
@@ -278,6 +323,7 @@ class MatchmakingModel{
 	}
 
 	public function addFeedback($db, $rating, $feedback, $id){
+		// query to update a jobmatch, to add feedback
 		$query = "UPDATE jobmatch SET rating=?, feedback=? WHERE id=?";
 		$stmt = $db->prepare($query);
 		$stmt->bind_param("isi", $rating, $feedback, $id);
@@ -286,6 +332,7 @@ class MatchmakingModel{
 		$stmt->close();
 		$db->close();
 
+		// check if the update is success
 		if ($affectedRows == 1) {
 			header("location: ../view/jobseeker_match.php?success=donefeedback");
 		} else {
@@ -294,6 +341,7 @@ class MatchmakingModel{
 	}
 
 	public function reportMatch($db, $username, $type, $id, $reason, $comment){
+		// query to insert a report to report table
 		$query = "INSERT INTO report (username, type, matchID, reason, comment) VALUES ('$username', '$type', '$id', '$reason', '$comment')";
 		mysqli_query($db, $query) or die(mysqli_error($db));
 		$db->close();
