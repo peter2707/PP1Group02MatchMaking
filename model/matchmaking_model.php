@@ -394,8 +394,9 @@ class MatchmakingModel {
 					],
 				);
 				$mail->setTemplateId("d-2098ec8ca08741b295d46f8e404c8baa");
-				// $sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
-				$sendgrid = new \SendGrid('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');
+				$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/environment');
+				$dotenv->load();
+				$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 				try {
 					$sendgrid->send($mail);
 				} catch (Exception $e) {
