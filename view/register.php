@@ -58,11 +58,15 @@ if(isset($_POST['register'])){
                         } else if ($_GET["error"] == "passwordsdontmatch") {
                             echo "Passwords do not match. Please try again!";
                         } else if ($_GET["error"] == "usernametaken") {
-                            echo "Username is already taken!";
+                            echo "Username or Email is already taken!";
                         } else if ($_GET["error"] == "fieldnotfound") {
                             echo "You have to choose a field of expertise";
                         } else if ($_GET["error"] == "positionnotfound") {
                             echo "You have to enter your position";
+                        }else if ($_GET["error"] == "date") {
+                            echo "Your date of birth cannot be in the future!";
+                        }else if ($_GET["error"] == "name") {
+                            echo "Your input cannot contain space!";
                         }else if ($_GET["error"] == "failed") {
                             echo "Something went wrong. Please try again!";
                         }

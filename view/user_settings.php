@@ -91,6 +91,14 @@ END;
                             echo "Something went wrong. Please try again!";
                         } else if ($_GET["error"] == "deletefailed") {
                             echo "There was a problem while deleting your account. Please try again!";
+                        } else if ($_GET["error"] == "fieldnotfound") {
+                            echo "You have to choose a field of expertise";
+                        } else if ($_GET["error"] == "date") {
+                            echo "Your date of birth cannot be in the future!";
+                        } else if ($_GET["error"] == "name") {
+                            echo "Your input name cannot contain space!";
+                        }else if ($_GET["error"] == "failed") {
+                            echo "Something went wrong. Please try again!";
                         }
                         echo "</span></h5>";
                     }elseif (isset($_GET["success"])) {
