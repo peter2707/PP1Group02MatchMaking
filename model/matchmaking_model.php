@@ -394,7 +394,7 @@ class MatchmakingModel {
 					],
 				);
 				$mail->setTemplateId("d-2098ec8ca08741b295d46f8e404c8baa");
-				$dotenv = Dotenv\Dotenv::createImmutable(__DIR__.'/environment');
+				$dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . '/environment');
 				$dotenv->load();
 				$sendgrid = new \SendGrid(getenv('SENDGRID_API_KEY'));
 				try {
@@ -409,8 +409,14 @@ class MatchmakingModel {
 	}
 
 	function getTimeElapsed($date, $tense = 'ago') {
-		$date = new DateTime($date, new DateTimeZone('UTC'));
-		$date->setTimezone(new DateTimeZone("Australia/Sydney"));
+		if ($this->is_localhost()) {
+			date_default_timezone_set('Australia/Melbourne');
+			$date = new DateTime($date);
+		} else {
+			$date = new DateTime($date, new DateTimeZone('UTC'));
+			$date->setTimezone(new DateTimeZone("Australia/Sydney"));
+		}
+
 		// declaring periods as static function var for future use
 		static $periods = array('year', 'month', 'day', 'hour', 'minute', 'second');
 
@@ -442,5 +448,12 @@ class MatchmakingModel {
 			}
 		}
 		return "$value $period $tense";
+	}
+
+	function is_localhost() {
+		$whitelist = array('127.0.0.1', '::1');
+		if (in_array($_SERVER['REMOTE_ADDR'], $whitelist)) {	// check if the server is in the array
+			return true;	// this is a local environment
+		}
 	}
 }
