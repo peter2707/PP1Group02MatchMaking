@@ -140,7 +140,7 @@ if (isset($_POST['match'])) {
 
         if($sc->getUserType() == "jobseeker"){
             if (count($jobmatches) < 1) {
-                echo "<h3>You don't have any match yet.</h3> <small>To find match, click on the <i class='fa fa-search' aria-hidden='true'></i> button</small>";
+                echo "<h3>You don't have any match yet.</h3> <small><b>To find match</b>, click on the <i class='fa fa-search' aria-hidden='true'></i> button</small>";
             } else {
                 foreach ($jobmatches as $match) {
                     $badge = "badge bg-primary";

@@ -168,7 +168,7 @@ if (isset($_POST['post'])) {
 
         if ($sc->getUserType() == "employer") {
             if (count($jobposts) < 1) {
-                echo "<h3>You don't have any post yet.</h3> <small>To make a new post, click on the <i class='fa fa-paper-plane' aria-hidden='true'></i> button and fill in the job details</small>";
+                echo "<h3>You don't have any post yet.</h3> <small><b>To make a new post</b>, click on the <i class='fa fa-paper-plane' aria-hidden='true'></i> button and fill in the job details</small>";
             } else {
                 foreach ($jobposts as $post) {
                     $badge = "badge bg-primary";

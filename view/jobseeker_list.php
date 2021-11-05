@@ -51,7 +51,7 @@ if (isset($_POST['delete'])) {
             <?php
             if($sc->getUserType() == "admin"){
                 if (count($allJobSeekers) < 1) {
-                    echo "<h3>No result found yet.</h3> <small>To add a user, click on the Add New User button</small>";
+                    echo "<h3>No result found yet.</h3> <small><b>To add a user</b>, click on the Add New User button</small>";
                 } else {
                     foreach ($allJobSeekers as $jobSeeker) {
                         $userImage = $jobSeeker->image;
