@@ -59,4 +59,16 @@ function usernameExists($db, $username, $email, $table) {
 	}
 }
 
+// Check if the input is in the future
+function compareDate($date){
+	$currentDate = date("Y-m-d");
+
+	if($currentDate > $date){
+		return false;
+	} else {
+		return true;
+	}
+
+}
+
 ?>

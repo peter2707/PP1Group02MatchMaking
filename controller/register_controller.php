@@ -1,12 +1,15 @@
 <?php
-class RegisterController {
+class RegisterController
+{
 
-	public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type, $field, $position) {
+	public function register($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type, $field, $position)
+	{
 		require_once '../model/register_model.php';
 		require_once '../model/utility.php';
 		require_once '../model/db_connection.php';
 		$registerModel = new RegisterModel();
 
+		// check if the input is empty
 		if (emptyInputRegister($firstName, $lastName, $username, $password, $confirmPassword, $dateOfBirth, $phone, $email, $location, $type) !== false) {
 			header("location: ../view/register.php?error=emptyinput");
 			exit();
@@ -18,6 +21,12 @@ class RegisterController {
 			exit();
 		} elseif (passwordMatch($password, $confirmPassword) !== false) {               // Do the two passwords match?
 			header("location: ../view/register.php?error=passwordsdontmatch");
+			exit();
+		} elseif (compareDate($dateOfBirth)) {
+			header("location: ../view/register.php?error=date");
+			exit();
+		} elseif (preg_match('/^\S.*\s.*\S$/', $firstName) || preg_match('/^\S.*\s.*\S$/', $lastName)) {
+			header("location: ../view/register.php?error=name");
 			exit();
 		} else {
 			if ($type == "employer") {

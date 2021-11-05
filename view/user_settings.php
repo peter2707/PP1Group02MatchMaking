@@ -1,49 +1,49 @@
 <?php
-    // check if the session has not started yet
-    if (session_status() === PHP_SESSION_NONE) {
-        session_start();
+// check if the session has not started yet
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+// require files
+require_once '../controller/session_controller.php';
+require_once '../controller/user_controller.php';
+
+// call controllers
+$sessionController = new SessionController();
+$userController = new UserController();
+
+// get current user session
+$validSession = $sessionController->checkSession();
+$userType = $sessionController->getUserType();
+
+if (isset($_POST['update'])) {
+    if ($userType == "jobseeker") {
+        $id = $_POST['id'];
+        $firstName = $_POST['firstName'];
+        $lastName = $_POST['lastName'];
+        $dob = $_POST['dob'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $field = $_POST['field'];
+        $location = $_POST['location'];
+        $password = $_POST['password'];
+
+        $userController->updateJobSeeker(ucfirst($firstName), ucfirst($lastName), $sessionController->getUserName(), $password, $dob, $phone, strtolower($email), $field, $location, $id);
+    } elseif ($userType == "employer") {
+        $id = $_POST['id'];
+        $firstName = $_POST['firstName'];
+        $lastName = $_POST['lastName'];
+        $dob = $_POST['dob'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $position = $_POST['position'];
+        $location = $_POST['location'];
+        $password = $_POST['password'];
+
+        $userController->updateEmployer(ucfirst($firstName), ucfirst($lastName), $sessionController->getUserName(), $password, $dob, $phone, strtolower($email), $position, $location, $id);
     }
-    // require files
-    require_once '../controller/session_controller.php';
-    require_once '../controller/user_controller.php';
-
-    // call controllers
-    $sessionController = new SessionController();
-    $userController = new UserController();
-
-    // get current user session
-    $validSession = $sessionController->checkSession();
-    $userType = $sessionController->getUserType();
-
-    if (isset($_POST['update'])) {
-        if ($userType == "jobseeker") {
-            $id = $_POST['id'];
-            $firstName = $_POST['firstName'];
-            $lastName = $_POST['lastName'];
-            $dob = $_POST['dob'];
-            $email = $_POST['email'];
-            $phone = $_POST['phone'];
-            $field = $_POST['field'];
-            $location = $_POST['location'];
-            $password = $_POST['password'];
-
-            $userController->updateJobSeeker(ucfirst($firstName), ucfirst($lastName), $sessionController->getUserName(), $password, $dob, $phone, strtolower($email), $field, $location, $id);
-        } elseif ($userType == "employer") {
-            $id = $_POST['id'];
-            $firstName = $_POST['firstName'];
-            $lastName = $_POST['lastName'];
-            $dob = $_POST['dob'];
-            $email = $_POST['email'];
-            $phone = $_POST['phone'];
-            $position = $_POST['position'];
-            $location = $_POST['location'];
-            $password = $_POST['password'];
-
-            $userController->updateEmployer(ucfirst($firstName), ucfirst($lastName), $sessionController->getUserName(), $password, $dob, $phone, strtolower($email), $position, $location, $id);
-        }
-    } elseif (isset($_POST['delete'])) {
-        $userController->deleteAccount($sessionController->getUserName(), $userType);
-    }
+} elseif (isset($_POST['delete'])) {
+    $userController->deleteAccount($sessionController->getUserName(), $userType);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -85,24 +85,32 @@
             <div class="container">
                 <div class="mb-5 text-center">
 END;
-                    if (isset($_GET["error"])) {
-                        echo "<h5><span class='mb-2 badge bg-danger'>";
-                        if ($_GET["error"] == "emptyinput") {
-                            echo "Please complete all required columns!";
-                        } else if ($_GET["error"] == "failed") {
-                            echo "Something went wrong. Please try again!";
-                        } else if ($_GET["error"] == "deletefailed") {
-                            echo "There was a problem while deleting your account. Please try again!";
-                        }
-                        echo "</span></h5>";
-                    }elseif (isset($_GET["success"])) {
-                        echo "<h5><span class='mt-5 mb-2 badge bg-success'>";
-                        if ($_GET["success"] == "accountupdated") {
-                            echo "Your account has been successfully Updated.";
-                        }
-                        echo"</span></h5>";
-                    }
-                    echo <<<END
+            if (isset($_GET["error"])) {
+                echo "<h5><span class='mb-2 badge bg-danger'>";
+                if ($_GET["error"] == "emptyinput") {
+                    echo "Please complete all required columns!";
+                } else if ($_GET["error"] == "failed") {
+                    echo "Something went wrong. Please try again!";
+                } else if ($_GET["error"] == "deletefailed") {
+                    echo "There was a problem while deleting your account. Please try again!";
+                } else if ($_GET["error"] == "fieldnotfound") {
+                    echo "You have to choose a field of expertise";
+                } else if ($_GET["error"] == "date") {
+                    echo "Your date of birth cannot be in the future!";
+                } else if ($_GET["error"] == "name") {
+                    echo "Your input name cannot contain space!";
+                } else if ($_GET["error"] == "failed") {
+                    echo "Something went wrong. Please try again!";
+                }
+                echo "</span></h5>";
+            } elseif (isset($_GET["success"])) {
+                echo "<h5><span class='mt-5 mb-2 badge bg-success'>";
+                if ($_GET["success"] == "accountupdated") {
+                    echo "Your account has been successfully Updated.";
+                }
+                echo "</span></h5>";
+            }
+            echo <<<END
                     <div class="main-body">
                         <div class="row gutters-sm">
                             <div class="col-md-8 offset-md-2">
@@ -226,16 +234,20 @@ END;
                     echo "Please complete all required columns!";
                 } else if ($_GET["error"] == "failed") {
                     echo "Something went wrong. Please try again!";
+                } else if ($_GET["error"] == "date") {
+                    echo "Your date of birth cannot be in the future!";
+                } else if ($_GET["error"] == "name") {
+                    echo "Your input name cannot contain space!";
                 } else if ($_GET["error"] == "deletefailed") {
                     echo "There was a problem while deleting your account. Please try again!";
                 }
                 echo "</span></h5>";
-            }elseif (isset($_GET["success"])) {
+            } elseif (isset($_GET["success"])) {
                 echo "<h5><span class='mt-5 mb-2 badge bg-success'>";
                 if ($_GET["success"] == "accountupdated") {
                     echo "Your account has been successfully Updated.";
                 }
-                echo"</span></h5>";
+                echo "</span></h5>";
             }
             echo <<<END
                     <div class="main-body">
